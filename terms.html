@@ -1,104 +1,551 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Terms & Conditions — No More Rubbish Websites</title>
-<meta name="description" content="Terms and conditions for web design services from No More Rubbish Websites.">
-<meta name="robots" content="index,follow">
-<link rel="canonical" href="https://www.nomorerubbishwebsites.com/terms.html">
-<meta name="theme-color" content="#FFD100">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230a0a0a'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial Black,sans-serif' font-size='38' font-weight='900' fill='%23FFD100'%3EN%3C/text%3E%3C/svg%3E">
+<title>Terms & Conditions — NoMoreRubbishWebsites</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-[data-theme="light"]{--bg:#f5f5f0;--ink:#0a0a0a;--ink2:#666;--border:rgba(10,10,10,0.15);--footer-bg:#0a0a0a;--footer-txt:rgba(255,255,255,.55)}
-[data-theme="dark"]{--bg:#0e0e0e;--ink:#f0f0eb;--ink2:#888;--border:rgba(240,240,235,0.12);--footer-bg:#050505;--footer-txt:rgba(255,255,255,.45)}
-:root{--yellow:#FFD100;--side:11vw}
+:root{--bg:#f5f5f0;--ink:#0a0a0a;--ink2:#666;--ink3:#999;--yellow:#FFD100;--border:rgba(10,10,10,0.1);--side:clamp(1.5rem,10vw,12rem)}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.7;font-weight:300}
-a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--yellow);text-decoration-thickness:2px;text-underline-offset:3px}
-nav{display:flex;justify-content:space-between;align-items:center;padding:1.6rem var(--side);border-bottom:1px solid var(--border)}
-.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:.04em;color:var(--ink);text-decoration:none;line-height:1}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;font-weight:300;line-height:1.7}
+
+/* NAV */
+nav{background:var(--ink);padding:1.1rem var(--side);display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.04em;color:white;text-decoration:none}
 .nav-logo span{color:var(--yellow)}
-.back{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);text-decoration:none}
-.back:hover{color:var(--ink)}
-main{max-width:760px;margin:0 auto;padding:5rem var(--side) 6rem}
-.eyebrow{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink2);font-weight:500;margin-bottom:1rem;display:flex;align-items:center;gap:.8rem}
-.eyebrow::before{content:'';width:24px;height:1.5px;background:var(--yellow);display:block}
-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.6rem,6vw,4.5rem);line-height:.95;letter-spacing:-.01em;margin-bottom:.5rem}
-.updated{font-size:.78rem;color:var(--ink2);margin-bottom:3rem}
-h2{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.02em;margin:2.5rem 0 .8rem;color:var(--ink)}
-p,ul{font-size:.95rem;color:var(--ink2);margin-bottom:1rem}
-ul{padding-left:1.3rem}
-li{margin-bottom:.4rem}
+.nav-back{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;display:flex;align-items:center;gap:.5rem}
+.nav-back:hover{color:var(--yellow)}
+.nav-back::before{content:'←'}
+
+/* HEADER */
+.doc-header{background:var(--ink);padding:4rem var(--side) 3rem;border-bottom:3px solid var(--yellow)}
+.doc-label{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--yellow);margin-bottom:.8rem;display:flex;align-items:center;gap:.6rem}
+.doc-label::before{content:'';display:block;width:18px;height:1.5px;background:var(--yellow)}
+.doc-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,6vw,5.5rem);line-height:.92;color:white;letter-spacing:-.01em;margin-bottom:1rem}
+.doc-meta{display:flex;gap:2rem;flex-wrap:wrap;margin-top:1.5rem}
+.meta-item{font-size:.76rem;color:rgba(255,255,255,.4);display:flex;flex-direction:column;gap:.2rem}
+.meta-item strong{color:rgba(255,255,255,.7);font-weight:500;font-size:.78rem}
+
+/* LAYOUT */
+.doc-body{display:grid;grid-template-columns:240px 1fr;gap:0;min-height:80vh}
+
+/* SIDEBAR TOC */
+.toc{position:sticky;top:0;height:100vh;overflow-y:auto;background:white;border-right:1px solid var(--border);padding:2.5rem 1.5rem}
+.toc-title{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink3);font-weight:500;margin-bottom:1.2rem}
+.toc-list{list-style:none;display:flex;flex-direction:column;gap:.2rem}
+.toc-list a{display:block;font-size:.76rem;color:var(--ink2);text-decoration:none;padding:.35rem .6rem;border-radius:3px;transition:all .2s;border-left:2px solid transparent}
+.toc-list a:hover{color:var(--ink);background:var(--bg);border-left-color:var(--yellow)}
+.toc-list a.active{color:var(--ink);background:var(--bg);border-left-color:var(--yellow);font-weight:500}
+.toc-num{color:var(--yellow);font-weight:600;margin-right:.3rem}
+
+/* CONTENT */
+.doc-content{padding:3.5rem var(--side) 5rem 4rem;max-width:780px}
+
+/* IMPORTANT NOTICE BOX */
+.notice-box{background:var(--yellow);padding:1.5rem 1.8rem;margin-bottom:3rem;border-left:4px solid var(--ink)}
+.notice-box strong{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:.4rem}
+.notice-box p{font-size:.85rem;line-height:1.6;color:var(--ink)}
+
+/* SECTIONS */
+.section{margin-bottom:3.5rem;padding-bottom:3.5rem;border-bottom:1px solid var(--border)}
+.section:last-child{border-bottom:none}
+.section-num{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:var(--yellow);line-height:1;margin-bottom:.3rem;opacity:.4}
+h2{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.02em;color:var(--ink);margin-bottom:1.2rem;line-height:1}
+h3{font-size:.88rem;font-weight:600;color:var(--ink);margin:1.4rem 0 .6rem;text-transform:uppercase;letter-spacing:.08em}
+p{font-size:.9rem;line-height:1.8;color:var(--ink2);margin-bottom:.9rem}
+p:last-child{margin-bottom:0}
 strong{color:var(--ink);font-weight:600}
-footer{background:var(--footer-bg);color:var(--footer-txt);padding:2.5rem var(--side);text-align:center;font-size:.78rem}
-footer a{color:var(--footer-txt);margin:0 .8rem;text-decoration:none}
-footer a:hover{color:var(--yellow)}
-@media(max-width:600px){:root{--side:6vw}main{padding:3rem var(--side) 4rem}}
+
+/* LISTS */
+ul,ol{padding-left:0;list-style:none;margin-bottom:.9rem}
+ul li,ol li{font-size:.9rem;line-height:1.8;color:var(--ink2);padding:.2rem 0 .2rem 1.4rem;position:relative}
+ul li::before{content:'—';position:absolute;left:0;color:var(--yellow);font-weight:700}
+ol{counter-reset:ol-counter}
+ol li{counter-increment:ol-counter}
+ol li::before{content:counter(ol-counter)'.';position:absolute;left:0;color:var(--yellow);font-weight:700;font-size:.82rem}
+
+/* HIGHLIGHT BOXES */
+.highlight{background:white;border:1px solid var(--border);border-left:3px solid var(--yellow);padding:1.2rem 1.4rem;margin:1.2rem 0;border-radius:0 4px 4px 0}
+.highlight p{font-size:.86rem;margin:0;color:var(--ink)}
+.highlight strong{color:var(--ink)}
+
+/* PROCESS TABLE */
+.process-table{width:100%;border-collapse:collapse;margin:1.2rem 0;font-size:.84rem}
+.process-table th{background:var(--ink);color:white;padding:.7rem 1rem;text-align:left;font-weight:500;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}
+.process-table td{padding:.7rem 1rem;border-bottom:1px solid var(--border);color:var(--ink2);vertical-align:top}
+.process-table tr:last-child td{border-bottom:none}
+.process-table tr:nth-child(even) td{background:white}
+.process-table .stage{font-weight:600;color:var(--ink);white-space:nowrap}
+.tag-yellow{display:inline-block;background:var(--yellow);color:var(--ink);font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.15rem .6rem;border-radius:2px}
+.tag-red{display:inline-block;background:#fee2e2;color:#991b1b;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.15rem .6rem;border-radius:2px}
+
+/* SIGNATURE BLOCK */
+.sig-block{background:white;border:1px solid var(--border);padding:2rem;margin-top:2rem}
+.sig-block h3{text-transform:uppercase;letter-spacing:.1em;font-size:.76rem;margin-bottom:1.2rem;color:var(--ink3)}
+.sig-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.sig-field{border-bottom:1px solid var(--ink);padding-bottom:.3rem;margin-bottom:.4rem;min-height:2rem}
+.sig-label{font-size:.68rem;color:var(--ink3);letter-spacing:.08em;text-transform:uppercase}
+
+/* FOOTER */
+.doc-footer{background:var(--ink);padding:2rem var(--side);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.doc-footer p{font-size:.74rem;color:rgba(255,255,255,.3)}
+.doc-footer a{color:var(--yellow);text-decoration:none;font-size:.74rem}
+
+@media(max-width:900px){
+  .doc-body{grid-template-columns:1fr}
+  .toc{display:none}
+  .doc-content{padding:2.5rem var(--side)}
+  .sig-grid{grid-template-columns:1fr}
+}
 </style>
-<script>
-(function(){var s=localStorage.getItem('theme');var d=s?s==='dark':matchMedia('(prefers-color-scheme:dark)').matches;document.documentElement.setAttribute('data-theme',d?'dark':'light');})();
-</script>
 </head>
 <body>
 
 <nav>
-  <a href="/" class="nav-logo">No More<span>Rubbish</span>Websites</a>
-  <a href="/" class="back">← Back to site</a>
+  <a href="index.html" class="nav-logo">No More<span>Rubbish</span>Websites</a>
+  <a href="index.html" class="nav-back">Back to Home</a>
 </nav>
 
-<main>
-  <div class="eyebrow">Legal</div>
-  <h1>Terms & Conditions</h1>
-  <div class="updated">Last updated: 8 April 2026</div>
+<div class="doc-header">
+  <div class="doc-label">Legal Document</div>
+  <div class="doc-title">Terms &<br>Conditions</div>
+  <div class="doc-meta">
+    <div class="meta-item"><strong>Version</strong>1.0</div>
+    <div class="meta-item"><strong>Effective Date</strong>April 2025</div>
+    <div class="meta-item"><strong>Jurisdiction</strong>Scotland, UK</div>
+    <div class="meta-item"><strong>Last Updated</strong>April 2025</div>
+  </div>
+</div>
 
-  <p>These terms govern the supply of web design and related services by No More Rubbish Websites ("we", "us"), a UK-based sole trader, to you ("the client"). By accepting a quote or paying a deposit, you agree to these terms.</p>
+<div class="doc-body">
 
-  <h2>1. Services</h2>
-  <p>We design, build, and deliver small business websites as described in our published packages or in a written quote. Anything outside the scope of the agreed package is treated as additional work and quoted separately before being carried out.</p>
+  <!-- SIDEBAR -->
+  <aside class="toc">
+    <div class="toc-title">Contents</div>
+    <ul class="toc-list">
+      <li><a href="#s1"><span class="toc-num">01</span> Definitions</a></li>
+      <li><a href="#s2"><span class="toc-num">02</span> The Agreement</a></li>
+      <li><a href="#s3"><span class="toc-num">03</span> Our Services</a></li>
+      <li><a href="#s4"><span class="toc-num">04</span> The Build Process</a></li>
+      <li><a href="#s5"><span class="toc-num">05</span> Revisions</a></li>
+      <li><a href="#s6"><span class="toc-num">06</span> Your Responsibilities</a></li>
+      <li><a href="#s7"><span class="toc-num">07</span> Fees & Payment</a></li>
+      <li><a href="#s8"><span class="toc-num">08</span> Handover of Logins</a></li>
+      <li><a href="#s9"><span class="toc-num">09</span> Ownership & IP</a></li>
+      <li><a href="#s10"><span class="toc-num">10</span> Aftercare Support</a></li>
+      <li><a href="#s11"><span class="toc-num">11</span> Cancellation</a></li>
+      <li><a href="#s12"><span class="toc-num">12</span> Liability</a></li>
+      <li><a href="#s13"><span class="toc-num">13</span> Confidentiality</a></li>
+      <li><a href="#s14"><span class="toc-num">14</span> Governing Law</a></li>
+      <li><a href="#s15"><span class="toc-num">15</span> Contact</a></li>
+    </ul>
+  </aside>
 
-  <h2>2. Quotes and pricing</h2>
-  <p>Prices listed on the website are starting prices. A quote becomes binding once accepted in writing (email is fine). All prices are in GBP. We are not currently VAT registered, so no VAT is charged.</p>
+  <!-- CONTENT -->
+  <main class="doc-content">
 
-  <h2>3. Payment terms</h2>
-  <ul>
-    <li>A <strong>50% deposit</strong> is due before work begins.</li>
-    <li>The <strong>remaining 50%</strong> is due on completion, before the site goes live or files are handed over.</li>
-    <li>Invoices are payable within 7 days of issue by bank transfer.</li>
-    <li>Late payments may incur statutory interest under the Late Payment of Commercial Debts (Interest) Act 1998.</li>
-  </ul>
+    <div class="notice-box">
+      <strong>Please read these terms carefully</strong>
+      <p>By engaging NoMoreRubbishWebsites for any web design or development service, you agree to be bound by these Terms and Conditions. If you do not agree, please do not proceed with an order. These terms form a legally binding contract between you and NoMoreRubbishWebsites.</p>
+    </div>
 
-  <h2>4. Turnaround and client responsibilities</h2>
-  <p>Stated turnaround times (e.g. 3 days, 7 days) begin once we have received your deposit and all the content we need from you (text, images, logos, brand details). Delays in receiving content from you will extend the timeline.</p>
+    <!-- 1. DEFINITIONS -->
+    <div class="section" id="s1">
+      <div class="section-num">01</div>
+      <h2>Definitions</h2>
+      <p>In these Terms and Conditions, the following words have the following meanings:</p>
+      <ul>
+        <li><strong>"We", "us", "our"</strong> refers to NoMoreRubbishWebsites, a sole trader business operating in Scotland, United Kingdom.</li>
+        <li><strong>"You", "your", "the Client"</strong> refers to the individual or business that has engaged our services.</li>
+        <li><strong>"Project"</strong> means the website design and/or development work agreed between us as set out in the project brief or quotation.</li>
+        <li><strong>"Quote"</strong> means the written price and scope of work we provide before starting any project.</li>
+        <li><strong>"Brief"</strong> means the information you provide us describing your requirements, preferences, content, and goals.</li>
+        <li><strong>"Deliverables"</strong> means the completed website files, pages, and associated assets produced as part of the Project.</li>
+        <li><strong>"Hosting"</strong> means the third-party server service that makes your website accessible on the internet.</li>
+        <li><strong>"Domain"</strong> means your website address (e.g. yourbusiness.co.uk).</li>
+        <li><strong>"Logins"</strong> means all usernames, passwords, and access credentials for your website, hosting account, and domain registrar.</li>
+        <li><strong>"Final Payment"</strong> means the last payment due before handover of logins and live deployment, as set out in Section 7.</li>
+      </ul>
+    </div>
 
-  <h2>5. Revisions</h2>
-  <p>Each package includes a defined number of revision rounds. Additional revisions beyond that allowance are charged at our standard hourly rate, agreed in writing before the work is done.</p>
+    <!-- 2. THE AGREEMENT -->
+    <div class="section" id="s2">
+      <div class="section-num">02</div>
+      <h2>The Agreement</h2>
+      <p>A binding contract between you and us is formed when <strong>both of the following have occurred</strong>:</p>
+      <ol>
+        <li>You have received and accepted our written Quote (by email, message, or signing this document); and</li>
+        <li>You have made the deposit payment as set out in Section 7.</li>
+      </ol>
+      <p>No work will begin until the deposit has been received. Accepting a quote verbally or by email constitutes acceptance of these Terms and Conditions in full.</p>
+      <div class="highlight">
+        <p><strong>Important:</strong> These Terms and Conditions apply to all projects we undertake, regardless of whether a separate written contract has been signed. By paying the deposit, you confirm you have read and agreed to these terms.</p>
+      </div>
+    </div>
 
-  <h2>6. Content and intellectual property</h2>
-  <p>You confirm that any text, images, logos, or other materials you provide are owned by you or properly licensed, and that we have permission to use them on your website. Once final payment is received, ownership of the finished website's design and code transfers to you. We retain the right to display the work in our portfolio unless you ask us not to.</p>
+    <!-- 3. OUR SERVICES -->
+    <div class="section" id="s3">
+      <div class="section-num">03</div>
+      <h2>Our Services</h2>
+      <p>We provide web design and development services for small and medium-sized local businesses. Our services include but are not limited to:</p>
+      <ul>
+        <li>Website design and build (Starter package — up to 3 pages)</li>
+        <li>Website design and build (Professional package — up to 7 pages)</li>
+        <li>Website refresh and redesign of existing sites</li>
+        <li>Contact form setup and integration</li>
+        <li>Basic SEO setup including meta titles, descriptions, and Google indexing</li>
+        <li>Google Maps and social media integration</li>
+        <li>Mobile-responsive design</li>
+        <li>Domain and hosting setup assistance</li>
+        <li>Post-launch support within the aftercare period</li>
+      </ul>
+      <h3>What is not included</h3>
+      <p>Unless explicitly stated in your Quote, the following are <strong>not included</strong> in our standard packages:</p>
+      <ul>
+        <li>Domain name registration or renewal fees</li>
+        <li>Hosting fees (ongoing monthly or annual costs)</li>
+        <li>Copywriting or content creation</li>
+        <li>Photography or videography</li>
+        <li>Logo design or brand identity work</li>
+        <li>E-commerce / online shop functionality</li>
+        <li>Ongoing maintenance beyond the aftercare period</li>
+        <li>Paid advertising (Google Ads, Meta Ads, etc.)</li>
+        <li>Advanced SEO campaigns or ongoing SEO management</li>
+      </ul>
+      <p>If you require any of the above, please ask us and we will provide a separate quotation.</p>
+    </div>
 
-  <h2>7. Hosting, domains, and third-party services</h2>
-  <p>Unless explicitly included in your package, hosting and domain registration are your responsibility. We can recommend providers and help set them up. We are not liable for outages, billing, or issues caused by third-party services.</p>
+    <!-- 4. THE BUILD PROCESS -->
+    <div class="section" id="s4">
+      <div class="section-num">04</div>
+      <h2>The Build Process</h2>
+      <p>Every project follows a structured process to ensure the final website reflects your business accurately. We do not begin design or development work without first consulting with you.</p>
 
-  <h2>8. Cancellation and refunds</h2>
-  <p>If you cancel after work has begun, the deposit is non-refundable as it covers initial design and project setup time. If we cancel a project for any reason, you'll be refunded for any work not yet started.</p>
+      <table class="process-table">
+        <tr><th>Stage</th><th>What Happens</th><th>Who Acts</th></tr>
+        <tr><td class="stage">1. Consultation</td><td>We discuss your business, goals, design preferences, pages required, and any existing branding. This may be by call, video, or written brief.</td><td>Both</td></tr>
+        <tr><td class="stage">2. Quote & Agreement</td><td>We provide a written quote. You accept and pay the deposit. Work is scheduled.</td><td>Both</td></tr>
+        <tr><td class="stage">3. Content Gathering</td><td>You provide all required content — text, logo, photos, and any specific requirements. We cannot proceed without this.</td><td>Client</td></tr>
+        <tr><td class="stage">4. Design & Build</td><td>We design and build your website according to the agreed brief. Turnaround is 3 days (Starter) or 7 days (Professional) from receipt of all content.</td><td>Us</td></tr>
+        <tr><td class="stage">5. Preview & Review</td><td>We share a preview link. You review the site and provide consolidated feedback. Up to 3 rounds of revisions are included.</td><td>Both</td></tr>
+        <tr><td class="stage">6. Final Payment</td><td>Once you are satisfied with the site, final payment is made before launch. <span class="tag-yellow">Payment required before handover</span></td><td>Client</td></tr>
+        <tr><td class="stage">7. Launch & Handover</td><td>Upon receipt of final payment, we launch the site and hand over all logins — website CMS, hosting, and domain registrar credentials.</td><td>Us</td></tr>
+        <tr><td class="stage">8. Aftercare</td><td>30-day (Starter) or 60-day (Professional) aftercare support period begins from launch date.</td><td>Both</td></tr>
+      </table>
 
-  <h2>9. Liability</h2>
-  <p>We deliver services with reasonable care and skill. To the fullest extent permitted by law, our total liability for any claim arising out of or in connection with the work is limited to the total amount you have paid us under the relevant project. We are not liable for indirect or consequential losses, including loss of profits, revenue, or data.</p>
+      <h3>Timelines</h3>
+      <p>Quoted build times run from the date we receive <strong>all required content from you</strong>, not from the date of deposit. We cannot be held responsible for delays caused by late content, slow feedback, or lack of communication from the Client.</p>
+      <p>We will make every reasonable effort to meet agreed timelines. If we anticipate a delay on our part, we will notify you as soon as possible.</p>
+    </div>
 
-  <h2>10. Governing law</h2>
-  <p>These terms are governed by the laws of England and Wales, and any dispute will be subject to the exclusive jurisdiction of the courts of England and Wales.</p>
+    <!-- 5. REVISIONS -->
+    <div class="section" id="s5">
+      <div class="section-num">05</div>
+      <h2>Revisions</h2>
+      <p>All packages include <strong>up to 3 rounds of revisions</strong> following the initial preview. A "round" means one set of consolidated feedback responded to with one updated version of the site.</p>
 
-  <h2>11. Contact</h2>
-  <p>Questions about these terms? Email <a href="mailto:info@nomorerubbishwebsites.com">info@nomorerubbishwebsites.com</a>.</p>
-</main>
+      <h3>What counts as a revision</h3>
+      <ul>
+        <li>Changes to text, colours, fonts, or layout</li>
+        <li>Adding or removing content elements</li>
+        <li>Adjustments to images or image placement</li>
+        <li>Changes to page structure or navigation</li>
+      </ul>
 
-<footer>
-  <div><a href="/">Home</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <a href="mailto:info@nomorerubbishwebsites.com">info@nomorerubbishwebsites.com</a></div>
-  <div style="margin-top:.8rem">© 2026 No More Rubbish Websites</div>
-</footer>
+      <h3>What does not count as a revision</h3>
+      <ul>
+        <li>Fixing genuine errors or bugs caused by us</li>
+        <li>Changes required due to our misunderstanding of the agreed brief</li>
+        <li>Minor text corrections (spelling, factual errors)</li>
+      </ul>
 
+      <div class="highlight">
+        <p><strong>We strongly recommend consolidating all feedback into a single response per round.</strong> Piecemeal or drip-fed feedback may use up revision rounds more quickly. Each time you send a set of changes and we implement them, that constitutes one revision round.</p>
+      </div>
+
+      <h3>Additional revisions</h3>
+      <p>If you require changes beyond the 3 included rounds, additional revisions are charged at <strong>£50 per hour</strong>, billed in 30-minute increments. We will always confirm the estimated time and cost before proceeding.</p>
+
+      <h3>Scope changes</h3>
+      <p>If you request changes that significantly alter the scope of the project from the original brief — such as adding new pages, new features, or major structural redesign — this may constitute a new quotation rather than a revision. We will advise you clearly if this is the case.</p>
+    </div>
+
+    <!-- 6. YOUR RESPONSIBILITIES -->
+    <div class="section" id="s6">
+      <div class="section-num">06</div>
+      <h2>Your Responsibilities</h2>
+      <p>A successful project is a collaboration. To allow us to deliver your website on time and to the agreed standard, you agree to:</p>
+      <ul>
+        <li>Provide a complete and accurate brief before work begins</li>
+        <li>Supply all required content (text, images, logo, brand guidelines) in a timely manner — ideally within 5 working days of us requesting it</li>
+        <li>Ensure all content you provide is owned by you or that you have the legal right to use it</li>
+        <li>Make yourself reasonably available for questions, clarification, or feedback during the build</li>
+        <li>Provide consolidated feedback within each revision round rather than sending changes piecemeal</li>
+        <li>Respond to preview links and milestone requests within 5 working days</li>
+        <li>Ensure any third-party accounts (hosting, domain) we need access to are made available to us promptly</li>
+        <li>Make payments on time as agreed in Section 7</li>
+      </ul>
+      <h3>Content ownership</h3>
+      <p>You confirm that any content, images, text, or materials you provide to us are either owned by you or that you hold a valid licence to use them. We accept no liability for any copyright infringement arising from content supplied by you.</p>
+      <p>If you use stock images, we recommend licensed sources such as Unsplash, Pexels (free), or Shutterstock (paid). We can advise on this if needed.</p>
+    </div>
+
+    <!-- 7. FEES & PAYMENT -->
+    <div class="section" id="s7">
+      <div class="section-num">07</div>
+      <h2>Fees & Payment</h2>
+
+      <h3>Pricing</h3>
+      <p>All prices are as quoted in writing before the project begins. Our standard packages are:</p>
+      <ul>
+        <li><strong>Starter Website</strong> — from £250 (3-day build, up to 3 pages)</li>
+        <li><strong>Professional Website</strong> — from £500 (7-day build, up to 7 pages)</li>
+        <li>Custom projects — priced individually per written quote</li>
+      </ul>
+      <p>Prices are quoted exclusive of VAT. If we become VAT registered, we will notify you in advance and update our pricing accordingly.</p>
+
+      <h3>Payment structure</h3>
+      <p>All projects are subject to the following payment terms:</p>
+
+      <div class="highlight">
+        <p><strong>Deposit (50%):</strong> Due before work begins. No work starts until the deposit is received.<br><br>
+        <strong>Final Payment (50%):</strong> Due upon your written approval of the completed website preview, and before the website is launched and logins are handed over.</p>
+      </div>
+
+      <p>For projects under £300, full payment upfront may be requested at our discretion.</p>
+
+      <h3>Payment methods</h3>
+      <ul>
+        <li>Bank transfer (BACS) — preferred</li>
+        <li>PayPal</li>
+        <li>Other methods by prior agreement</li>
+      </ul>
+
+      <h3>Late payment</h3>
+      <p>If any payment is not received within <strong>7 days of the due date</strong>, we reserve the right to:</p>
+      <ul>
+        <li>Pause work on the project until payment is received</li>
+        <li>Charge interest on overdue amounts at 8% above the Bank of Scotland base rate, in line with the Late Payment of Commercial Debts (Interest) Act 1998</li>
+        <li>Withhold delivery of final files, login credentials, or launch of the website</li>
+      </ul>
+
+      <h3>Expenses</h3>
+      <p>Any third-party costs incurred on your behalf — such as purchasing stock images, premium plugins, or fonts specifically requested by you — will be charged at cost and added to your invoice with prior agreement.</p>
+    </div>
+
+    <!-- 8. HANDOVER OF LOGINS -->
+    <div class="section" id="s8">
+      <div class="section-num">08</div>
+      <h2>Handover of Logins & Access</h2>
+
+      <div class="highlight" style="border-left-color:#0a0a0a;background:#fff9e6">
+        <p><strong>Full payment must be received before any login credentials, access details, or live deployment takes place.</strong> This includes but is not limited to: CMS logins, hosting account credentials, domain registrar access, FTP/SFTP details, and any third-party platform accounts set up on your behalf.</p>
+      </div>
+
+      <p>Once <strong>final payment has cleared</strong>, we will hand over the following within 1 working day:</p>
+      <ul>
+        <li>Website CMS login (username and password)</li>
+        <li>Hosting account login and server details (where applicable)</li>
+        <li>Domain registrar account credentials (where we have registered the domain on your behalf)</li>
+        <li>Any other platform logins set up as part of the project (e.g. Google Analytics, Google Search Console)</li>
+        <li>A handover document explaining how to manage and update your website</li>
+      </ul>
+
+      <h3>Existing accounts</h3>
+      <p>Where you already hold a hosting or domain account and have granted us access to work on your behalf, we will retain only the access required to complete the project. Upon project completion and final payment, we will confirm the removal of any temporary access we were granted.</p>
+
+      <h3>Security</h3>
+      <p>We strongly recommend that you change all passwords after handover. We accept no responsibility for any security issues that arise after login credentials have been transferred to you.</p>
+    </div>
+
+    <!-- 9. OWNERSHIP & IP -->
+    <div class="section" id="s9">
+      <div class="section-num">09</div>
+      <h2>Ownership & Intellectual Property</h2>
+
+      <h3>Transfer of ownership</h3>
+      <p>Upon receipt of <strong>full and final payment</strong>, all intellectual property rights in the completed website design and code transfer to you, the Client. You will own the site outright — including all files, designs, and assets created specifically for your project.</p>
+      <p>Until final payment is received, all work remains the intellectual property of NoMoreRubbishWebsites.</p>
+
+      <h3>Our portfolio rights</h3>
+      <p>We reserve the right to display your completed website as part of our portfolio and in our marketing materials (website, social media, case studies) unless you specifically request otherwise in writing before the project begins. We will never share sensitive business information — only the visual design of the site.</p>
+
+      <h3>Third-party components</h3>
+      <p>Some projects may incorporate open-source frameworks, fonts, or plugins. These remain subject to their own licences. We will advise you of any such components used in your project.</p>
+
+      <h3>Content you provide</h3>
+      <p>All content supplied by you (text, images, logos) remains your property at all times. We will not use your content for any purpose other than building your website.</p>
+    </div>
+
+    <!-- 10. AFTERCARE SUPPORT -->
+    <div class="section" id="s10">
+      <div class="section-num">10</div>
+      <h2>Aftercare Support</h2>
+      <p>Following launch, all packages include a period of complimentary aftercare support:</p>
+      <ul>
+        <li><strong>Starter package:</strong> 30 days from launch date</li>
+        <li><strong>Professional package:</strong> 60 days from launch date</li>
+      </ul>
+
+      <h3>What aftercare covers</h3>
+      <ul>
+        <li>Fixing any bugs or errors that appear in the completed website</li>
+        <li>Minor content corrections (text updates, image swaps)</li>
+        <li>Guidance on how to use and update your website</li>
+        <li>Technical questions relating to the website we built</li>
+      </ul>
+
+      <h3>What aftercare does not cover</h3>
+      <ul>
+        <li>New pages, sections, or features not included in the original brief</li>
+        <li>Issues caused by third-party hosting or domain providers</li>
+        <li>Issues caused by changes you or a third party make to the website after handover</li>
+        <li>Ongoing SEO management or marketing</li>
+      </ul>
+
+      <p>After the aftercare period ends, support and maintenance can be arranged at our standard rate of <strong>£50 per hour</strong> or via a monthly maintenance package (available on request).</p>
+    </div>
+
+    <!-- 11. CANCELLATION -->
+    <div class="section" id="s11">
+      <div class="section-num">11</div>
+      <h2>Cancellation</h2>
+
+      <h3>Cancellation by you</h3>
+      <p>You may cancel the project at any time by notifying us in writing. The following applies depending on the stage of the project:</p>
+      <ul>
+        <li><strong>Before work begins:</strong> Deposit is forfeited to cover our scheduling and preparation time. No further charge applies.</li>
+        <li><strong>After work has begun but before preview:</strong> The deposit is forfeited in full. An additional charge may apply for work completed, calculated at £50 per hour, up to the total project fee.</li>
+        <li><strong>After preview has been delivered:</strong> Full project fee is payable. The deposit is non-refundable and the remaining balance becomes immediately due.</li>
+      </ul>
+
+      <p>Cancellation must be made in writing via email to <a href="mailto:hello@nomorerubbbishwebsites.com" style="color:var(--ink);font-weight:500">hello@nomorerubbbishwebsites.com</a>.</p>
+
+      <h3>Cancellation by us</h3>
+      <p>We reserve the right to cancel a project in exceptional circumstances, including (but not limited to):</p>
+      <ul>
+        <li>Non-payment or persistent late payment</li>
+        <li>Abusive, threatening, or unreasonable behaviour toward us</li>
+        <li>A project brief that requires us to produce content that is illegal, defamatory, or in breach of any applicable law</li>
+      </ul>
+      <p>In the event of cancellation by us, we will refund any payments received minus the value of work already completed, calculated at £50 per hour.</p>
+
+      <h3>Project abandonment</h3>
+      <p>If a project is stalled for more than <strong>30 days due to inaction on your part</strong> (e.g. failure to provide content, failure to respond to communications), we reserve the right to treat the project as abandoned. In this case, the deposit is forfeited and the project will be closed. Restarting the project may require a new quote and new deposit.</p>
+    </div>
+
+    <!-- 12. LIABILITY -->
+    <div class="section" id="s12">
+      <div class="section-num">12</div>
+      <h2>Limitation of Liability</h2>
+
+      <h3>Our liability</h3>
+      <p>We will always endeavour to deliver high-quality work. However, our total liability to you for any claim arising from a project — whether in contract, tort, or otherwise — is limited to the total fees paid by you for that specific project.</p>
+      <p>We are not liable for:</p>
+      <ul>
+        <li>Loss of business, revenue, profits, or opportunity arising from any issue with the website</li>
+        <li>Data loss caused by hosting providers, server failures, or third-party platforms</li>
+        <li>Errors arising from inaccurate, incomplete, or misleading content provided by you</li>
+        <li>Any downtime, errors, or security breaches that occur after login credentials have been handed over to you</li>
+        <li>Actions taken by you or third parties that alter or damage the website after handover</li>
+        <li>Failure of the website to rank in search engines — we set up SEO correctly but cannot guarantee rankings</li>
+      </ul>
+
+      <h3>Third-party services</h3>
+      <p>We may recommend or set up third-party services such as hosting providers, domain registrars, or analytics platforms. We are not responsible for the performance, availability, pricing changes, or terms of these third-party services.</p>
+    </div>
+
+    <!-- 13. CONFIDENTIALITY -->
+    <div class="section" id="s13">
+      <div class="section-num">13</div>
+      <h2>Confidentiality</h2>
+      <p>Both parties agree to keep confidential any sensitive business information shared during the course of the project. This includes business strategies, financial information, customer data, and any information clearly marked or communicated as confidential.</p>
+      <p>We will not disclose your confidential information to any third party without your prior written consent, except where required by law.</p>
+      <p>This obligation of confidentiality does not apply to information that is or becomes publicly available through no fault of ours, or that we were already aware of before you shared it with us.</p>
+      <h3>Data protection</h3>
+      <p>We handle any personal data you share with us in accordance with the UK General Data Protection Regulation (UK GDPR) and the Data Protection Act 2018. Please refer to our Privacy Policy for full details of how we collect, use, and store your data.</p>
+    </div>
+
+    <!-- 14. GOVERNING LAW -->
+    <div class="section" id="s14">
+      <div class="section-num">14</div>
+      <h2>Governing Law & Disputes</h2>
+      <p>These Terms and Conditions are governed by and construed in accordance with the <strong>law of Scotland</strong>. Any disputes arising from or in connection with these terms shall be subject to the exclusive jurisdiction of the <strong>Scottish courts</strong>.</p>
+      <h3>Resolving disputes</h3>
+      <p>Before raising any formal dispute, we ask that both parties make a genuine effort to resolve any disagreement informally. Please contact us in the first instance at <a href="mailto:hello@nomorerubbbishwebsites.com" style="color:var(--ink);font-weight:500">hello@nomorerubbbishwebsites.com</a> and we will respond within 3 working days.</p>
+      <p>If informal resolution is not possible, we are willing to consider mediation as an alternative to legal proceedings before either party commences formal legal action.</p>
+      <h3>Severability</h3>
+      <p>If any provision of these Terms is found to be invalid or unenforceable by a court of competent jurisdiction, the remaining provisions shall continue in full force and effect.</p>
+      <h3>Entire agreement</h3>
+      <p>These Terms and Conditions, together with the written Quote accepted by you, constitute the entire agreement between the parties and supersede all prior discussions, representations, or agreements whether written or oral.</p>
+    </div>
+
+    <!-- 15. CONTACT -->
+    <div class="section" id="s15">
+      <div class="section-num">15</div>
+      <h2>Contact Us</h2>
+      <p>If you have any questions about these Terms and Conditions, or wish to discuss any aspect of your project, please contact us:</p>
+      <ul>
+        <li><strong>Trading name:</strong> NoMoreRubbishWebsites</li>
+        <li><strong>Business type:</strong> Sole trader</li>
+        <li><strong>Based in:</strong> Glasgow, Scotland</li>
+        <li><strong>Email:</strong> <a href="mailto:hello@nomorerubbbishwebsites.com" style="color:var(--ink)">hello@nomorerubbbishwebsites.com</a></li>
+        <li><strong>Website:</strong> <a href="https://nomorerubbbishwebsites.com" style="color:var(--ink)">nomorerubbbishwebsites.com</a></li>
+      </ul>
+      <p style="margin-top:1.2rem;font-size:.82rem;color:var(--ink3)">These Terms and Conditions were last updated in April 2025. We reserve the right to update these terms at any time. The version applicable to your project is the version in force at the time your deposit is received.</p>
+
+      <!-- SIGNATURE BLOCK -->
+      <div class="sig-block" style="margin-top:2.5rem">
+        <h3>Project agreement — client sign-off (optional)</h3>
+        <p style="font-size:.82rem;color:var(--ink2);margin-bottom:1.5rem">For larger projects, both parties may wish to sign below to confirm agreement to these terms alongside the project quote. This is optional — acceptance of the quote and payment of the deposit also constitutes agreement.</p>
+        <div class="sig-grid">
+          <div>
+            <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:1.2rem">Client</div>
+            <div class="sig-field"></div>
+            <div class="sig-label">Signature</div>
+            <div class="sig-field" style="margin-top:1rem"></div>
+            <div class="sig-label">Full Name</div>
+            <div class="sig-field" style="margin-top:1rem"></div>
+            <div class="sig-label">Date</div>
+          </div>
+          <div>
+            <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:1.2rem">NoMoreRubbishWebsites</div>
+            <div class="sig-field"></div>
+            <div class="sig-label">Signature</div>
+            <div class="sig-field" style="margin-top:1rem"></div>
+            <div class="sig-label">Full Name</div>
+            <div class="sig-field" style="margin-top:1rem"></div>
+            <div class="sig-label">Date</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<div class="doc-footer">
+  <p>© 2025 NoMoreRubbishWebsites — Sole trader, Scotland, UK</p>
+  <a href="privacy.html">Privacy Policy</a>
+</div>
+
+<script>
+// Highlight active TOC item on scroll
+const sections = document.querySelectorAll('.section');
+const tocLinks = document.querySelectorAll('.toc-list a');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      tocLinks.forEach(l => l.classList.remove('active'));
+      const id = e.target.getAttribute('id');
+      const active = document.querySelector(`.toc-list a[href="#${id}"]`);
+      if(active) active.classList.add('active');
+    }
+  });
+}, {rootMargin:'-20% 0px -70% 0px'});
+sections.forEach(s => obs.observe(s));
+</script>
 </body>
 </html>
