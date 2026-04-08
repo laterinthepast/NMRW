@@ -1,0 +1,86 @@
+{
+  "food": [
+    {
+      "name": "Cullen Skink",
+      "price": "£8.50",
+      "description": "Smoked haddock, cream, potato, chive oil. A proper Scottish classic, done right.",
+      "tag": "Starter"
+    },
+    {
+      "name": "Haggis Bon Bons",
+      "price": "£7.50",
+      "description": "Traditional haggis, whisky cream sauce, pickled turnip. Three per portion.",
+      "tag": "Starter"
+    },
+    {
+      "name": "28-Day Aged Ribeye",
+      "price": "£28.00",
+      "description": "Perthshire beef, triple-cooked chips, peppercorn sauce, watercress.",
+      "tag": "Main"
+    },
+    {
+      "name": "Beer-Battered Haddock",
+      "price": "£16.50",
+      "description": "West Coast haddock, hand-cut chips, minted mushy peas, tartare sauce.",
+      "tag": "Main"
+    },
+    {
+      "name": "The Anchor Burger",
+      "price": "£15.00",
+      "description": "Double smash patty, aged cheddar, house pickle, brioche, skin-on fries.",
+      "tag": "Main"
+    },
+    {
+      "name": "Sticky Toffee Pudding",
+      "price": "£7.00",
+      "description": "Medjool date sponge, butterscotch sauce, Ayrshire vanilla ice cream.",
+      "tag": "Dessert"
+    }
+  ],
+  "drinks": [
+    {
+      "name": "Tennent's Lager",
+      "price": "£5.00",
+      "description": "Scotland's favourite pint. Cold, crisp, perfect.",
+      "tag": "Lager"
+    },
+    {
+      "name": "Belhaven Best",
+      "price": "£5.20",
+      "description": "Classic Scottish real ale, smooth and malty.",
+      "tag": "Ale"
+    },
+    {
+      "name": "Caledonian 80/-",
+      "price": "£5.40",
+      "description": "Rich, full-bodied Scottish heavy. A pub classic.",
+      "tag": "Ale"
+    },
+    {
+      "name": "House Red / White",
+      "price": "£5.50",
+      "description": "Ask your server for today's selection. Glass or bottle available.",
+      "tag": "Wine"
+    }
+  ],
+  "sunday": [
+    {
+      "name": "Sunday Roast — Beef",
+      "price": "£16.00",
+      "description": "Slow-roasted Perthshire silverside, Yorkshire pudding, roasties, seasonal veg, gravy.",
+      "tag": "Main"
+    },
+    {
+      "name": "Sunday Roast — Chicken",
+      "price": "£14.50",
+      "description": "Half roasted chicken, stuffing, roasties, seasonal veg, gravy.",
+      "tag": "Main"
+    },
+    {
+      "name": "Sunday Roast — Veggie",
+      "price": "£13.00",
+      "description": "Roasted root vegetable wellington, roasties, seasonal veg, vegetarian gravy.",
+      "tag": "Main"
+    }
+  ]
+}

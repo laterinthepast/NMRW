@@ -256,9 +256,9 @@ footer{background:#070503;padding:3rem var(--side) 2rem;border-top:1px solid var
       <h2 class="reveal">What's On</h2>
     </div>
     <div class="menu-tabs">
-      <button class="menu-tab active" onclick="setTab(this,'food')">Food</button>
-      <button class="menu-tab" onclick="setTab(this,'drinks')">Drinks</button>
-      <button class="menu-tab" onclick="setTab(this,'sunday')">Sunday</button>
+      <button class="menu-tab active" data-tab="food" onclick="setTab(this,'food')">Food</button>
+      <button class="menu-tab" data-tab="drinks" onclick="setTab(this,'drinks')">Drinks</button>
+      <button class="menu-tab" data-tab="sunday" onclick="setTab(this,'sunday')">Sunday</button>
     </div>
   </div>
   <div class="menu-grid" id="menu-grid">
@@ -323,7 +323,7 @@ footer{background:#070503;padding:3rem var(--side) 2rem;border-top:1px solid var
 <section class="events" id="events">
   <div class="label reveal">What's On</div>
   <h2 class="reveal">Upcoming Events</h2>
-  <div class="events-list">
+  <div class="events-list" id="events-list">
     <div class="event-item reveal">
       <div class="event-date"><div class="event-day">12</div><div class="event-month">Apr</div></div>
       <div><div class="event-title">Scottish Craft Beer Festival</div><div class="event-desc">20 Scottish breweries, live tasting notes, food pairings. Tickets £15 includes first pint.</div></div>
@@ -379,21 +379,21 @@ footer{background:#070503;padding:3rem var(--side) 2rem;border-top:1px solid var
     <div class="findus-info reveal">
       <div class="info-block">
         <h3>Address</h3>
-        <p>42 Miller Street<br>Glasgow City Centre<br>G1 1DT</p>
+        <p id="cms-address">42 Miller Street<br>Glasgow City Centre<br>G1 1DT</p>
       </div>
       <div class="info-block">
         <h3>Opening Hours</h3>
         <div class="hours-grid">
-          <span class="hours-day">Monday — Thursday</span><span class="hours-time">12pm — 11pm</span>
-          <span class="hours-day">Friday — Saturday</span><span class="hours-time">12pm — 1am</span>
-          <span class="hours-day">Sunday</span><span class="hours-time">12pm — 10pm</span>
-          <span class="hours-day">Kitchen closes</span><span class="hours-time">9pm daily</span>
+          <span class="hours-day">Monday — Thursday</span><span class="hours-time" id="cms-hours-mon-thu">12pm — 11pm</span>
+          <span class="hours-day">Friday — Saturday</span><span class="hours-time" id="cms-hours-fri-sat">12pm — 1am</span>
+          <span class="hours-day">Sunday</span><span class="hours-time" id="cms-hours-sun">12pm — 10pm</span>
+          <span class="hours-day">Kitchen closes</span><span class="hours-time" id="cms-hours-kitchen">9pm daily</span>
         </div>
       </div>
       <div class="info-block">
         <h3>Contact</h3>
-        <a href="tel:01412345678">0141 234 5678</a>
-        <a href="mailto:hello@anchorandcleaver.co.uk">hello@anchorandcleaver.co.uk</a>
+        <a href="tel:01412345678" id="cms-phone">0141 234 5678</a>
+        <a href="mailto:hello@anchorandcleaver.co.uk" id="cms-email">hello@anchorandcleaver.co.uk</a>
       </div>
     </div>
     <div class="map-placeholder reveal d1">
@@ -447,6 +447,97 @@ function setTab(btn,tab){
 }
 const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// ── CMS CONTENT LOADER ──
+async function loadContent() {
+  try {
+    const [menuData, eventsData, settingsData] = await Promise.all([
+      fetch('/content/menu.json').then(r => r.json()),
+      fetch('/content/events.json').then(r => r.json()),
+      fetch('/content/settings.json').then(r => r.json())
+    ]);
+    window._menuData = menuData;
+    renderMenu(menuData);
+    renderEvents(eventsData.events);
+    renderSettings(settingsData);
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  } catch(e) {
+    console.log('Running without CMS content, using static fallback.', e);
+  }
+}
+
+function renderMenu(data) {
+  const grid = document.getElementById('menu-grid');
+  if (!grid || !data) return;
+  const activeTab = document.querySelector('.menu-tab.active');
+  const tab = activeTab ? activeTab.dataset.tab : 'food';
+  const items = data[tab] || data.food;
+  grid.innerHTML = items.map((item, i) => `
+    <div class="menu-item reveal ${i % 2 === 1 ? 'd1' : ''}">
+      <div class="menu-item-header">
+        <span class="menu-item-name">${item.name}</span>
+        <span class="menu-item-price">${item.price}</span>
+      </div>
+      <div class="menu-item-desc">${item.description}</div>
+      <span class="menu-item-tag">${item.tag}</span>
+    </div>
+  `).join('');
+  document.querySelectorAll('#menu-grid .reveal').forEach(el => {
+    setTimeout(() => el.classList.add('visible'), 50);
+  });
+}
+
+function renderEvents(events) {
+  const list = document.getElementById('events-list');
+  if (!list || !events) return;
+  list.innerHTML = events.map(event => `
+    <div class="event-item reveal">
+      <div class="event-date">
+        <div class="event-day">${event.day}</div>
+        <div class="event-month">${event.month}</div>
+      </div>
+      <div>
+        <div class="event-title">${event.title}</div>
+        <div class="event-desc">${event.description}</div>
+      </div>
+      <div class="event-time">${event.time}</div>
+    </div>
+  `).join('');
+  document.querySelectorAll('#events-list .reveal').forEach(el => {
+    setTimeout(() => el.classList.add('visible'), 50);
+  });
+}
+
+function renderSettings(s) {
+  if (!s) return;
+  const fields = {
+    'cms-address': `${s.address_line1}<br>${s.address_line2}<br>${s.address_postcode}`,
+    'cms-phone': s.phone,
+    'cms-email': s.email,
+    'cms-hours-mon-thu': s.hours_mon_thu,
+    'cms-hours-fri-sat': s.hours_fri_sat,
+    'cms-hours-sun': s.hours_sun,
+    'cms-hours-kitchen': s.hours_kitchen,
+  };
+  Object.entries(fields).forEach(([id, val]) => {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = val;
+  });
+  const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
+  phoneLinks.forEach(a => { a.href = `tel:${s.phone.replace(/\s/g, '')}`; if (a.id === 'cms-phone') a.textContent = s.phone; });
+  const emailLinks = document.querySelectorAll('a[href^="mailto:"]');
+  emailLinks.forEach(a => { a.href = `mailto:${s.email}`; if (a.id === 'cms-email') a.textContent = s.email; });
+}
+
+// Override setTab to re-render menu on tab switch
+window.setTab = function(btn, tab) {
+  document.querySelectorAll('.menu-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  btn.dataset.tab = tab;
+  if (window._menuData) renderMenu(window._menuData);
+};
+
+loadContent();
 </script>
 </body>
 </html>

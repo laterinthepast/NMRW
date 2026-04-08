@@ -1,0 +1,32 @@
+{
+  "events": [
+    {
+      "day": "12",
+      "month": "Apr",
+      "title": "Scottish Craft Beer Festival",
+      "description": "20 Scottish breweries, live tasting notes, food pairings. Tickets £15 includes first pint.",
+      "time": "4pm – Close"
+    },
+    {
+      "day": "19",
+      "month": "Apr",
+      "title": "Pub Quiz — Monthly",
+      "description": "Eight rounds, £2 entry per person, winner takes the pot. Tables of up to six. Book in advance.",
+      "time": "7:30pm"
+    },
+    {
+      "day": "26",
+      "month": "Apr",
+      "title": "Scottish Derby — Live",
+      "description": "Celtic vs Rangers. Doors open 11am. First come, first served.",
+      "time": "12pm Kick-Off"
+    },
+    {
+      "day": "3",
+      "month": "May",
+      "title": "Live Music — The Heilan Coos",
+      "description": "Traditional Scottish folk band, two sets. No entry charge.",
+      "time": "8pm – 11pm"
+    }
+  ]
+}
