@@ -1,6 +1,17 @@
 {
-  "cleanUrls": true,
-  "rewrites": [
-    { "source": "/admin", "destination": "/admin/index.html" }
+  "version": 2,
+  "builds": [
+    { "src": "api/**/*.js", "use": "@vercel/node" },
+    { "src": "index.html", "use": "@vercel/static" },
+    { "src": "admin/**", "use": "@vercel/static" },
+    { "src": "content/**", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/api/auth/callback", "dest": "/api/auth/callback.js" },
+    { "src": "/admin/?$", "dest": "/admin/index.html" },
+    { "src": "/admin/(.+)", "dest": "/admin/$1" },
+    { "src": "/content/(.+)", "dest": "/content/$1" },
+    { "src": "/", "dest": "/index.html" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
