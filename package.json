@@ -1,0 +1,26 @@
+{
+  "name": "nmrw",
+  "version": "1.0.0",
+  "description": "No More Rubbish Websites - Sites for UK Local Business",
+  "scripts": {
+    "build:analytics": "esbuild analytics.js --bundle --minify --outfile=analytics.bundle.js",
+    "build": "npm run build:analytics"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laterinthepast/NMRW.git"
+  },
+  "keywords": ["website", "local-business", "uk"],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/laterinthepast/NMRW/issues"
+  },
+  "homepage": "https://github.com/laterinthepast/NMRW#readme",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.0"
+  }
+}
