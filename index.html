@@ -195,7 +195,32 @@ section{padding:7rem var(--side)}
 .guarantee-list li svg{color:var(--green);flex-shrink:0;margin-top:.1rem}
 .guarantee-list strong{color:var(--ink);font-weight:600}
 
-/* ── SOCIAL PROOF ── */
+/* ── PORTFOLIO ── */
+.portfolio{background:var(--bg);transition:background .35s}
+.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.pf-card{border:1.5px solid var(--border);border-radius:8px;background:var(--card);overflow:hidden;transition:transform .25s,border-color .35s,box-shadow .25s;display:flex;flex-direction:column}
+.pf-card:hover{transform:translateY(-6px);border-color:var(--yellow);box-shadow:0 18px 40px -20px rgba(0,0,0,.25)}
+.pf-browser{background:var(--bg2);border-bottom:1px solid var(--border);padding:.55rem .8rem;display:flex;align-items:center;gap:.5rem;transition:background .35s,border-color .35s}
+.pf-dots{display:flex;gap:.32rem}
+.pf-dot{width:9px;height:9px;border-radius:50%;background:rgba(120,120,120,.35)}
+.pf-dot:nth-child(1){background:#ff5f57}
+.pf-dot:nth-child(2){background:#febc2e}
+.pf-dot:nth-child(3){background:#28c840}
+.pf-url{flex:1;background:var(--bg);border-radius:4px;padding:.25rem .6rem;font-size:.65rem;color:var(--ink2);font-family:'Inter',sans-serif;text-align:center;border:1px solid var(--border);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;transition:background .35s}
+.pf-shot{aspect-ratio:16/10;background:linear-gradient(135deg,var(--bg2) 0%,var(--card) 100%);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;border-bottom:1px solid var(--border);transition:background .35s,border-color .35s}
+.pf-shot img{width:100%;height:100%;object-fit:cover;display:block}
+.pf-placeholder{font-family:'Bebas Neue',sans-serif;font-size:2.6rem;color:var(--ink3);letter-spacing:.04em;opacity:.55;text-align:center;padding:0 1rem;line-height:1}
+.pf-body{padding:1.4rem 1.5rem 1.6rem;display:flex;flex-direction:column;flex:1}
+.pf-tag{display:inline-flex;align-items:center;font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);background:var(--bg2);padding:.3rem .7rem;border-radius:999px;border:1px solid var(--border);width:fit-content;margin-bottom:.9rem;transition:background .35s,border-color .35s,color .35s}
+.pf-title{font-family:'Bebas Neue',sans-serif;font-size:1.45rem;color:var(--ink);letter-spacing:.01em;line-height:1.1;margin-bottom:.45rem;transition:color .35s}
+.pf-desc{font-size:.82rem;color:var(--ink2);line-height:1.65;margin-bottom:1.3rem;flex:1}
+.pf-link{display:inline-flex;align-items:center;gap:.45rem;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);text-decoration:none;padding:.65rem 1.1rem;border:1.5px solid var(--ink);border-radius:999px;width:fit-content;transition:background .2s,color .2s,border-color .2s}
+.pf-link:hover{background:var(--yellow);border-color:var(--yellow);color:#0a0a0a}
+.pf-link svg{transition:transform .2s}
+.pf-link:hover svg{transform:translate(2px,-2px)}
+.portfolio-note{margin-top:2.5rem;text-align:center;font-size:.78rem;color:var(--ink3);font-style:italic}
+
+/* ── SOCIAL PROOF (legacy, kept for compatibility) ── */
 .proof{background:var(--bg);transition:background .35s}
 .proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:3rem}
 .proof-card{border:1.5px solid var(--border);padding:2.2rem;border-radius:6px;background:var(--card);transition:transform .2s,background .2s,border-color .35s;position:relative;overflow:hidden}
@@ -282,7 +307,7 @@ footer a:hover{color:var(--yellow)}
   .canvas-hint{display:none}
   .trust-items{gap:1.5rem}
   .trust-divider{display:none}
-  .pkg-grid,.process-grid,.form-layout,.obj-grid,.proof-grid{grid-template-columns:1fr}
+  .pkg-grid,.process-grid,.form-layout,.obj-grid,.proof-grid,.portfolio-grid{grid-template-columns:1fr}
   .pkg{border-right:none;border-bottom:1px solid rgba(255,255,255,.08)}
   .form-row{grid-template-columns:1fr}
   .sticky-cta{display:flex}
@@ -522,56 +547,73 @@ footer a:hover{color:var(--yellow)}
 </section>
 
 <!-- SOCIAL PROOF -->
-<section class="proof" id="proof">
-  <div class="section-label reveal">Reviews</div>
-  <h2 class="section-title reveal">WHAT LOCAL BUSINESSES SAY</h2>
-  <div class="proof-grid">
-    <div class="proof-card reveal">
-      <div class="proof-rating"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-      <p class="proof-text">"Site was live in 3 days. Looked better than competitors who'd paid thousands. <strong>Already getting enquiries through it.</strong>"</p>
-      <div class="proof-author">
-        <div class="proof-avatar-sm" style="background:#e74c3c">ST</div>
-        <div>
-          <div class="proof-name">Sarah T.</div>
-          <div class="proof-biz">Meadow Flowers, Glasgow</div>
-        </div>
+<section class="portfolio proof" id="proof">
+  <div class="section-label reveal">Recent work</div>
+  <h2 class="section-title reveal">SITES WE'VE BUILT</h2>
+  <div class="portfolio-grid">
+
+    <div class="pf-card reveal">
+      <div class="pf-browser">
+        <div class="pf-dots"><span class="pf-dot"></span><span class="pf-dot"></span><span class="pf-dot"></span></div>
+        <div class="pf-url">example-florist.co.uk</div>
       </div>
-      <div class="proof-result">
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        3 new enquiries in the first week
+      <div class="pf-shot">
+        <!-- Replace with: <img src="/portfolio/florist.jpg" alt="Florist website preview"> -->
+        <div class="pf-placeholder">Coming<br>Soon</div>
       </div>
-    </div>
-    <div class="proof-card reveal d1">
-      <div class="proof-rating"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-      <p class="proof-text">"No jargon, no faff. They listened and delivered exactly what I wanted. <strong>The whole thing was painless.</strong>"</p>
-      <div class="proof-author">
-        <div class="proof-avatar-sm" style="background:#3498db">JK</div>
-        <div>
-          <div class="proof-name">James K.</div>
-          <div class="proof-biz">Northgate Deli, Edinburgh</div>
-        </div>
-      </div>
-      <div class="proof-result">
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        Site live in 4 days, zero stress
+      <div class="pf-body">
+        <span class="pf-tag">Florist</span>
+        <h3 class="pf-title">Local Florist Site</h3>
+        <p class="pf-desc">Mobile-first shop window with online enquiries, opening hours, and Google Maps integration.</p>
+        <a href="#" class="pf-link" target="_blank" rel="noopener">
+          View Live Site
+          <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3M9 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
       </div>
     </div>
-    <div class="proof-card reveal d2">
-      <div class="proof-rating"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-      <p class="proof-text">"Zero online presence to <strong>first page of Google locally</strong> within a month. Paid for itself in the first two weeks."</p>
-      <div class="proof-author">
-        <div class="proof-avatar-sm" style="background:#2ecc71">MO</div>
-        <div>
-          <div class="proof-name">Michelle O.</div>
-          <div class="proof-biz">CleanPro Services, Glasgow</div>
-        </div>
+
+    <div class="pf-card reveal d1">
+      <div class="pf-browser">
+        <div class="pf-dots"><span class="pf-dot"></span><span class="pf-dot"></span><span class="pf-dot"></span></div>
+        <div class="pf-url">example-deli.co.uk</div>
       </div>
-      <div class="proof-result">
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        ROI in under 2 weeks
+      <div class="pf-shot">
+        <!-- Replace with: <img src="/portfolio/deli.jpg" alt="Deli website preview"> -->
+        <div class="pf-placeholder">Coming<br>Soon</div>
+      </div>
+      <div class="pf-body">
+        <span class="pf-tag">Food &amp; Drink</span>
+        <h3 class="pf-title">Independent Deli</h3>
+        <p class="pf-desc">Menu, story, and click-to-call ordering — built to convert hungry locals into walk-in customers.</p>
+        <a href="#" class="pf-link" target="_blank" rel="noopener">
+          View Live Site
+          <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3M9 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
       </div>
     </div>
+
+    <div class="pf-card reveal d2">
+      <div class="pf-browser">
+        <div class="pf-dots"><span class="pf-dot"></span><span class="pf-dot"></span><span class="pf-dot"></span></div>
+        <div class="pf-url">example-cleaners.co.uk</div>
+      </div>
+      <div class="pf-shot">
+        <!-- Replace with: <img src="/portfolio/cleaners.jpg" alt="Cleaning service website preview"> -->
+        <div class="pf-placeholder">Coming<br>Soon</div>
+      </div>
+      <div class="pf-body">
+        <span class="pf-tag">Trades &amp; Services</span>
+        <h3 class="pf-title">Cleaning Service</h3>
+        <p class="pf-desc">Service area, pricing transparency, and a one-tap quote form. Designed to rank on local Google.</p>
+        <a href="#" class="pf-link" target="_blank" rel="noopener">
+          View Live Site
+          <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3M9 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
   </div>
+  <div class="portfolio-note reveal">New work being added as we launch — your business could be next.</div>
 </section>
 
 <!-- PROCESS + GUARANTEE -->
