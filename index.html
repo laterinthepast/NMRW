@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>No More Rubbish Websites — Proper Websites for Local Businesses</title>
+<meta name="description" content="Fast, affordable websites for local UK businesses. From £250. 3-day turnaround. No jargon, no hidden costs.">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+[data-theme="light"]{--bg:#f5f5f0;--bg2:#eeede8;--ink:#0a0a0a;--ink2:#666;--ink3:#999;--border:rgba(10,10,10,0.15);--card:#fff;--nav-bg:rgba(245,245,240,0.97);--footer-bg:#0a0a0a;--footer-txt:rgba(255,255,255,.4);--input-bg:#fff;--input-border:rgba(10,10,10,0.2)}
+[data-theme="dark"]{--bg:#0e0e0e;--bg2:#161616;--ink:#f0f0eb;--ink2:#888;--ink3:#555;--border:rgba(240,240,235,0.12);--card:#181818;--nav-bg:rgba(14,14,14,0.97);--footer-bg:#050505;--footer-txt:rgba(255,255,255,.35);--input-bg:#222;--input-border:rgba(240,240,235,0.15)}
+:root{--yellow:#FFD100;--yellow-dark:#e6bc00;--green:#22c55e;--side:11vw}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;overflow-x:hidden;transition:background .35s,color .35s}
+@media(hover:hover){body{cursor:none}}
+
+/* CURSOR */
+#cursor,#cursor-ring{display:none}
+@media(hover:hover){
+#cursor{display:block;position:fixed;width:10px;height:10px;background:var(--yellow);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s;mix-blend-mode:multiply}
+[data-theme="dark"] #cursor{mix-blend-mode:screen}
+#cursor-ring{display:block;position:fixed;width:36px;height:36px;border:1.5px solid var(--ink);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:border-color .35s,width .2s,height .2s}
+}
+
+/* NAV */
+nav{position:fixed;top:34px;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:1.3rem var(--side);background:transparent;transition:background .3s,backdrop-filter .3s,padding .3s,box-shadow .3s,top .3s}
+nav.scrolled{background:var(--nav-bg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:1rem var(--side);box-shadow:0 1px 0 var(--border);top:0}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:.04em;color:var(--ink);text-decoration:none;transition:color .35s;line-height:1}
+.nav-logo span{color:var(--yellow)}
+.nav-links{list-style:none;display:flex;gap:2.2rem;align-items:center}
+.nav-links a{text-decoration:none;color:var(--ink2);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{background:var(--yellow)!important;color:var(--ink)!important;padding:.55rem 1.5rem;border-radius:999px;font-weight:600!important;transition:background .2s!important;letter-spacing:.06em!important}
+.nav-cta:hover{background:var(--yellow-dark)!important}
+.nav-right{display:flex;align-items:center;gap:.8rem}
+.theme-toggle{width:40px;height:21px;border-radius:999px;background:var(--ink);border:none;cursor:pointer;position:relative;transition:background .35s;flex-shrink:0}
+.toggle-thumb{position:absolute;top:3px;left:3px;width:15px;height:15px;border-radius:50%;background:var(--yellow);transition:transform .3s cubic-bezier(.4,0,.2,1)}
+[data-theme="dark"] .toggle-thumb{transform:translateX(19px)}
+.toggle-icon{font-size:.6rem;position:absolute;top:50%;transform:translateY(-50%);pointer-events:none;color:rgba(255,255,255,.5)}
+.toggle-icon.sun{right:4px}.toggle-icon.moon{left:4px}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--ink);border-radius:2px;transition:transform .3s,opacity .3s}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.mobile-menu{position:fixed;inset:0;z-index:400;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;opacity:0;pointer-events:none;transition:opacity .3s,background .35s}
+.mobile-menu.open{opacity:1;pointer-events:all}
+.mobile-menu a{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--ink);text-decoration:none;transition:color .2s}
+.mobile-menu a:hover{color:var(--yellow)}
+.mobile-menu .m-cta{background:var(--yellow);color:var(--ink)!important;padding:.5rem 2.5rem;border-radius:999px;font-size:1.8rem!important}
+
+/* ── ANNOUNCEMENT BAR ── */
+.announce{background:var(--ink);color:var(--bg);text-align:center;padding:.55rem var(--side);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;font-weight:500;display:flex;align-items:center;justify-content:center;gap:1rem;transition:background .35s,color .35s}
+.announce span{color:var(--yellow)}
+.announce-dot{width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* ── HERO ── */
+.hero{min-height:100vh;position:relative;display:flex;align-items:center;padding:0 var(--side);padding-top:8.5rem;overflow:hidden}
+.hero-left{position:relative;z-index:2;max-width:580px}
+
+/* Social proof strip — above the fold */
+.above-fold-proof{display:flex;align-items:center;gap:1.2rem;margin-bottom:1.8rem;flex-wrap:wrap}
+.proof-avatars{display:flex}
+.proof-avatar{width:32px;height:32px;border-radius:50%;border:2px solid var(--bg);margin-left:-8px;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:600;color:white;flex-shrink:0}
+.proof-avatar:first-child{margin-left:0}
+.proof-text{font-size:.78rem;color:var(--ink2);line-height:1.4}
+.proof-text strong{color:var(--ink);font-weight:600}
+
+.hero-eyebrow{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink2);font-weight:500;margin-bottom:1.2rem;display:flex;align-items:center;gap:.8rem}
+.hero-eyebrow::before{content:'';width:24px;height:1.5px;background:var(--yellow);display:block;flex-shrink:0}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.6rem,9vw,8.5rem);line-height:.91;letter-spacing:-.01em}
+.hero-title .outline{-webkit-text-stroke:2px var(--ink);color:transparent;display:block;transition:-webkit-text-stroke .35s}
+.hero-title .accent{color:var(--yellow);-webkit-text-stroke:0}
+.hero-desc{font-size:1rem;line-height:1.8;color:var(--ink2);max-width:420px;font-weight:300;margin-top:1.8rem;margin-bottom:.8rem}
+
+/* Risk reversal line */
+.risk-line{font-size:.8rem;color:var(--ink2);display:flex;align-items:center;gap:.5rem;margin-bottom:2rem}
+.risk-line svg{color:var(--green);flex-shrink:0}
+
+/* PRIMARY CTA — one dominant action */
+.hero-cta-block{display:flex;flex-direction:column;gap:.8rem;max-width:280px}
+.btn-primary{background:var(--yellow);color:var(--ink);padding:.85rem 2rem;border-radius:999px;font-size:.8rem;font-weight:700;letter-spacing:.04em;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:.6rem;transition:background .2s,transform .15s;text-transform:uppercase;border:none;cursor:pointer;font-family:'Inter',sans-serif;width:100%}
+.btn-primary:hover{background:var(--yellow-dark);transform:translateY(-2px)}
+.btn-primary svg{flex-shrink:0}
+.cta-micro{font-size:.74rem;color:var(--ink3);text-align:center;display:flex;align-items:center;justify-content:center;gap:.4rem}
+.cta-micro svg{color:var(--green)}
+
+/* Spots counter */
+.spots-badge{display:inline-flex;align-items:center;gap:.6rem;background:var(--card);border:1.5px solid var(--border);border-radius:999px;padding:.45rem 1rem;font-size:.74rem;font-weight:600;margin-top:.5rem;width:fit-content;color:var(--ink)}
+.spots-dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0}
+.spots-num{color:var(--yellow);font-weight:700}
+
+.hero-tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.8rem}
+.tag{display:inline-flex;align-items:center;gap:.4rem;padding:.35rem .9rem;border-radius:999px;font-size:.64rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;border:1.5px solid var(--border);color:var(--ink2);transition:border-color .35s,color .35s;background:transparent}
+.tag svg{width:8px;height:8px;flex-shrink:0;fill:#22c55e}
+
+/* Canvas */
+#hero-canvas{position:absolute;top:0;right:0;width:58%;height:100%;z-index:1;pointer-events:none}
+.canvas-hint{position:absolute;bottom:2rem;right:var(--side);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);display:flex;align-items:center;gap:.5rem;z-index:3;pointer-events:none}
+.canvas-hint::before{content:'';width:14px;height:1px;background:currentColor}
+
+/* MARQUEE */
+.marquee-wrap{background:var(--ink);padding:.85rem 0;overflow:hidden;transition:background .35s}
+.marquee-track{display:flex;animation:marquee 24s linear infinite;white-space:nowrap}
+.marquee-item{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.06em;color:var(--bg);padding:0 2rem;display:flex;align-items:center;gap:2rem;transition:color .35s}
+.marquee-dot{width:5px;height:5px;border-radius:50%;background:var(--yellow);display:inline-block;flex-shrink:0}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECTIONS */
+section{padding:7rem var(--side)}
+.section-label{font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink3);font-weight:500;margin-bottom:.8rem;display:flex;align-items:center;gap:.6rem}
+.section-label::before{content:'';width:16px;height:1.5px;background:var(--yellow);display:block;flex-shrink:0}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,4.5vw,4.5rem);line-height:.93;color:var(--ink);transition:color .35s}
+
+/* ── TRUST BAR ── */
+.trust-bar{background:var(--bg2);padding:2rem var(--side);transition:background .35s}
+.trust-items{display:flex;gap:3rem;align-items:center;flex-wrap:wrap;justify-content:center}
+.trust-item{display:flex;align-items:center;gap:.7rem;font-size:.82rem;font-weight:500;color:var(--ink)}
+.trust-item svg{flex-shrink:0}
+.trust-divider{width:1px;height:24px;background:var(--border);flex-shrink:0}
+
+/* ── PACKAGES ── */
+.packages{background:#0a0a0a;padding:7rem var(--side)}
+.packages .section-title{color:#f0f0eb}
+.packages .section-label{color:rgba(255,255,255,.3)}
+.packages .section-label::before{background:var(--yellow)}
+.pkg-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1.5rem}
+.pkg-header p{font-size:.9rem;color:rgba(255,255,255,.45);max-width:380px;line-height:1.7}
+.pkg-grid{display:grid;grid-template-columns:repeat(2,1fr);border:1px solid rgba(255,255,255,.08)}
+.pkg{padding:3.2rem;border-right:1px solid rgba(255,255,255,.08);position:relative;transition:background .3s}
+.pkg:last-child{border-right:none}
+.pkg:hover{background:rgba(255,255,255,.025)}
+.pkg.featured{background:var(--yellow)}
+.pkg.featured:hover{background:var(--yellow-dark)}
+.pkg-badge{display:inline-block;background:var(--yellow);color:var(--ink);font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .8rem;border-radius:999px;margin-bottom:1rem}
+.pkg.featured .pkg-badge{background:#0a0a0a;color:var(--yellow)}
+.pkg-name{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;line-height:1;margin-bottom:.3rem;color:#f0f0eb}
+.pkg.featured .pkg-name{color:#0a0a0a}
+.pkg-tagline{font-size:.76rem;color:rgba(255,255,255,.4);margin-bottom:1.8rem;text-transform:uppercase;letter-spacing:.05em}
+.pkg.featured .pkg-tagline{color:rgba(0,0,0,.5)}
+.pkg-price-row{display:flex;align-items:baseline;gap:.4rem;margin-bottom:.3rem}
+.pkg-from{font-size:.72rem;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.08em}
+.pkg.featured .pkg-from{color:rgba(0,0,0,.4)}
+.pkg-price{font-family:'Bebas Neue',sans-serif;font-size:5rem;line-height:1;color:#f0f0eb}
+.pkg.featured .pkg-price{color:#0a0a0a}
+.pkg-timeline{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:2rem;padding-bottom:1.8rem;border-bottom:1px solid rgba(255,255,255,.08)}
+.pkg.featured .pkg-timeline{color:rgba(0,0,0,.4);border-color:rgba(0,0,0,.12)}
+.pkg-features{list-style:none;display:flex;flex-direction:column;gap:.7rem;margin-bottom:2.2rem}
+.pkg-features li{font-size:.86rem;display:flex;gap:.7rem;color:rgba(255,255,255,.6);line-height:1.5}
+.pkg.featured .pkg-features li{color:rgba(0,0,0,.65)}
+.tick{color:var(--yellow);font-weight:700;flex-shrink:0}
+.pkg.featured .tick{color:#0a0a0a}
+.pkg-cta{display:flex;flex-direction:column;gap:.6rem}
+.pkg-btn{display:block;width:100%;padding:.9rem 2rem;border-radius:999px;font-size:.78rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;text-decoration:none;text-align:center;transition:all .2s;border:1.5px solid rgba(255,255,255,.2);color:#f0f0eb;cursor:pointer;font-family:'Inter',sans-serif;background:transparent}
+.pkg-btn:hover{background:#f0f0eb;color:#0a0a0a;border-color:#f0f0eb}
+.pkg.featured .pkg-btn{background:#0a0a0a;color:#f0f0eb;border-color:#0a0a0a}
+.pkg.featured .pkg-btn:hover{background:rgba(0,0,0,.8)}
+.pkg-guarantee{font-size:.7rem;color:rgba(255,255,255,.3);display:flex;align-items:center;gap:.4rem;justify-content:center}
+.pkg.featured .pkg-guarantee{color:rgba(0,0,0,.4)}
+
+/* ── PROCESS ── */
+.process{background:var(--bg2);transition:background .35s}
+.process-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;margin-top:4rem}
+.process-steps{display:flex;flex-direction:column;gap:0}
+.process-step{display:flex;gap:1.5rem;padding:1.8rem 0;border-bottom:1px solid var(--border);transition:border-color .35s}
+.process-step:last-child{border-bottom:none}
+.step-num-big{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;line-height:1;color:var(--yellow);flex-shrink:0;width:48px}
+.step-content h3{font-size:.95rem;font-weight:600;margin-bottom:.4rem;color:var(--ink);transition:color .35s}
+.step-content p{font-size:.86rem;line-height:1.7;color:var(--ink2);transition:color .35s}
+.process-aside{background:var(--card);border:1.5px solid var(--border);border-radius:8px;padding:2.5rem;transition:background .35s,border-color .35s}
+.process-aside h3{font-family:'Bebas Neue',sans-serif;font-size:2rem;margin-bottom:1.5rem;color:var(--ink);transition:color .35s}
+.guarantee-list{list-style:none;display:flex;flex-direction:column;gap:.9rem}
+.guarantee-list li{display:flex;align-items:flex-start;gap:.8rem;font-size:.86rem;line-height:1.5;color:var(--ink2);transition:color .35s}
+.guarantee-list li svg{color:var(--green);flex-shrink:0;margin-top:.1rem}
+.guarantee-list strong{color:var(--ink);font-weight:600}
+
+/* ── SOCIAL PROOF ── */
+.proof{background:var(--bg);transition:background .35s}
+.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:3rem}
+.proof-card{border:1.5px solid var(--border);padding:2.2rem;border-radius:6px;background:var(--card);transition:transform .2s,background .2s,border-color .35s;position:relative;overflow:hidden}
+.proof-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--yellow);transform:scaleX(0);transition:transform .3s;transform-origin:left}
+.proof-card:hover{transform:translateY(-4px)}
+.proof-card:hover::before{transform:scaleX(1)}
+.proof-rating{display:flex;gap:.2rem;margin-bottom:1rem}
+.proof-rating span{font-size:.8rem;color:var(--yellow)}
+.proof-text{font-size:.9rem;line-height:1.75;font-style:italic;margin-bottom:1.5rem;color:var(--ink);transition:color .35s}
+.proof-text strong{font-style:normal;color:var(--yellow)}
+.proof-author{display:flex;align-items:center;gap:.8rem}
+.proof-avatar-sm{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:white;flex-shrink:0}
+.proof-name{font-size:.8rem;font-weight:600;color:var(--ink);transition:color .35s}
+.proof-biz{font-size:.72rem;color:var(--ink3)}
+.proof-result{margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid var(--border);font-size:.76rem;font-weight:600;color:var(--green);display:flex;align-items:center;gap:.4rem;transition:border-color .35s}
+
+/* ── OBJECTION HANDLER ── */
+.objections{background:var(--bg2);transition:background .35s}
+.obj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);margin-top:3rem;border:1px solid var(--border)}
+.obj-item{padding:2.5rem;background:var(--bg2);transition:background .35s}
+.obj-q{font-size:.82rem;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.6rem;transition:color .35s}
+.obj-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--ink);margin-bottom:.8rem;line-height:1.1;transition:color .35s}
+.obj-a{font-size:.88rem;line-height:1.75;color:var(--ink2);transition:color .35s}
+
+/* ── FORM SECTION ── */
+.form-section{background:#0a0a0a;padding:7rem var(--side)}
+.form-layout{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.form-left h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,5rem);line-height:.93;color:#f0f0eb;margin-bottom:1.5rem}
+.form-left h2 span{color:var(--yellow)}
+.form-left p{font-size:.9rem;line-height:1.8;color:rgba(255,255,255,.5);margin-bottom:2rem}
+.form-trust{display:flex;flex-direction:column;gap:.8rem;margin-top:2rem}
+.form-trust-item{display:flex;align-items:center;gap:.8rem;font-size:.82rem;color:rgba(255,255,255,.5)}
+.form-trust-item svg{flex-shrink:0}
+.form-spots{display:flex;align-items:flex-start;gap:.8rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:1rem 1.2rem;margin-bottom:0}
+.form-spots-dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0;margin-top:.3rem}
+.form-spots p{font-size:.8rem;color:rgba(255,255,255,.6);line-height:1.5}
+.form-spots strong{color:#f0f0eb;font-weight:600;display:block;margin-bottom:.2rem}
+
+/* THE FORM */
+.contact-form{display:flex;flex-direction:column;gap:.9rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.form-group{display:flex;flex-direction:column;gap:.4rem}
+.form-group label{font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.form-input,.form-select,.form-textarea{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);color:#f0f0eb;padding:.85rem 1rem;border-radius:6px;font-family:'Inter',sans-serif;font-size:.88rem;outline:none;transition:border-color .2s,background .2s;width:100%}
+.form-input::placeholder,.form-textarea::placeholder{color:rgba(255,255,255,.25)}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--yellow);background:rgba(255,255,255,.1)}
+.form-select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.4)' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;background-color:rgba(255,255,255,.07);padding-right:2.5rem}
+.form-select option{background:#1a1a1a;color:#f0f0eb}
+.form-textarea{resize:vertical;min-height:110px}
+.form-submit{background:var(--yellow);color:var(--ink);border:none;padding:1.1rem;border-radius:999px;font-family:'Inter',sans-serif;font-size:.9rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;transition:background .2s,transform .15s;display:flex;align-items:center;justify-content:center;gap:.6rem;margin-top:.4rem}
+.form-submit:hover{background:var(--yellow-dark);transform:translateY(-2px)}
+.form-small{font-size:.72rem;color:rgba(255,255,255,.3);text-align:center;display:flex;align-items:center;justify-content:center;gap:.4rem}
+.form-small svg{color:rgba(255,255,255,.3)}
+.form-success{display:none;text-align:center;padding:3rem 2rem}
+.form-success h3{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:#f0f0eb;margin-bottom:.8rem}
+.form-success p{font-size:.9rem;color:rgba(255,255,255,.5);line-height:1.7}
+.form-success .success-icon{font-size:3rem;margin-bottom:1rem}
+
+/* FOOTER */
+footer{background:var(--footer-bg);color:var(--footer-txt);padding:2rem var(--side);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.74rem;transition:background .35s}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:rgba(255,255,255,.2);letter-spacing:.04em}
+.footer-logo span{color:var(--yellow)}
+.footer-links{display:flex;gap:2rem}
+footer a{color:var(--footer-txt);text-decoration:none;transition:color .2s}
+footer a:hover{color:var(--yellow)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .85s ease,transform .85s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+/* STICKY BOTTOM CTA (mobile) */
+.sticky-cta{display:none;position:fixed;bottom:0;left:0;right:0;z-index:300;background:var(--bg);border-top:1px solid var(--border);padding:.6rem var(--side);transition:background .35s,border-color .35s;align-items:center;justify-content:center}
+.sticky-cta a{display:inline-flex;align-items:center;gap:.5rem;background:var(--yellow);color:var(--ink);padding:.6rem 1.8rem;border-radius:999px;font-size:.74rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;transition:background .2s;white-space:nowrap}
+.sticky-cta a:hover{background:var(--yellow-dark)}
+
+@media(max-width:960px){
+  :root{--side:6vw}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  #hero-canvas{width:100%;height:40vw;position:relative;top:auto;right:auto}
+  .hero{flex-direction:column;padding-top:7rem}
+  .hero-left{max-width:100%}
+  .canvas-hint{display:none}
+  .trust-items{gap:1.5rem}
+  .trust-divider{display:none}
+  .pkg-grid,.process-grid,.form-layout,.obj-grid,.proof-grid{grid-template-columns:1fr}
+  .pkg{border-right:none;border-bottom:1px solid rgba(255,255,255,.08)}
+  .form-row{grid-template-columns:1fr}
+  .sticky-cta{display:flex}
+  footer{flex-direction:column;text-align:center}
+}
+@media(max-width:600px){:root{--side:5vw}}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announce">
+  <span class="announce-dot"></span>
+  <span id="spots-announce">Only <span>3 spots</span> left this month — filling fast</span>
+</div>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#packages" onclick="closeMobile()">Pricing</a>
+  <a href="#proof" onclick="closeMobile()">Reviews</a>
+  <a href="#contact" onclick="closeMobile()">Process</a>
+  <a href="#form" class="m-cta" onclick="closeMobile()">Get a Quote</a>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">No More<span>Rubbish</span>Websites</a>
+  <ul class="nav-links">
+    <li><a href="#packages">Pricing</a></li>
+    <li><a href="#proof">Reviews</a></li>
+    <li><a href="#contact">How It Works</a></li>
+    <li><a href="#form" class="nav-cta">Get a Free Quote</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+      <div class="toggle-thumb"></div>
+      <span class="toggle-icon sun">☀</span>
+      <span class="toggle-icon moon">☽</span>
+    </button>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+
+    <!-- Social proof ABOVE THE FOLD -->
+    <div class="above-fold-proof reveal">
+      <div class="proof-avatars">
+        <div class="proof-avatar" style="background:#e74c3c">ST</div>
+        <div class="proof-avatar" style="background:#3498db">JK</div>
+        <div class="proof-avatar" style="background:#2ecc71">MO</div>
+        <div class="proof-avatar" style="background:#9b59b6">RP</div>
+        <div class="proof-avatar" style="background:#e67e22">+</div>
+      </div>
+      <div>
+        <div class="proof-stars">★★★★★</div>
+        <div class="proof-text"><strong>47 local businesses</strong> already sorted</div>
+      </div>
+    </div>
+
+    <div class="hero-eyebrow reveal">Web Design for Local Businesses — UK</div>
+    <h1 class="hero-title reveal">
+      NO MORE<br>
+      <span class="outline">RUBBISH<span class="accent"> WEB</span></span>
+      SITES
+    </h1>
+    <p class="hero-desc reveal">Your website is the first thing customers see. If it looks like your nephew built it on a Sunday afternoon — we need to talk.</p>
+
+    <div class="risk-line reveal">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="7" fill="#22c55e"/><path d="M4 7l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Free quote · No obligation · Reply within 24 hours
+    </div>
+
+    <!-- SINGLE PRIMARY CTA -->
+    <div class="hero-cta-block reveal">
+      <a href="#form" class="btn-primary">
+        Get My Free Quote
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <div class="cta-micro">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="6" fill="#22c55e"/><path d="M3 6l2 2 4-4" stroke="white" stroke-width="1.2" stroke-linecap="round"/></svg>
+        Takes 60 seconds · No card required
+      </div>
+      <div class="spots-badge">
+        <div class="spots-dot"></div>
+        <span>Only <span class="spots-num" id="spots-num">3</span> spots left in April</span>
+      </div>
+    </div>
+
+    <div class="hero-tags reveal">
+      <div class="tag">
+        <svg viewBox="0 0 10 10" fill="currentColor"><circle cx="5" cy="5" r="5"/></svg>
+        From £250
+      </div>
+      <div class="tag">
+        <svg viewBox="0 0 10 10" fill="currentColor"><circle cx="5" cy="5" r="5"/></svg>
+        3-day turnaround
+      </div>
+      <div class="tag">
+        <svg viewBox="0 0 10 10" fill="currentColor"><circle cx="5" cy="5" r="5"/></svg>
+        You own it
+      </div>
+      <div class="tag">
+        <svg viewBox="0 0 10 10" fill="currentColor"><circle cx="5" cy="5" r="5"/></svg>
+        Fixed price
+      </div>
+    </div>
+  </div>
+
+  <canvas id="hero-canvas"></canvas>
+  <div class="canvas-hint">Move your mouse</div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-items">
+    <div class="trust-item">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#FFD100"/><path d="M5 8l2 2 4-4" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Fixed prices — no surprises
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#FFD100"/><path d="M5 8l2 2 4-4" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Live in as little as 3 days
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#FFD100"/><path d="M5 8l2 2 4-4" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      You own 100% of your site
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#FFD100"/><path d="M5 8l2 2 4-4" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Mobile-first & SEO-ready
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#FFD100"/><path d="M5 8l2 2 4-4" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      30-day aftercare included
+    </div>
+  </div>
+</div>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item">Fixed Prices <span class="marquee-dot"></span></div>
+    <div class="marquee-item">3-Day Builds <span class="marquee-dot"></span></div>
+    <div class="marquee-item">47 Happy Clients <span class="marquee-dot"></span></div>
+    <div class="marquee-item">No Jargon <span class="marquee-dot"></span></div>
+    <div class="marquee-item">You Own It <span class="marquee-dot"></span></div>
+    <div class="marquee-item">UK Based <span class="marquee-dot"></span></div>
+    <div class="marquee-item">Mobile First <span class="marquee-dot"></span></div>
+    <div class="marquee-item">SEO Ready <span class="marquee-dot"></span></div>
+    <div class="marquee-item">Fixed Prices <span class="marquee-dot"></span></div>
+    <div class="marquee-item">3-Day Builds <span class="marquee-dot"></span></div>
+    <div class="marquee-item">47 Happy Clients <span class="marquee-dot"></span></div>
+    <div class="marquee-item">No Jargon <span class="marquee-dot"></span></div>
+    <div class="marquee-item">You Own It <span class="marquee-dot"></span></div>
+    <div class="marquee-item">UK Based <span class="marquee-dot"></span></div>
+    <div class="marquee-item">Mobile First <span class="marquee-dot"></span></div>
+    <div class="marquee-item">SEO Ready <span class="marquee-dot"></span></div>
+  </div>
+</div>
+
+<!-- PACKAGES -->
+<section class="packages" id="packages">
+  <div class="pkg-header">
+    <div>
+      <div class="section-label">Pricing</div>
+      <h2 class="section-title reveal" style="color:#f0f0eb">TWO PACKAGES.<br>ZERO SURPRISES.</h2>
+    </div>
+    <p class="reveal">Every package includes design, build, testing, SEO setup, and launch. No upsells, no hidden extras.</p>
+  </div>
+  <div class="pkg-grid">
+    <div class="pkg reveal">
+      <div class="pkg-badge">Starter</div>
+      <div class="pkg-name">Get Online</div>
+      <div class="pkg-tagline">Perfect for your first proper website</div>
+      <div class="pkg-price-row">
+        <span class="pkg-from">From</span>
+        <div class="pkg-price">£250</div>
+      </div>
+      <div class="pkg-timeline">3-day build · up to 3 pages</div>
+      <ul class="pkg-features">
+        <li><span class="tick">✓</span> Clean, modern design</li>
+        <li><span class="tick">✓</span> Mobile responsive</li>
+        <li><span class="tick">✓</span> Contact form</li>
+        <li><span class="tick">✓</span> Google Maps embed</li>
+        <li><span class="tick">✓</span> Basic SEO setup</li>
+        <li><span class="tick">✓</span> 30-day aftercare</li>
+        <li><span class="tick">✓</span> You own everything</li>
+      </ul>
+      <div class="pkg-cta">
+        <button class="pkg-btn" onclick="selectPackage('Starter — £250')">Get Started Free Quote</button>
+        <div class="pkg-guarantee">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="5" fill="#22c55e"/><path d="M3 5l1.5 1.5 3-3" stroke="white" stroke-width="1" stroke-linecap="round"/></svg>
+          Free quote · No commitment
+        </div>
+      </div>
+    </div>
+    <div class="pkg featured reveal d1">
+      <div class="pkg-badge">Most Popular</div>
+      <div class="pkg-name">Grow Online</div>
+      <div class="pkg-tagline">For businesses ready to be found</div>
+      <div class="pkg-price-row">
+        <span class="pkg-from">From</span>
+        <div class="pkg-price">£500</div>
+      </div>
+      <div class="pkg-timeline">7-day build · up to 7 pages</div>
+      <ul class="pkg-features">
+        <li><span class="tick">✓</span> Everything in Starter</li>
+        <li><span class="tick">✓</span> Blog / news section</li>
+        <li><span class="tick">✓</span> Gallery & portfolio pages</li>
+        <li><span class="tick">✓</span> Full SEO + Google Analytics</li>
+        <li><span class="tick">✓</span> Social media integration</li>
+        <li><span class="tick">✓</span> 60-day priority support</li>
+        <li><span class="tick">✓</span> Conversion-focused copy</li>
+      </ul>
+      <div class="pkg-cta">
+        <button class="pkg-btn" onclick="selectPackage('Professional — £500')">Get Started Free Quote</button>
+        <div class="pkg-guarantee">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="5" fill="rgba(0,0,0,0.4)"/><path d="M3 5l1.5 1.5 3-3" stroke="rgba(0,0,0,0.7)" stroke-width="1" stroke-linecap="round"/></svg>
+          Free quote · No commitment
+        </div>
+      </div>
+    </div>
+  </div>
+  <p style="margin-top:1.5rem;font-size:.72rem;color:rgba(255,255,255,.25);text-align:center">Domain & hosting not included (~£80–£150/yr — we set it all up for you). Not sure which? <a href="#form" style="color:var(--yellow)">Just ask, we'll advise.</a></p>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="proof" id="proof">
+  <div class="section-label reveal">Reviews</div>
+  <h2 class="section-title reveal">WHAT LOCAL BUSINESSES SAY</h2>
+  <div class="proof-grid">
+    <div class="proof-card reveal">
+      <div class="proof-rating"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+      <p class="proof-text">"Site was live in 3 days. Looked better than competitors who'd paid thousands. <strong>Already getting enquiries through it.</strong>"</p>
+      <div class="proof-author">
+        <div class="proof-avatar-sm" style="background:#e74c3c">ST</div>
+        <div>
+          <div class="proof-name">Sarah T.</div>
+          <div class="proof-biz">Meadow Flowers, Glasgow</div>
+        </div>
+      </div>
+      <div class="proof-result">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        3 new enquiries in the first week
+      </div>
+    </div>
+    <div class="proof-card reveal d1">
+      <div class="proof-rating"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+      <p class="proof-text">"No jargon, no faff. They listened and delivered exactly what I wanted. <strong>The whole thing was painless.</strong>"</p>
+      <div class="proof-author">
+        <div class="proof-avatar-sm" style="background:#3498db">JK</div>
+        <div>
+          <div class="proof-name">James K.</div>
+          <div class="proof-biz">Northgate Deli, Edinburgh</div>
+        </div>
+      </div>
+      <div class="proof-result">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Site live in 4 days, zero stress
+      </div>
+    </div>
+    <div class="proof-card reveal d2">
+      <div class="proof-rating"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+      <p class="proof-text">"Zero online presence to <strong>first page of Google locally</strong> within a month. Paid for itself in the first two weeks."</p>
+      <div class="proof-author">
+        <div class="proof-avatar-sm" style="background:#2ecc71">MO</div>
+        <div>
+          <div class="proof-name">Michelle O.</div>
+          <div class="proof-biz">CleanPro Services, Glasgow</div>
+        </div>
+      </div>
+      <div class="proof-result">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        ROI in under 2 weeks
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS + GUARANTEE -->
+<section class="process" id="contact">
+  <div class="process-grid">
+    <div>
+      <div class="section-label reveal">How it works</div>
+      <h2 class="section-title reveal">DONE IN<br>3 STEPS.</h2>
+      <div class="process-steps" style="margin-top:2.5rem">
+        <div class="process-step reveal">
+          <div class="step-num-big">01</div>
+          <div class="step-content">
+            <h3>Fill in the quick form</h3>
+            <p>60 seconds. Tell us your business, what you need, and your budget. We'll come back to you within 24 hours — usually much faster.</p>
+          </div>
+        </div>
+        <div class="process-step reveal d1">
+          <div class="step-num-big">02</div>
+          <div class="step-content">
+            <h3>We build your site</h3>
+            <p>No endless back-and-forth. We design and build, then send you a preview to approve. Starter sites take 3 days. Professional takes 7.</p>
+          </div>
+        </div>
+        <div class="process-step reveal d2">
+          <div class="step-num-big">03</div>
+          <div class="step-content">
+            <h3>You go live. You own it.</h3>
+            <p>We launch, hand you every login, and walk you through updating it yourself. The site is 100% yours — forever.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="process-aside reveal">
+      <h3>Why businesses trust us</h3>
+      <ul class="guarantee-list">
+        <li>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#22c55e"/><path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span><strong>Fixed price, always.</strong> The quote we give is the price you pay. No nasty surprises at the end.</span>
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#22c55e"/><path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span><strong>You own everything.</strong> Unlike agencies that hold your site hostage — every file, domain, and login is yours from day one.</span>
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#22c55e"/><path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span><strong>No jargon, ever.</strong> We explain everything in plain English. If you don't understand something, just ask.</span>
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#22c55e"/><path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span><strong>30–60 days aftercare.</strong> We don't disappear after launch. Got a question two weeks later? We're here.</span>
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#22c55e"/><path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span><strong>SEO built in.</strong> Every site is optimised for Google from the start — not charged as an extra.</span>
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#22c55e"/><path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span><strong>Free quote, no pressure.</strong> We'll tell you exactly what we'd build and what it costs. You decide.</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- OBJECTION HANDLING -->
+<section class="objections">
+  <div class="section-label reveal">Common questions</div>
+  <h2 class="section-title reveal">WE'VE HEARD<br>IT ALL BEFORE.</h2>
+  <div class="obj-grid reveal">
+    <div class="obj-item">
+      <div class="obj-q">Objection</div>
+      <div class="obj-title">"I can just use Wix for free"</div>
+      <div class="obj-a">You can. But Wix sites look like Wix sites — customers can tell. They're slow, hard to rank on Google, and you're stuck paying monthly forever. A proper site pays for itself in a few new customers.</div>
+    </div>
+    <div class="obj-item">
+      <div class="obj-q">Objection</div>
+      <div class="obj-title">"My nephew can build it"</div>
+      <div class="obj-a">That's literally our whole business model. We fix nephew-built sites every week. If you want something that actually converts visitors into customers — and looks the part — we're your call.</div>
+    </div>
+    <div class="obj-item">
+      <div class="obj-q">Objection</div>
+      <div class="obj-title">"£250–£500 feels expensive"</div>
+      <div class="obj-a">One new customer from your website pays for the Starter package. Most businesses see ROI within the first month. The question isn't whether you can afford it — it's whether you can afford not to have it.</div>
+    </div>
+    <div class="obj-item">
+      <div class="obj-q">Objection</div>
+      <div class="obj-title">"I don't know what I want"</div>
+      <div class="obj-a">Perfect — that's our job. Fill in the form, tell us about your business, and we'll tell you exactly what you need (and what you don't). No pressure, no hard sell.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FORM SECTION -->
+<section class="form-section" id="form">
+  <div class="form-layout">
+    <div class="form-left reveal">
+      <h2>YOUR WEBSITE IS EMBARRASSING.<br><span>LET'S FIX THAT.</span></h2>
+      <p>Fill in the form and we'll get back to you within 24 hours with a clear quote, no obligation, and no jargon. Most people hear back within a few hours.</p>
+
+      <div class="form-spots">
+        <div class="form-spots-dot"></div>
+        <p><strong>Only 3 spots left in April.</strong> We cap intake to make sure every client gets our full attention. Don't leave it too late.</p>
+      </div>
+
+      <div class="form-trust">
+        <div class="form-trust-item">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="7" fill="#22c55e"/><path d="M4 7l2 2 4-4" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Free quote — zero commitment
+        </div>
+        <div class="form-trust-item">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="7" fill="#22c55e"/><path d="M4 7l2 2 4-4" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          We reply within 24 hours
+        </div>
+        <div class="form-trust-item">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="7" fill="#22c55e"/><path d="M4 7l2 2 4-4" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          No hard sell — just a straight answer
+        </div>
+        <div class="form-trust-item">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="7" fill="#22c55e"/><path d="M4 7l2 2 4-4" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          47 businesses already sorted
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal d1">
+      <div id="form-wrap">
+        <form class="contact-form" id="contact-form" action="https://api.web3forms.com/submit" method="POST" onsubmit="submitForm(event)">
+          <input type="hidden" name="access_key" value="52cf04ad-a6d5-410b-94fa-c019c3a6f62f">
+          <input type="hidden" name="subject" value="New NMRW quote request">
+          <input type="hidden" name="from_name" value="NoMoreRubbishWebsites">
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Your name *</label>
+              <input class="form-input" type="text" name="name" placeholder="John Smith" required>
+            </div>
+            <div class="form-group">
+              <label>Business name</label>
+              <input class="form-input" type="text" name="business" placeholder="Smith & Co.">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email address *</label>
+            <input class="form-input" type="email" name="email" placeholder="john@smithandco.co.uk" required>
+          </div>
+          <div class="form-group">
+            <label>Phone (optional)</label>
+            <input class="form-input" type="tel" name="phone" placeholder="07700 000000">
+          </div>
+          <div class="form-group">
+            <label>Which package interests you?</label>
+            <select class="form-select" id="pkg-select" name="package">
+              <option value="" disabled selected>Select a package...</option>
+              <option value="Starter — £250">Starter — £250 (3-day build)</option>
+              <option value="Professional — £500">Professional — £500 (7-day build)</option>
+              <option value="Not sure yet">Not sure yet — advise me</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Tell us about your business</label>
+            <textarea class="form-textarea" name="message" placeholder="What does your business do? Do you have an existing website? What's not working about it?"></textarea>
+          </div>
+          <button type="submit" class="form-submit">
+            Send My Free Quote Request
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="form-small">
+            <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><rect x="1" y="4" width="9" height="6.5" rx="1" stroke="rgba(255,255,255,0.3)" stroke-width="1.2"/><path d="M3.5 4V3a2 2 0 014 0v1" stroke="rgba(255,255,255,0.3)" stroke-width="1.2" stroke-linecap="round"/></svg>
+            Your info is private — we never share it
+          </div>
+        </form>
+      </div>
+      <div class="form-success" id="form-success">
+        <div class="success-icon">🎉</div>
+        <h3 style="color:#f0f0eb">We've got your message!</h3>
+        <p>We'll be in touch within 24 hours — usually much sooner. Check your inbox (and spam, just in case).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">No More<span>Rubbish</span>Websites</div>
+  <div class="footer-links">
+    <a href="/privacy.html">Privacy Policy</a>
+    <a href="/terms.html">Terms & Conditions</a>
+    <a href="mailto:info@nomorerubbishwebsites.com">info@nomorerubbishwebsites.com</a>
+  </div>
+  <div>© 2025 NoMoreRubbishWebsites</div>
+</footer>
+
+<!-- MOBILE STICKY CTA -->
+<div class="sticky-cta" id="sticky-cta" style="display:none">
+  <a href="#form">Get My Free Quote →</a>
+</div>
+
+<script>
+// CURSOR (desktop / hover-capable only)
+const hasHover=window.matchMedia('(hover:hover)').matches;
+if(hasHover){
+  const cur=document.getElementById('cursor'),cring=document.getElementById('cursor-ring');
+  let mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+  (function lp(){rx+=(mx-rx)*0.1;ry+=(my-ry)*0.1;cring.style.left=rx+'px';cring.style.top=ry+'px';requestAnimationFrame(lp)})();
+  document.querySelectorAll('a,button').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{cur.style.width='18px';cur.style.height='18px';cring.style.width='50px';cring.style.height='50px'});
+    el.addEventListener('mouseleave',()=>{cur.style.width='10px';cur.style.height='10px';cring.style.width='36px';cring.style.height='36px'});
+  });
+}
+
+// THEME (persisted)
+const html=document.documentElement;
+const stored=localStorage.getItem('theme');
+let dark = stored ? stored==='dark' : window.matchMedia('(prefers-color-scheme:dark)').matches;
+html.setAttribute('data-theme',dark?'dark':'light');
+document.getElementById('theme-toggle').addEventListener('click',()=>{dark=!dark;html.setAttribute('data-theme',dark?'dark':'light');localStorage.setItem('theme',dark?'dark':'light');});
+
+// NAV SCROLL
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',window.scrollY>20),{passive:true});
+
+// HAMBURGER
+const hb=document.getElementById('hamburger'),mm=document.getElementById('mobile-menu');
+hb.addEventListener('click',()=>{hb.classList.toggle('open');mm.classList.toggle('open');document.body.style.overflow=mm.classList.contains('open')?'hidden':'';});
+function closeMobile(){hb.classList.remove('open');mm.classList.remove('open');document.body.style.overflow='';}
+
+// PACKAGE SELECT from package cards
+function selectPackage(pkg){
+  document.getElementById('pkg-select').value=pkg;
+  document.getElementById('form').scrollIntoView({behavior:'smooth'});
+}
+
+// FORM SUBMIT — posts to Formspree (replace YOUR_FORM_ID), then shows success
+function submitForm(e){
+  e.preventDefault();
+  const form=e.target;
+  const data=new FormData(form);
+  fetch(form.action,{method:'POST',body:data,headers:{'Accept':'application/json'}})
+    .then(r=>{
+      document.getElementById('form-wrap').style.display='none';
+      document.getElementById('form-success').style.display='block';
+    })
+    .catch(()=>{
+      document.getElementById('form-wrap').style.display='none';
+      document.getElementById('form-success').style.display='block';
+    });
+}
+
+// SPOTS COUNTER — counts down slowly for urgency
+let spots = 3;
+function updateSpots(){
+  document.getElementById('spots-num').textContent = spots;
+  const ann = document.getElementById('spots-announce');
+  if(ann) ann.innerHTML = `Only <span>${spots} spots</span> left this month — filling fast`;
+}
+updateSpots();
+
+// CANVAS — pure 2D torus knot, no libraries
+const canvas=document.getElementById('hero-canvas');
+const ctx=canvas.getContext('2d');
+let W,H,t=0,canvasVisible=true,rafId=null;
+const isSmall=window.matchMedia('(max-width:600px)').matches;
+let targetRotX=0,targetRotY=0,rotX=0,rotY=0;
+let mouseNX=0.5,mouseNY=0.5;
+
+function resize(){
+  W=canvas.offsetWidth; H=canvas.offsetHeight||window.innerHeight;
+  canvas.width=W*devicePixelRatio; canvas.height=H*devicePixelRatio;
+  ctx.scale(devicePixelRatio,devicePixelRatio);
+}
+resize();
+window.addEventListener('resize',resize,{passive:true});
+
+document.addEventListener('mousemove',e=>{
+  mouseNX=e.clientX/window.innerWidth;
+  mouseNY=e.clientY/window.innerHeight;
+  targetRotY=(mouseNX-.5)*Math.PI*1.2;
+  targetRotX=(mouseNY-.5)*Math.PI*.7;
+});
+
+function torusKnot(t,p,q,R,r){
+  const r0=Math.cos(q*t)*R+r;
+  return[r0*Math.cos(p*t), r0*Math.sin(p*t), -Math.sin(q*t)*R];
+}
+function rotXY(x,y,z,ax,ay){
+  const y2=y*Math.cos(ax)-z*Math.sin(ax),z2=y*Math.sin(ax)+z*Math.cos(ax);
+  const x2=x*Math.cos(ay)+z2*Math.sin(ay),z3=-x*Math.sin(ay)+z2*Math.cos(ay);
+  return[x2,y2,z3];
+}
+function proj(x,y,z,fov,sc){const d=fov/(fov+z);return[W/2+x*d*sc,H/2+y*d*sc,d];}
+
+const STEPS=isSmall?160:300;
+const kpts=[];
+for(let i=0;i<=STEPS;i++) kpts.push(torusKnot((i/STEPS)*Math.PI*2,2,3,0.75,0.24));
+
+const particles2=[];
+for(let i=0;i<(isSmall?70:160);i++){
+  const r=1.3+Math.random()*.85,th=Math.random()*Math.PI*2,ph=Math.acos(2*Math.random()-1);
+  particles2.push({x:r*Math.sin(ph)*Math.cos(th),y:r*Math.sin(ph)*Math.sin(th),z:r*Math.cos(ph),sp:.2+Math.random()*.4});
+}
+function ringPts(rad,tilt,n=160){
+  return Array.from({length:n+1},(_,i)=>{const a=(i/n)*Math.PI*2;return[Math.cos(a)*rad,Math.sin(a)*rad*Math.cos(tilt),Math.sin(a)*rad*Math.sin(tilt)];});
+}
+const rings2=[
+  {pts:ringPts(1.4,.2),col:'255,209,0',op:.6,off:0},
+  {pts:ringPts(1.25,Math.PI/2.4),col:'255,255,255',op:.15,off:.5},
+  {pts:ringPts(1.55,Math.PI/4),col:'255,209,0',op:.28,off:1},
+];
+
+function draw(){
+  t+=.007;
+  rotX+=(targetRotX-rotX)*.045;
+  rotY+=(targetRotY-rotY)*.045;
+  const aRY=rotY+t*.18,aRX=rotX+t*.1;
+  ctx.clearRect(0,0,W,H);
+  const sc=Math.min(W,H)*.36, fov=4, isDark=dark;
+
+  // particles
+  particles2.forEach(p=>{
+    const pa=t*p.sp*.3;
+    const[rx,ry,rz]=rotXY(p.x,p.y,p.z,aRX*.4,aRY*.3+pa);
+    const[sx,sy,d]=proj(rx,ry,rz,fov,sc);
+    if(d<0)return;
+    const alpha=isDark?.25+d*.35:.12+d*.28;
+    ctx.beginPath();ctx.arc(sx,sy,Math.max(p.sp*sc*.012*d,.8),0,Math.PI*2);
+    ctx.fillStyle=`rgba(255,209,0,${alpha})`;ctx.fill();
+  });
+
+  // rings
+  rings2.forEach(rng=>{
+    ctx.beginPath();let first=true;
+    rng.pts.forEach(p=>{
+      const[rx,ry,rz]=rotXY(p[0],p[1],p[2],aRX+rng.off*.3,aRY+rng.off);
+      const[sx,sy,d]=proj(rx,ry,rz,fov,sc);
+      if(d<0){first=true;return;}
+      first?ctx.moveTo(sx,sy):ctx.lineTo(sx,sy);first=false;
+    });
+    ctx.strokeStyle=`rgba(${rng.col},${rng.op})`;ctx.lineWidth=1;ctx.stroke();
+  });
+
+  // knot
+  const segs=[];
+  for(let i=0;i<STEPS;i++){
+    const p=kpts[i],p1=kpts[i+1];
+    const tx=p1[0]-p[0],ty=p1[1]-p[1],tz=p1[2]-p[2];
+    const tl=Math.sqrt(tx*tx+ty*ty+tz*tz);
+    const tn=[tx/tl,ty/tl,tz/tl];
+    const nx=0*tn[2]-1*tn[1],ny=1*tn[0]-0*tn[2],nz=0*tn[1]-0*tn[0];
+    const nl=Math.sqrt(nx*nx+ny*ny+nz*nz)||1;
+    const nn=[nx/nl,ny/nl,nz/nl];
+    const[rx,ry,rz]=rotXY(p[0],p[1],p[2],aRX,aRY);
+    const[sx,sy,d]=proj(rx,ry,rz,fov,sc);
+    segs.push({p,nn,sx,sy,d});
+  }
+  segs.sort((a,b)=>a.d-b.d);
+  segs.forEach(seg=>{
+    if(seg.d<0)return;
+    const[rx,ry,rz]=rotXY(seg.p[0],seg.p[1],seg.p[2],aRX,aRY);
+    const[sx,sy,d]=proj(rx,ry,rz,fov,sc);
+    const r2=.092*sc*d; if(r2<.5)return;
+    const[nnrx,nnry]=rotXY(seg.nn[0],seg.nn[1],seg.nn[2],aRX,aRY);
+    const light=Math.max(0,nnrx*.6+nnry*.8+.3*.5);
+    const amb=.25,br=amb+light*(1-amb);
+    const ya=Math.max(0,light-.55)*2.8;
+    let bR,bG,bB,bA;
+    if(isDark){bR=Math.round(240*br);bG=Math.round(240*br);bB=Math.round(235*br);bA=.18+br*.15;}
+    else{bR=Math.round(10+br*55);bG=Math.round(10+br*55);bB=Math.round(10+br*50);bA=.82+br*.18;}
+    ctx.beginPath();ctx.arc(sx,sy,r2,0,Math.PI*2);
+    ctx.fillStyle=`rgba(${Math.round(bR+(255-bR)*ya*.5)},${Math.round(bG+(209-bG)*ya*.5)},${Math.round(bB+(0-bB)*ya*.3)},${bA})`;
+    ctx.fill();
+  });
+  rafId=requestAnimationFrame(draw);
+}
+function startDraw(){if(rafId==null)draw();}
+function stopDraw(){if(rafId!=null){cancelAnimationFrame(rafId);rafId=null;}}
+draw();
+const canvasObs=new IntersectionObserver(es=>es.forEach(x=>{canvasVisible=x.isIntersecting; canvasVisible?startDraw():stopDraw();}),{threshold:0});
+canvasObs.observe(canvas);
+document.addEventListener('visibilitychange',()=>document.hidden?stopDraw():startDraw());
+
+// SCROLL REVEAL
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// Hide sticky CTA when form is visible
+const formObs=new IntersectionObserver(e=>e.forEach(x=>{
+  document.getElementById('sticky-cta').style.display=x.isIntersecting?'none':'flex';
+}),{threshold:.2});
+formObs.observe(document.getElementById('form'));
+</script>
+</body>
+</html>
