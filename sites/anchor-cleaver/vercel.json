@@ -8,10 +8,14 @@
   ],
   "routes": [
     { "src": "/api/auth/callback", "dest": "/api/auth/callback.js" },
+    {
+      "src": "/admin/config\\.yml",
+      "dest": "/admin/config.yml",
+      "headers": { "Content-Type": "text/yaml; charset=utf-8" }
+    },
     { "src": "/admin/?$", "dest": "/admin/index.html" },
     { "src": "/admin/(.+)", "dest": "/admin/$1" },
     { "src": "/content/(.+)", "dest": "/content/$1" },
-    { "src": "/", "dest": "/index.html" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
