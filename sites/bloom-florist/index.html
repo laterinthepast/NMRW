@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bloom & Co. — Independent Florist, Edinburgh</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#faf8f4;--bg2:#f3efe8;--bg3:#ece6dc;--sage:#4a6741;--sage-light:#6a8a60;--sage-dim:#d8e4d5;--cream:#faf8f4;--ink:#1e1c18;--ink2:#6e6a62;--gold:#b8975a;--border:rgba(30,28,24,0.1);--side:clamp(1.5rem,7vw,7rem)}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.6rem var(--side);background:transparent;transition:background .4s,padding .4s}
+nav.scrolled{background:rgba(250,248,244,0.97);backdrop-filter:blur(12px);padding:1.1rem var(--side);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'DM Serif Display',serif;font-size:1.2rem;color:var(--ink);text-decoration:none;display:flex;flex-direction:column;line-height:1.1}
+.nav-logo span{font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sage);font-family:'DM Sans',sans-serif;font-weight:500}
+nav ul{list-style:none;display:flex;gap:2.5rem;align-items:center}
+nav a{text-decoration:none;color:var(--ink2);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:400;transition:color .2s}
+nav a:hover{color:var(--sage)}
+.nav-order{background:var(--sage);color:white!important;padding:.5rem 1.4rem;letter-spacing:.1em!important;transition:background .2s!important}
+.nav-order:hover{background:var(--sage-light)!important}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:1px;background:var(--ink);transition:transform .3s,opacity .3s}
+.hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.mobile-menu{position:fixed;inset:0;z-index:99;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;opacity:0;pointer-events:none;transition:opacity .3s}
+.mobile-menu.open{opacity:1;pointer-events:all}
+.mobile-menu a{font-family:'DM Serif Display',serif;font-size:2.8rem;font-style:italic;color:var(--ink);text-decoration:none;transition:color .2s}
+.mobile-menu a:hover{color:var(--sage)}
+.hero{min-height:100vh;display:grid;grid-template-columns:55% 45%;padding-top:80px;position:relative;overflow:hidden}
+.hero-main{display:flex;flex-direction:column;justify-content:center;padding:5rem var(--side) 5rem var(--side);position:relative}
+.hero-main::before{content:'';position:absolute;top:-10%;right:-15%;width:600px;height:600px;border-radius:60% 40% 70% 30%/40% 60% 40% 60%;background:var(--sage-dim);opacity:.3;z-index:0;animation:morphBlob 8s ease-in-out infinite}
+@keyframes morphBlob{0%,100%{border-radius:60% 40% 70% 30%/40% 60% 40% 60%}33%{border-radius:40% 60% 30% 70%/60% 40% 60% 40%}66%{border-radius:70% 30% 50% 50%/30% 70% 50% 50%}}
+.hero-text{position:relative;z-index:1}
+.hero-eyebrow{font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--sage);margin-bottom:1.5rem;display:flex;align-items:center;gap:.8rem;font-weight:500}
+.hero-eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--sage)}
+h1{font-family:'DM Serif Display',serif;font-size:clamp(3rem,5.5vw,5.5rem);font-weight:400;line-height:1.1;letter-spacing:-.01em;margin-bottom:1.5rem}
+h1 em{display:block;font-style:italic;color:var(--sage)}
+.hero-desc{font-size:.93rem;line-height:1.9;color:var(--ink2);max-width:380px;margin-bottom:2.5rem}
+.hero-btns{display:flex;gap:.9rem;flex-wrap:wrap}
+.btn-sage{background:var(--sage);color:white;padding:.9rem 2.2rem;font-family:'DM Sans',sans-serif;font-size:.74rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;display:inline-block;transition:background .2s,transform .15s}
+.btn-sage:hover{background:var(--sage-light);transform:translateY(-1px)}
+.btn-outline{border:1px solid var(--border);color:var(--ink2);padding:.9rem 2.2rem;font-size:.74rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;display:inline-block;transition:all .2s}
+.btn-outline:hover{border-color:var(--sage);color:var(--sage)}
+.hero-tags{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:2rem}
+.tag{padding:.35rem .9rem;border:1px solid var(--border);border-radius:999px;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2)}
+.hero-aside{background:var(--bg2);display:flex;flex-direction:column;position:relative;overflow:hidden}
+.hero-aside-inner{padding:4rem 3rem;display:flex;flex-direction:column;justify-content:center;height:100%;position:relative;z-index:1}
+.botanical-deco{position:absolute;opacity:.08;right:-30px;bottom:-30px;width:300px;height:300px}
+.aside-title{font-family:'DM Serif Display',serif;font-size:1.4rem;font-style:italic;color:var(--ink);margin-bottom:1.5rem}
+.aside-items{display:flex;flex-direction:column;gap:1.2rem}
+.aside-item{display:flex;gap:1rem;align-items:flex-start;padding-bottom:1.2rem;border-bottom:1px solid var(--border)}
+.aside-item:last-child{border-bottom:none;padding-bottom:0}
+.aside-icon{font-size:1.3rem;flex-shrink:0;margin-top:.1rem}
+.aside-item-title{font-size:.88rem;font-weight:500;color:var(--ink);margin-bottom:.2rem}
+.aside-item-desc{font-size:.78rem;line-height:1.5;color:var(--ink2)}
+.marquee{background:var(--sage);padding:.6rem 0;overflow:hidden}
+.marquee-track{display:flex;animation:marquee 25s linear infinite;white-space:nowrap}
+.marquee-item{font-family:'DM Serif Display',serif;font-size:1rem;font-style:italic;color:rgba(255,255,255,.7);padding:0 2rem;display:flex;align-items:center;gap:2rem}
+.marquee-sep{display:inline-block;width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.4)}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+section{padding:6rem var(--side)}
+.label{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sage);margin-bottom:.6rem;font-weight:500}
+h2{font-family:'DM Serif Display',serif;font-size:clamp(2rem,4vw,3.8rem);font-weight:400;line-height:1.1;letter-spacing:-.01em;margin-bottom:1.2rem}
+.occasions{background:var(--bg)}
+.occasions-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3rem}
+.occasion-card{background:var(--bg2);padding:0;overflow:hidden;transition:transform .2s}
+.occasion-card:hover{transform:translateY(-4px)}
+.occasion-img{aspect-ratio:3/4;background:var(--bg3);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.5rem}
+.occasion-img-icon{font-size:3rem;opacity:.2}
+.occasion-info{padding:1.4rem}
+.occasion-name{font-family:'DM Serif Display',serif;font-size:1.2rem;margin-bottom:.4rem}
+.occasion-desc{font-size:.78rem;line-height:1.6;color:var(--ink2)}
+.occasion-link{display:inline-flex;align-items:center;gap:.4rem;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--sage);margin-top:.8rem;text-decoration:none;font-weight:500}
+.occasion-link:hover{gap:.7rem}
+.seasonal{background:var(--bg2)}
+.seasonal-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
+.seasonal-visual{position:relative}
+.seasonal-img{aspect-ratio:1/1;background:var(--bg3);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.5rem}
+.seasonal-img::after{content:'';position:absolute;bottom:-15px;right:-15px;width:100px;height:100px;background:var(--sage-dim);border-radius:50%;z-index:0}
+.seasonal-text h2{margin-bottom:1rem}
+.seasonal-text p{font-size:.9rem;line-height:1.9;color:var(--ink2);margin-bottom:1.2rem}
+.seasonal-text strong{color:var(--ink);font-weight:500}
+.range-pills{display:flex;gap:.5rem;flex-wrap:wrap;margin:1.5rem 0}
+.range-pill{padding:.4rem 1.1rem;border:1px solid var(--sage-dim);border-radius:999px;font-size:.72rem;color:var(--sage);font-weight:500;cursor:pointer;transition:all .2s}
+.range-pill.active,.range-pill:hover{background:var(--sage);color:white;border-color:var(--sage)}
+.wedding{background:var(--sage);color:white}
+.wedding-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.wedding h2{font-size:clamp(2rem,4vw,3.8rem);color:white;margin-bottom:1rem}
+.wedding .label{color:rgba(255,255,255,.5)}
+.wedding p{font-size:.9rem;line-height:1.9;color:rgba(255,255,255,.65);margin-bottom:1.2rem}
+.wedding strong{color:white;font-weight:500}
+.wedding-packages{display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,.1)}
+.wedding-pkg{background:rgba(0,0,0,.1);padding:1.5rem;display:flex;justify-content:space-between;align-items:center;transition:background .2s}
+.wedding-pkg:hover{background:rgba(0,0,0,.2)}
+.wpkg-name{font-family:'DM Serif Display',serif;font-size:1.1rem;font-style:italic;color:white}
+.wpkg-desc{font-size:.78rem;color:rgba(255,255,255,.6);margin-top:.2rem}
+.wpkg-price{font-family:'DM Serif Display',serif;font-size:1.3rem;color:white;white-space:nowrap}
+.btn-white{background:white;color:var(--sage);padding:.9rem 2.2rem;font-size:.74rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;display:inline-block;transition:all .2s;margin-top:1.5rem}
+.btn-white:hover{background:var(--bg2)}
+.process-section{background:var(--bg)}
+.process-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3rem;position:relative}
+.process-row::before{content:'';position:absolute;top:20px;left:calc(12.5% + 20px);right:calc(12.5% + 20px);height:1px;background:var(--sage-dim);z-index:0}
+.process-step{text-align:center;position:relative;z-index:1}
+.step-num{width:40px;height:40px;border-radius:50%;background:var(--sage);color:white;font-family:'DM Serif Display',serif;font-size:1rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem}
+.step-title{font-family:'DM Serif Display',serif;font-size:1rem;margin-bottom:.4rem}
+.step-desc{font-size:.78rem;line-height:1.5;color:var(--ink2)}
+.reviews{background:var(--bg2)}
+.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.review-card{background:var(--bg);padding:2rem;border-bottom:3px solid transparent;transition:border-color .2s}
+.review-card:hover{border-bottom-color:var(--sage)}
+.review-flower{font-size:1.5rem;margin-bottom:1rem}
+.review-text{font-family:'DM Serif Display',serif;font-size:1rem;font-style:italic;line-height:1.7;color:var(--ink);margin-bottom:1.2rem}
+.review-author{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--sage);font-weight:500}
+.review-occasion{font-size:.68rem;color:var(--ink2);margin-top:.2rem}
+.order-section{background:var(--bg3)}
+.order-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.order-form{display:flex;flex-direction:column;gap:.9rem}
+.form-group{display:flex;flex-direction:column;gap:.4rem}
+.form-group label{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2);font-weight:500}
+.form-input,.form-select,.form-textarea{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--ink);padding:.8rem 1rem;font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:300;outline:none;transition:border-color .2s;border-radius:2px;-webkit-appearance:none}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--ink2);opacity:.5}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--sage)}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.order-info h2{margin-bottom:1rem}
+.order-info p{font-size:.88rem;line-height:1.9;color:var(--ink2);margin-bottom:1.5rem}
+.delivery-zones{display:flex;flex-direction:column;gap:.6rem;margin-top:1.5rem}
+.dz-item{display:flex;justify-content:space-between;align-items:center;padding:.7rem 0;border-bottom:1px solid var(--border);font-size:.82rem}
+.dz-area{color:var(--ink)}
+.dz-price{color:var(--sage);font-weight:500}
+footer{background:var(--ink);color:rgba(250,248,244,.35);padding:3.5rem var(--side) 2rem}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:4rem;padding-bottom:2.5rem;margin-bottom:2rem;border-bottom:1px solid rgba(250,248,244,.08)}
+.footer-brand{font-family:'DM Serif Display',serif;font-size:1.4rem;font-style:italic;color:rgba(250,248,244,.5);margin-bottom:.4rem}
+.footer-brand-sub{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(74,103,65,.5);font-family:'DM Sans',sans-serif}
+.footer-col h3{font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(74,103,65,.6);margin-bottom:.8rem;font-family:'DM Sans',sans-serif}
+.footer-col p,.footer-col a{font-size:.8rem;line-height:2;color:rgba(250,248,244,.35);text-decoration:none;display:block;transition:color .2s}
+.footer-col a:hover{color:rgba(74,103,65,.8)}
+.footer-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.7rem}
+.footer-credit a{color:rgba(74,103,65,.4)}
+.footer-credit a:hover{color:rgba(74,103,65,.8)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .9s,transform .9s}
+.reveal.visible{opacity:1;transform:none}
+.d1{transition-delay:.12s}.d2{transition-delay:.24s}.d3{transition-delay:.36s}
+@media(max-width:900px){
+  nav ul{display:none}
+  .hamburger{display:flex}
+  .hero{grid-template-columns:1fr}
+  .hero-aside{display:none}
+  .occasions-grid,.seasonal-grid,.wedding-grid,.review-grid,.order-grid{grid-template-columns:1fr}
+  .occasions-grid{grid-template-columns:1fr 1fr}
+  .process-row{grid-template-columns:1fr 1fr}
+  .process-row::before{display:none}
+  .footer-top{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#occasions" onclick="closeMobile()">Shop</a>
+  <a href="#wedding" onclick="closeMobile()">Weddings</a>
+  <a href="#reviews" onclick="closeMobile()">Reviews</a>
+  <a href="#order" onclick="closeMobile()">Order</a>
+</div>
+
+<nav id="navbar">
+  <a href="#" class="nav-logo">Bloom & Co.<span>Florist · Edinburgh</span></a>
+  <ul>
+    <li><a href="#occasions">Shop</a></li>
+    <li><a href="#seasonal">Seasonal</a></li>
+    <li><a href="#wedding">Weddings</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#order" class="nav-order">Order Now</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="hero">
+  <div class="hero-main">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Independent Florist · Edinburgh</div>
+      <h1>Flowers That<br>Say What<br><em>Words Can't.</em></h1>
+      <p class="hero-desc">Hand-tied bouquets, wedding flowers, and seasonal arrangements made with love in our Edinburgh studio. Same-day delivery across the city.</p>
+      <div class="hero-btns">
+        <a href="#order" class="btn-sage">Order Flowers</a>
+        <a href="#wedding" class="btn-outline">Wedding Enquiry</a>
+      </div>
+      <div class="hero-tags">
+        <div class="tag">Same-Day Delivery</div>
+        <div class="tag">Hand-Tied</div>
+        <div class="tag">Wedding Specialists</div>
+        <div class="tag">Seasonal Blooms</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-aside">
+    <svg class="botanical-deco" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="80" stroke="#4a6741" stroke-width="1"/><path d="M100 20 Q140 60 100 100 Q60 60 100 20" stroke="#4a6741" stroke-width="1" fill="none"/><path d="M100 100 Q140 140 100 180 Q60 140 100 100" stroke="#4a6741" stroke-width="1" fill="none"/><path d="M20 100 Q60 60 100 100 Q60 140 20 100" stroke="#4a6741" stroke-width="1" fill="none"/><path d="M100 100 Q140 60 180 100 Q140 140 100 100" stroke="#4a6741" stroke-width="1" fill="none"/></svg>
+    <div class="hero-aside-inner">
+      <div class="aside-title">Why Bloom & Co.?</div>
+      <div class="aside-items">
+        <div class="aside-item"><div class="aside-icon">🌿</div><div><div class="aside-item-title">Locally sourced</div><div class="aside-item-desc">Scottish growers wherever possible, sustainable practices always.</div></div></div>
+        <div class="aside-item"><div class="aside-icon">🚚</div><div><div class="aside-item-title">Same-day delivery</div><div class="aside-item-desc">Order by 1pm for same-day delivery across Edinburgh.</div></div></div>
+        <div class="aside-item"><div class="aside-icon">🌸</div><div><div class="aside-item-title">Hand-tied, every time</div><div class="aside-item-desc">Each arrangement is made to order by our florists. Never off a shelf.</div></div></div>
+        <div class="aside-item"><div class="aside-icon">💐</div><div><div class="aside-item-title">Wedding specialists</div><div class="aside-item-desc">Over 200 weddings — boutonnières to full venue dressing.</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span class="marquee-item">Fresh Daily Arrivals <span class="marquee-sep"></span></span>
+    <span class="marquee-item">Same-Day Edinburgh Delivery <span class="marquee-sep"></span></span>
+    <span class="marquee-item">Wedding Specialists <span class="marquee-sep"></span></span>
+    <span class="marquee-item">Seasonal Bouquets <span class="marquee-sep"></span></span>
+    <span class="marquee-item">Locally Sourced <span class="marquee-sep"></span></span>
+    <span class="marquee-item">Hand-Tied to Order <span class="marquee-sep"></span></span>
+    <span class="marquee-item">Fresh Daily Arrivals <span class="marquee-sep"></span></span>
+    <span class="marquee-item">Same-Day Edinburgh Delivery <span class="marquee-sep"></span></span>
+    <span class="marquee-item">Wedding Specialists <span class="marquee-sep"></span></span>
+    <span class="marquee-item">Seasonal Bouquets <span class="marquee-sep"></span></span>
+    <span class="marquee-item">Locally Sourced <span class="marquee-sep"></span></span>
+    <span class="marquee-item">Hand-Tied to Order <span class="marquee-sep"></span></span>
+  </div>
+</div>
+
+<section class="occasions" id="occasions">
+  <div class="label reveal">Shop by Occasion</div>
+  <h2 class="reveal">Find the Perfect<br><em>Arrangement.</em></h2>
+  <div class="occasions-grid">
+    <div class="occasion-card reveal">
+      <div class="occasion-img" style="background:#f3ede7"><div class="occasion-img-icon">🌷</div></div>
+      <div class="occasion-info">
+        <div class="occasion-name">Just Because</div>
+        <div class="occasion-desc">Seasonal bouquets for no reason at all — the best kind.</div>
+        <a href="#order" class="occasion-link">Order Now →</a>
+      </div>
+    </div>
+    <div class="occasion-card reveal d1">
+      <div class="occasion-img" style="background:#ece6dc"><div class="occasion-img-icon">🌹</div></div>
+      <div class="occasion-info">
+        <div class="occasion-name">Romance</div>
+        <div class="occasion-desc">Anniversaries, proposals, Valentine's Day — we make moments memorable.</div>
+        <a href="#order" class="occasion-link">Order Now →</a>
+      </div>
+    </div>
+    <div class="occasion-card reveal d2">
+      <div class="occasion-img" style="background:#d8e4d5"><div class="occasion-img-icon">🌻</div></div>
+      <div class="occasion-info">
+        <div class="occasion-name">Birthdays</div>
+        <div class="occasion-desc">Bright, bold, or soft and elegant — tell us about them and we'll create something perfect.</div>
+        <a href="#order" class="occasion-link">Order Now →</a>
+      </div>
+    </div>
+    <div class="occasion-card reveal d3">
+      <div class="occasion-img" style="background:#e8e0d5"><div class="occasion-img-icon">🕊️</div></div>
+      <div class="occasion-info">
+        <div class="occasion-name">Sympathy</div>
+        <div class="occasion-desc">Thoughtful, gentle arrangements. Delivered with care and a handwritten note.</div>
+        <a href="#order" class="occasion-link">Order Now →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="seasonal" id="seasonal">
+  <div class="seasonal-grid">
+    <div class="seasonal-visual reveal">
+      <div class="seasonal-img"><div class="occasion-img-icon" style="font-size:4rem;opacity:.2">🌸</div></div>
+    </div>
+    <div class="seasonal-text reveal d1">
+      <div class="label">What's in Season</div>
+      <h2>Spring is Here.<br><em>And It's Glorious.</em></h2>
+      <p>April brings <strong>tulips, ranunculus, sweet peas, and peonies</strong> — some of our favourite blooms of the year. We source what's freshest each week and build our arrangements around what's at its absolute best.</p>
+      <p>Choosing seasonal flowers means <strong>fresher bouquets, longer lasting arrangements, and better prices.</strong> We'll always guide you toward what's beautiful right now.</p>
+      <div class="range-pills">
+        <div class="range-pill active" onclick="setPill(this)">Spring</div>
+        <div class="range-pill" onclick="setPill(this)">Summer</div>
+        <div class="range-pill" onclick="setPill(this)">Autumn</div>
+        <div class="range-pill" onclick="setPill(this)">Winter</div>
+      </div>
+      <a href="#order" class="btn-sage">Shop Spring Bouquets</a>
+    </div>
+  </div>
+</section>
+
+<section class="wedding" id="wedding">
+  <div class="wedding-grid">
+    <div class="reveal">
+      <div class="label">Weddings</div>
+      <h2>Your Wedding Flowers,<br><em>Perfectly Arranged.</em></h2>
+      <p>We've worked on <strong>over 200 weddings</strong> across Edinburgh and the Lothians. From intimate registry office ceremonies to full-scale country house events — flowers and styling that tell your story.</p>
+      <p>Every wedding enquiry gets a personal consultation. We'll talk through your vision, venue, colour palette, and budget, then create a bespoke proposal just for you.</p>
+      <a href="#order" class="btn-white">Start Your Wedding Enquiry</a>
+    </div>
+    <div class="reveal d1">
+      <div class="wedding-packages">
+        <div class="wedding-pkg"><div><div class="wpkg-name">Elopement</div><div class="wpkg-desc">Bridal bouquet & boutonnière</div></div><div class="wpkg-price">From £120</div></div>
+        <div class="wedding-pkg"><div><div class="wpkg-name">Intimate</div><div class="wpkg-desc">Bridal party, buttonholes & ceremony</div></div><div class="wpkg-price">From £450</div></div>
+        <div class="wedding-pkg"><div><div class="wpkg-name">Full Wedding</div><div class="wpkg-desc">Ceremony, reception & full party flowers</div></div><div class="wpkg-price">From £1,200</div></div>
+        <div class="wedding-pkg"><div><div class="wpkg-name">Complete Dressing</div><div class="wpkg-desc">Full venue styling, arches, centrepieces</div></div><div class="wpkg-price">POA</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process-section">
+  <div class="label reveal" style="text-align:center;justify-content:center">How It Works</div>
+  <h2 class="reveal" style="text-align:center">Flowers on Your Doorstep<br><em>In 4 Easy Steps.</em></h2>
+  <div class="process-row">
+    <div class="process-step reveal"><div class="step-num">1</div><div class="step-title">Choose Your Occasion</div><p class="step-desc">Tell us what the flowers are for and roughly what you'd like to spend.</p></div>
+    <div class="process-step reveal d1"><div class="step-num">2</div><div class="step-title">We Design It</div><p class="step-desc">Our florists create your arrangement using the freshest blooms available.</p></div>
+    <div class="process-step reveal d2"><div class="step-num">3</div><div class="step-title">Add a Message</div><p class="step-desc">We hand-write your message on a beautiful card and include it with the flowers.</p></div>
+    <div class="process-step reveal d3"><div class="step-num">4</div><div class="step-title">Delivered to Their Door</div><p class="step-desc">Same-day delivery across Edinburgh. We'll let you know when it's delivered.</p></div>
+  </div>
+</section>
+
+<section class="reviews" id="reviews">
+  <div class="label reveal">Reviews</div>
+  <h2 class="reveal">Kind Words from<br><em>Happy Customers.</em></h2>
+  <div class="review-grid">
+    <div class="review-card reveal">
+      <div class="review-flower">🌸</div>
+      <p class="review-text">"Ordered birthday flowers for my mum at 11am. They arrived at 2:30pm looking absolutely stunning. She was in tears — the good kind."</p>
+      <div class="review-author">Emma R.</div>
+      <div class="review-occasion">Birthday bouquet · Edinburgh delivery</div>
+    </div>
+    <div class="review-card reveal d1">
+      <div class="review-flower">💐</div>
+      <p class="review-text">"Bloom & Co. did our entire wedding and I cannot say enough. Every flower was perfect and they understood exactly what we wanted from day one."</p>
+      <div class="review-author">Sarah & Tom W.</div>
+      <div class="review-occasion">Wedding · Prestonfield House · September 2024</div>
+    </div>
+    <div class="review-card reveal d2">
+      <div class="review-flower">🌿</div>
+      <p class="review-text">"I have a monthly subscription and every bouquet is different, seasonal, and always beautiful. My flat has never looked better."</p>
+      <div class="review-author">Claire M.</div>
+      <div class="review-occasion">Monthly subscription · Stockbridge</div>
+    </div>
+  </div>
+</section>
+
+<section class="order-section" id="order">
+  <div class="order-grid">
+    <div class="order-info reveal">
+      <div class="label">Order Flowers</div>
+      <h2>Send Something<br><em>Beautiful Today.</em></h2>
+      <p>Fill in the form and we'll be in touch to confirm your order and discuss any special requests. Order by 1pm for same-day Edinburgh delivery.</p>
+      <div class="delivery-zones">
+        <div class="dz-item"><span class="dz-area">Edinburgh City Centre</span><span class="dz-price">Free delivery</span></div>
+        <div class="dz-item"><span class="dz-area">Edinburgh suburbs</span><span class="dz-price">£5</span></div>
+        <div class="dz-item"><span class="dz-area">Lothians & Midlothian</span><span class="dz-price">£8</span></div>
+        <div class="dz-item"><span class="dz-area">Collection from studio</span><span class="dz-price">Free</span></div>
+      </div>
+    </div>
+    <form class="order-form reveal d1" onsubmit="event.preventDefault();alert('Order received! We\'ll confirm within an hour.')">
+      <div class="form-group"><label>Your Name</label><input class="form-input" type="text" placeholder="Your name"></div>
+      <div class="form-row-2">
+        <div class="form-group"><label>Email</label><input class="form-input" type="email" placeholder="your@email.com"></div>
+        <div class="form-group"><label>Phone</label><input class="form-input" type="tel" placeholder="07700 000000"></div>
+      </div>
+      <div class="form-group"><label>Occasion</label>
+        <select class="form-select"><option>Just Because</option><option>Birthday</option><option>Anniversary / Romance</option><option>Sympathy</option><option>Wedding Enquiry</option><option>Other</option></select>
+      </div>
+      <div class="form-group"><label>Budget</label>
+        <select class="form-select"><option>£25–£40</option><option>£40–£60</option><option>£60–£100</option><option>£100–£150</option><option>Over £150</option></select>
+      </div>
+      <div class="form-row-2">
+        <div class="form-group"><label>Delivery Date</label><input class="form-input" type="date"></div>
+        <div class="form-group"><label>Delivery Postcode</label><input class="form-input" type="text" placeholder="EH1 1AA"></div>
+      </div>
+      <div class="form-group"><label>Message for Card (optional)</label><textarea class="form-textarea" style="min-height:70px" placeholder="With love, from..."></textarea></div>
+      <button type="submit" class="btn-sage" style="border:none;cursor:pointer;font-family:'DM Sans',sans-serif;width:100%;font-size:.76rem;font-weight:500;letter-spacing:.12em;padding:1rem">Place Your Order →</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">Bloom & Co.</div>
+      <div class="footer-brand-sub">Independent Florist · Edinburgh</div>
+      <p style="margin-top:1rem;font-size:.8rem;line-height:1.9;color:rgba(250,248,244,.35)">22 Cockburn Street<br>Edinburgh Old Town<br>EH1 1BP</p>
+    </div>
+    <div class="footer-col">
+      <h3>Opening Hours</h3>
+      <p>Monday — Friday: 8am — 6pm</p>
+      <p>Saturday: 8am — 5pm</p>
+      <p>Sunday: 10am — 3pm</p>
+      <p>Same-day orders by 1pm</p>
+    </div>
+    <div class="footer-col">
+      <h3>Get in Touch</h3>
+      <a href="tel:01312345678">0131 234 5678</a>
+      <a href="mailto:hello@bloomandco.co.uk">hello@bloomandco.co.uk</a>
+      <a href="https://instagram.com">@bloomandco.edinburgh</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Bloom & Co. Florist. All rights reserved.</span>
+    <span class="footer-credit">Website by <a href="https://nomorerubbishwebsites.com">NoMoreRubbishWebsites.com</a></span>
+  </div>
+</footer>
+
+<script>
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',window.scrollY>60),{passive:true});
+const hb=document.getElementById('hamburger'),mm=document.getElementById('mobile-menu');
+hb.addEventListener('click',()=>{hb.classList.toggle('open');mm.classList.toggle('open');document.body.style.overflow=mm.classList.contains('open')?'hidden':'';});
+function closeMobile(){hb.classList.remove('open');mm.classList.remove('open');document.body.style.overflow='';}
+function setPill(el){document.querySelectorAll('.range-pill').forEach(p=>p.classList.remove('active'));el.classList.add('active');}
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

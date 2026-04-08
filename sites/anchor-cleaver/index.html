@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Anchor & Cleaver — Gastropub, Glasgow</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0f0a06;
+  --bg2:#1a1108;
+  --bg3:#241810;
+  --amber:#c9890a;
+  --amber-light:#e8a820;
+  --cream:#f5e6c8;
+  --cream-dim:#c4b49a;
+  --rust:#8b3a1a;
+  --border:rgba(201,137,10,0.2);
+  --side:clamp(1.5rem,6vw,6rem);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--cream);font-family:'Lato',sans-serif;font-weight:300;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.35}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.5rem var(--side);transition:background .4s,padding .4s}
+nav.scrolled{background:rgba(15,10,6,0.96);backdrop-filter:blur(12px);padding:1rem var(--side);border-bottom:1px solid var(--border)}
+.nav-brand{display:flex;flex-direction:column;line-height:1}
+.nav-brand-main{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--cream);letter-spacing:.02em}
+.nav-brand-sub{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--amber)}
+nav ul{list-style:none;display:flex;gap:2.5rem;align-items:center}
+nav a{text-decoration:none;color:var(--cream-dim);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;transition:color .2s}
+nav a:hover{color:var(--amber)}
+.nav-reserve{border:1px solid var(--amber);color:var(--amber)!important;padding:.5rem 1.4rem;border-radius:2px;transition:all .2s!important}
+.nav-reserve:hover{background:var(--amber);color:var(--bg)!important}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:1px;background:var(--cream);transition:transform .3s,opacity .3s}
+.hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.mobile-menu{position:fixed;inset:0;z-index:99;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;opacity:0;pointer-events:none;transition:opacity .3s}
+.mobile-menu.open{opacity:1;pointer-events:all}
+.mobile-menu a{font-family:'Playfair Display',serif;font-size:2.5rem;color:var(--cream);text-decoration:none;transition:color .2s}
+.mobile-menu a:hover{color:var(--amber)}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 var(--side) 5rem;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(160deg,#1a0a02 0%,#0f0604 40%,#1a0e04 100%);z-index:0}
+.hero-glow{position:absolute;bottom:-20%;right:5%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(201,137,10,0.12) 0%,rgba(139,58,26,0.06) 50%,transparent 70%);z-index:0;animation:glow 4s ease-in-out infinite}
+.hero-glow2{position:absolute;top:20%;left:15%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(232,168,32,0.06) 0%,transparent 65%);z-index:0;animation:glow 6s ease-in-out infinite reverse}
+@keyframes glow{0%,100%{opacity:.7;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
+.hero-rule{position:absolute;top:0;left:var(--side);width:1px;height:45%;background:linear-gradient(to bottom,transparent,var(--border),transparent);z-index:1}
+.hero-content{position:relative;z-index:2;max-width:800px}
+.hero-label{font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--amber);margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem}
+.hero-label::before{content:'';display:block;width:32px;height:1px;background:var(--amber)}
+h1{font-family:'Playfair Display',serif;font-size:clamp(3.5rem,8vw,8rem);font-weight:900;line-height:.92;letter-spacing:-.02em;margin-bottom:1.5rem}
+h1 em{display:block;font-style:italic;color:var(--amber);font-weight:400}
+.hero-desc{font-size:1rem;line-height:1.8;color:var(--cream-dim);max-width:460px;margin-bottom:2.5rem}
+.hero-actions{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.btn-gold{background:var(--amber);color:var(--bg);padding:.85rem 2.2rem;border:none;font-family:'Lato',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:background .2s,transform .15s;display:inline-block}
+.btn-gold:hover{background:var(--amber-light);transform:translateY(-1px)}
+.btn-ghost{border:1px solid rgba(245,230,200,0.3);color:var(--cream-dim);padding:.85rem 2.2rem;font-size:.78rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:all .2s;display:inline-block}
+.btn-ghost:hover{border-color:var(--amber);color:var(--amber)}
+.hero-scroll{position:absolute;bottom:2rem;right:var(--side);display:flex;align-items:center;gap:.8rem;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cream-dim);z-index:2}
+.scroll-line{width:40px;height:1px;background:var(--amber-light)}
+section{padding:6rem var(--side)}
+.label{font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--amber);margin-bottom:.8rem;display:flex;align-items:center;gap:.8rem}
+.label::before{content:'';display:block;width:24px;height:1px;background:var(--amber)}
+h2{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4.5vw,4rem);font-weight:700;line-height:1;letter-spacing:-.01em;margin-bottom:1.5rem}
+.divider{width:60px;height:1px;background:var(--amber);margin:1.5rem 0}
+.about{background:var(--bg2)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
+.about-img{aspect-ratio:4/5;background:var(--bg3);border:1px solid var(--border);position:relative;overflow:hidden}
+.about-img-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.5rem}
+.about-img-icon{font-size:4rem;opacity:.15}
+.about-img-label{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);opacity:.4}
+.about-corner{position:absolute;width:30px;height:30px;border-color:var(--amber);border-style:solid;opacity:.4}
+.about-corner.tl{top:16px;left:16px;border-width:1px 0 0 1px}
+.about-corner.tr{top:16px;right:16px;border-width:1px 1px 0 0}
+.about-corner.bl{bottom:16px;left:16px;border-width:0 0 1px 1px}
+.about-corner.br{bottom:16px;right:16px;border-width:0 1px 1px 0}
+.about-text p{font-size:.95rem;line-height:1.9;color:var(--cream-dim);margin-bottom:1.2rem}
+.about-text strong{color:var(--cream);font-weight:700}
+.about-stats{display:flex;gap:2.5rem;margin-top:2.5rem}
+.stat{border-left:1px solid var(--amber);padding-left:1.2rem}
+.stat-num{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;color:var(--amber);line-height:1}
+.stat-label{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cream-dim);margin-top:.3rem}
+.menu-section{background:var(--bg)}
+.menu-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1rem}
+.menu-tabs{display:flex;gap:0;border:1px solid var(--border);width:fit-content}
+.menu-tab{padding:.55rem 1.5rem;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cream-dim);cursor:pointer;background:transparent;border:none;font-family:'Lato',sans-serif;transition:all .2s;border-right:1px solid var(--border)}
+.menu-tab:last-child{border-right:none}
+.menu-tab.active{background:var(--amber);color:var(--bg);font-weight:700}
+.menu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border:1px solid var(--border)}
+.menu-item{padding:1.8rem;border-bottom:1px solid var(--border);border-right:1px solid var(--border);transition:background .2s}
+.menu-item:hover{background:rgba(201,137,10,0.05)}
+.menu-item:nth-child(even){border-right:none}
+.menu-item-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.5rem}
+.menu-item-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--cream)}
+.menu-item-price{font-size:.85rem;color:var(--amber);font-weight:700;letter-spacing:.05em}
+.menu-item-desc{font-size:.82rem;line-height:1.6;color:var(--cream-dim)}
+.menu-item-tag{display:inline-block;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--amber);color:var(--amber);padding:.18rem .6rem;margin-top:.6rem}
+.atmosphere{background:var(--bg3)}
+.atm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:3rem}
+.atm-item{background:var(--bg3);padding:2.5rem 2rem;text-align:center}
+.atm-icon{width:48px;height:48px;border:1px solid var(--amber);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem;font-size:1.3rem}
+.atm-title{font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:.6rem;color:var(--cream)}
+.atm-desc{font-size:.82rem;line-height:1.7;color:var(--cream-dim)}
+.events{background:var(--bg2)}
+.events-list{display:flex;flex-direction:column;gap:0;margin-top:2.5rem;border:1px solid var(--border)}
+.event-item{display:grid;grid-template-columns:100px 1fr auto;gap:2rem;padding:1.8rem;border-bottom:1px solid var(--border);align-items:center;transition:background .2s}
+.event-item:last-child{border-bottom:none}
+.event-item:hover{background:rgba(201,137,10,0.04)}
+.event-date{text-align:center}
+.event-day{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;color:var(--amber);line-height:1}
+.event-month{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cream-dim)}
+.event-title{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--cream);margin-bottom:.3rem}
+.event-desc{font-size:.82rem;color:var(--cream-dim)}
+.event-time{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);white-space:nowrap}
+.testimonials{background:var(--bg)}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.testi-card{border:1px solid var(--border);padding:2rem;position:relative;transition:border-color .2s}
+.testi-card:hover{border-color:var(--amber)}
+.testi-quote-mark{font-family:'Playfair Display',serif;font-size:5rem;color:var(--amber);opacity:.2;line-height:.5;margin-bottom:.8rem}
+.testi-text{font-size:.88rem;line-height:1.8;color:var(--cream-dim);font-style:italic;margin-bottom:1.5rem}
+.testi-author{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--amber)}
+.testi-platform{font-size:.68rem;color:var(--cream-dim);margin-top:.2rem}
+.findus{background:var(--bg3)}
+.findus-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;margin-top:3rem}
+.findus-info{display:flex;flex-direction:column;gap:2rem}
+.info-block h3{font-family:'Playfair Display',serif;font-size:1rem;color:var(--amber);margin-bottom:.6rem;font-style:italic}
+.info-block p,.info-block a{font-size:.88rem;line-height:1.8;color:var(--cream-dim);text-decoration:none;display:block}
+.info-block a:hover{color:var(--amber)}
+.map-placeholder{background:var(--bg2);border:1px solid var(--border);aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.8rem;position:relative;overflow:hidden}
+.map-placeholder::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(201,137,10,0.08),transparent 70%)}
+.map-pin{font-size:2.5rem;opacity:.3}
+.map-label{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);opacity:.5}
+.hours-grid{display:grid;grid-template-columns:1fr 1fr;gap:.4rem .8rem}
+.hours-day{font-size:.8rem;color:var(--cream-dim)}
+.hours-time{font-size:.8rem;color:var(--cream);text-align:right}
+.reserve{background:var(--bg2);text-align:center;padding:5rem var(--side)}
+.reserve h2{margin-bottom:1rem}
+.reserve p{font-size:.95rem;color:var(--cream-dim);margin-bottom:2.5rem;max-width:500px;margin-left:auto;margin-right:auto}
+.reserve-form{display:flex;gap:0;max-width:520px;margin:0 auto;flex-wrap:wrap}
+.reserve-input{flex:1;min-width:200px;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--cream);padding:.9rem 1.2rem;font-family:'Lato',sans-serif;font-size:.85rem;outline:none;transition:border-color .2s}
+.reserve-input::placeholder{color:rgba(245,230,200,.3)}
+.reserve-input:focus{border-color:var(--amber)}
+.reserve-form .btn-gold{border:none;cursor:pointer;padding:.9rem 2rem;white-space:nowrap}
+footer{background:#070503;padding:3rem var(--side) 2rem;border-top:1px solid var(--border)}
+.footer-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:2rem;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border)}
+.footer-brand{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--cream);margin-bottom:.3rem}
+.footer-brand-sub{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--amber)}
+.footer-links{display:flex;gap:2rem;flex-wrap:wrap}
+.footer-links a{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cream-dim);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--amber)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-copy{font-size:.72rem;color:rgba(196,180,154,.35)}
+.footer-credit{font-size:.68rem;color:rgba(196,180,154,.25)}
+.footer-credit a{color:rgba(201,137,10,.4);text-decoration:none}
+.footer-credit a:hover{color:var(--amber)}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s ease,transform .9s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+@media(max-width:900px){
+  nav ul{display:none}
+  .hamburger{display:flex}
+  .about-grid,.findus-grid{grid-template-columns:1fr}
+  .menu-grid,.testi-grid{grid-template-columns:1fr}
+  .atm-grid{grid-template-columns:1fr}
+  .event-item{grid-template-columns:70px 1fr}
+  .event-time{display:none}
+  .menu-item:nth-child(even){border-right:1px solid var(--border)}
+  .reserve-form{flex-direction:column}
+  .footer-top{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#about" onclick="closeMobile()">Our Story</a>
+  <a href="#menu-sec" onclick="closeMobile()">Menu</a>
+  <a href="#events" onclick="closeMobile()">Events</a>
+  <a href="#findus" onclick="closeMobile()">Find Us</a>
+  <a href="#reserve" onclick="closeMobile()">Reserve a Table</a>
+</div>
+
+<nav id="navbar">
+  <div class="nav-brand">
+    <span class="nav-brand-main">The Anchor & Cleaver</span>
+    <span class="nav-brand-sub">Gastropub · Glasgow</span>
+  </div>
+  <ul>
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#menu-sec">Menu</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#findus">Find Us</a></li>
+    <li><a href="#reserve" class="nav-reserve">Reserve a Table</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-rule"></div>
+  <div class="hero-content">
+    <div class="hero-label">Est. 2009 · Glasgow City Centre</div>
+    <h1>Proper Food.<br><em>Proper Pint.</em><br>Proper Pub.</h1>
+    <p class="hero-desc">A real Glasgow gastropub. Seasonal Scottish menu, hand-pulled ales, and a welcome that's been warming hearts on Miller Street for fifteen years.</p>
+    <div class="hero-actions">
+      <a href="#reserve" class="btn-gold">Reserve a Table</a>
+      <a href="#menu-sec" class="btn-ghost">View the Menu</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><span class="scroll-line"></span>Scroll</div>
+</section>
+
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="about-img reveal">
+      <div class="about-img-inner">
+        <div class="about-img-icon">🍺</div>
+        <div class="about-img-label">Interior photo</div>
+      </div>
+      <div class="about-corner tl"></div>
+      <div class="about-corner tr"></div>
+      <div class="about-corner bl"></div>
+      <div class="about-corner br"></div>
+    </div>
+    <div class="about-text reveal">
+      <div class="label">Our Story</div>
+      <h2>A Proper Glasgow Local</h2>
+      <div class="divider"></div>
+      <p>The Anchor & Cleaver has been feeding and watering Glasgow since 2009. We took a forgotten Victorian boozer on Miller Street and brought it back to what a pub should be — <strong>great food, honest drink, and somewhere you actually want to stay.</strong></p>
+      <p>Our head chef sources locally wherever possible — Perthshire beef, Hebridean seafood, Ayrshire dairy. The menu changes with the seasons, but the welcome never does.</p>
+      <p>Whether it's a quiet weeknight dinner, Saturday with the family, or the World Cup final at full volume — <strong>there's always a seat for you at the Anchor.</strong></p>
+      <div class="about-stats">
+        <div class="stat">
+          <div class="stat-num">15</div>
+          <div class="stat-label">Years in Glasgow</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">4.8</div>
+          <div class="stat-label">Google Rating</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">12</div>
+          <div class="stat-label">Ales on Tap</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="menu-section" id="menu-sec">
+  <div class="menu-header">
+    <div>
+      <div class="label reveal">Kitchen & Bar</div>
+      <h2 class="reveal">What's On</h2>
+    </div>
+    <div class="menu-tabs">
+      <button class="menu-tab active" onclick="setTab(this,'food')">Food</button>
+      <button class="menu-tab" onclick="setTab(this,'drinks')">Drinks</button>
+      <button class="menu-tab" onclick="setTab(this,'sunday')">Sunday</button>
+    </div>
+  </div>
+  <div class="menu-grid" id="menu-grid">
+    <div class="menu-item reveal">
+      <div class="menu-item-header"><span class="menu-item-name">Cullen Skink</span><span class="menu-item-price">£8.50</span></div>
+      <div class="menu-item-desc">Smoked haddock, cream, potato, chive oil. A proper Scottish classic, done right.</div>
+      <span class="menu-item-tag">Starter</span>
+    </div>
+    <div class="menu-item reveal d1">
+      <div class="menu-item-header"><span class="menu-item-name">Haggis Bon Bons</span><span class="menu-item-price">£7.50</span></div>
+      <div class="menu-item-desc">Traditional haggis, whisky cream sauce, pickled turnip. Three per portion.</div>
+      <span class="menu-item-tag">Starter</span>
+    </div>
+    <div class="menu-item reveal">
+      <div class="menu-item-header"><span class="menu-item-name">28-Day Aged Ribeye</span><span class="menu-item-price">£28.00</span></div>
+      <div class="menu-item-desc">Perthshire beef, triple-cooked chips, peppercorn sauce, watercress.</div>
+      <span class="menu-item-tag">Main</span>
+    </div>
+    <div class="menu-item reveal d1">
+      <div class="menu-item-header"><span class="menu-item-name">Beer-Battered Haddock</span><span class="menu-item-price">£16.50</span></div>
+      <div class="menu-item-desc">West Coast haddock, hand-cut chips, minted mushy peas, tartare sauce.</div>
+      <span class="menu-item-tag">Main</span>
+    </div>
+    <div class="menu-item reveal">
+      <div class="menu-item-header"><span class="menu-item-name">The Anchor Burger</span><span class="menu-item-price">£15.00</span></div>
+      <div class="menu-item-desc">Double smash patty, aged cheddar, house pickle, brioche, skin-on fries.</div>
+      <span class="menu-item-tag">Main</span>
+    </div>
+    <div class="menu-item reveal d1">
+      <div class="menu-item-header"><span class="menu-item-name">Sticky Toffee Pudding</span><span class="menu-item-price">£7.00</span></div>
+      <div class="menu-item-desc">Medjool date sponge, butterscotch sauce, Ayrshire vanilla ice cream.</div>
+      <span class="menu-item-tag">Dessert</span>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:2.5rem">
+    <a href="#reserve" class="btn-ghost">Full Menu Available On Request — Book Your Table</a>
+  </div>
+</section>
+
+<section class="atmosphere">
+  <div class="label reveal">The Experience</div>
+  <h2 class="reveal">More Than a Meal</h2>
+  <div class="atm-grid">
+    <div class="atm-item reveal">
+      <div class="atm-icon">🍺</div>
+      <div class="atm-title">Real Ale Bar</div>
+      <p class="atm-desc">12 hand-pulled ales and craft beers, rotating monthly. Scottish favourites plus guest breweries from across the UK.</p>
+    </div>
+    <div class="atm-item reveal d1">
+      <div class="atm-icon">🔥</div>
+      <div class="atm-title">Open Fire</div>
+      <p class="atm-desc">Our Victorian fireplace burns October through April. Best seat in Glasgow on a cold night — we'll fight anyone who disagrees.</p>
+    </div>
+    <div class="atm-item reveal d2">
+      <div class="atm-icon">📺</div>
+      <div class="atm-title">Live Sport</div>
+      <p class="atm-desc">Five screens, every major fixture. Rugby, football, golf — if it's on, we've got it. Arrive early for the big games.</p>
+    </div>
+  </div>
+</section>
+
+<section class="events" id="events">
+  <div class="label reveal">What's On</div>
+  <h2 class="reveal">Upcoming Events</h2>
+  <div class="events-list">
+    <div class="event-item reveal">
+      <div class="event-date"><div class="event-day">12</div><div class="event-month">Apr</div></div>
+      <div><div class="event-title">Scottish Craft Beer Festival</div><div class="event-desc">20 Scottish breweries, live tasting notes, food pairings. Tickets £15 includes first pint.</div></div>
+      <div class="event-time">4pm — Close</div>
+    </div>
+    <div class="event-item reveal">
+      <div class="event-date"><div class="event-day">19</div><div class="event-month">Apr</div></div>
+      <div><div class="event-title">Pub Quiz — Monthly</div><div class="event-desc">Eight rounds, £2 entry per person, winner takes the pot. Tables of up to six. Book in advance.</div></div>
+      <div class="event-time">7:30pm</div>
+    </div>
+    <div class="event-item reveal">
+      <div class="event-date"><div class="event-day">26</div><div class="event-month">Apr</div></div>
+      <div><div class="event-title">Scottish Derby — Live</div><div class="event-desc">Celtic vs Rangers. Doors open 11am. First come, first served. No tickets needed.</div></div>
+      <div class="event-time">12pm Kick-Off</div>
+    </div>
+    <div class="event-item reveal">
+      <div class="event-date"><div class="event-day">3</div><div class="event-month">May</div></div>
+      <div><div class="event-title">Live Music — The Heilan Coos</div><div class="event-desc">Traditional Scottish folk band, two sets. No entry charge. Just come, drink, and enjoy.</div></div>
+      <div class="event-time">8pm — 11pm</div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials">
+  <div class="label reveal">What Folk Say</div>
+  <h2 class="reveal">The Locals Know Best</h2>
+  <div class="testi-grid">
+    <div class="testi-card reveal">
+      <div class="testi-quote-mark">"</div>
+      <p class="testi-text">Best Sunday roast in Glasgow, full stop. Been coming here for years and the quality never dips. The staff remember your name — you can't say that about many places.</p>
+      <div class="testi-author">Morag T.</div>
+      <div class="testi-platform">Google Review · ★★★★★</div>
+    </div>
+    <div class="testi-card reveal d1">
+      <div class="testi-quote-mark">"</div>
+      <p class="testi-text">Took clients here for a working lunch and they were genuinely impressed. Ribeye was flawless, service was quick without being pushy. Will be back.</p>
+      <div class="testi-author">David M.</div>
+      <div class="testi-platform">TripAdvisor · ★★★★★</div>
+    </div>
+    <div class="testi-card reveal d2">
+      <div class="testi-quote-mark">"</div>
+      <p class="testi-text">Watched the Six Nations here last winter. Packed but they managed the crowd brilliantly. Great atmosphere, good beer, and the haggis bon bons at half time were elite.</p>
+      <div class="testi-author">Callum R.</div>
+      <div class="testi-platform">Google Review · ★★★★★</div>
+    </div>
+  </div>
+</section>
+
+<section class="findus" id="findus">
+  <div class="label reveal">Getting Here</div>
+  <h2 class="reveal">Find Us</h2>
+  <div class="findus-grid">
+    <div class="findus-info reveal">
+      <div class="info-block">
+        <h3>Address</h3>
+        <p>42 Miller Street<br>Glasgow City Centre<br>G1 1DT</p>
+      </div>
+      <div class="info-block">
+        <h3>Opening Hours</h3>
+        <div class="hours-grid">
+          <span class="hours-day">Monday — Thursday</span><span class="hours-time">12pm — 11pm</span>
+          <span class="hours-day">Friday — Saturday</span><span class="hours-time">12pm — 1am</span>
+          <span class="hours-day">Sunday</span><span class="hours-time">12pm — 10pm</span>
+          <span class="hours-day">Kitchen closes</span><span class="hours-time">9pm daily</span>
+        </div>
+      </div>
+      <div class="info-block">
+        <h3>Contact</h3>
+        <a href="tel:01412345678">0141 234 5678</a>
+        <a href="mailto:hello@anchorandcleaver.co.uk">hello@anchorandcleaver.co.uk</a>
+      </div>
+    </div>
+    <div class="map-placeholder reveal d1">
+      <div class="map-pin">📍</div>
+      <div class="map-label">42 Miller Street, Glasgow</div>
+    </div>
+  </div>
+</section>
+
+<section class="reserve" id="reserve">
+  <div class="label" style="justify-content:center">Reservations</div>
+  <h2 class="reveal">Book Your Table</h2>
+  <p class="reveal">Walk-ins always welcome, but we recommend booking ahead for evenings and weekends. Tables held for 15 minutes.</p>
+  <div class="reserve-form reveal">
+    <input class="reserve-input" type="text" placeholder="Your name">
+    <input class="reserve-input" type="email" placeholder="Email address">
+    <button class="btn-gold" onclick="alert('Table request sent! We\'ll confirm within 2 hours.')">Request Table</button>
+  </div>
+  <p style="margin-top:1rem;font-size:.74rem;color:var(--cream-dim)">Or call us on <a href="tel:01412345678" style="color:var(--amber)">0141 234 5678</a></p>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">The Anchor & Cleaver</div>
+      <div class="footer-brand-sub">Gastropub · Est. 2009 · Glasgow</div>
+    </div>
+    <div class="footer-links">
+      <a href="#about">Our Story</a>
+      <a href="#menu-sec">Menu</a>
+      <a href="#events">Events</a>
+      <a href="#findus">Find Us</a>
+      <a href="#reserve">Reservations</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 The Anchor & Cleaver. All rights reserved.</div>
+    <div class="footer-credit">Website by <a href="https://nomorerubbishwebsites.com">NoMoreRubbishWebsites.com</a></div>
+  </div>
+</footer>
+
+<script>
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',window.scrollY>60),{passive:true});
+const hb=document.getElementById('hamburger'),mm=document.getElementById('mobile-menu');
+hb.addEventListener('click',()=>{hb.classList.toggle('open');mm.classList.toggle('open');document.body.style.overflow=mm.classList.contains('open')?'hidden':'';});
+function closeMobile(){hb.classList.remove('open');mm.classList.remove('open');document.body.style.overflow='';}
+function setTab(btn,tab){
+  document.querySelectorAll('.menu-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

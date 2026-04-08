@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ironwork Strength — Independent Gym & PT, Glasgow</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,700;0,900;1,900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0d0d0d;--bg2:#141414;--bg3:#1a1a1a;--acid:#d4f700;--acid-dim:#a8c400;--white:#f0f0f0;--mid:#888;--border:rgba(240,240,240,0.08);--side:clamp(1.5rem,6vw,6rem)}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:'Barlow',sans-serif;font-weight:300;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.4rem var(--side);transition:background .3s,padding .3s}
+nav.scrolled{background:rgba(13,13,13,0.97);backdrop-filter:blur(10px);padding:1rem var(--side);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Barlow Condensed',sans-serif;font-size:1.5rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--white);text-decoration:none}
+.nav-logo span{color:var(--acid)}
+nav ul{list-style:none;display:flex;gap:2.5rem;align-items:center}
+nav a{text-decoration:none;color:var(--mid);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;transition:color .2s}
+nav a:hover{color:var(--white)}
+.nav-join{background:var(--acid);color:var(--bg)!important;padding:.5rem 1.4rem;font-weight:700!important;transition:background .2s!important}
+.nav-join:hover{background:var(--acid-dim)!important}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--white);transition:transform .3s,opacity .3s}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.mobile-menu{position:fixed;inset:0;z-index:99;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;opacity:0;pointer-events:none;transition:opacity .3s}
+.mobile-menu.open{opacity:1;pointer-events:all}
+.mobile-menu a{font-family:'Barlow Condensed',sans-serif;font-size:3rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--white);text-decoration:none;transition:color .2s}
+.mobile-menu a:hover{color:var(--acid)}
+.hero{min-height:100vh;display:flex;align-items:flex-end;padding:0 var(--side) 5rem;position:relative;overflow:hidden;margin-top:0}
+.hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(212,247,0,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(212,247,0,0.03) 1px,transparent 1px);background-size:60px 60px;z-index:0}
+.hero-glow{position:absolute;top:50%;left:50%;transform:translate(-20%,-60%);width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(212,247,0,0.06) 0%,transparent 65%);z-index:0}
+.hero-content{position:relative;z-index:2;max-width:900px}
+.hero-tag{display:inline-flex;align-items:center;gap:.6rem;background:rgba(212,247,0,0.1);border:1px solid rgba(212,247,0,0.3);color:var(--acid);padding:.4rem 1rem;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;margin-bottom:2rem}
+.hero-tag-dot{width:6px;height:6px;border-radius:50%;background:var(--acid);animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+h1{font-family:'Barlow Condensed',sans-serif;font-size:clamp(5rem,15vw,16rem);font-weight:900;line-height:.85;letter-spacing:-.02em;text-transform:uppercase;margin-bottom:1rem}
+h1 .acid{color:var(--acid)}
+h1 .outline{-webkit-text-stroke:2px rgba(240,240,240,.3);color:transparent}
+.hero-sub-row{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap;margin-top:2rem}
+.hero-desc{font-size:.95rem;line-height:1.8;color:var(--mid);max-width:420px}
+.hero-ctas{display:flex;gap:.8rem;align-items:center;flex-wrap:wrap}
+.btn-acid{background:var(--acid);color:var(--bg);padding:.9rem 2.2rem;font-family:'Barlow',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;display:inline-block;transition:background .2s,transform .15s;border:none;cursor:pointer}
+.btn-acid:hover{background:var(--acid-dim);transform:translateY(-1px)}
+.btn-ghost{border:1px solid rgba(240,240,240,.2);color:var(--mid);padding:.9rem 2.2rem;font-size:.8rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;display:inline-block;transition:all .2s}
+.btn-ghost:hover{border-color:var(--white);color:var(--white)}
+.hero-stats{display:flex;gap:2.5rem;flex-wrap:wrap}
+.hero-stat-num{font-family:'Barlow Condensed',sans-serif;font-size:2.5rem;font-weight:900;color:var(--acid);line-height:1}
+.hero-stat-label{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);margin-top:.2rem}
+section{padding:6rem var(--side)}
+.label{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--acid);margin-bottom:.6rem;font-weight:500}
+h2{font-family:'Barlow Condensed',sans-serif;font-size:clamp(2.5rem,6vw,5.5rem);font-weight:900;line-height:.9;text-transform:uppercase;letter-spacing:-.01em;margin-bottom:1.5rem}
+.membership{background:var(--bg2)}
+.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:3rem}
+.pkg{background:var(--bg2);padding:2.5rem;position:relative;transition:background .2s}
+.pkg:hover{background:var(--bg3)}
+.pkg.featured{background:var(--acid)}
+.pkg.featured:hover{background:var(--acid-dim)}
+.pkg-name{font-family:'Barlow Condensed',sans-serif;font-size:1.8rem;font-weight:900;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.3rem;color:var(--white)}
+.pkg.featured .pkg-name{color:var(--bg)}
+.pkg-price{font-family:'Barlow Condensed',sans-serif;font-size:4.5rem;font-weight:900;line-height:1;color:var(--acid);margin-bottom:.2rem}
+.pkg.featured .pkg-price{color:var(--bg)}
+.pkg-period{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-bottom:1.8rem}
+.pkg.featured .pkg-period{color:rgba(13,13,13,.6)}
+.pkg-features{list-style:none;display:flex;flex-direction:column;gap:.65rem;margin-bottom:2rem}
+.pkg-features li{font-size:.84rem;display:flex;gap:.6rem;color:rgba(240,240,240,.6);line-height:1.4}
+.pkg.featured .pkg-features li{color:rgba(13,13,13,.65)}
+.pkg-tick{color:var(--acid);font-weight:700;flex-shrink:0}
+.pkg.featured .pkg-tick{color:var(--bg)}
+.pkg-btn{display:block;width:100%;padding:.85rem;background:rgba(240,240,240,.06);border:1px solid rgba(240,240,240,.12);color:var(--white);font-family:'Barlow',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s;text-decoration:none;text-align:center}
+.pkg-btn:hover{background:var(--acid);color:var(--bg);border-color:var(--acid)}
+.pkg.featured .pkg-btn{background:var(--bg);color:var(--acid);border-color:var(--bg)}
+.pkg.featured .pkg-btn:hover{background:rgba(13,13,13,.8)}
+.facility{background:var(--bg)}
+.facility-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);margin-top:3rem}
+.facility-item{background:var(--bg);padding:2.5rem;display:flex;gap:1.5rem;align-items:flex-start;transition:background .2s}
+.facility-item:hover{background:var(--bg3)}
+.facility-icon{font-size:1.8rem;flex-shrink:0;margin-top:.1rem}
+.facility-name{font-family:'Barlow Condensed',sans-serif;font-size:1.3rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.4rem}
+.facility-desc{font-size:.82rem;line-height:1.6;color:var(--mid)}
+.pt-section{background:var(--bg2)}
+.pt-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
+.pt-text h2{margin-bottom:1rem}
+.pt-text p{font-size:.9rem;line-height:1.8;color:var(--mid);margin-bottom:1.2rem}
+.pt-text strong{color:var(--white);font-weight:500}
+.pt-trainers{display:flex;flex-direction:column;gap:1px;background:var(--border)}
+.trainer{background:var(--bg2);padding:1.5rem;display:flex;gap:1.2rem;align-items:center;transition:background .2s}
+.trainer:hover{background:var(--bg3)}
+.trainer-avatar{width:52px;height:52px;border-radius:50%;background:var(--bg3);border:2px solid var(--acid);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.trainer-name{font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.trainer-spec{font-size:.72rem;color:var(--acid);letter-spacing:.08em;text-transform:uppercase;margin-top:.1rem}
+.trainer-exp{font-size:.78rem;color:var(--mid);margin-top:.2rem}
+.timetable{background:var(--bg)}
+.tt-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--border);margin-top:3rem}
+.tt-day{background:var(--bg3);padding:.8rem;text-align:center;font-family:'Barlow Condensed',sans-serif;font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--acid)}
+.tt-cell{background:var(--bg);padding:.8rem;border-bottom:1px solid var(--border)}
+.tt-class{font-size:.75rem;font-weight:500;color:var(--white);margin-bottom:.2rem}
+.tt-time{font-size:.65rem;color:var(--mid);letter-spacing:.06em}
+.tt-empty{background:var(--bg);padding:.8rem}
+.reviews{background:var(--bg2)}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:3rem}
+.review{background:var(--bg2);padding:2.2rem;transition:background .2s}
+.review:hover{background:var(--bg3)}
+.review-stars{color:var(--acid);font-size:.85rem;letter-spacing:.1em;margin-bottom:.8rem}
+.review-text{font-size:.86rem;line-height:1.7;color:var(--mid);margin-bottom:1.2rem}
+.review-author{font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--white)}
+.review-detail{font-size:.68rem;color:var(--mid);margin-top:.2rem}
+.cta-band{background:var(--acid);padding:5rem var(--side);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:2rem}
+.cta-band h2{color:var(--bg);margin:0;font-size:clamp(2.5rem,6vw,6rem)}
+.cta-band-right{display:flex;flex-direction:column;gap:.8rem;align-items:flex-end}
+.btn-dark{background:var(--bg);color:var(--acid);padding:1rem 2.5rem;font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;transition:all .2s;display:inline-block}
+.btn-dark:hover{background:var(--bg2)}
+footer{background:#080808;padding:2.5rem var(--side) 2rem;border-top:1px solid var(--border)}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;padding-bottom:1.5rem;margin-bottom:1.5rem;border-bottom:1px solid var(--border)}
+.footer-logo{font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:rgba(240,240,240,.2)}
+.footer-logo span{color:rgba(212,247,0,.4)}
+.footer-links{display:flex;gap:2rem;flex-wrap:wrap}
+footer a{color:rgba(240,240,240,.35);text-decoration:none;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;transition:color .2s}
+footer a:hover{color:var(--acid)}
+.footer-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.7rem;color:rgba(240,240,240,.25)}
+.footer-credit a{color:rgba(212,247,0,.3)}
+.footer-credit a:hover{color:var(--acid)}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s,transform .8s}
+.reveal.visible{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+@media(max-width:900px){
+  nav ul{display:none}
+  .hamburger{display:flex}
+  .hero{align-items:flex-start;padding-top:8rem}
+  .hero-sub-row{flex-direction:column;align-items:flex-start}
+  .pkg-grid,.facility-grid,.pt-grid,.reviews-grid{grid-template-columns:1fr}
+  .tt-grid{grid-template-columns:repeat(3,1fr)}
+  .cta-band{flex-direction:column;text-align:center}
+  .cta-band-right{align-items:center}
+}
+</style>
+</head>
+<body>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#membership" onclick="closeMobile()">Join</a>
+  <a href="#facility" onclick="closeMobile()">Facility</a>
+  <a href="#pt-section" onclick="closeMobile()">Personal Training</a>
+  <a href="#timetable" onclick="closeMobile()">Classes</a>
+</div>
+
+<nav id="navbar">
+  <a href="#" class="nav-logo">Iron<span>Work</span></a>
+  <ul>
+    <li><a href="#membership">Membership</a></li>
+    <li><a href="#facility">Facility</a></li>
+    <li><a href="#pt-section">PT</a></li>
+    <li><a href="#timetable">Classes</a></li>
+    <li><a href="#membership" class="nav-join">Join Now</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+
+<section class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-tag"><span class="hero-tag-dot"></span>Now Open 5am — 11pm · Glasgow Southside</div>
+    <h1>NO<br><span class="acid">LIMITS.</span><br><span class="outline">JUST</span><br>IRON.</h1>
+    <div class="hero-sub-row">
+      <div>
+        <p class="hero-desc">Glasgow's most serious independent gym. No contracts, no bullshit, no chain gym vibes. Just proper kit, real coaching, and people who mean it.</p>
+        <div class="hero-ctas" style="margin-top:1.5rem">
+          <a href="#membership" class="btn-acid">Join From £35/month</a>
+          <a href="#facility" class="btn-ghost">See the Gym</a>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">600+</div>
+          <div class="hero-stat-label">Members</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">4.9★</div>
+          <div class="hero-stat-label">Google</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">7k</div>
+          <div class="hero-stat-label">Sq Ft</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="membership" id="membership">
+  <div class="label reveal">Membership</div>
+  <h2 class="reveal">JOIN THE<br>IRONWORK FAMILY.</h2>
+  <div class="pkg-grid">
+    <div class="pkg reveal">
+      <div class="pkg-name">Off-Peak</div>
+      <div class="pkg-price">£35</div>
+      <div class="pkg-period">Per month · No contract</div>
+      <ul class="pkg-features">
+        <li><span class="pkg-tick">✓</span> Gym access 9am–5pm weekdays</li>
+        <li><span class="pkg-tick">✓</span> Full equipment access</li>
+        <li><span class="pkg-tick">✓</span> Locker & shower facilities</li>
+        <li><span class="pkg-tick">✓</span> Free induction session</li>
+      </ul>
+      <a href="#" class="pkg-btn" onclick="alert('Joining form coming soon!')">Get Started</a>
+    </div>
+    <div class="pkg featured reveal d1">
+      <div class="pkg-name">Full Access</div>
+      <div class="pkg-price">£45</div>
+      <div class="pkg-period">Per month · No contract</div>
+      <ul class="pkg-features">
+        <li><span class="pkg-tick">✓</span> 5am — 11pm, 7 days</li>
+        <li><span class="pkg-tick">✓</span> All classes included</li>
+        <li><span class="pkg-tick">✓</span> Full equipment access</li>
+        <li><span class="pkg-tick">✓</span> Guest pass (1/month)</li>
+        <li><span class="pkg-tick">✓</span> Nutrition guide</li>
+      </ul>
+      <a href="#" class="pkg-btn" onclick="alert('Joining form coming soon!')">Get Started</a>
+    </div>
+    <div class="pkg reveal d2">
+      <div class="pkg-name">Elite</div>
+      <div class="pkg-price">£95</div>
+      <div class="pkg-period">Per month · No contract</div>
+      <ul class="pkg-features">
+        <li><span class="pkg-tick">✓</span> Everything in Full Access</li>
+        <li><span class="pkg-tick">✓</span> 4× PT sessions/month</li>
+        <li><span class="pkg-tick">✓</span> Monthly body composition</li>
+        <li><span class="pkg-tick">✓</span> Custom program design</li>
+        <li><span class="pkg-tick">✓</span> Priority class booking</li>
+      </ul>
+      <a href="#" class="pkg-btn" onclick="alert('Joining form coming soon!')">Get Started</a>
+    </div>
+  </div>
+</section>
+
+<section class="facility" id="facility">
+  <div class="label reveal">The Gym</div>
+  <h2 class="reveal">7,000 SQ FT OF<br>SERIOUS KIT.</h2>
+  <div class="facility-grid">
+    <div class="facility-item reveal"><div class="facility-icon">🏋️</div><div><div class="facility-name">Free Weights Floor</div><div class="facility-desc">Full dumbbell rack to 60kg, barbells, squat racks, benches, and a dedicated Olympic lifting platform.</div></div></div>
+    <div class="facility-item reveal d1"><div class="facility-icon">⚙️</div><div><div class="facility-name">Strength Machines</div><div class="facility-desc">Plate-loaded and cable machines covering every muscle group. No worn-out cables, no missing pins.</div></div></div>
+    <div class="facility-item reveal"><div class="facility-icon">🏃</div><div><div class="facility-name">Cardio Suite</div><div class="facility-desc">30 treadmills, bikes, rowers, ski ergs, and assault bikes. Screens on everything.</div></div></div>
+    <div class="facility-item reveal d1"><div class="facility-icon">🥊</div><div><div class="facility-name">Functional Zone</div><div class="facility-desc">Turf track, sleds, kettlebells, battle ropes, TRX, plyo boxes, and more. For those who don't do "easy".</div></div></div>
+    <div class="facility-item reveal"><div class="facility-icon">🧘</div><div><div class="facility-name">Class Studio</div><div class="facility-desc">Dedicated 800 sq ft studio. HIIT, yoga, pilates, spin. Full timetable, 30+ classes a week.</div></div></div>
+    <div class="facility-item reveal d1"><div class="facility-icon">🚿</div><div><div class="facility-name">Changing Rooms</div><div class="facility-desc">Clean, spacious changing rooms with secure lockers, showers, and hairdryers. Actually clean.</div></div></div>
+  </div>
+</section>
+
+<section class="pt-section" id="pt-section">
+  <div class="pt-grid">
+    <div class="pt-text reveal">
+      <div class="label">Personal Training</div>
+      <h2>REAL COACHES.<br>REAL RESULTS.</h2>
+      <p>Our PTs aren't just there to count your reps. They're <strong>specialists in their fields</strong> — strength, weight loss, sport-specific, pre/postnatal, rehabilitation. Whatever your goal, there's a trainer who's built for it.</p>
+      <p>All packages include a <strong>free initial consultation</strong>, goal-setting session, and custom programming from day one.</p>
+      <a href="#" class="btn-acid" onclick="alert('PT booking coming soon!')">Book a Free Consultation</a>
+    </div>
+    <div class="pt-trainers reveal d1">
+      <div class="trainer"><div class="trainer-avatar">💪</div><div><div class="trainer-name">Craig Morrison</div><div class="trainer-spec">Strength & Powerlifting</div><div class="trainer-exp">8 years · Scottish Powerlifting Champ</div></div></div>
+      <div class="trainer"><div class="trainer-avatar">🔥</div><div><div class="trainer-name">Anya Petrov</div><div class="trainer-spec">Weight Loss & Nutrition</div><div class="trainer-exp">6 years · BSc Sports Science</div></div></div>
+      <div class="trainer"><div class="trainer-avatar">⚡</div><div><div class="trainer-name">Liam Forsyth</div><div class="trainer-spec">HIIT & Athletic Performance</div><div class="trainer-exp">5 years · Ex-Professional Rugby</div></div></div>
+      <div class="trainer"><div class="trainer-avatar">🧘</div><div><div class="trainer-name">Priya Singh</div><div class="trainer-spec">Pre/Postnatal & Pilates</div><div class="trainer-exp">7 years · Women's Health Specialist</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="timetable" id="timetable">
+  <div class="label reveal">Classes</div>
+  <h2 class="reveal">THIS WEEK'S<br>TIMETABLE.</h2>
+  <div class="tt-grid reveal">
+    <div class="tt-day">MON</div><div class="tt-day">TUE</div><div class="tt-day">WED</div><div class="tt-day">THU</div><div class="tt-day">FRI</div><div class="tt-day">SAT</div>
+    <div class="tt-cell"><div class="tt-class">Morning HIIT</div><div class="tt-time">6:00am</div></div>
+    <div class="tt-cell"><div class="tt-class">Spin</div><div class="tt-time">6:15am</div></div>
+    <div class="tt-cell"><div class="tt-class">Strength</div><div class="tt-time">6:00am</div></div>
+    <div class="tt-cell"><div class="tt-class">HIIT</div><div class="tt-time">6:00am</div></div>
+    <div class="tt-cell"><div class="tt-class">Friday Burn</div><div class="tt-time">6:30am</div></div>
+    <div class="tt-cell"><div class="tt-class">Weekend HIIT</div><div class="tt-time">8:00am</div></div>
+    <div class="tt-cell"><div class="tt-class">Pilates</div><div class="tt-time">10:00am</div></div>
+    <div class="tt-cell"><div class="tt-class">Yoga</div><div class="tt-time">10:00am</div></div>
+    <div class="tt-cell"><div class="tt-class">Circuit</div><div class="tt-time">9:30am</div></div>
+    <div class="tt-cell"><div class="tt-class">Pilates</div><div class="tt-time">10:00am</div></div>
+    <div class="tt-cell"><div class="tt-class">Yoga Flow</div><div class="tt-time">10:00am</div></div>
+    <div class="tt-cell"><div class="tt-class">Spin</div><div class="tt-time">10:30am</div></div>
+    <div class="tt-cell"><div class="tt-class">Boxing</div><div class="tt-time">6:00pm</div></div>
+    <div class="tt-cell"><div class="tt-class">Strength</div><div class="tt-time">6:00pm</div></div>
+    <div class="tt-cell"><div class="tt-class">Boxing</div><div class="tt-time">6:30pm</div></div>
+    <div class="tt-cell"><div class="tt-class">HIIT</div><div class="tt-time">6:00pm</div></div>
+    <div class="tt-empty"></div>
+    <div class="tt-cell"><div class="tt-class">Boxing</div><div class="tt-time">12:00pm</div></div>
+  </div>
+  <p style="margin-top:1.5rem;font-size:.78rem;color:var(--mid)">All classes included in Full Access & Elite memberships. Drop-in: £8.</p>
+</section>
+
+<section class="reviews">
+  <div class="label reveal">Reviews</div>
+  <h2 class="reveal">THE MEMBERS<br>SPEAK.</h2>
+  <div class="reviews-grid">
+    <div class="review reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Left a big chain gym after 3 years and I'm never going back. The kit here is better, the people are serious, and it actually feels like a community."</p>
+      <div class="review-author">Jordan S.</div>
+      <div class="review-detail">Member 2 years · Full Access</div>
+    </div>
+    <div class="review reveal d1">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Craig's programming got me to my first 200kg deadlift in 8 months. Proper coaching, zero ego. He knows his stuff."</p>
+      <div class="review-author">Barry T.</div>
+      <div class="review-detail">PT Client · Elite Member</div>
+    </div>
+    <div class="review reveal d2">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"The 6am classes get me out of bed every day. High energy, great music, and Liam pushes you without being a maniac about it. Worth every penny."</p>
+      <div class="review-author">Kirsty M.</div>
+      <div class="review-detail">Member 1 year · Classes addict</div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <h2>STOP<br>TALKING.<br>START<br>LIFTING.</h2>
+  <div class="cta-band-right">
+    <p style="font-size:.82rem;color:rgba(13,13,13,.6);text-align:right">No contracts · Cancel anytime<br>First month 50% off with code IRON50</p>
+    <a href="#membership" class="btn-dark">Join Today From £35</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Iron<span>Work</span> Strength</div>
+    <div class="footer-links">
+      <a href="#membership">Join</a>
+      <a href="#facility">Facility</a>
+      <a href="#pt-section">PT</a>
+      <a href="#timetable">Classes</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Ironwork Strength Ltd · 88 Victoria Road, Glasgow G42 · 0141 234 5678</span>
+    <span class="footer-credit">Website by <a href="https://nomorerubbishwebsites.com">NoMoreRubbishWebsites.com</a></span>
+  </div>
+</footer>
+
+<script>
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',window.scrollY>60),{passive:true});
+const hb=document.getElementById('hamburger'),mm=document.getElementById('mobile-menu');
+hb.addEventListener('click',()=>{hb.classList.toggle('open');mm.classList.toggle('open');document.body.style.overflow=mm.classList.contains('open')?'hidden':'';});
+function closeMobile(){hb.classList.remove('open');mm.classList.remove('open');document.body.style.overflow='';}
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

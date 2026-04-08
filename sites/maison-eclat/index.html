@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maison Éclat — Hair & Beauty, Glasgow West End</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#faf7f4;--bg2:#f3ede7;--blush:#f5ece6;--ink:#1a1a1a;--ink2:#8a8178;--rose:#c4846a;--rose-light:#f0d4c8;--gold:#b8975a;--border:rgba(26,26,26,0.1);--side:clamp(1.5rem,8vw,8rem)}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.8rem var(--side);transition:background .4s,padding .4s;background:transparent}
+nav.scrolled{background:rgba(250,247,244,0.96);backdrop-filter:blur(12px);padding:1.2rem var(--side);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;letter-spacing:.06em;color:var(--ink);text-decoration:none}
+.nav-logo em{font-style:italic;color:var(--rose)}
+nav ul{list-style:none;display:flex;gap:2.5rem;align-items:center}
+nav a{text-decoration:none;color:var(--ink2);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;font-weight:400;transition:color .2s}
+nav a:hover{color:var(--ink)}
+.nav-book{border:1px solid var(--ink);color:var(--ink)!important;padding:.5rem 1.4rem;letter-spacing:.1em!important;transition:all .2s!important}
+.nav-book:hover{background:var(--ink);color:var(--bg)!important}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:1px;background:var(--ink);transition:transform .3s,opacity .3s}
+.hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.mobile-menu{position:fixed;inset:0;z-index:99;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;opacity:0;pointer-events:none;transition:opacity .3s}
+.mobile-menu.open{opacity:1;pointer-events:all}
+.mobile-menu a{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-style:italic;color:var(--ink);text-decoration:none;transition:color .2s}
+.mobile-menu a:hover{color:var(--rose)}
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:80px;position:relative;overflow:hidden}
+.hero-img{background:var(--blush);position:relative;overflow:hidden;min-height:600px}
+.hero-img-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.8rem}
+.hero-img-icon{font-size:5rem;opacity:.12}
+.hero-img-label{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--rose);opacity:.4}
+.hero-deco{position:absolute;bottom:2rem;right:2rem;width:80px;height:80px;opacity:.15}
+.hero-text{display:flex;flex-direction:column;justify-content:center;padding:5rem var(--side) 5rem 5rem;position:relative}
+.hero-eyebrow{font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;color:var(--rose);margin-bottom:2rem;display:flex;align-items:center;gap:.8rem}
+.hero-eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--rose)}
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,5.5vw,5.5rem);font-weight:300;line-height:1.05;letter-spacing:-.01em;margin-bottom:1.5rem}
+h1 em{display:block;font-style:italic;color:var(--rose)}
+.hero-desc{font-size:.92rem;line-height:1.9;color:var(--ink2);max-width:360px;margin-bottom:2.5rem}
+.btn-rose{background:var(--rose);color:white;padding:.9rem 2.5rem;font-family:'Jost',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;display:inline-block;transition:background .2s,transform .15s}
+.btn-rose:hover{background:#b3745a;transform:translateY(-1px)}
+.btn-outline-ink{border:1px solid var(--border);color:var(--ink2);padding:.9rem 2.5rem;font-size:.72rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;display:inline-block;transition:all .2s;margin-left:1rem}
+.btn-outline-ink:hover{border-color:var(--ink);color:var(--ink)}
+.hero-scroll-indicator{position:absolute;bottom:2rem;right:var(--side);display:flex;flex-direction:column;align-items:center;gap:.5rem;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink2)}
+.scroll-bar{width:1px;height:40px;background:var(--rose);animation:scrollBar 2s ease-in-out infinite}
+@keyframes scrollBar{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.marquee{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:.65rem 0;overflow:hidden;background:var(--bg)}
+.marquee-track{display:flex;white-space:nowrap;animation:marquee 20s linear infinite}
+.marquee-item{font-family:'Cormorant Garamond',serif;font-size:.95rem;font-style:italic;color:var(--ink2);padding:0 2rem;display:flex;align-items:center;gap:2rem}
+.marquee-sep{display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--rose)}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+section{padding:6rem var(--side)}
+.label{font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--rose);margin-bottom:.8rem}
+h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.8rem);font-weight:300;line-height:1.05;margin-bottom:1rem}
+.services{background:var(--bg)}
+.services-intro{display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-bottom:4rem;align-items:end}
+.services-intro p{font-size:.9rem;line-height:1.9;color:var(--ink2)}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+.service-item{background:var(--bg);padding:2.5rem 2rem;position:relative;overflow:hidden;transition:background .3s}
+.service-item:hover{background:var(--blush)}
+.service-item::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--rose);transform:scaleX(0);transition:transform .3s;transform-origin:left}
+.service-item:hover::before{transform:scaleX(1)}
+.service-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;margin-bottom:.5rem;letter-spacing:.01em}
+.service-desc{font-size:.8rem;line-height:1.7;color:var(--ink2);margin-bottom:1rem}
+.service-from{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--rose)}
+.about{background:var(--bg2)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:7rem;align-items:center}
+.about-visual{position:relative}
+.about-img-main{aspect-ratio:3/4;background:var(--blush);position:relative;overflow:hidden}
+.about-img-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem}
+.about-img-accent{position:absolute;bottom:-20px;right:-20px;width:150px;height:150px;background:var(--rose-light);z-index:0}
+.about-number{font-family:'Cormorant Garamond',serif;font-size:8rem;font-weight:300;color:var(--rose);opacity:.1;position:absolute;bottom:-1rem;left:-1rem;line-height:1}
+.about-text h2{margin-bottom:1.5rem}
+.about-text p{font-size:.9rem;line-height:1.9;color:var(--ink2);margin-bottom:1.2rem}
+.about-text strong{color:var(--ink);font-weight:500}
+.team-row{display:flex;gap:1.5rem;margin-top:2.5rem;flex-wrap:wrap}
+.team-member{text-align:center}
+.team-avatar{width:56px;height:56px;border-radius:50%;background:var(--blush);margin:0 auto .5rem;display:flex;align-items:center;justify-content:center;font-size:1.4rem}
+.team-name{font-size:.78rem;font-weight:500;color:var(--ink)}
+.team-role{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--rose)}
+.gallery{background:var(--bg);padding-bottom:4rem}
+.gallery-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-rows:auto auto;gap:8px;margin-top:3rem}
+.gallery-item{background:var(--blush);position:relative;overflow:hidden}
+.gallery-item.tall{grid-row:span 2}
+.gallery-item-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.5rem}
+.gallery-item .gi-icon{font-size:2.5rem;opacity:.15}
+.gallery-item .gi-label{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);opacity:.4}
+.g1{aspect-ratio:4/3}
+.g2,.g3{aspect-ratio:1/1}
+.booking{background:var(--blush);padding:5rem var(--side)}
+.booking-inner{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.booking-form{display:flex;flex-direction:column;gap:1rem}
+.form-group label{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink2);display:block;margin-bottom:.4rem}
+.form-input,.form-select,.form-textarea{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--ink);padding:.8rem 1rem;font-family:'Jost',sans-serif;font-size:.85rem;font-weight:300;outline:none;transition:border-color .2s;-webkit-appearance:none}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--ink2);opacity:.5}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--rose)}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.booking-info h2{margin-bottom:1rem}
+.booking-info p{font-size:.88rem;line-height:1.9;color:var(--ink2);margin-bottom:1.5rem}
+.booking-details{display:flex;flex-direction:column;gap:1rem}
+.booking-detail{display:flex;gap:.8rem;align-items:flex-start}
+.detail-icon{color:var(--rose);flex-shrink:0;font-size:1rem;margin-top:.1rem}
+.detail-text{font-size:.82rem;line-height:1.6;color:var(--ink2)}
+.detail-text strong{color:var(--ink);font-weight:500}
+.reviews{background:var(--bg2)}
+.reviews-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem}
+.review{border-left:2px solid var(--rose-light);padding-left:1.5rem;transition:border-color .2s}
+.review:hover{border-color:var(--rose)}
+.review-text{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;line-height:1.7;color:var(--ink);margin-bottom:1rem}
+.review-author{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--rose)}
+.review-stars{color:var(--gold);font-size:.75rem;margin-bottom:.5rem}
+footer{background:var(--ink);color:rgba(250,247,244,.4);padding:3rem var(--side) 2rem}
+.footer-top{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3rem;padding-bottom:2.5rem;margin-bottom:2rem;border-bottom:1px solid rgba(250,247,244,.08)}
+.footer-col h3{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:400;color:rgba(250,247,244,.7);margin-bottom:1rem;font-style:italic}
+.footer-col p,.footer-col a{font-size:.78rem;line-height:1.9;color:rgba(250,247,244,.4);text-decoration:none;display:block;transition:color .2s}
+.footer-col a:hover{color:var(--rose)}
+.footer-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.7rem}
+.footer-credit a{color:rgba(196,132,106,.4)}
+.footer-credit a:hover{color:var(--rose)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s ease}
+.reveal.visible{opacity:1;transform:none}
+.d1{transition-delay:.12s}.d2{transition-delay:.24s}.d3{transition-delay:.36s}
+@media(max-width:900px){
+  nav ul{display:none}
+  .hamburger{display:flex}
+  .hero{grid-template-columns:1fr}
+  .hero-img{min-height:40vh}
+  .hero-text{padding:3rem var(--side)}
+  .services-intro,.about-grid,.booking-inner{grid-template-columns:1fr}
+  .services-grid,.reviews-strip{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:1fr 1fr}
+  .gallery-item.tall{grid-row:span 1}
+  .footer-top{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#booking" onclick="closeMobile()">Book</a>
+</div>
+
+<nav id="navbar">
+  <a href="#" class="nav-logo">Maison <em>Éclat</em></a>
+  <ul>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About Us</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#booking" class="nav-book">Book Now</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="hero">
+  <div class="hero-img">
+    <div class="hero-img-placeholder">
+      <div class="hero-img-icon">✿</div>
+      <div class="hero-img-label">Salon photography</div>
+    </div>
+    <svg class="hero-deco" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="40" r="35" stroke="#c4846a" stroke-width="0.5"/><circle cx="40" cy="40" r="25" stroke="#c4846a" stroke-width="0.5"/><line x1="40" y1="5" x2="40" y2="75" stroke="#c4846a" stroke-width="0.5"/><line x1="5" y1="40" x2="75" y2="40" stroke="#c4846a" stroke-width="0.5"/></svg>
+  </div>
+  <div class="hero-text">
+    <div class="hero-eyebrow">Hair · Beauty · Glasgow West End</div>
+    <h1>Where Glasgow<br>Comes to<br><em>Feel Beautiful.</em></h1>
+    <p class="hero-desc">An intimate boutique salon on Byres Road. Expert colourists, skilled stylists, and a space designed for you to exhale.</p>
+    <div>
+      <a href="#booking" class="btn-rose">Book Your Appointment</a>
+      <a href="#services" class="btn-outline-ink">Our Services</a>
+    </div>
+    <div class="hero-scroll-indicator">
+      <div class="scroll-bar"></div>
+      <span>Scroll</span>
+    </div>
+  </div>
+</div>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span class="marquee-item">Precision Cuts <span class="marquee-sep"></span></span>
+    <span class="marquee-item">Balayage & Colour <span class="marquee-sep"></span></span>
+    <span class="marquee-item">Bridal Hair <span class="marquee-sep"></span></span>
+    <span class="marquee-item">Brow & Lash <span class="marquee-sep"></span></span>
+    <span class="marquee-item">Facials <span class="marquee-sep"></span></span>
+    <span class="marquee-item">Keratin Treatments <span class="marquee-sep"></span></span>
+    <span class="marquee-item">Wedding Packages <span class="marquee-sep"></span></span>
+    <span class="marquee-item">Precision Cuts <span class="marquee-sep"></span></span>
+    <span class="marquee-item">Balayage & Colour <span class="marquee-sep"></span></span>
+    <span class="marquee-item">Bridal Hair <span class="marquee-sep"></span></span>
+    <span class="marquee-item">Brow & Lash <span class="marquee-sep"></span></span>
+    <span class="marquee-item">Facials <span class="marquee-sep"></span></span>
+    <span class="marquee-item">Keratin Treatments <span class="marquee-sep"></span></span>
+    <span class="marquee-item">Wedding Packages <span class="marquee-sep"></span></span>
+  </div>
+</div>
+
+<section class="services" id="services">
+  <div class="services-intro">
+    <div>
+      <div class="label reveal">What We Offer</div>
+      <h2 class="reveal">Every Service,<br><em>Perfectly Delivered.</em></h2>
+    </div>
+    <p class="reveal">From a quick trim to a full transformation, every appointment at Maison Éclat gets the same attention to detail. We don't rush — because your hair deserves better than that.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-item reveal">
+      <div class="service-name">Cut & Style</div>
+      <div class="service-desc">Precision cuts tailored to your face shape, lifestyle, and hair type. Includes consultation, wash, and finish.</div>
+      <div class="service-from">From £45</div>
+    </div>
+    <div class="service-item reveal d1">
+      <div class="service-name">Colour & Balayage</div>
+      <div class="service-desc">Full colour, highlights, balayage, ombré. We use Schwarzkopf and Olaplex to keep your hair healthy.</div>
+      <div class="service-from">From £85</div>
+    </div>
+    <div class="service-item reveal d2">
+      <div class="service-name">Bridal & Occasion</div>
+      <div class="service-desc">Bridal hair and make-up packages, trial sessions, and occasion styling for bridesmaids and mothers.</div>
+      <div class="service-from">From £120</div>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-name">Brow & Lash</div>
+      <div class="service-desc">HD brows, lash lifts, lash extensions, tinting. Framing your face with the detail it deserves.</div>
+      <div class="service-from">From £35</div>
+    </div>
+    <div class="service-item reveal d1">
+      <div class="service-name">Facials & Skin</div>
+      <div class="service-desc">Hydrafacial, classic facials, peels and LED therapy. Using Medik8 and IMAGE skincare ranges.</div>
+      <div class="service-from">From £65</div>
+    </div>
+    <div class="service-item reveal d2">
+      <div class="service-name">Keratin & Treatments</div>
+      <div class="service-desc">Olaplex bonding treatments, keratin smoothing, deep conditioning. For hair that behaves and shines.</div>
+      <div class="service-from">From £55</div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="about-visual reveal">
+      <div class="about-img-accent"></div>
+      <div class="about-img-main">
+        <div class="about-img-inner">
+          <div class="hero-img-icon" style="font-size:3rem;opacity:.12">👥</div>
+          <div class="hero-img-label" style="font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);opacity:.35">Team photography</div>
+        </div>
+      </div>
+      <div class="about-number">12</div>
+    </div>
+    <div class="about-text reveal d1">
+      <div class="label">Our Story</div>
+      <h2>Twelve Years on<br><em>Byres Road.</em></h2>
+      <p>Maison Éclat opened its doors in 2013 with one simple belief: <strong>every client deserves to feel seen.</strong> Not rushed in and out, not given a standard cut — but genuinely listened to and looked after.</p>
+      <p>Twelve years on, we're still the same small, passionate team. We've done <strong>hundreds of weddings, thousands of colours,</strong> and built lasting relationships with clients who've been with us from the beginning.</p>
+      <p>Our Byres Road salon is our home. Come in for a coffee, a chat, and the best colour in the West End.</p>
+      <div class="team-row">
+        <div class="team-member"><div class="team-avatar">💇</div><div class="team-name">Sophie</div><div class="team-role">Creative Director</div></div>
+        <div class="team-member"><div class="team-avatar">✂</div><div class="team-name">Claire</div><div class="team-role">Senior Stylist</div></div>
+        <div class="team-member"><div class="team-avatar">🎨</div><div class="team-name">Aisha</div><div class="team-role">Colourist</div></div>
+        <div class="team-member"><div class="team-avatar">💆</div><div class="team-name">Zoe</div><div class="team-role">Beauty Therapist</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <div class="label reveal">Our Work</div>
+  <h2 class="reveal">The Results<br><em>Speak for Themselves.</em></h2>
+  <div class="gallery-grid reveal">
+    <div class="gallery-item g1 tall">
+      <div class="gallery-item-inner"><div class="gi-icon">✿</div><div class="gi-label">Colour work</div></div>
+    </div>
+    <div class="gallery-item g2">
+      <div class="gallery-item-inner"><div class="gi-icon">💇</div><div class="gi-label">Cut & style</div></div>
+    </div>
+    <div class="gallery-item g2">
+      <div class="gallery-item-inner"><div class="gi-icon">👰</div><div class="gi-label">Bridal</div></div>
+    </div>
+    <div class="gallery-item g2">
+      <div class="gallery-item-inner"><div class="gi-icon">🎨</div><div class="gi-label">Balayage</div></div>
+    </div>
+    <div class="gallery-item g2">
+      <div class="gallery-item-inner"><div class="gi-icon">✨</div><div class="gi-label">Highlights</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="booking" id="booking">
+  <div class="booking-inner">
+    <div class="booking-info reveal">
+      <div class="label">Book Online</div>
+      <h2>Ready for<br><em>Your Appointment?</em></h2>
+      <p>Fill in your details and we'll confirm within a few hours. Prefer to call? We'd love to hear from you.</p>
+      <div class="booking-details">
+        <div class="booking-detail"><span class="detail-icon">📍</span><div class="detail-text"><strong>145 Byres Road</strong><br>Glasgow West End, G12 8TS</div></div>
+        <div class="booking-detail"><span class="detail-icon">📞</span><div class="detail-text"><a href="tel:01412345678" style="color:var(--rose);text-decoration:none">0141 234 5678</a></div></div>
+        <div class="booking-detail"><span class="detail-icon">🕐</span><div class="detail-text"><strong>Tue–Fri</strong> 9am–7pm · <strong>Sat</strong> 9am–5pm · <strong>Sun–Mon</strong> Closed</div></div>
+      </div>
+    </div>
+    <form class="booking-form reveal d1" onsubmit="event.preventDefault();alert('Request received! We\'ll be in touch to confirm your appointment.')">
+      <div class="form-group"><label>Your Name</label><input class="form-input" type="text" placeholder="Sophie Reid"></div>
+      <div class="form-row-2">
+        <div class="form-group"><label>Email</label><input class="form-input" type="email" placeholder="sophie@email.com"></div>
+        <div class="form-group"><label>Phone</label><input class="form-input" type="tel" placeholder="07700 000000"></div>
+      </div>
+      <div class="form-group"><label>Service</label>
+        <select class="form-select"><option>Cut & Style</option><option>Colour & Balayage</option><option>Bridal Package</option><option>Brow & Lash</option><option>Facial</option><option>Not sure yet</option></select>
+      </div>
+      <div class="form-row-2">
+        <div class="form-group"><label>Preferred Date</label><input class="form-input" type="date"></div>
+        <div class="form-group"><label>Preferred Time</label>
+          <select class="form-select"><option>Morning (9am–12pm)</option><option>Afternoon (12pm–3pm)</option><option>Late (3pm–7pm)</option></select>
+        </div>
+      </div>
+      <button type="submit" class="btn-rose" style="border:none;cursor:pointer;font-family:'Jost',sans-serif;width:100%;font-size:.78rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase">Request Appointment →</button>
+      <p style="font-size:.72rem;color:var(--ink2);text-align:center">We'll confirm within 24 hours</p>
+    </form>
+  </div>
+</section>
+
+<section class="reviews" id="reviews">
+  <div class="label reveal">Client Reviews</div>
+  <h2 class="reveal">Loved by Glasgow,<br><em>One Chair at a Time.</em></h2>
+  <div class="reviews-strip">
+    <div class="review reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Sophie has been doing my hair for six years. She's the only person I trust with my colour — my balayage always gets compliments."</p>
+      <div class="review-author">Rachel M., Hyndland</div>
+    </div>
+    <div class="review reveal d1">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Went in for bridal hair and make-up and genuinely cried at the result. The team made such a stressful day completely calm and beautiful."</p>
+      <div class="review-author">Laura K., Bride 2024</div>
+    </div>
+    <div class="review reveal d2">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"The salon itself is gorgeous and the atmosphere is so relaxing. I always leave feeling like I've had a mini holiday. Worth every penny."</p>
+      <div class="review-author">Fiona D., Partick</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-col">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;color:rgba(250,247,244,.5);margin-bottom:.5rem;font-style:italic">Maison Éclat</div>
+      <p>Hair & Beauty Boutique<br>145 Byres Road, Glasgow<br>G12 8TS</p>
+    </div>
+    <div class="footer-col">
+      <h3>Opening Hours</h3>
+      <p>Tuesday — Friday: 9am — 7pm</p>
+      <p>Saturday: 9am — 5pm</p>
+      <p>Sunday & Monday: Closed</p>
+    </div>
+    <div class="footer-col">
+      <h3>Get in Touch</h3>
+      <a href="tel:01412345678">0141 234 5678</a>
+      <a href="mailto:hello@maisoneclat.co.uk">hello@maisoneclat.co.uk</a>
+      <a href="https://instagram.com" target="_blank">@maisoneclat.glasgow</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Maison Éclat. All rights reserved.</span>
+    <span class="footer-credit">Website by <a href="https://nomorerubbishwebsites.com">NoMoreRubbishWebsites.com</a></span>
+  </div>
+</footer>
+
+<script>
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',window.scrollY>60),{passive:true});
+const hb=document.getElementById('hamburger'),mm=document.getElementById('mobile-menu');
+hb.addEventListener('click',()=>{hb.classList.toggle('open');mm.classList.toggle('open');document.body.style.overflow=mm.classList.contains('open')?'hidden':'';});
+function closeMobile(){hb.classList.remove('open');mm.classList.remove('open');document.body.style.overflow='';}
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
