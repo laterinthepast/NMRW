@@ -41,6 +41,11 @@ footer a:hover{color:var(--yellow)}
 <script>
 (function(){var s=localStorage.getItem('theme');var d=s?s==='dark':matchMedia('(prefers-color-scheme:dark)').matches;document.documentElement.setAttribute('data-theme',d?'dark':'light');})();
 </script>
+<!-- Vercel Web Analytics -->
+<script type="module">
+import { inject } from 'https://cdn.jsdelivr.net/npm/@vercel/analytics@2/+esm';
+inject();
+</script>
 </head>
 <body>
 
