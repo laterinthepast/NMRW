@@ -8,9 +8,19 @@
     {
       "src": "portfolio/**",
       "use": "@vercel/static"
+    },
+    {
+      "src": "sitemap.xml",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "robots.txt",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
+    { "src": "/sitemap\\.xml", "dest": "/sitemap.xml" },
+    { "src": "/robots\\.txt", "dest": "/robots.txt" },
     { "src": "/portfolio/(.*)", "dest": "/portfolio/$1" },
     { "src": "/privacy", "dest": "/privacy.html" },
     { "src": "/terms", "dest": "/terms.html" },
