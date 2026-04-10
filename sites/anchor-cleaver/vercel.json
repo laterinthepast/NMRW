@@ -1,18 +1,17 @@
 {
   "version": 2,
   "builds": [
-    { "src": "api/**/*.js", "use": "@vercel/node" },
+    { "src": "api/*.js", "use": "@vercel/node" },
     { "src": "index.html", "use": "@vercel/static" },
     { "src": "admin/**", "use": "@vercel/static" },
     { "src": "content/**", "use": "@vercel/static" }
   ],
   "routes": [
-    { "src": "/api/auth/callback", "dest": "/api/auth/callback.js" },
-    {
-      "src": "/admin/config\\.yml",
-      "dest": "/admin/config.yml",
-      "headers": { "Content-Type": "text/yaml; charset=utf-8" }
-    },
+    { "src": "/auth", "dest": "/api/auth.js" },
+    { "src": "/callback", "dest": "/api/callback.js" },
+    { "src": "/api/auth", "dest": "/api/auth.js" },
+    { "src": "/api/callback", "dest": "/api/callback.js" },
+    { "src": "/api/auth/callback", "dest": "/api/callback.js" },
     { "src": "/admin/?$", "dest": "/admin/index.html" },
     { "src": "/admin/(.+)", "dest": "/admin/$1" },
     { "src": "/content/(.+)", "dest": "/content/$1" },
