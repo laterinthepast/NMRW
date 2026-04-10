@@ -22,9 +22,11 @@
     { "src": "/sitemap\\.xml", "dest": "/sitemap.xml" },
     { "src": "/robots\\.txt", "dest": "/robots.txt" },
     { "src": "/portfolio/(.*)", "dest": "/portfolio/$1" },
+    { "src": "/privacy\\.html", "dest": "/privacy.html" },
     { "src": "/privacy", "dest": "/privacy.html" },
+    { "src": "/terms\\.html", "dest": "/terms.html" },
     { "src": "/terms", "dest": "/terms.html" },
-    { "src": "/(.*\\.(png|jpg|jpeg|gif|svg|webp|ico|xml|txt|css|js))", "dest": "/$1" },
+    { "src": "/(.*\\.(png|jpg|jpeg|gif|svg|webp|ico|xml|txt|css|js|html))", "dest": "/$1" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
