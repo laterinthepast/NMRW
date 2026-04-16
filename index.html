@@ -249,7 +249,7 @@ section{padding:7rem var(--side)}
 .pkg-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1.5rem}
 .pkg-header p{font-size:.9rem;color:rgba(255,255,255,.45);max-width:380px;line-height:1.7}
 .pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid rgba(255,255,255,.08)}
-.pkg{padding:3.2rem;border-right:1px solid rgba(255,255,255,.08);position:relative;transition:background .3s}
+.pkg{padding:3.2rem;border-right:1px solid rgba(255,255,255,.08);position:relative;transition:background .3s;display:flex;flex-direction:column}
 .pkg:last-child{border-right:none}
 .pkg:hover{background:rgba(255,255,255,.025)}
 .pkg.featured{background:var(--yellow)}
@@ -264,6 +264,7 @@ section{padding:7rem var(--side)}
 .pkg-from{font-size:.72rem;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.08em}
 .pkg.featured .pkg-from{color:rgba(0,0,0,.4)}
 .pkg-price{font-family:'Bebas Neue',sans-serif;font-size:5rem;line-height:1;color:#f0f0eb}
+.pkg.entry .pkg-price{color:var(--yellow)}
 .pkg.featured .pkg-price{color:#0a0a0a}
 .pkg-timeline{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:2rem;padding-bottom:1.8rem;border-bottom:1px solid rgba(255,255,255,.08)}
 .pkg.featured .pkg-timeline{color:rgba(0,0,0,.4);border-color:rgba(0,0,0,.12)}
@@ -272,7 +273,7 @@ section{padding:7rem var(--side)}
 .pkg.featured .pkg-features li{color:rgba(0,0,0,.65)}
 .tick{color:var(--yellow);font-weight:700;flex-shrink:0}
 .pkg.featured .tick{color:#0a0a0a}
-.pkg-cta{display:flex;flex-direction:column;gap:.6rem}
+.pkg-cta{display:flex;flex-direction:column;gap:.6rem;margin-top:auto}
 .pkg-btn{display:block;width:100%;padding:.9rem 2rem;border-radius:999px;font-size:.78rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;text-decoration:none;text-align:center;transition:all .2s;border:1.5px solid rgba(255,255,255,.2);color:#f0f0eb;cursor:pointer;font-family:'Inter',sans-serif;background:transparent}
 .pkg-btn:hover{background:#f0f0eb;color:#0a0a0a;border-color:#f0f0eb}
 .pkg.featured .pkg-btn{background:#0a0a0a;color:#f0f0eb;border-color:#0a0a0a}
@@ -579,7 +580,7 @@ footer a:hover{color:var(--yellow)}
     <p class="reveal">Every package includes design, build, testing, SEO setup, and launch. No upsells, no hidden extras.</p>
   </div>
   <div class="pkg-grid">
-    <div class="pkg reveal">
+    <div class="pkg entry reveal">
       <div class="pkg-badge">Landing</div>
       <div class="pkg-name">Just Online</div>
       <div class="pkg-tagline">A simple shop window for very small businesses</div>
