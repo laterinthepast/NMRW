@@ -1117,12 +1117,14 @@ function resize(){
 resize();
 window.addEventListener('resize',resize,{passive:true});
 
+// Four distinct colour zones + one dark "shadow" blob that carves depth.
+// Keep radii smaller than max(W,H) so blobs stay as defined masses, not fog.
 const BLOBS=[
-  {cx:0.35,cy:0.30,r:0.65,col:[255,209,0],  a:0.55,fx:0.00011,fy:0.00017,ph:0.0},
-  {cx:0.70,cy:0.65,r:0.60,col:[255,190,20], a:0.40,fx:0.00019,fy:0.00013,ph:1.3},
-  {cx:0.55,cy:0.50,r:0.50,col:[255,230,80], a:0.30,fx:0.00013,fy:0.00023,ph:2.1},
-  {cx:0.20,cy:0.80,r:0.45,col:[120,90,0],   a:0.55,fx:0.00009,fy:0.00015,ph:3.0},
-  {cx:0.85,cy:0.20,r:0.40,col:[255,209,0],  a:0.35,fx:0.00021,fy:0.00011,ph:4.2},
+  {cx:0.30,cy:0.35,r:0.38,col:[255,209,0],  a:0.55,fx:0.00012,fy:0.00018,ph:0.0}, // brand yellow
+  {cx:0.78,cy:0.28,r:0.34,col:[255,130,20], a:0.45,fx:0.00017,fy:0.00011,ph:1.7}, // warm amber
+  {cx:0.22,cy:0.80,r:0.30,col:[230,60,30],  a:0.32,fx:0.00014,fy:0.00021,ph:2.9}, // deep ember
+  {cx:0.85,cy:0.78,r:0.28,col:[255,235,140],a:0.35,fx:0.00020,fy:0.00010,ph:4.2}, // highlight
+  {cx:0.55,cy:0.50,r:0.42,col:[0,0,0],      a:0.55,fx:0.00009,fy:0.00015,ph:5.5}, // shadow pocket
 ];
 
 function draw(now){
@@ -1130,15 +1132,17 @@ function draw(now){
   const isDark = dark;
   ctx.clearRect(0,0,W,H);
   BLOBS.forEach(b=>{
-    const x=(b.cx + Math.sin(now*b.fx + b.ph)*0.18)*W;
-    const y=(b.cy + Math.cos(now*b.fy + b.ph)*0.18)*H;
+    const x=(b.cx + Math.sin(now*b.fx + b.ph)*0.28)*W;
+    const y=(b.cy + Math.cos(now*b.fy + b.ph)*0.28)*H;
     const radius = Math.max(W,H)*b.r;
-    const alpha = isDark ? b.a : b.a*0.55;
+    const isShadow = b.col[0]+b.col[1]+b.col[2] < 60;
+    let alpha = isDark ? b.a : b.a*0.55;
+    if (isShadow && !isDark) alpha = b.a*0.25;
     const [r,g,bl] = b.col;
     const grad = ctx.createRadialGradient(x,y,0,x,y,radius);
-    grad.addColorStop(0, `rgba(${r},${g},${bl},${alpha})`);
-    grad.addColorStop(0.45,`rgba(${r},${g},${bl},${alpha*0.35})`);
-    grad.addColorStop(1, `rgba(${r},${g},${bl},0)`);
+    grad.addColorStop(0,    `rgba(${r},${g},${bl},${alpha})`);
+    grad.addColorStop(0.55, `rgba(${r},${g},${bl},${alpha*0.30})`);
+    grad.addColorStop(1,    `rgba(${r},${g},${bl},0)`);
     ctx.fillStyle=grad;
     ctx.fillRect(0,0,W,H);
   });
