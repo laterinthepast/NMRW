@@ -515,7 +515,7 @@ footer a:hover{color:var(--yellow)}
   </div>
 
   <canvas id="hero-canvas"></canvas>
-  <div class="canvas-hint">Move your mouse</div>
+  <div class="canvas-hint">How we build sites</div>
 </section>
 
 <!-- TRUST BAR -->
@@ -1104,123 +1104,285 @@ function submitForm(e){
     });
 }
 
-// CANVAS — pure 2D torus knot, no libraries
+// CANVAS — "website being built" wireframe animation
 const canvas=document.getElementById('hero-canvas');
 const ctx=canvas.getContext('2d');
 let W,H,t=0,canvasVisible=true,rafId=null;
-const isSmall=window.matchMedia('(max-width:600px)').matches;
-let targetRotX=0,targetRotY=0,rotX=0,rotY=0;
-let mouseNX=0.5,mouseNY=0.5;
 
 function resize(){
   W=canvas.offsetWidth; H=canvas.offsetHeight||window.innerHeight;
   canvas.width=W*devicePixelRatio; canvas.height=H*devicePixelRatio;
+  ctx.setTransform(1,0,0,1,0,0);
   ctx.scale(devicePixelRatio,devicePixelRatio);
 }
 resize();
 window.addEventListener('resize',resize,{passive:true});
 
-document.addEventListener('mousemove',e=>{
-  mouseNX=e.clientX/window.innerWidth;
-  mouseNY=e.clientY/window.innerHeight;
-  targetRotY=(mouseNX-.5)*Math.PI*1.2;
-  targetRotX=(mouseNY-.5)*Math.PI*.7;
-});
+// Easing
+const easeOut = x => 1 - Math.pow(1 - x, 3);
+const easeInOut = x => x < 0.5 ? 2*x*x : 1 - Math.pow(-2*x+2, 2)/2;
 
-function torusKnot(t,p,q,R,r){
-  const r0=Math.cos(q*t)*R+r;
-  return[r0*Math.cos(p*t), r0*Math.sin(p*t), -Math.sin(q*t)*R];
-}
-function rotXY(x,y,z,ax,ay){
-  const y2=y*Math.cos(ax)-z*Math.sin(ax),z2=y*Math.sin(ax)+z*Math.cos(ax);
-  const x2=x*Math.cos(ay)+z2*Math.sin(ay),z3=-x*Math.sin(ay)+z2*Math.cos(ay);
-  return[x2,y2,z3];
-}
-function proj(x,y,z,fov,sc){const d=fov/(fov+z);return[W/2+x*d*sc,H/2+y*d*sc,d];}
+// Animation timeline (in seconds)
+// 0.0-0.4   frame fades in
+// 0.4-0.8   traffic lights + URL bar
+// 0.8-1.3   nav bar
+// 1.3-1.8   hero block
+// 1.8-2.3   image placeholder
+// 2.3-2.8   content lines
+// 2.8-3.6   yellow accent sweep
+// 3.6-5.0   hold
+// 5.0-5.8   fade out
+// 5.8-6.0   reset
+const CYCLE = 6.0;
 
-const STEPS=isSmall?160:300;
-const kpts=[];
-for(let i=0;i<=STEPS;i++) kpts.push(torusKnot((i/STEPS)*Math.PI*2,2,3,0.75,0.24));
+function drawBrowserMockup(p) {
+  const isDark = dark;
+  const inkStrong = isDark ? 'rgba(240,240,235,' : 'rgba(10,10,10,';
+  const inkSoft   = isDark ? 'rgba(240,240,235,' : 'rgba(10,10,10,';
+  const bgFill    = isDark ? 'rgba(20,20,20,' : 'rgba(255,255,255,';
+  const border    = isDark ? 'rgba(240,240,235,' : 'rgba(10,10,10,';
 
-const particles2=[];
-for(let i=0;i<(isSmall?70:160);i++){
-  const r=1.3+Math.random()*.85,th=Math.random()*Math.PI*2,ph=Math.acos(2*Math.random()-1);
-  particles2.push({x:r*Math.sin(ph)*Math.cos(th),y:r*Math.sin(ph)*Math.sin(th),z:r*Math.cos(ph),sp:.2+Math.random()*.4});
-}
-function ringPts(rad,tilt,n=160){
-  return Array.from({length:n+1},(_,i)=>{const a=(i/n)*Math.PI*2;return[Math.cos(a)*rad,Math.sin(a)*rad*Math.cos(tilt),Math.sin(a)*rad*Math.sin(tilt)];});
-}
-const rings2=[
-  {pts:ringPts(1.4,.2),col:'255,209,0',op:.6,off:0},
-  {pts:ringPts(1.25,Math.PI/2.4),col:'255,255,255',op:.15,off:.5},
-  {pts:ringPts(1.55,Math.PI/4),col:'255,209,0',op:.28,off:1},
-];
+  // Frame dimensions (centered, respecting aspect)
+  const pad = Math.min(W, H) * 0.08;
+  const frameW = W - pad * 2;
+  const frameH = Math.min(H - pad * 2, frameW * 0.62);
+  const fx = (W - frameW) / 2;
+  const fy = (H - frameH) / 2;
+  const radius = 10;
 
-function draw(){
-  t+=.007;
-  rotX+=(targetRotX-rotX)*.045;
-  rotY+=(targetRotY-rotY)*.045;
-  const aRY=rotY+t*.18,aRX=rotX+t*.1;
-  ctx.clearRect(0,0,W,H);
-  const sc=Math.min(W,H)*.36, fov=4, isDark=dark;
+  // Overall page opacity (fade in then out)
+  let pageAlpha = 1;
+  if (p < 0.067) pageAlpha = easeOut(p / 0.067);            // 0.0-0.4s fade in
+  else if (p > 0.833) pageAlpha = 1 - easeOut((p - 0.833) / 0.133); // 5.0-5.8s fade out
+  ctx.globalAlpha = pageAlpha;
 
-  // particles
-  particles2.forEach(p=>{
-    const pa=t*p.sp*.3;
-    const[rx,ry,rz]=rotXY(p.x,p.y,p.z,aRX*.4,aRY*.3+pa);
-    const[sx,sy,d]=proj(rx,ry,rz,fov,sc);
-    if(d<0)return;
-    const alpha=isDark?.25+d*.35:.12+d*.28;
-    ctx.beginPath();ctx.arc(sx,sy,Math.max(p.sp*sc*.012*d,.8),0,Math.PI*2);
-    ctx.fillStyle=`rgba(255,209,0,${alpha})`;ctx.fill();
-  });
+  // === BROWSER FRAME ===
+  // Chrome bar background
+  ctx.fillStyle = bgFill + '0.92)';
+  roundRect(fx, fy, frameW, frameH, radius);
+  ctx.fill();
+  // Border
+  ctx.strokeStyle = border + '0.15)';
+  ctx.lineWidth = 1;
+  roundRect(fx, fy, frameW, frameH, radius);
+  ctx.stroke();
 
-  // rings
-  rings2.forEach(rng=>{
-    ctx.beginPath();let first=true;
-    rng.pts.forEach(p=>{
-      const[rx,ry,rz]=rotXY(p[0],p[1],p[2],aRX+rng.off*.3,aRY+rng.off);
-      const[sx,sy,d]=proj(rx,ry,rz,fov,sc);
-      if(d<0){first=true;return;}
-      first?ctx.moveTo(sx,sy):ctx.lineTo(sx,sy);first=false;
+  const chromeH = Math.max(28, frameH * 0.09);
+  // Chrome background tint
+  ctx.fillStyle = isDark ? 'rgba(30,30,30,0.6)' : 'rgba(245,245,240,0.9)';
+  roundRect(fx, fy, frameW, chromeH, radius, true);
+  ctx.fill();
+  // Chrome bottom line
+  ctx.strokeStyle = border + '0.1)';
+  ctx.beginPath();
+  ctx.moveTo(fx, fy + chromeH);
+  ctx.lineTo(fx + frameW, fy + chromeH);
+  ctx.stroke();
+
+  // === TRAFFIC LIGHTS (0.4-0.8s) ===
+  const dotsProgress = stage(p, 0.067, 0.133);
+  if (dotsProgress > 0) {
+    const dotR = 5;
+    const dotY = fy + chromeH / 2;
+    const colors = ['#ff5f57', '#febc2e', '#28c840'];
+    colors.forEach((c, i) => {
+      const dotP = Math.min(1, Math.max(0, (dotsProgress - i * 0.15) / 0.5));
+      if (dotP <= 0) return;
+      ctx.globalAlpha = pageAlpha * easeOut(dotP);
+      ctx.fillStyle = c;
+      ctx.beginPath();
+      ctx.arc(fx + 16 + i * (dotR * 2 + 6), dotY, dotR, 0, Math.PI * 2);
+      ctx.fill();
     });
-    ctx.strokeStyle=`rgba(${rng.col},${rng.op})`;ctx.lineWidth=1;ctx.stroke();
-  });
-
-  // knot
-  const segs=[];
-  for(let i=0;i<STEPS;i++){
-    const p=kpts[i],p1=kpts[i+1];
-    const tx=p1[0]-p[0],ty=p1[1]-p[1],tz=p1[2]-p[2];
-    const tl=Math.sqrt(tx*tx+ty*ty+tz*tz);
-    const tn=[tx/tl,ty/tl,tz/tl];
-    const nx=0*tn[2]-1*tn[1],ny=1*tn[0]-0*tn[2],nz=0*tn[1]-0*tn[0];
-    const nl=Math.sqrt(nx*nx+ny*ny+nz*nz)||1;
-    const nn=[nx/nl,ny/nl,nz/nl];
-    const[rx,ry,rz]=rotXY(p[0],p[1],p[2],aRX,aRY);
-    const[sx,sy,d]=proj(rx,ry,rz,fov,sc);
-    segs.push({p,nn,sx,sy,d});
+    ctx.globalAlpha = pageAlpha;
   }
-  segs.sort((a,b)=>a.d-b.d);
-  segs.forEach(seg=>{
-    if(seg.d<0)return;
-    const[rx,ry,rz]=rotXY(seg.p[0],seg.p[1],seg.p[2],aRX,aRY);
-    const[sx,sy,d]=proj(rx,ry,rz,fov,sc);
-    const r2=.092*sc*d; if(r2<.5)return;
-    const[nnrx,nnry]=rotXY(seg.nn[0],seg.nn[1],seg.nn[2],aRX,aRY);
-    const light=Math.max(0,nnrx*.6+nnry*.8+.3*.5);
-    const amb=.25,br=amb+light*(1-amb);
-    const ya=Math.max(0,light-.55)*2.8;
-    let bR,bG,bB,bA;
-    if(isDark){bR=Math.round(240*br);bG=Math.round(240*br);bB=Math.round(235*br);bA=.18+br*.15;}
-    else{bR=Math.round(10+br*55);bG=Math.round(10+br*55);bB=Math.round(10+br*50);bA=.82+br*.18;}
-    ctx.beginPath();ctx.arc(sx,sy,r2,0,Math.PI*2);
-    ctx.fillStyle=`rgba(${Math.round(bR+(255-bR)*ya*.5)},${Math.round(bG+(209-bG)*ya*.5)},${Math.round(bB+(0-bB)*ya*.3)},${bA})`;
+
+  // URL bar
+  const urlProgress = stage(p, 0.1, 0.1);
+  if (urlProgress > 0) {
+    const urlX = fx + 70;
+    const urlY = fy + chromeH * 0.25;
+    const urlW = frameW * 0.55;
+    const urlH = chromeH * 0.5;
+    ctx.globalAlpha = pageAlpha * easeOut(urlProgress);
+    ctx.fillStyle = isDark ? 'rgba(40,40,40,0.8)' : 'rgba(255,255,255,0.95)';
+    roundRect(urlX, urlY, urlW, urlH, 4);
     ctx.fill();
-  });
-  rafId=requestAnimationFrame(draw);
+    ctx.strokeStyle = border + '0.08)';
+    ctx.stroke();
+    ctx.globalAlpha = pageAlpha;
+  }
+
+  // === CONTENT AREA ===
+  const contentX = fx + frameW * 0.08;
+  const contentW = frameW * 0.84;
+  const contentY = fy + chromeH + frameH * 0.06;
+
+  // Nav bar (0.8-1.3s)
+  const navP = stage(p, 0.133, 0.083);
+  if (navP > 0) {
+    const navY = contentY;
+    const e = easeOut(navP);
+    ctx.globalAlpha = pageAlpha * e;
+    // Logo block
+    ctx.fillStyle = inkStrong + '0.9)';
+    ctx.fillRect(contentX, navY, 50, 8);
+    // Nav items
+    for (let i = 0; i < 4; i++) {
+      ctx.fillStyle = inkSoft + '0.3)';
+      ctx.fillRect(contentX + contentW - 180 + i * 42, navY + 2, 28, 5);
+    }
+    ctx.globalAlpha = pageAlpha;
+  }
+
+  // Hero block (1.3-1.8s) — big headline
+  const heroP = stage(p, 0.217, 0.083);
+  if (heroP > 0) {
+    const e = easeOut(heroP);
+    const baseY = contentY + frameH * 0.11;
+    const lineH = frameH * 0.065;
+    // Three stacked headline bars
+    for (let i = 0; i < 3; i++) {
+      const barP = Math.min(1, Math.max(0, (heroP - i * 0.2) / 0.6));
+      if (barP <= 0) continue;
+      ctx.globalAlpha = pageAlpha * easeOut(barP);
+      ctx.fillStyle = inkStrong + (i === 1 ? '0.85)' : '0.9)');
+      const barW = (contentW * 0.45) * easeOut(barP);
+      ctx.fillRect(contentX, baseY + i * (lineH + 6), barW * [1, 0.8, 0.55][i], lineH);
+    }
+    ctx.globalAlpha = pageAlpha;
+  }
+
+  // Image placeholder (1.8-2.3s)
+  const imgP = stage(p, 0.3, 0.083);
+  if (imgP > 0) {
+    const e = easeOut(imgP);
+    ctx.globalAlpha = pageAlpha * e;
+    const imgX = contentX + contentW * 0.55;
+    const imgY = contentY + frameH * 0.11;
+    const imgW = contentW * 0.45;
+    const imgH = frameH * 0.38;
+    ctx.fillStyle = isDark ? 'rgba(60,60,60,0.35)' : 'rgba(10,10,10,0.06)';
+    roundRect(imgX, imgY, imgW, imgH, 6);
+    ctx.fill();
+    ctx.strokeStyle = border + '0.12)';
+    roundRect(imgX, imgY, imgW, imgH, 6);
+    ctx.stroke();
+    // Image "icon" — a square + circle suggestion
+    ctx.strokeStyle = inkSoft + '0.25)';
+    ctx.lineWidth = 1.5;
+    const iconS = Math.min(imgW, imgH) * 0.28;
+    const cx = imgX + imgW / 2, cy = imgY + imgH / 2;
+    ctx.beginPath();
+    ctx.arc(cx - iconS * 0.2, cy - iconS * 0.2, iconS * 0.3, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(cx - iconS * 0.6, cy + iconS * 0.4);
+    ctx.lineTo(cx, cy - iconS * 0.1);
+    ctx.lineTo(cx + iconS * 0.6, cy + iconS * 0.4);
+    ctx.stroke();
+    ctx.globalAlpha = pageAlpha;
+  }
+
+  // Content lines (2.3-2.8s)
+  const linesP = stage(p, 0.383, 0.083);
+  if (linesP > 0) {
+    const baseY = contentY + frameH * 0.56;
+    const lineH = 5;
+    for (let i = 0; i < 4; i++) {
+      const lp = Math.min(1, Math.max(0, (linesP - i * 0.15) / 0.55));
+      if (lp <= 0) continue;
+      ctx.globalAlpha = pageAlpha * easeOut(lp);
+      ctx.fillStyle = inkSoft + '0.35)';
+      const lw = contentW * [0.7, 0.85, 0.65, 0.4][i];
+      ctx.fillRect(contentX, baseY + i * (lineH + 8), lw, lineH);
+    }
+    ctx.globalAlpha = pageAlpha;
+  }
+
+  // CTA button
+  const ctaP = stage(p, 0.45, 0.067);
+  if (ctaP > 0) {
+    const e = easeOut(ctaP);
+    ctx.globalAlpha = pageAlpha * e;
+    const btnY = contentY + frameH * 0.78;
+    const btnW = 90;
+    const btnH = 22;
+    ctx.fillStyle = '#FFD100';
+    roundRect(contentX, btnY, btnW, btnH, 999);
+    ctx.fill();
+    ctx.globalAlpha = pageAlpha;
+  }
+
+  // === YELLOW ACCENT SWEEP (2.8-3.6s) ===
+  const sweepP = stage(p, 0.467, 0.133);
+  if (sweepP > 0 && sweepP < 1) {
+    const sweepX = fx + easeInOut(sweepP) * frameW;
+    const sweepW = frameW * 0.08;
+    const grad = ctx.createLinearGradient(sweepX - sweepW, 0, sweepX, 0);
+    grad.addColorStop(0, 'rgba(255,209,0,0)');
+    grad.addColorStop(0.7, 'rgba(255,209,0,0.25)');
+    grad.addColorStop(1, 'rgba(255,209,0,0.45)');
+    ctx.globalAlpha = pageAlpha;
+    ctx.fillStyle = grad;
+    ctx.save();
+    roundRect(fx, fy, frameW, frameH, radius);
+    ctx.clip();
+    ctx.fillRect(sweepX - sweepW, fy, sweepW + 4, frameH);
+    ctx.restore();
+    // Vertical bright edge
+    ctx.strokeStyle = 'rgba(255,209,0,0.8)';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(sweepX, fy + 2);
+    ctx.lineTo(sweepX, fy + frameH - 2);
+    ctx.stroke();
+  }
+
+  ctx.globalAlpha = 1;
 }
-function startDraw(){if(rafId==null)draw();}
+
+// Helper: normalized stage progress within [0,1]
+function stage(p, start, duration) {
+  return Math.min(1, Math.max(0, (p - start) / duration));
+}
+
+function roundRect(x, y, w, h, r, topOnly=false) {
+  ctx.beginPath();
+  if (topOnly) {
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + w - r, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h);
+    ctx.lineTo(x, y + h);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+  } else {
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + w - r, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+  }
+  ctx.closePath();
+}
+
+let lastTime = performance.now();
+function draw(now) {
+  now = now || performance.now();
+  const dt = Math.min((now - lastTime) / 1000, 0.1);
+  lastTime = now;
+  t += dt;
+  const p = (t % CYCLE) / CYCLE;
+  ctx.clearRect(0, 0, W, H);
+  drawBrowserMockup(p);
+  rafId = requestAnimationFrame(draw);
+}
+function startDraw(){if(rafId==null){lastTime=performance.now();draw();}}
 function stopDraw(){if(rafId!=null){cancelAnimationFrame(rafId);rafId=null;}}
 draw();
 const canvasObs=new IntersectionObserver(es=>es.forEach(x=>{canvasVisible=x.isIntersecting; canvasVisible?startDraw():stopDraw();}),{threshold:0});
