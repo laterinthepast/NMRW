@@ -515,7 +515,7 @@ footer a:hover{color:var(--yellow)}
   </div>
 
   <canvas id="hero-canvas"></canvas>
-  <div class="canvas-hint">How we build sites</div>
+  <div class="canvas-hint">Move your mouse</div>
 </section>
 
 <!-- TRUST BAR -->
@@ -1104,450 +1104,123 @@ function submitForm(e){
     });
 }
 
-// CANVAS — "website being built" wireframe animation
+// CANVAS — pure 2D torus knot, no libraries
 const canvas=document.getElementById('hero-canvas');
 const ctx=canvas.getContext('2d');
 let W,H,t=0,canvasVisible=true,rafId=null;
+const isSmall=window.matchMedia('(max-width:600px)').matches;
+let targetRotX=0,targetRotY=0,rotX=0,rotY=0;
+let mouseNX=0.5,mouseNY=0.5;
 
 function resize(){
   W=canvas.offsetWidth; H=canvas.offsetHeight||window.innerHeight;
   canvas.width=W*devicePixelRatio; canvas.height=H*devicePixelRatio;
-  ctx.setTransform(1,0,0,1,0,0);
   ctx.scale(devicePixelRatio,devicePixelRatio);
 }
 resize();
 window.addEventListener('resize',resize,{passive:true});
 
-// Easing
-const easeOut = x => 1 - Math.pow(1 - x, 3);
-const easeInOut = x => x < 0.5 ? 2*x*x : 1 - Math.pow(-2*x+2, 2)/2;
+document.addEventListener('mousemove',e=>{
+  mouseNX=e.clientX/window.innerWidth;
+  mouseNY=e.clientY/window.innerHeight;
+  targetRotY=(mouseNX-.5)*Math.PI*1.2;
+  targetRotX=(mouseNY-.5)*Math.PI*.7;
+});
 
-// Animation timeline (7s cycle, ratios of p)
-// 0.000-0.043  fade in
-// 0.043-0.100  traffic lights
-// 0.070-0.130  URL bar (padlock + dots)
-// 0.100-0.143  nav (logo + items + mini CTA)
-// 0.143-0.229  headline (3 lines + yellow highlight)
-// 0.229-0.271  subhead lines
-// 0.271-0.314  CTA pair (primary + secondary)
-// 0.314-0.386  image panel (gradient + play button + badge)
-// 0.386-0.486  feature cards (3 cards staggered)
-// 0.486-0.557  star rating
-// 0.557-0.710  cursor moves to CTA
-// 0.710-0.740  click ripple
-// 0.740-0.860  yellow sweep
-// 0.900-0.986  fade out
-const CYCLE = 7.0;
-const YELLOW = '#FFD100';
+function torusKnot(t,p,q,R,r){
+  const r0=Math.cos(q*t)*R+r;
+  return[r0*Math.cos(p*t), r0*Math.sin(p*t), -Math.sin(q*t)*R];
+}
+function rotXY(x,y,z,ax,ay){
+  const y2=y*Math.cos(ax)-z*Math.sin(ax),z2=y*Math.sin(ax)+z*Math.cos(ax);
+  const x2=x*Math.cos(ay)+z2*Math.sin(ay),z3=-x*Math.sin(ay)+z2*Math.cos(ay);
+  return[x2,y2,z3];
+}
+function proj(x,y,z,fov,sc){const d=fov/(fov+z);return[W/2+x*d*sc,H/2+y*d*sc,d];}
 
-function drawBrowserMockup(p) {
-  const isDark = dark;
-  const ink = a => (isDark ? `rgba(240,240,235,${a})` : `rgba(10,10,10,${a})`);
+const STEPS=isSmall?160:300;
+const kpts=[];
+for(let i=0;i<=STEPS;i++) kpts.push(torusKnot((i/STEPS)*Math.PI*2,2,3,0.75,0.24));
 
-  // Frame
-  const pad = Math.min(W, H) * 0.08;
-  const frameW = W - pad * 2;
-  const frameH = Math.min(H - pad * 2, frameW * 0.62);
-  const fx = (W - frameW) / 2;
-  const fy = (H - frameH) / 2;
-  const radius = 10;
+const particles2=[];
+for(let i=0;i<(isSmall?70:160);i++){
+  const r=1.3+Math.random()*.85,th=Math.random()*Math.PI*2,ph=Math.acos(2*Math.random()-1);
+  particles2.push({x:r*Math.sin(ph)*Math.cos(th),y:r*Math.sin(ph)*Math.sin(th),z:r*Math.cos(ph),sp:.2+Math.random()*.4});
+}
+function ringPts(rad,tilt,n=160){
+  return Array.from({length:n+1},(_,i)=>{const a=(i/n)*Math.PI*2;return[Math.cos(a)*rad,Math.sin(a)*rad*Math.cos(tilt),Math.sin(a)*rad*Math.sin(tilt)];});
+}
+const rings2=[
+  {pts:ringPts(1.4,.2),col:'255,209,0',op:.6,off:0},
+  {pts:ringPts(1.25,Math.PI/2.4),col:'255,255,255',op:.15,off:.5},
+  {pts:ringPts(1.55,Math.PI/4),col:'255,209,0',op:.28,off:1},
+];
 
-  // Page opacity
-  let pageAlpha = 1;
-  if (p < 0.043) pageAlpha = easeOut(p / 0.043);
-  else if (p > 0.900) pageAlpha = 1 - easeOut((p - 0.900) / 0.086);
-  ctx.globalAlpha = pageAlpha;
+function draw(){
+  t+=.007;
+  rotX+=(targetRotX-rotX)*.045;
+  rotY+=(targetRotY-rotY)*.045;
+  const aRY=rotY+t*.18,aRX=rotX+t*.1;
+  ctx.clearRect(0,0,W,H);
+  const sc=Math.min(W,H)*.36, fov=4, isDark=dark;
 
-  // === BROWSER FRAME ===
-  ctx.fillStyle = isDark ? 'rgba(20,20,20,0.92)' : 'rgba(255,255,255,0.92)';
-  roundRect(fx, fy, frameW, frameH, radius); ctx.fill();
-  ctx.strokeStyle = ink(0.15); ctx.lineWidth = 1;
-  roundRect(fx, fy, frameW, frameH, radius); ctx.stroke();
+  // particles
+  particles2.forEach(p=>{
+    const pa=t*p.sp*.3;
+    const[rx,ry,rz]=rotXY(p.x,p.y,p.z,aRX*.4,aRY*.3+pa);
+    const[sx,sy,d]=proj(rx,ry,rz,fov,sc);
+    if(d<0)return;
+    const alpha=isDark?.25+d*.35:.12+d*.28;
+    ctx.beginPath();ctx.arc(sx,sy,Math.max(p.sp*sc*.012*d,.8),0,Math.PI*2);
+    ctx.fillStyle=`rgba(255,209,0,${alpha})`;ctx.fill();
+  });
 
-  const chromeH = Math.max(28, frameH * 0.09);
-  ctx.fillStyle = isDark ? 'rgba(30,30,30,0.6)' : 'rgba(245,245,240,0.9)';
-  roundRect(fx, fy, frameW, chromeH, radius, true); ctx.fill();
-  ctx.strokeStyle = ink(0.1);
-  ctx.beginPath(); ctx.moveTo(fx, fy + chromeH); ctx.lineTo(fx + frameW, fy + chromeH); ctx.stroke();
-
-  // Traffic lights
-  const dotsP = stage(p, 0.043, 0.057);
-  if (dotsP > 0) {
-    const dotR = 5, dotY = fy + chromeH / 2;
-    ['#ff5f57', '#febc2e', '#28c840'].forEach((c, i) => {
-      const dp = Math.min(1, Math.max(0, (dotsP - i * 0.15) / 0.5));
-      if (dp <= 0) return;
-      ctx.globalAlpha = pageAlpha * easeOut(dp);
-      ctx.fillStyle = c;
-      ctx.beginPath(); ctx.arc(fx + 16 + i * (dotR * 2 + 6), dotY, dotR, 0, Math.PI * 2); ctx.fill();
+  // rings
+  rings2.forEach(rng=>{
+    ctx.beginPath();let first=true;
+    rng.pts.forEach(p=>{
+      const[rx,ry,rz]=rotXY(p[0],p[1],p[2],aRX+rng.off*.3,aRY+rng.off);
+      const[sx,sy,d]=proj(rx,ry,rz,fov,sc);
+      if(d<0){first=true;return;}
+      first?ctx.moveTo(sx,sy):ctx.lineTo(sx,sy);first=false;
     });
-    ctx.globalAlpha = pageAlpha;
+    ctx.strokeStyle=`rgba(${rng.col},${rng.op})`;ctx.lineWidth=1;ctx.stroke();
+  });
+
+  // knot
+  const segs=[];
+  for(let i=0;i<STEPS;i++){
+    const p=kpts[i],p1=kpts[i+1];
+    const tx=p1[0]-p[0],ty=p1[1]-p[1],tz=p1[2]-p[2];
+    const tl=Math.sqrt(tx*tx+ty*ty+tz*tz);
+    const tn=[tx/tl,ty/tl,tz/tl];
+    const nx=0*tn[2]-1*tn[1],ny=1*tn[0]-0*tn[2],nz=0*tn[1]-0*tn[0];
+    const nl=Math.sqrt(nx*nx+ny*ny+nz*nz)||1;
+    const nn=[nx/nl,ny/nl,nz/nl];
+    const[rx,ry,rz]=rotXY(p[0],p[1],p[2],aRX,aRY);
+    const[sx,sy,d]=proj(rx,ry,rz,fov,sc);
+    segs.push({p,nn,sx,sy,d});
   }
-
-  // URL bar with padlock + dots
-  const urlP = stage(p, 0.070, 0.060);
-  if (urlP > 0) {
-    const urlX = fx + 70;
-    const urlY = fy + chromeH * 0.22;
-    const urlW = frameW * 0.55;
-    const urlH = chromeH * 0.55;
-    ctx.globalAlpha = pageAlpha * easeOut(urlP);
-    ctx.fillStyle = isDark ? 'rgba(40,40,40,0.8)' : 'rgba(255,255,255,0.95)';
-    roundRect(urlX, urlY, urlW, urlH, 4); ctx.fill();
-    ctx.strokeStyle = ink(0.08); ctx.stroke();
-
-    // Padlock
-    const lockH = urlH * 0.55;
-    const lockW = lockH * 0.8;
-    const lockX = urlX + 9;
-    const lockY = urlY + urlH / 2 - lockH / 2;
-    ctx.strokeStyle = ink(0.45); ctx.lineWidth = 1;
-    ctx.strokeRect(lockX, lockY + lockH * 0.4, lockW, lockH * 0.6);
-    ctx.beginPath();
-    ctx.arc(lockX + lockW / 2, lockY + lockH * 0.4, lockW * 0.3, Math.PI, 0);
-    ctx.stroke();
-
-    // URL "text" dots
-    ctx.fillStyle = ink(0.3);
-    const tStart = urlX + 22;
-    for (let i = 0; i < 24; i++) {
-      const dx = tStart + i * 5;
-      if (dx > urlX + urlW - 10) break;
-      ctx.fillRect(dx, urlY + urlH / 2 - 1.5, 3, 3);
-    }
-    ctx.globalAlpha = pageAlpha;
-  }
-
-  // === CONTENT AREA ===
-  const contentX = fx + frameW * 0.08;
-  const contentW = frameW * 0.84;
-  const contentY = fy + chromeH + frameH * 0.05;
-  const leftW = contentW * 0.5;
-
-  // Nav bar
-  const navP = stage(p, 0.100, 0.043);
-  if (navP > 0) {
-    const navY = contentY;
-    ctx.globalAlpha = pageAlpha * easeOut(navP);
-    // Logo: yellow dot + brand bar
-    ctx.fillStyle = YELLOW;
-    ctx.beginPath(); ctx.arc(contentX + 4, navY + 4, 4, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = ink(0.9);
-    ctx.fillRect(contentX + 14, navY + 1, 54, 7);
-    // Nav items
-    ctx.fillStyle = ink(0.32);
-    for (let i = 0; i < 4; i++) {
-      ctx.fillRect(contentX + contentW - 220 + i * 38, navY + 2, 28, 5);
-    }
-    // Mini CTA
-    ctx.fillStyle = YELLOW;
-    roundRect(contentX + contentW - 52, navY - 2, 52, 14, 7); ctx.fill();
-    ctx.globalAlpha = pageAlpha;
-  }
-
-  // === HEADLINE (left) with yellow highlight ===
-  const heroP = stage(p, 0.143, 0.086);
-  const hlineH = frameH * 0.065;
-  const hBaseY = contentY + frameH * 0.08;
-  if (heroP > 0) {
-    // Yellow highlight on line 2
-    const hlP = stage(p, 0.185, 0.045);
-    if (hlP > 0) {
-      ctx.globalAlpha = pageAlpha * easeOut(hlP);
-      ctx.fillStyle = YELLOW;
-      const hlW = leftW * 0.78 * easeOut(hlP);
-      ctx.fillRect(contentX - 4, hBaseY + hlineH + 6 - 2, hlW + 8, hlineH + 4);
-    }
-    // 3 lines
-    const widths = [0.95, 0.8, 0.55];
-    for (let i = 0; i < 3; i++) {
-      const bp = Math.min(1, Math.max(0, (heroP - i * 0.18) / 0.65));
-      if (bp <= 0) continue;
-      ctx.globalAlpha = pageAlpha * easeOut(bp);
-      // Line 2 sits on yellow, so stays dark (readable contrast)
-      ctx.fillStyle = i === 1 ? 'rgba(10,10,10,0.95)' : ink(0.9);
-      ctx.fillRect(contentX, hBaseY + i * (hlineH + 6), leftW * widths[i] * easeOut(bp), hlineH);
-    }
-    ctx.globalAlpha = pageAlpha;
-  }
-
-  // Subhead lines
-  const subP = stage(p, 0.229, 0.042);
-  if (subP > 0) {
-    const sBaseY = contentY + frameH * 0.34;
-    const lineH = 5;
-    const widths = [0.92, 0.85, 0.6];
-    for (let i = 0; i < 3; i++) {
-      const lp = Math.min(1, Math.max(0, (subP - i * 0.18) / 0.6));
-      if (lp <= 0) continue;
-      ctx.globalAlpha = pageAlpha * easeOut(lp);
-      ctx.fillStyle = ink(0.35);
-      ctx.fillRect(contentX, sBaseY + i * (lineH + 7), leftW * widths[i], lineH);
-    }
-    ctx.globalAlpha = pageAlpha;
-  }
-
-  // CTA buttons (pair)
-  const btnW = 72, btnH = 20;
-  const btnY = contentY + frameH * 0.44;
-  const btnX = contentX;
-  const ctaP = stage(p, 0.271, 0.043);
-  if (ctaP > 0) {
-    ctx.globalAlpha = pageAlpha * easeOut(ctaP);
-    // Primary (yellow)
-    ctx.fillStyle = YELLOW;
-    roundRect(btnX, btnY, btnW, btnH, btnH / 2); ctx.fill();
-    // Arrow inside
-    ctx.strokeStyle = '#0a0a0a'; ctx.lineWidth = 1.4; ctx.lineCap = 'round';
-    const ax = btnX + btnW - 14, ay = btnY + btnH / 2;
-    ctx.beginPath();
-    ctx.moveTo(ax - 10, ay); ctx.lineTo(ax, ay);
-    ctx.moveTo(ax - 4, ay - 3.5); ctx.lineTo(ax, ay);
-    ctx.moveTo(ax - 4, ay + 3.5); ctx.lineTo(ax, ay);
-    ctx.stroke();
-    ctx.lineCap = 'butt';
-    // Secondary (outlined)
-    ctx.strokeStyle = ink(0.35); ctx.lineWidth = 1;
-    roundRect(btnX + btnW + 10, btnY, btnW, btnH, btnH / 2); ctx.stroke();
-    ctx.fillStyle = ink(0.35);
-    ctx.fillRect(btnX + btnW + 10 + 14, btnY + btnH / 2 - 2, 30, 4);
-    ctx.globalAlpha = pageAlpha;
-  }
-
-  // === IMAGE PANEL (right) ===
-  const imgX = contentX + contentW * 0.55;
-  const imgY = contentY + frameH * 0.08;
-  const imgW = contentW * 0.45;
-  const imgH = frameH * 0.42;
-  const imgP = stage(p, 0.314, 0.072);
-  if (imgP > 0) {
-    ctx.globalAlpha = pageAlpha * easeOut(imgP);
-    // Gradient bg
-    const grad = ctx.createLinearGradient(imgX, imgY, imgX + imgW, imgY + imgH);
-    grad.addColorStop(0, isDark ? 'rgba(80,80,80,0.4)' : 'rgba(30,30,30,0.08)');
-    grad.addColorStop(1, isDark ? 'rgba(40,40,40,0.2)' : 'rgba(10,10,10,0.02)');
-    ctx.fillStyle = grad;
-    roundRect(imgX, imgY, imgW, imgH, 6); ctx.fill();
-    ctx.strokeStyle = ink(0.12);
-    roundRect(imgX, imgY, imgW, imgH, 6); ctx.stroke();
-
-    // Diagonal lines pattern
-    ctx.save();
-    roundRect(imgX, imgY, imgW, imgH, 6); ctx.clip();
-    ctx.strokeStyle = ink(0.06);
-    ctx.lineWidth = 1;
-    for (let i = -imgH; i < imgW; i += 14) {
-      ctx.beginPath();
-      ctx.moveTo(imgX + i, imgY);
-      ctx.lineTo(imgX + i + imgH, imgY + imgH);
-      ctx.stroke();
-    }
-    ctx.restore();
-
-    // Play button
-    const pbR = Math.min(imgW, imgH) * 0.13;
-    const pbX = imgX + imgW / 2, pbY = imgY + imgH / 2;
-    ctx.fillStyle = YELLOW;
-    ctx.beginPath(); ctx.arc(pbX, pbY, pbR, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = '#0a0a0a';
-    ctx.beginPath();
-    ctx.moveTo(pbX - pbR * 0.28, pbY - pbR * 0.48);
-    ctx.lineTo(pbX + pbR * 0.48, pbY);
-    ctx.lineTo(pbX - pbR * 0.28, pbY + pbR * 0.48);
-    ctx.closePath(); ctx.fill();
-
-    // Status badge (green dot + bar) top-right
-    const bX = imgX + imgW - 56, bY = imgY + 8;
-    ctx.fillStyle = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(10,10,10,0.06)';
-    roundRect(bX, bY, 48, 14, 7); ctx.fill();
-    ctx.fillStyle = '#22c55e';
-    ctx.beginPath(); ctx.arc(bX + 7, bY + 7, 3, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = ink(0.55);
-    ctx.fillRect(bX + 14, bY + 5, 28, 4);
-
-    ctx.globalAlpha = pageAlpha;
-  }
-
-  // === FEATURE CARDS ROW ===
-  const cardY = contentY + frameH * 0.58;
-  const cardH = frameH * 0.16;
-  const gap = 10;
-  const cardW = (contentW - gap * 2) / 3;
-  const featP = stage(p, 0.386, 0.100);
-  if (featP > 0) {
-    for (let i = 0; i < 3; i++) {
-      const cp = Math.min(1, Math.max(0, (featP - i * 0.15) / 0.6));
-      if (cp <= 0) continue;
-      ctx.globalAlpha = pageAlpha * easeOut(cp);
-      const cx = contentX + i * (cardW + gap);
-
-      // Card bg
-      ctx.fillStyle = isDark ? 'rgba(255,255,255,0.03)' : 'rgba(10,10,10,0.02)';
-      roundRect(cx, cardY, cardW, cardH, 6); ctx.fill();
-      ctx.strokeStyle = ink(0.1);
-      roundRect(cx, cardY, cardW, cardH, 6); ctx.stroke();
-
-      // Icon (middle card gets yellow)
-      const ir = 9;
-      const ix = cx + 14, iy = cardY + 14;
-      ctx.fillStyle = i === 1 ? YELLOW : (isDark ? 'rgba(255,255,255,0.08)' : 'rgba(10,10,10,0.07)');
-      ctx.beginPath(); ctx.arc(ix, iy, ir, 0, Math.PI * 2); ctx.fill();
-      // Check inside
-      ctx.strokeStyle = i === 1 ? '#0a0a0a' : ink(0.6);
-      ctx.lineWidth = 1.4; ctx.lineCap = 'round';
-      ctx.beginPath();
-      ctx.moveTo(ix - 3.5, iy);
-      ctx.lineTo(ix - 1, iy + 2.5);
-      ctx.lineTo(ix + 4, iy - 2.5);
-      ctx.stroke();
-      ctx.lineCap = 'butt';
-
-      // Label
-      ctx.fillStyle = ink(0.85);
-      ctx.fillRect(cx + 10, cardY + 30, cardW * 0.55, 5);
-      // Description lines
-      ctx.fillStyle = ink(0.28);
-      ctx.fillRect(cx + 10, cardY + 42, cardW - 20, 3);
-      ctx.fillRect(cx + 10, cardY + 49, cardW * 0.7, 3);
-    }
-    ctx.globalAlpha = pageAlpha;
-  }
-
-  // === STAR RATING ===
-  const starP = stage(p, 0.486, 0.071);
-  if (starP > 0) {
-    const sy = contentY + frameH * 0.80;
-    const sr = 5;
-    for (let i = 0; i < 5; i++) {
-      const sp = Math.min(1, Math.max(0, (starP - i * 0.12) / 0.7));
-      if (sp <= 0) continue;
-      ctx.globalAlpha = pageAlpha * easeOut(sp);
-      ctx.fillStyle = YELLOW;
-      drawStar(contentX + sr + i * (sr * 2.4), sy, sr, sr * 0.45);
-      ctx.fill();
-    }
-    ctx.globalAlpha = pageAlpha * easeOut(starP);
-    ctx.fillStyle = ink(0.45);
-    ctx.fillRect(contentX + 5 * sr * 2.4 + 8, sy - 2, 72, 4);
-    ctx.globalAlpha = pageAlpha;
-  }
-
-  // === CURSOR moving to CTA, then click ripple ===
-  const curP = stage(p, 0.557, 0.153);
-  const clickP = stage(p, 0.710, 0.030);
-  if (curP > 0 && p < 0.78) {
-    const startX = imgX + imgW / 2, startY = imgY + imgH / 2;
-    const endX = btnX + btnW - 18, endY = btnY + btnH / 2;
-    const cx = startX + (endX - startX) * easeInOut(curP);
-    const cy = startY + (endY - startY) * easeInOut(curP);
-
-    if (clickP > 0) {
-      const rr = 24 * clickP;
-      ctx.globalAlpha = pageAlpha * (1 - clickP) * 0.8;
-      ctx.strokeStyle = YELLOW;
-      ctx.lineWidth = 2;
-      ctx.beginPath(); ctx.arc(endX, endY, rr, 0, Math.PI * 2); ctx.stroke();
-    }
-
-    ctx.globalAlpha = pageAlpha;
-    ctx.save();
-    ctx.translate(cx, cy);
-    ctx.beginPath();
-    ctx.moveTo(0, 0);
-    ctx.lineTo(0, 15);
-    ctx.lineTo(4, 11);
-    ctx.lineTo(7, 17);
-    ctx.lineTo(9, 16);
-    ctx.lineTo(6, 10);
-    ctx.lineTo(11, 10);
-    ctx.closePath();
-    ctx.fillStyle = isDark ? '#f0f0eb' : '#0a0a0a';
+  segs.sort((a,b)=>a.d-b.d);
+  segs.forEach(seg=>{
+    if(seg.d<0)return;
+    const[rx,ry,rz]=rotXY(seg.p[0],seg.p[1],seg.p[2],aRX,aRY);
+    const[sx,sy,d]=proj(rx,ry,rz,fov,sc);
+    const r2=.092*sc*d; if(r2<.5)return;
+    const[nnrx,nnry]=rotXY(seg.nn[0],seg.nn[1],seg.nn[2],aRX,aRY);
+    const light=Math.max(0,nnrx*.6+nnry*.8+.3*.5);
+    const amb=.25,br=amb+light*(1-amb);
+    const ya=Math.max(0,light-.55)*2.8;
+    let bR,bG,bB,bA;
+    if(isDark){bR=Math.round(240*br);bG=Math.round(240*br);bB=Math.round(235*br);bA=.18+br*.15;}
+    else{bR=Math.round(10+br*55);bG=Math.round(10+br*55);bB=Math.round(10+br*50);bA=.82+br*.18;}
+    ctx.beginPath();ctx.arc(sx,sy,r2,0,Math.PI*2);
+    ctx.fillStyle=`rgba(${Math.round(bR+(255-bR)*ya*.5)},${Math.round(bG+(209-bG)*ya*.5)},${Math.round(bB+(0-bB)*ya*.3)},${bA})`;
     ctx.fill();
-    ctx.strokeStyle = isDark ? 'rgba(10,10,10,0.7)' : 'rgba(255,255,255,0.9)';
-    ctx.lineWidth = 1;
-    ctx.stroke();
-    ctx.restore();
-  }
-
-  // === YELLOW SWEEP ===
-  const sweepP = stage(p, 0.740, 0.120);
-  if (sweepP > 0 && sweepP < 1) {
-    const sweepX = fx + easeInOut(sweepP) * frameW;
-    const sweepW = frameW * 0.08;
-    const grad = ctx.createLinearGradient(sweepX - sweepW, 0, sweepX, 0);
-    grad.addColorStop(0, 'rgba(255,209,0,0)');
-    grad.addColorStop(0.7, 'rgba(255,209,0,0.25)');
-    grad.addColorStop(1, 'rgba(255,209,0,0.45)');
-    ctx.globalAlpha = pageAlpha;
-    ctx.fillStyle = grad;
-    ctx.save();
-    roundRect(fx, fy, frameW, frameH, radius); ctx.clip();
-    ctx.fillRect(sweepX - sweepW, fy, sweepW + 4, frameH);
-    ctx.restore();
-    ctx.strokeStyle = 'rgba(255,209,0,0.8)';
-    ctx.lineWidth = 1.5;
-    ctx.beginPath();
-    ctx.moveTo(sweepX, fy + 2); ctx.lineTo(sweepX, fy + frameH - 2);
-    ctx.stroke();
-  }
-
-  ctx.globalAlpha = 1;
+  });
+  rafId=requestAnimationFrame(draw);
 }
-
-function drawStar(cx, cy, outerR, innerR) {
-  ctx.beginPath();
-  for (let i = 0; i < 10; i++) {
-    const r = i % 2 === 0 ? outerR : innerR;
-    const a = (Math.PI / 5) * i - Math.PI / 2;
-    const x = cx + Math.cos(a) * r;
-    const y = cy + Math.sin(a) * r;
-    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-  }
-  ctx.closePath();
-}
-
-// Helper: normalized stage progress within [0,1]
-function stage(p, start, duration) {
-  return Math.min(1, Math.max(0, (p - start) / duration));
-}
-
-function roundRect(x, y, w, h, r, topOnly=false) {
-  r = Math.max(0, Math.min(r, w / 2, h / 2));
-  ctx.beginPath();
-  if (topOnly) {
-    ctx.moveTo(x + r, y);
-    ctx.lineTo(x + w - r, y);
-    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
-    ctx.lineTo(x + w, y + h);
-    ctx.lineTo(x, y + h);
-    ctx.lineTo(x, y + r);
-    ctx.quadraticCurveTo(x, y, x + r, y);
-  } else {
-    ctx.moveTo(x + r, y);
-    ctx.lineTo(x + w - r, y);
-    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
-    ctx.lineTo(x + w, y + h - r);
-    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-    ctx.lineTo(x + r, y + h);
-    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
-    ctx.lineTo(x, y + r);
-    ctx.quadraticCurveTo(x, y, x + r, y);
-  }
-  ctx.closePath();
-}
-
-let lastTime = performance.now();
-function draw(now) {
-  now = now || performance.now();
-  const dt = Math.min((now - lastTime) / 1000, 0.1);
-  lastTime = now;
-  t += dt;
-  const p = (t % CYCLE) / CYCLE;
-  ctx.clearRect(0, 0, W, H);
-  drawBrowserMockup(p);
-  rafId = requestAnimationFrame(draw);
-}
-function startDraw(){if(rafId==null){lastTime=performance.now();draw();}}
+function startDraw(){if(rafId==null)draw();}
 function stopDraw(){if(rafId!=null){cancelAnimationFrame(rafId);rafId=null;}}
 draw();
 const canvasObs=new IntersectionObserver(es=>es.forEach(x=>{canvasVisible=x.isIntersecting; canvasVisible?startDraw():stopDraw();}),{threshold:0});
