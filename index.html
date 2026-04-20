@@ -1118,14 +1118,15 @@ function resize(){
 resize();
 window.addEventListener('resize',resize,{passive:true});
 
-// Four distinct colour zones + one dark "shadow" blob that carves depth.
-// Keep radii smaller than max(W,H) so blobs stay as defined masses, not fog.
+// Blob field skewed to the right half so the right side carries real visual
+// weight. A shadow pocket sits over the headline area so text stays readable.
 const BLOBS=[
-  {cx:0.30,cy:0.35,r:0.38,col:[255,209,0],  a:0.55,fx:0.00012,fy:0.00018,ph:0.0}, // brand yellow
-  {cx:0.78,cy:0.28,r:0.34,col:[255,130,20], a:0.45,fx:0.00017,fy:0.00011,ph:1.7}, // warm amber
-  {cx:0.22,cy:0.80,r:0.30,col:[230,60,30],  a:0.32,fx:0.00014,fy:0.00021,ph:2.9}, // deep ember
-  {cx:0.85,cy:0.78,r:0.28,col:[255,235,140],a:0.35,fx:0.00020,fy:0.00010,ph:4.2}, // highlight
-  {cx:0.55,cy:0.50,r:0.42,col:[0,0,0],      a:0.55,fx:0.00009,fy:0.00015,ph:5.5}, // shadow pocket
+  {cx:0.70,cy:0.30,r:0.42,col:[255,209,0],  a:0.75,fx:0.00012,fy:0.00018,ph:0.0}, // brand yellow, bright
+  {cx:0.88,cy:0.65,r:0.38,col:[255,140,30], a:0.65,fx:0.00017,fy:0.00011,ph:1.7}, // warm amber
+  {cx:0.55,cy:0.75,r:0.35,col:[230,70,40],  a:0.55,fx:0.00014,fy:0.00021,ph:2.9}, // deep ember
+  {cx:0.78,cy:0.50,r:0.30,col:[255,235,140],a:0.55,fx:0.00020,fy:0.00010,ph:4.2}, // hot highlight
+  {cx:0.95,cy:0.20,r:0.28,col:[255,180,50], a:0.50,fx:0.00015,fy:0.00013,ph:0.8}, // corner glow
+  {cx:0.25,cy:0.45,r:0.50,col:[0,0,0],      a:0.80,fx:0.00009,fy:0.00015,ph:5.5}, // shadow over headline
 ];
 
 function draw(now){
