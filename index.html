@@ -1348,6 +1348,7 @@ function stage(p, start, duration) {
 }
 
 function roundRect(x, y, w, h, r, topOnly=false) {
+  r = Math.max(0, Math.min(r, w / 2, h / 2));
   ctx.beginPath();
   if (topOnly) {
     ctx.moveTo(x + r, y);
