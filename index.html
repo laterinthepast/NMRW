@@ -322,42 +322,43 @@ section{padding:7rem var(--side)}
 .obj-a{font-size:.88rem;line-height:1.75;color:var(--ink2);transition:color .35s}
 
 /* ── FORM SECTION ── */
-.form-section{background:#0a0a0a;padding:7rem var(--side)}
+.form-section{background:var(--bg2);padding:7rem var(--side);transition:background .35s}
 .form-layout{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
-.form-left h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,5rem);line-height:.93;color:#f0f0eb;margin-bottom:1.5rem}
+.form-left h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,5rem);line-height:.93;color:var(--ink);margin-bottom:1.5rem;transition:color .35s}
 .form-left h2 span{color:var(--yellow)}
-.form-left p{font-size:.9rem;line-height:1.8;color:rgba(255,255,255,.5);margin-bottom:2rem}
+.form-left p{font-size:.9rem;line-height:1.8;color:var(--ink2);margin-bottom:2rem}
 .form-trust{display:flex;flex-direction:column;gap:.8rem;margin-top:2rem}
-.form-trust-item{display:flex;align-items:center;gap:.8rem;font-size:.82rem;color:rgba(255,255,255,.5)}
+.form-trust-item{display:flex;align-items:center;gap:.8rem;font-size:.82rem;color:var(--ink2)}
 .form-trust-item svg{flex-shrink:0}
-.form-spots{display:flex;align-items:flex-start;gap:.8rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:1rem 1.2rem;margin-bottom:0}
+.form-spots{display:flex;align-items:flex-start;gap:.8rem;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1rem 1.2rem;margin-bottom:0;transition:background .35s,border-color .35s}
 .form-spots-dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0;margin-top:.3rem}
-.form-spots p{font-size:.8rem;color:rgba(255,255,255,.6);line-height:1.5}
-.form-spots strong{color:#f0f0eb;font-weight:600;display:block;margin-bottom:.2rem}
+.form-spots p{font-size:.8rem;color:var(--ink2);line-height:1.5}
+.form-spots strong{color:var(--ink);font-weight:600;display:block;margin-bottom:.2rem;transition:color .35s}
 
 /* THE FORM */
 .contact-form{display:flex;flex-direction:column;gap:.9rem}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
 .form-group{display:flex;flex-direction:column;gap:.4rem}
-.form-group label{font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5)}
-.form-input,.form-select,.form-textarea{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);color:#f0f0eb;padding:.85rem 1rem;border-radius:6px;font-family:'Inter',sans-serif;font-size:.88rem;outline:none;transition:border-color .2s,background .2s;width:100%}
-.form-input::placeholder,.form-textarea::placeholder{color:rgba(255,255,255,.25)}
-.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--yellow);background:rgba(255,255,255,.1)}
-.form-select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.4)' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;background-color:rgba(255,255,255,.07);padding-right:2.5rem}
-.form-select option{background:#1a1a1a;color:#f0f0eb}
+.form-group label{font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)}
+/* 16px font-size prevents iOS from zooming on focus */
+.form-input,.form-select,.form-textarea{background:var(--input-bg);border:1.5px solid var(--input-border);color:var(--ink);padding:.85rem 1rem;border-radius:6px;font-family:'Inter',sans-serif;font-size:1rem;outline:none;transition:border-color .2s,background .2s,color .35s;width:100%}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--ink3)}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--yellow)}
+.form-select{cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem}
+.form-select option{background:var(--card);color:var(--ink)}
 .form-textarea{resize:vertical;min-height:110px}
-.form-submit{background:var(--yellow);color:var(--ink);border:none;padding:1.1rem;border-radius:999px;font-family:'Inter',sans-serif;font-size:.9rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;transition:background .2s,transform .15s;display:flex;align-items:center;justify-content:center;gap:.6rem;margin-top:.4rem}
+.form-submit{background:var(--yellow);color:#0a0a0a;border:none;padding:1.1rem;border-radius:999px;font-family:'Inter',sans-serif;font-size:.9rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;transition:background .2s,transform .15s;display:flex;align-items:center;justify-content:center;gap:.6rem;margin-top:.4rem}
 .form-submit:hover{background:var(--yellow-dark);transform:translateY(-2px)}
-.form-small{font-size:.72rem;color:rgba(255,255,255,.3);text-align:center;display:flex;align-items:center;justify-content:center;gap:.4rem}
-.form-small svg{color:rgba(255,255,255,.3)}
+.form-small{font-size:.72rem;color:var(--ink3);text-align:center;display:flex;align-items:center;justify-content:center;gap:.4rem}
+.form-small svg{color:var(--ink3)}
 .form-success{display:none;text-align:center;padding:3rem 2rem}
-.form-success h3{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:#f0f0eb;margin-bottom:.8rem}
-.form-success p{font-size:.9rem;color:rgba(255,255,255,.5);line-height:1.7}
+.form-success h3{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--ink);margin-bottom:.8rem;transition:color .35s}
+.form-success p{font-size:.9rem;color:var(--ink2);line-height:1.7}
 .form-success .success-icon{font-size:3rem;margin-bottom:1rem}
 
 /* FOOTER */
-footer{background:var(--footer-bg);color:var(--footer-txt);padding:2rem var(--side);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.74rem;transition:background .35s}
-.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:rgba(255,255,255,.2);letter-spacing:.04em}
+footer{background:var(--footer-bg);color:var(--footer-txt);padding:2rem var(--side);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.74rem;transition:background .35s,color .35s}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--footer-txt);letter-spacing:.04em;transition:color .35s}
 .footer-logo span{color:var(--yellow)}
 .footer-links{display:flex;gap:2rem}
 footer a{color:var(--footer-txt);text-decoration:none;transition:color .2s}
@@ -626,7 +627,7 @@ footer a:hover{color:var(--yellow)}
       </div>
     </div>
   </div>
-  <p style="margin-top:1.5rem;font-size:.72rem;color:rgba(255,255,255,.25);text-align:center">Domain & hosting not included (~£80–£150/yr — we set it all up for you). Not sure which? <a href="#form" style="color:var(--yellow)">Just ask, we'll advise.</a></p>
+  <p style="margin-top:1.5rem;font-size:.72rem;color:var(--ink3);text-align:center">Domain & hosting not included (~£80–£150/yr — we set it all up for you). Not sure which? <a href="#form" style="color:var(--yellow)">Just ask, we'll advise.</a></p>
 </section>
 
 <!-- SOCIAL PROOF -->
