@@ -266,6 +266,12 @@ section{padding:7rem var(--side)}
 .pkg.featured .pkg-btn:hover{background:rgba(0,0,0,.8)}
 .pkg-guarantee{font-size:.7rem;color:var(--ink3);display:flex;align-items:center;gap:.4rem;justify-content:center}
 .pkg.featured .pkg-guarantee{color:rgba(0,0,0,.4)}
+.free-hosting-callout{margin:2.5rem auto 0;max-width:720px;background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:1.8rem 2rem;display:flex;flex-direction:column;align-items:center;text-align:center;gap:.8rem;transition:background .35s,border-color .35s}
+.fhc-badge{display:inline-block;background:var(--yellow);color:#0a0a0a;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .9rem;border-radius:999px}
+.fhc-headline{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.7rem,3.5vw,2.6rem);line-height:1;color:var(--ink);letter-spacing:-.005em;transition:color .35s}
+.fhc-headline .fhc-highlight{color:var(--yellow)}
+.fhc-desc{font-size:.86rem;color:var(--ink2);line-height:1.6;max-width:540px;margin:0}
+.fhc-desc strong{color:var(--ink);font-weight:600;transition:color .35s}
 
 /* ── PROCESS ── */
 .process{background:var(--bg2);transition:background .35s}
@@ -521,6 +527,7 @@ footer a:hover{color:var(--yellow)}
 <div class="marquee-wrap">
   <div class="marquee-track">
     <div class="marquee-item">Fixed Prices <span class="marquee-dot"></span></div>
+    <div class="marquee-item">Free Hosting <span class="marquee-dot"></span></div>
     <div class="marquee-item">3-Day Builds <span class="marquee-dot"></span></div>
     <div class="marquee-item">Taking New Clients <span class="marquee-dot"></span></div>
     <div class="marquee-item">No Jargon <span class="marquee-dot"></span></div>
@@ -529,6 +536,7 @@ footer a:hover{color:var(--yellow)}
     <div class="marquee-item">Mobile First <span class="marquee-dot"></span></div>
     <div class="marquee-item">SEO Ready <span class="marquee-dot"></span></div>
     <div class="marquee-item">Fixed Prices <span class="marquee-dot"></span></div>
+    <div class="marquee-item">Free Hosting <span class="marquee-dot"></span></div>
     <div class="marquee-item">3-Day Builds <span class="marquee-dot"></span></div>
     <div class="marquee-item">Taking New Clients <span class="marquee-dot"></span></div>
     <div class="marquee-item">No Jargon <span class="marquee-dot"></span></div>
@@ -627,7 +635,11 @@ footer a:hover{color:var(--yellow)}
       </div>
     </div>
   </div>
-  <p style="margin-top:1.5rem;font-size:.72rem;color:var(--ink3);text-align:center">Domain & hosting not included (~£80–£150/yr — we set it all up for you). Not sure which? <a href="#form" style="color:var(--yellow)">Just ask, we'll advise.</a></p>
+  <div class="free-hosting-callout">
+    <div class="fhc-badge">No hidden fees</div>
+    <div class="fhc-headline">Don't pay for hosting. <span class="fhc-highlight">It's free.</span></div>
+    <p class="fhc-desc">We host simple websites on a free plan (Vercel, Netlify or Cloudflare Pages). If you need a new domain it's around <strong>£10/yr</strong> — we'll advise and set it all up. <a href="#form" style="color:var(--yellow)">Just ask.</a></p>
+  </div>
 </section>
 
 <!-- SOCIAL PROOF -->
