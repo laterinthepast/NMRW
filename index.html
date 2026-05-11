@@ -157,7 +157,7 @@ nav.scrolled{background:var(--nav-bg);backdrop-filter:blur(16px);-webkit-backdro
 .theme-toggle{width:40px;height:21px;border-radius:999px;background:var(--ink);border:none;cursor:pointer;position:relative;transition:background .35s;flex-shrink:0}
 .toggle-thumb{position:absolute;top:3px;left:3px;width:15px;height:15px;border-radius:50%;background:var(--yellow);transition:transform .3s cubic-bezier(.4,0,.2,1)}
 [data-theme="dark"] .toggle-thumb{transform:translateX(19px)}
-.toggle-icon{font-size:.6rem;position:absolute;top:50%;transform:translateY(-50%);pointer-events:none;color:rgba(255,255,255,.5)}
+.toggle-icon{font-size:.6rem;position:absolute;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--bg);opacity:.55}
 .toggle-icon.sun{right:4px}.toggle-icon.moon{left:4px}
 .hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
 .hamburger span{display:block;width:22px;height:1.5px;background:var(--ink);border-radius:2px;transition:transform .3s,opacity .3s}
@@ -569,7 +569,7 @@ footer a:hover{color:var(--yellow)}
   <div class="pkg-header">
     <div>
       <div class="section-label">Pricing</div>
-      <h2 class="section-title reveal" style="color:#f0f0eb">THREE PACKAGES.<br>ZERO SURPRISES.</h2>
+      <h2 class="section-title reveal">THREE PACKAGES.<br>ZERO SURPRISES.</h2>
     </div>
     <p class="reveal">Every package includes design, build, testing, SEO setup, and launch. No upsells, no hidden extras.</p>
   </div>
@@ -1072,14 +1072,14 @@ footer a:hover{color:var(--yellow)}
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
           <div class="form-small">
-            <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><rect x="1" y="4" width="9" height="6.5" rx="1" stroke="rgba(255,255,255,0.3)" stroke-width="1.2"/><path d="M3.5 4V3a2 2 0 014 0v1" stroke="rgba(255,255,255,0.3)" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><rect x="1" y="4" width="9" height="6.5" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M3.5 4V3a2 2 0 014 0v1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
             Your info is private — we never share it
           </div>
         </form>
       </div>
       <div class="form-success" id="form-success">
         <div class="success-icon">🎉</div>
-        <h3 style="color:#f0f0eb">We've got your message!</h3>
+        <h3>We've got your message!</h3>
         <p>We'll be in touch within 24 hours — usually much sooner. Check your inbox (and spam, just in case).</p>
       </div>
     </div>
