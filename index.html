@@ -125,15 +125,31 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap"></noscript>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-[data-theme="light"]{--bg:#f5f5f0;--bg2:#eeede8;--ink:#0a0a0a;--ink2:#666;--ink3:#999;--border:rgba(10,10,10,0.15);--card:#fff;--nav-bg:rgba(245,245,240,0.97);--footer-bg:#eeede8;--footer-txt:rgba(10,10,10,0.55);--input-bg:#fff;--input-border:rgba(10,10,10,0.2)}
-[data-theme="dark"]{--bg:#0e0e0e;--bg2:#161616;--ink:#f0f0eb;--ink2:#888;--ink3:#555;--border:rgba(240,240,235,0.12);--card:#181818;--nav-bg:rgba(14,14,14,0.97);--footer-bg:#050505;--footer-txt:rgba(255,255,255,.35);--input-bg:#222;--input-border:rgba(240,240,235,0.15)}
+[data-theme="light"]{--bg:#f5f5f0;--bg2:#eeede8;--ink:#0a0a0a;--ink2:#525252;--ink3:#6b6b6b;--border:rgba(10,10,10,0.15);--card:#fff;--nav-bg:rgba(245,245,240,0.97);--footer-bg:#eeede8;--footer-txt:rgba(10,10,10,0.7);--input-bg:#fff;--input-border:rgba(10,10,10,0.2)}
+[data-theme="dark"]{--bg:#0e0e0e;--bg2:#161616;--ink:#f0f0eb;--ink2:#a3a3a3;--ink3:#7a7a7a;--border:rgba(240,240,235,0.12);--card:#181818;--nav-bg:rgba(14,14,14,0.97);--footer-bg:#050505;--footer-txt:rgba(255,255,255,.55);--input-bg:#222;--input-border:rgba(240,240,235,0.15)}
 :root{--yellow:#FFD100;--yellow-dark:#e6bc00;--green:#22c55e;--side:11vw}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;overflow-x:hidden;transition:background .35s,color .35s}
-@media(hover:hover){body{cursor:none}}
+body.cursor-custom{cursor:none}
+
+/* A11Y — skip link, focus, reduced motion */
+.skip-link{position:absolute;top:-100px;left:0;background:var(--ink);color:var(--bg);padding:.85rem 1.3rem;text-decoration:none;font-weight:600;font-size:.85rem;z-index:1000;border-radius:0 0 6px 0;transition:top .15s}
+.skip-link:focus{top:0;outline:2px solid var(--yellow);outline-offset:-2px}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px;border-radius:4px}
+.btn-primary:focus-visible,.pkg-btn:focus-visible,.form-submit:focus-visible,.reviews-cta:focus-visible,.sticky-cta a:focus-visible,.nav-cta:focus-visible{outline-offset:3px}
+[data-theme="dark"] :focus-visible{outline-color:var(--yellow)}
+.form-input:focus-visible,.form-select:focus-visible,.form-textarea:focus-visible{outline:2px solid var(--ink);outline-offset:1px}
+[data-theme="dark"] .form-input:focus-visible,[data-theme="dark"] .form-select:focus-visible,[data-theme="dark"] .form-textarea:focus-visible{outline-color:var(--yellow)}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  html{scroll-behavior:auto}
+  .reveal{opacity:1!important;transform:none!important}
+}
 
 /* CURSOR */
 #cursor,#cursor-ring{display:none}
@@ -188,7 +204,7 @@ nav.scrolled{background:var(--nav-bg);backdrop-filter:blur(16px);-webkit-backdro
 .hero-eyebrow::before{content:'';width:24px;height:1.5px;background:var(--yellow);display:block;flex-shrink:0}
 .hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,14vw,7.2rem);line-height:.91;letter-spacing:-.01em}
 .hero-title .outline{-webkit-text-stroke:2px var(--ink);color:transparent;display:block;transition:-webkit-text-stroke .35s}
-.hero-title .accent{color:var(--yellow);-webkit-text-stroke:0}
+.hero-title .accent{color:var(--yellow);-webkit-text-stroke:1.5px var(--ink)}
 .hero-desc{font-size:1rem;line-height:1.65;color:var(--ink2);max-width:540px;font-weight:300;margin:1.2rem auto .8rem}
 
 /* Risk reversal line */
@@ -242,18 +258,18 @@ section{padding:7rem var(--side)}
 .pkg.featured:hover{background:var(--yellow-dark)}
 .pkg-badge{display:inline-block;background:var(--yellow);color:var(--ink);font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .8rem;border-radius:999px;margin-bottom:1rem}
 .pkg.featured .pkg-badge{background:#0a0a0a;color:var(--yellow)}
-.pkg-name{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;line-height:1;margin-bottom:.3rem;color:var(--ink);transition:color .35s}
+.pkg-name{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;line-height:1;margin-bottom:.3rem;color:var(--ink);transition:color .35s;font-weight:400;letter-spacing:.005em}
 .pkg.featured .pkg-name{color:#0a0a0a}
 .pkg-tagline{font-size:.76rem;color:var(--ink3);margin-bottom:1.8rem;text-transform:uppercase;letter-spacing:.05em}
-.pkg.featured .pkg-tagline{color:rgba(0,0,0,.5)}
+.pkg.featured .pkg-tagline{color:rgba(0,0,0,.72)}
 .pkg-price-row{display:flex;align-items:baseline;gap:.4rem;margin-bottom:.3rem}
 .pkg-from{font-size:.72rem;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em}
-.pkg.featured .pkg-from{color:rgba(0,0,0,.4)}
+.pkg.featured .pkg-from{color:rgba(0,0,0,.7)}
 .pkg-price{font-family:'Bebas Neue',sans-serif;font-size:5rem;line-height:1;color:var(--ink);transition:color .35s}
 .pkg.entry .pkg-price{color:var(--yellow)}
 .pkg.featured .pkg-price{color:#0a0a0a}
 .pkg-timeline{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:2rem;padding-bottom:1.8rem;border-bottom:1px solid var(--border);transition:color .35s,border-color .35s}
-.pkg.featured .pkg-timeline{color:rgba(0,0,0,.4);border-color:rgba(0,0,0,.12)}
+.pkg.featured .pkg-timeline{color:rgba(0,0,0,.7);border-color:rgba(0,0,0,.18)}
 .pkg-features{list-style:none;display:flex;flex-direction:column;gap:.7rem;margin-bottom:2.2rem}
 .pkg-features li{font-size:.86rem;display:flex;gap:.7rem;color:var(--ink2);line-height:1.5}
 .pkg.featured .pkg-features li{color:rgba(0,0,0,.65)}
@@ -265,13 +281,15 @@ section{padding:7rem var(--side)}
 .pkg.featured .pkg-btn{background:#0a0a0a;color:#f0f0eb;border-color:#0a0a0a}
 .pkg.featured .pkg-btn:hover{background:rgba(0,0,0,.8)}
 .pkg-guarantee{font-size:.7rem;color:var(--ink3);display:flex;align-items:center;gap:.4rem;justify-content:center}
-.pkg.featured .pkg-guarantee{color:rgba(0,0,0,.4)}
+.pkg.featured .pkg-guarantee{color:rgba(0,0,0,.7)}
 .free-hosting-callout{margin:2.5rem auto 0;max-width:720px;background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:1.8rem 2rem;display:flex;flex-direction:column;align-items:center;text-align:center;gap:.8rem;transition:background .35s,border-color .35s}
 .fhc-badge{display:inline-block;background:var(--yellow);color:#0a0a0a;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .9rem;border-radius:999px}
 .fhc-headline{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.7rem,3.5vw,2.6rem);line-height:1;color:var(--ink);letter-spacing:-.005em;transition:color .35s}
-.fhc-headline .fhc-highlight{color:var(--yellow)}
+.fhc-headline .fhc-highlight{background:var(--yellow);color:#0a0a0a;padding:.05em .25em;border-radius:4px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 .fhc-desc{font-size:.86rem;color:var(--ink2);line-height:1.6;max-width:540px;margin:0}
 .fhc-desc strong{color:var(--ink);font-weight:600;transition:color .35s}
+.fhc-link{color:var(--ink);font-weight:600;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:2px}
+.fhc-link:hover{color:var(--yellow-dark);text-decoration-color:var(--yellow-dark)}
 
 /* ── PROCESS ── */
 .process{background:var(--bg2);transition:background .35s}
@@ -334,7 +352,7 @@ section{padding:7rem var(--side)}
 /* ── SOCIAL PROOF / PORTFOLIO ── */
 .proof{background:var(--bg);transition:background .35s}
 .proof-text{font-size:.9rem;line-height:1.75;font-style:italic;margin-bottom:1.5rem;color:var(--ink);transition:color .35s}
-.proof-text strong{font-style:normal;color:var(--yellow)}
+.proof-text strong{font-style:normal;color:var(--ink);background:var(--yellow);padding:.05em .35em;border-radius:3px}
 
 /* ── OBJECTION HANDLER ── */
 .objections{background:var(--bg2);transition:background .35s}
@@ -416,11 +434,13 @@ footer a:hover{color:var(--yellow)}
 </head>
 <body>
 
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div id="cursor" aria-hidden="true"></div>
+<div id="cursor-ring" aria-hidden="true"></div>
 
 <!-- ANNOUNCEMENT BAR -->
-<div class="announce">
+<div class="announce" role="status">
   <span class="announce-dot"></span>
   <span id="spots-announce">Now accepting new clients — <span>get your free quote today</span></span>
 </div>
@@ -434,8 +454,8 @@ footer a:hover{color:var(--yellow)}
 </div>
 
 <!-- NAV -->
-<nav id="navbar">
-  <a href="#" class="nav-logo">No More<span>Rubbish</span>Websites</a>
+<nav id="navbar" aria-label="Primary">
+  <a href="#main" class="nav-logo" aria-label="No More Rubbish Websites — home">No More<span>Rubbish</span>Websites</a>
   <ul class="nav-links">
     <li><a href="#packages">Pricing</a></li>
     <li><a href="#reviews">Reviews</a></li>
@@ -454,6 +474,8 @@ footer a:hover{color:var(--yellow)}
   </div>
 </nav>
 
+<main id="main">
+
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
@@ -471,7 +493,7 @@ footer a:hover{color:var(--yellow)}
     <p class="hero-desc reveal">Affordable, professional web design for small UK businesses. Mobile-friendly websites from £299, built in as little as 3 days. Fixed prices, no jargon, and you own everything — no monthly fees, no lock-in.</p>
 
     <div class="risk-line reveal">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="7" fill="#22c55e"/><path d="M4 7l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="7" fill="#22c55e"/><path d="M4 7l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Free quote · No obligation · Reply within 24 hours
     </div>
 
@@ -479,62 +501,62 @@ footer a:hover{color:var(--yellow)}
     <div class="hero-cta-block reveal">
       <a href="#form" class="btn-primary">
         Get My Free Quote
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
       <div class="cta-micro">
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="6" fill="#22c55e"/><path d="M3 6l2 2 4-4" stroke="white" stroke-width="1.2" stroke-linecap="round"/></svg>
+        <svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="6" fill="#22c55e"/><path d="M3 6l2 2 4-4" stroke="white" stroke-width="1.2" stroke-linecap="round"/></svg>
         Takes 60 seconds · No card required
       </div>
     </div>
 
     <div class="hero-tags reveal">
       <div class="tag">
-        <svg viewBox="0 0 10 10" fill="currentColor"><circle cx="5" cy="5" r="5"/></svg>
+        <svg aria-hidden="true" viewBox="0 0 10 10" fill="currentColor"><circle cx="5" cy="5" r="5"/></svg>
         From £299
       </div>
       <div class="tag">
-        <svg viewBox="0 0 10 10" fill="currentColor"><circle cx="5" cy="5" r="5"/></svg>
+        <svg aria-hidden="true" viewBox="0 0 10 10" fill="currentColor"><circle cx="5" cy="5" r="5"/></svg>
         3-day turnaround
       </div>
       <div class="tag">
-        <svg viewBox="0 0 10 10" fill="currentColor"><circle cx="5" cy="5" r="5"/></svg>
+        <svg aria-hidden="true" viewBox="0 0 10 10" fill="currentColor"><circle cx="5" cy="5" r="5"/></svg>
         You own it
       </div>
       <div class="tag">
-        <svg viewBox="0 0 10 10" fill="currentColor"><circle cx="5" cy="5" r="5"/></svg>
+        <svg aria-hidden="true" viewBox="0 0 10 10" fill="currentColor"><circle cx="5" cy="5" r="5"/></svg>
         Fixed price
       </div>
     </div>
   </div>
 
-  <canvas id="hero-canvas"></canvas>
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
 </section>
 
 <!-- TRUST BAR -->
 <div class="trust-bar">
   <div class="trust-items">
     <div class="trust-item">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#FFD100"/><path d="M5 8l2 2 4-4" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#FFD100"/><path d="M5 8l2 2 4-4" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Fixed prices — no surprises
     </div>
     <div class="trust-divider"></div>
     <div class="trust-item">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#FFD100"/><path d="M5 8l2 2 4-4" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#FFD100"/><path d="M5 8l2 2 4-4" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Live in as little as 3 days
     </div>
     <div class="trust-divider"></div>
     <div class="trust-item">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#FFD100"/><path d="M5 8l2 2 4-4" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#FFD100"/><path d="M5 8l2 2 4-4" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       You own 100% of your site
     </div>
     <div class="trust-divider"></div>
     <div class="trust-item">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#FFD100"/><path d="M5 8l2 2 4-4" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#FFD100"/><path d="M5 8l2 2 4-4" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Mobile-first & SEO-ready
     </div>
     <div class="trust-divider"></div>
     <div class="trust-item">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#FFD100"/><path d="M5 8l2 2 4-4" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#FFD100"/><path d="M5 8l2 2 4-4" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       30-day aftercare included
     </div>
   </div>
@@ -576,7 +598,7 @@ footer a:hover{color:var(--yellow)}
   <div class="pkg-grid">
     <div class="pkg entry reveal">
       <div class="pkg-badge">Landing</div>
-      <div class="pkg-name">Just Online</div>
+      <h3 class="pkg-name">Just Online</h3>
       <div class="pkg-tagline">A simple shop window for very small businesses</div>
       <div class="pkg-price-row">
         <span class="pkg-from">From</span>
@@ -594,14 +616,14 @@ footer a:hover{color:var(--yellow)}
       <div class="pkg-cta">
         <button class="pkg-btn" onclick="selectPackage('Landing — £299')">Get Started Free Quote</button>
         <div class="pkg-guarantee">
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="5" fill="#22c55e"/><path d="M3 5l1.5 1.5 3-3" stroke="white" stroke-width="1" stroke-linecap="round"/></svg>
+          <svg aria-hidden="true" width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="5" fill="#22c55e"/><path d="M3 5l1.5 1.5 3-3" stroke="white" stroke-width="1" stroke-linecap="round"/></svg>
           Free quote · No commitment
         </div>
       </div>
     </div>
     <div class="pkg reveal d1">
       <div class="pkg-badge">Starter</div>
-      <div class="pkg-name">Get Online</div>
+      <h3 class="pkg-name">Get Online</h3>
       <div class="pkg-tagline">Perfect for your first proper website</div>
       <div class="pkg-price-row">
         <span class="pkg-from">From</span>
@@ -620,14 +642,14 @@ footer a:hover{color:var(--yellow)}
       <div class="pkg-cta">
         <button class="pkg-btn" onclick="selectPackage('Starter — £499')">Get Started Free Quote</button>
         <div class="pkg-guarantee">
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="5" fill="#22c55e"/><path d="M3 5l1.5 1.5 3-3" stroke="white" stroke-width="1" stroke-linecap="round"/></svg>
+          <svg aria-hidden="true" width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="5" fill="#22c55e"/><path d="M3 5l1.5 1.5 3-3" stroke="white" stroke-width="1" stroke-linecap="round"/></svg>
           Free quote · No commitment
         </div>
       </div>
     </div>
     <div class="pkg featured reveal d2">
       <div class="pkg-badge">Most Popular</div>
-      <div class="pkg-name">Grow Online</div>
+      <h3 class="pkg-name">Grow Online</h3>
       <div class="pkg-tagline">For businesses ready to be found</div>
       <div class="pkg-price-row">
         <span class="pkg-from">From</span>
@@ -646,7 +668,7 @@ footer a:hover{color:var(--yellow)}
       <div class="pkg-cta">
         <button class="pkg-btn" onclick="selectPackage('Professional — £999')">Get Started Free Quote</button>
         <div class="pkg-guarantee">
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="5" fill="rgba(0,0,0,0.4)"/><path d="M3 5l1.5 1.5 3-3" stroke="rgba(0,0,0,0.7)" stroke-width="1" stroke-linecap="round"/></svg>
+          <svg aria-hidden="true" width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="5" fill="rgba(0,0,0,0.4)"/><path d="M3 5l1.5 1.5 3-3" stroke="rgba(0,0,0,0.7)" stroke-width="1" stroke-linecap="round"/></svg>
           Free quote · No commitment
         </div>
       </div>
@@ -655,7 +677,7 @@ footer a:hover{color:var(--yellow)}
   <div class="free-hosting-callout">
     <div class="fhc-badge">No hidden fees</div>
     <div class="fhc-headline">Don't pay for hosting. <span class="fhc-highlight">It's free.</span></div>
-    <p class="fhc-desc">We host simple websites on a free plan (Vercel, Netlify or Cloudflare Pages). If you need a new domain it's around <strong>£10/yr</strong> — we'll advise and set it all up. <a href="#form" style="color:var(--yellow)">Just ask.</a></p>
+    <p class="fhc-desc">We host simple websites on a free plan (Vercel, Netlify or Cloudflare Pages). If you need a new domain it's around <strong>£10/yr</strong> — we'll advise and set it all up. <a href="#form" class="fhc-link">Just ask.</a></p>
   </div>
 </section>
 
@@ -671,7 +693,7 @@ footer a:hover{color:var(--yellow)}
         <div class="pf-url">okolitzastudio.com</div>
       </div>
       <div class="pf-shot">
-        <img src="/portfolio/okolitza.png" alt="Okolitza Studio website preview" loading="lazy">
+        <img src="/portfolio/okolitza.webp" width="1000" height="625" decoding="async" alt="Okolitza Studio website preview" loading="lazy">
       </div>
       <div class="pf-body">
         <span class="pf-tag">Project · Recording Studio</span>
@@ -679,7 +701,7 @@ footer a:hover{color:var(--yellow)}
         <p class="pf-desc">Recording &amp; mixing studio. Atmospheric gallery-led site showcasing the room, gear, and sessions.</p>
         <a href="https://okolitzastudio.com" class="pf-link" target="_blank" rel="noopener">
           View Project
-          <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3M9 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg aria-hidden="true" width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3M9 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
     </div>
@@ -690,7 +712,7 @@ footer a:hover{color:var(--yellow)}
         <div class="pf-url">l8pro.co.uk</div>
       </div>
       <div class="pf-shot">
-        <img src="/portfolio/l8.png" alt="L8 Pro website preview" loading="lazy">
+        <img src="/portfolio/l8.webp" width="1000" height="625" decoding="async" alt="L8 Pro website preview" loading="lazy">
       </div>
       <div class="pf-body">
         <span class="pf-tag">Project · SaaS</span>
@@ -698,7 +720,7 @@ footer a:hover{color:var(--yellow)}
         <p class="pf-desc">Late-delivery compensation platform. Clean conversion-focused landing with instant quote flow.</p>
         <a href="https://www.l8pro.co.uk/" class="pf-link" target="_blank" rel="noopener">
           View Project
-          <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3M9 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg aria-hidden="true" width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3M9 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
     </div>
@@ -709,7 +731,7 @@ footer a:hover{color:var(--yellow)}
         <div class="pf-url">scoutyourlead.com</div>
       </div>
       <div class="pf-shot">
-        <img src="/portfolio/scout.png" alt="Scout Your Lead website preview" loading="lazy">
+        <img src="/portfolio/scout.webp" width="1000" height="625" decoding="async" alt="Scout Your Lead website preview" loading="lazy">
       </div>
       <div class="pf-body">
         <span class="pf-tag">Project · B2B Lead Gen</span>
@@ -717,7 +739,7 @@ footer a:hover{color:var(--yellow)}
         <p class="pf-desc">B2B lead discovery tool. Feature-led landing page with clear pricing and a signup-ready CTA.</p>
         <a href="https://www.scoutyourlead.com/" class="pf-link" target="_blank" rel="noopener">
           View Project
-          <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3M9 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg aria-hidden="true" width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3M9 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
     </div>
@@ -728,7 +750,7 @@ footer a:hover{color:var(--yellow)}
         <div class="pf-url">bloom-and-co.co.uk</div>
       </div>
       <div class="pf-shot">
-        <img src="/portfolio/bloom.png" alt="Bloom & Co. florist website preview" loading="lazy">
+        <img src="/portfolio/bloom.webp" width="1000" height="625" decoding="async" alt="Bloom & Co. florist website preview" loading="lazy">
       </div>
       <div class="pf-body">
         <span class="pf-tag">Template · Florist</span>
@@ -736,7 +758,7 @@ footer a:hover{color:var(--yellow)}
         <p class="pf-desc">Independent Edinburgh florist. Same-day delivery, wedding packages, and a clean order form.</p>
         <a href="https://nmrw-qsu6.vercel.app" class="pf-link" target="_blank" rel="noopener">
           View Template
-          <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3M9 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg aria-hidden="true" width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3M9 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
     </div>
@@ -747,7 +769,7 @@ footer a:hover{color:var(--yellow)}
         <div class="pf-url">anchorandcleaver.co.uk</div>
       </div>
       <div class="pf-shot">
-        <img src="/portfolio/anchor.png" alt="The Anchor & Cleaver gastropub website preview" loading="lazy">
+        <img src="/portfolio/anchor.webp" width="1000" height="625" decoding="async" alt="The Anchor & Cleaver gastropub website preview" loading="lazy">
       </div>
       <div class="pf-body">
         <span class="pf-tag">Template · Hospitality</span>
@@ -755,7 +777,7 @@ footer a:hover{color:var(--yellow)}
         <p class="pf-desc">Glasgow gastropub. Menu, events, table reservations and a story-led brand presence.</p>
         <a href="https://nmrw-4tmo.vercel.app" class="pf-link" target="_blank" rel="noopener">
           View Template
-          <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3M9 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg aria-hidden="true" width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3M9 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
     </div>
@@ -766,7 +788,7 @@ footer a:hover{color:var(--yellow)}
         <div class="pf-url">flowfix-plumbing.co.uk</div>
       </div>
       <div class="pf-shot">
-        <img src="/portfolio/flowfix.png" alt="FlowFix Plumbing website preview" loading="lazy">
+        <img src="/portfolio/flowfix.webp" width="1000" height="625" decoding="async" alt="FlowFix Plumbing website preview" loading="lazy">
       </div>
       <div class="pf-body">
         <span class="pf-tag">Template · Trades &amp; Services</span>
@@ -774,7 +796,7 @@ footer a:hover{color:var(--yellow)}
         <p class="pf-desc">Edinburgh emergency plumber. Click-to-call hero, service grid, and trust signals built in.</p>
         <a href="https://nmrw-4hfz.vercel.app" class="pf-link" target="_blank" rel="noopener">
           View Template
-          <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3M9 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg aria-hidden="true" width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3M9 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
     </div>
@@ -785,7 +807,7 @@ footer a:hover{color:var(--yellow)}
         <div class="pf-url">ironworkstrength.co.uk</div>
       </div>
       <div class="pf-shot">
-        <img src="/portfolio/ironwork.png" alt="Ironwork Strength gym website preview" loading="lazy">
+        <img src="/portfolio/ironwork.webp" width="1000" height="625" decoding="async" alt="Ironwork Strength gym website preview" loading="lazy">
       </div>
       <div class="pf-body">
         <span class="pf-tag">Template · Health &amp; Fitness</span>
@@ -793,7 +815,7 @@ footer a:hover{color:var(--yellow)}
         <p class="pf-desc">Glasgow independent gym. Membership tiers, PT profiles and a class timetable that converts.</p>
         <a href="https://nmrw-m26h.vercel.app" class="pf-link" target="_blank" rel="noopener">
           View Template
-          <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3M9 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg aria-hidden="true" width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3M9 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
     </div>
@@ -804,7 +826,7 @@ footer a:hover{color:var(--yellow)}
         <div class="pf-url">maisoneclat.co.uk</div>
       </div>
       <div class="pf-shot">
-        <img src="/portfolio/maison.png" alt="Maison Éclat salon website preview" loading="lazy">
+        <img src="/portfolio/maison.webp" width="1000" height="625" decoding="async" alt="Maison Éclat salon website preview" loading="lazy">
       </div>
       <div class="pf-body">
         <span class="pf-tag">Template · Hair &amp; Beauty</span>
@@ -812,7 +834,7 @@ footer a:hover{color:var(--yellow)}
         <p class="pf-desc">Boutique Glasgow salon. Editorial layout, online booking, and a treatment menu that sells.</p>
         <a href="https://nmrw-b6e8.vercel.app" class="pf-link" target="_blank" rel="noopener">
           View Template
-          <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3M9 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg aria-hidden="true" width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3M9 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
     </div>
@@ -823,7 +845,7 @@ footer a:hover{color:var(--yellow)}
         <div class="pf-url">monikasjakubowska.com</div>
       </div>
       <div class="pf-shot">
-        <img src="/portfolio/monika.png" alt="Monika S. Jakubowska photographer website" loading="lazy">
+        <img src="/portfolio/monika.webp" width="1000" height="625" decoding="async" alt="Monika S. Jakubowska photographer website" loading="lazy">
       </div>
       <div class="pf-body">
         <span class="pf-tag">Project · Photography</span>
@@ -831,7 +853,7 @@ footer a:hover{color:var(--yellow)}
         <p class="pf-desc">London jazz photographer. Bold editorial layout, portfolio gallery, and venue credentials.</p>
         <a href="https://project199838.netlify.app" class="pf-link" target="_blank" rel="noopener">
           View Project
-          <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3M9 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg aria-hidden="true" width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3M9 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
     </div>
@@ -842,7 +864,7 @@ footer a:hover{color:var(--yellow)}
         <div class="pf-url">bartsound.co.uk</div>
       </div>
       <div class="pf-shot">
-        <img src="/portfolio/bart.png" alt="Bart sound engineer website" loading="lazy">
+        <img src="/portfolio/bart.webp" width="1000" height="625" decoding="async" alt="Bart sound engineer website" loading="lazy">
       </div>
       <div class="pf-body">
         <span class="pf-tag">Project · Music &amp; Audio</span>
@@ -850,7 +872,7 @@ footer a:hover{color:var(--yellow)}
         <p class="pf-desc">Front of house, monitor, and studio engineer. Booking system, gear list, and artist credentials.</p>
         <a href="https://project1998573.netlify.app" class="pf-link" target="_blank" rel="noopener">
           View Project
-          <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3M9 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg aria-hidden="true" width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3M9 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
     </div>
@@ -861,7 +883,7 @@ footer a:hover{color:var(--yellow)}
         <div class="pf-url">stopmonashee.com</div>
       </div>
       <div class="pf-shot">
-        <img src="/portfolio/monashee.png" alt="Stop Monashee Wind Farm campaign website" loading="lazy">
+        <img src="/portfolio/monashee.webp" width="1000" height="625" decoding="async" alt="Stop Monashee Wind Farm campaign website" loading="lazy">
       </div>
       <div class="pf-body">
         <span class="pf-tag">Project · Campaign</span>
@@ -869,7 +891,7 @@ footer a:hover{color:var(--yellow)}
         <p class="pf-desc">Community campaign site. Objection tools, impact data, and a call to action that drives engagement.</p>
         <a href="https://stopmonashee.com" class="pf-link" target="_blank" rel="noopener">
           View Project
-          <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3M9 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg aria-hidden="true" width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3M9 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
     </div>
@@ -887,7 +909,7 @@ footer a:hover{color:var(--yellow)}
 
     <div class="review-grid reveal">
       <article class="review-card">
-        <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <div class="review-stars" role="img" aria-label="Rated 5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
         <p class="review-text">"I've been working with Rafal for several years. A friend recommended him to me, and I sincerely recommend him to you. I rarely meet people who truly listen to their clients' needs. It saves me a lot of time and stress. I've stayed with him for a long time, not only because he's a great designer, but most importantly he understands the latest trends and comes up with great ideas. My website looks great on both my phone and my computer. Thanks!"</p>
         <div class="review-author">
           <span class="review-author-name">Michal Wasyl</span>
@@ -905,7 +927,7 @@ footer a:hover{color:var(--yellow)}
         <svg width="16" height="16" viewBox="0 0 48 48"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18c-.44-1.32-.69-2.73-.69-4.18 0-1.45.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24c0 3.55.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7C13.42 14.62 18.27 10.75 24 10.75z"/></svg>
       </span>
       Read reviews on Google
-      <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
   </div>
 </section>
@@ -944,27 +966,27 @@ footer a:hover{color:var(--yellow)}
       <h3>Why businesses trust us</h3>
       <ul class="guarantee-list">
         <li>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#22c55e"/><path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#22c55e"/><path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <span><strong>Fixed price, always.</strong> The quote we give is the price you pay. No nasty surprises at the end.</span>
         </li>
         <li>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#22c55e"/><path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#22c55e"/><path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <span><strong>You own everything.</strong> Unlike agencies that hold your site hostage — every file, domain, and login is yours from day one.</span>
         </li>
         <li>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#22c55e"/><path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#22c55e"/><path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <span><strong>No jargon, ever.</strong> We explain everything in plain English. If you don't understand something, just ask.</span>
         </li>
         <li>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#22c55e"/><path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#22c55e"/><path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <span><strong>30–60 days aftercare.</strong> We don't disappear after launch. Got a question two weeks later? We're here.</span>
         </li>
         <li>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#22c55e"/><path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#22c55e"/><path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <span><strong>SEO built in.</strong> Every site is optimised for Google from the start — not charged as an extra.</span>
         </li>
         <li>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#22c55e"/><path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#22c55e"/><path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <span><strong>Free quote, no pressure.</strong> We'll tell you exactly what we'd build and what it costs. You decide.</span>
         </li>
       </ul>
@@ -1010,19 +1032,19 @@ footer a:hover{color:var(--yellow)}
 
       <div class="form-trust">
         <div class="form-trust-item">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="7" fill="#22c55e"/><path d="M4 7l2 2 4-4" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="7" fill="#22c55e"/><path d="M4 7l2 2 4-4" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
           Free quote — zero commitment
         </div>
         <div class="form-trust-item">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="7" fill="#22c55e"/><path d="M4 7l2 2 4-4" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="7" fill="#22c55e"/><path d="M4 7l2 2 4-4" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
           We reply within 24 hours
         </div>
         <div class="form-trust-item">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="7" fill="#22c55e"/><path d="M4 7l2 2 4-4" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="7" fill="#22c55e"/><path d="M4 7l2 2 4-4" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
           No hard sell — just a straight answer
         </div>
         <div class="form-trust-item">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="7" fill="#22c55e"/><path d="M4 7l2 2 4-4" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="7" fill="#22c55e"/><path d="M4 7l2 2 4-4" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
           Fast turnaround — no waiting list
         </div>
       </div>
@@ -1034,27 +1056,27 @@ footer a:hover{color:var(--yellow)}
           <input type="hidden" name="access_key" value="52cf04ad-a6d5-410b-94fa-c019c3a6f62f">
           <input type="hidden" name="subject" value="New NMRW quote request">
           <input type="hidden" name="from_name" value="NoMoreRubbishWebsites">
-          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
           <div class="form-row">
             <div class="form-group">
-              <label>Your name *</label>
-              <input class="form-input" type="text" name="name" placeholder="John Smith" required>
+              <label for="f-name">Your name <span aria-hidden="true">*</span></label>
+              <input id="f-name" class="form-input" type="text" name="name" placeholder="John Smith" autocomplete="name" required aria-required="true">
             </div>
             <div class="form-group">
-              <label>Business name</label>
-              <input class="form-input" type="text" name="business" placeholder="Smith & Co.">
+              <label for="f-business">Business name</label>
+              <input id="f-business" class="form-input" type="text" name="business" placeholder="Smith & Co." autocomplete="organization">
             </div>
           </div>
           <div class="form-group">
-            <label>Email address *</label>
-            <input class="form-input" type="email" name="email" placeholder="john@smithandco.co.uk" required>
+            <label for="f-email">Email address <span aria-hidden="true">*</span></label>
+            <input id="f-email" class="form-input" type="email" name="email" placeholder="john@smithandco.co.uk" autocomplete="email" required aria-required="true">
           </div>
           <div class="form-group">
-            <label>Phone (optional)</label>
-            <input class="form-input" type="tel" name="phone" placeholder="07700 000000">
+            <label for="f-phone">Phone (optional)</label>
+            <input id="f-phone" class="form-input" type="tel" name="phone" placeholder="07700 000000" autocomplete="tel">
           </div>
           <div class="form-group">
-            <label>Which package interests you?</label>
+            <label for="pkg-select">Which package interests you?</label>
             <select class="form-select" id="pkg-select" name="package">
               <option value="" disabled selected>Select a package...</option>
               <option value="Landing — £299">Landing — £299 (2-day build, single page)</option>
@@ -1064,27 +1086,29 @@ footer a:hover{color:var(--yellow)}
             </select>
           </div>
           <div class="form-group">
-            <label>Tell us about your business</label>
-            <textarea class="form-textarea" name="message" placeholder="What does your business do? Do you have an existing website? What's not working about it?"></textarea>
+            <label for="f-message">Tell us about your business</label>
+            <textarea id="f-message" class="form-textarea" name="message" placeholder="What does your business do? Do you have an existing website? What's not working about it?"></textarea>
           </div>
           <button type="submit" class="form-submit">
             Send My Free Quote Request
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
           <div class="form-small">
-            <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><rect x="1" y="4" width="9" height="6.5" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M3.5 4V3a2 2 0 014 0v1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <svg aria-hidden="true" width="11" height="11" viewBox="0 0 11 11" fill="none"><rect x="1" y="4" width="9" height="6.5" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M3.5 4V3a2 2 0 014 0v1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
             Your info is private — we never share it
           </div>
         </form>
       </div>
       <div class="form-success" id="form-success">
-        <div class="success-icon">🎉</div>
+        <div class="success-icon" aria-hidden="true">🎉</div>
         <h3>We've got your message!</h3>
         <p>We'll be in touch within 24 hours — usually much sooner. Check your inbox (and spam, just in case).</p>
       </div>
     </div>
   </div>
 </section>
+
+</main>
 
 <footer>
   <div class="footer-logo">No More<span>Rubbish</span>Websites</div>
@@ -1102,9 +1126,11 @@ footer a:hover{color:var(--yellow)}
 </div>
 
 <script>
-// CURSOR (desktop / hover-capable only)
+// CURSOR (desktop / hover-capable only — and only when JS confirms)
 const hasHover=window.matchMedia('(hover:hover)').matches;
+const prefersReducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 if(hasHover){
+  document.body.classList.add('cursor-custom');
   const cur=document.getElementById('cursor'),cring=document.getElementById('cursor-ring');
   let mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;
   document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
@@ -1128,8 +1154,17 @@ window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',window.s
 
 // HAMBURGER
 const hb=document.getElementById('hamburger'),mm=document.getElementById('mobile-menu');
-hb.addEventListener('click',()=>{hb.classList.toggle('open');mm.classList.toggle('open');document.body.style.overflow=mm.classList.contains('open')?'hidden':'';});
-function closeMobile(){hb.classList.remove('open');mm.classList.remove('open');document.body.style.overflow='';}
+function setMobileMenu(open){
+  hb.classList.toggle('open',open);
+  mm.classList.toggle('open',open);
+  hb.setAttribute('aria-expanded',open?'true':'false');
+  document.body.style.overflow=open?'hidden':'';
+}
+hb.setAttribute('aria-expanded','false');
+hb.setAttribute('aria-controls','mobile-menu');
+hb.addEventListener('click',()=>setMobileMenu(!mm.classList.contains('open')));
+function closeMobile(){setMobileMenu(false);hb.focus();}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&mm.classList.contains('open'))closeMobile();});
 
 // PACKAGE SELECT from package cards
 function selectPackage(pkg){
@@ -1197,9 +1232,9 @@ function draw(now){
     ctx.fillStyle=grad;
     ctx.fillRect(0,0,W,H);
   });
-  rafId=requestAnimationFrame(draw);
+  if(!prefersReducedMotion) rafId=requestAnimationFrame(draw);
 }
-function startDraw(){if(rafId==null)draw();}
+function startDraw(){if(prefersReducedMotion){draw();return;} if(rafId==null)draw();}
 function stopDraw(){if(rafId!=null){cancelAnimationFrame(rafId);rafId=null;}}
 draw();
 const canvasObs=new IntersectionObserver(es=>es.forEach(x=>{canvasVisible=x.isIntersecting; canvasVisible?startDraw():stopDraw();}),{threshold:0});
