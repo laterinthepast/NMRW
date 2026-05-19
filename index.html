@@ -1191,16 +1191,17 @@ function submitForm(e){
 // CANVAS — animated mesh-gradient blobs (slow drifting, yellow/ember)
 const canvas=document.getElementById('hero-canvas');
 const ctx=canvas.getContext('2d');
-let W,H,rafId=null;
+let W=0,H=0,rafId=null;
 
-function resize(){
-  W=canvas.offsetWidth; H=canvas.offsetHeight||window.innerHeight;
+// ResizeObserver reports dimensions without forcing synchronous layout
+// (the old offsetWidth read was costing ~85ms of forced reflow on load)
+new ResizeObserver(entries=>{
+  const r=entries[0].contentRect;
+  W=r.width; H=r.height||window.innerHeight;
   canvas.width=W*devicePixelRatio; canvas.height=H*devicePixelRatio;
   ctx.setTransform(1,0,0,1,0,0);
   ctx.scale(devicePixelRatio,devicePixelRatio);
-}
-resize();
-window.addEventListener('resize',resize,{passive:true});
+}).observe(canvas);
 
 // Blob field skewed to the right half so the right side carries real visual
 // weight. A shadow pocket sits over the headline area so text stays readable.
@@ -1234,10 +1235,9 @@ function draw(now){
   });
   if(!prefersReducedMotion) rafId=requestAnimationFrame(draw);
 }
-function startDraw(){if(prefersReducedMotion){draw();return;} if(rafId==null)draw();}
+function startDraw(){if(prefersReducedMotion){requestAnimationFrame(draw);return;} if(rafId==null)rafId=requestAnimationFrame(draw);}
 function stopDraw(){if(rafId!=null){cancelAnimationFrame(rafId);rafId=null;}}
-draw();
-const canvasObs=new IntersectionObserver(es=>es.forEach(x=>{canvasVisible=x.isIntersecting; canvasVisible?startDraw():stopDraw();}),{threshold:0});
+const canvasObs=new IntersectionObserver(es=>es.forEach(x=>{x.isIntersecting?startDraw():stopDraw();}),{threshold:0});
 canvasObs.observe(canvas);
 document.addEventListener('visibilitychange',()=>document.hidden?stopDraw():startDraw());
 
