@@ -1,27 +1,6 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "*.html",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "portfolio/**",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "og-card.png",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "sitemap.xml",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "robots.txt",
-      "use": "@vercel/static"
-    }
-  ],
+  "cleanUrls": true,
+  "trailingSlash": false,
   "headers": [
     {
       "source": "/(.*)",
@@ -46,16 +25,5 @@
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
     }
-  ],
-  "routes": [
-    { "src": "/sitemap\\.xml", "dest": "/sitemap.xml" },
-    { "src": "/robots\\.txt", "dest": "/robots.txt" },
-    { "src": "/portfolio/(.*)", "dest": "/portfolio/$1" },
-    { "src": "/privacy\\.html", "dest": "/privacy.html" },
-    { "src": "/privacy", "dest": "/privacy.html" },
-    { "src": "/terms\\.html", "dest": "/terms.html" },
-    { "src": "/terms", "dest": "/terms.html" },
-    { "src": "/(.*\\.(png|jpg|jpeg|gif|svg|webp|ico|xml|txt|css|js|html))", "dest": "/$1" },
-    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
