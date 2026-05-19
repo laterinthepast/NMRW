@@ -9,8 +9,8 @@
 <meta name="author" content="No More Rubbish Websites">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <meta name="googlebot" content="index, follow">
-<meta name="geo.region" content="GB">
-<meta name="geo.placename" content="United Kingdom">
+<meta name="geo.region" content="GB-SCT">
+<meta name="geo.placename" content="Chirnside, Scotland, United Kingdom">
 <link rel="canonical" href="https://www.nomorerubbishwebsites.com/">
 <meta name="theme-color" content="#FFD100">
 
@@ -48,6 +48,8 @@
   "email": "info@nomorerubbishwebsites.com",
   "address": {
     "@type": "PostalAddress",
+    "addressLocality": "Chirnside",
+    "addressRegion": "Scotland",
     "addressCountry": "GB"
   },
   "image": "https://www.nomorerubbishwebsites.com/og-card.png",
@@ -376,6 +378,10 @@ section{padding:7rem var(--side)}
 .form-trust{display:flex;flex-direction:column;gap:.8rem;margin-top:2rem}
 .form-trust-item{display:flex;align-items:center;gap:.8rem;font-size:.82rem;color:var(--ink2)}
 .form-trust-item svg{flex-shrink:0}
+.form-direct{display:flex;flex-direction:column;gap:.3rem;padding:1.1rem 1.3rem;background:var(--card);border:1.5px solid var(--border);border-left:3px solid var(--yellow);border-radius:6px;margin:0 0 1.5rem;transition:background .35s,border-color .35s}
+.form-direct-label{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);font-weight:600}
+.form-direct-link{font-family:'Inter',sans-serif;font-size:1rem;color:var(--ink);text-decoration:none;font-weight:600;letter-spacing:.005em;transition:color .2s}
+.form-direct-link:hover{color:var(--yellow-dark)}
 .form-spots{display:flex;align-items:flex-start;gap:.8rem;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1rem 1.2rem;margin-bottom:0;transition:background .35s,border-color .35s}
 .form-spots-dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0;margin-top:.3rem}
 .form-spots p{font-size:.8rem;color:var(--ink2);line-height:1.5}
@@ -407,6 +413,8 @@ section{padding:7rem var(--side)}
 footer{background:var(--footer-bg);color:var(--footer-txt);padding:2rem var(--side);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.74rem;transition:background .35s,color .35s}
 .footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--footer-txt);letter-spacing:.04em;transition:color .35s}
 .footer-logo span{color:var(--yellow)}
+.footer-address{font-style:normal;display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.footer-sep{opacity:.5}
 .footer-links{display:flex;gap:2rem}
 footer a{color:var(--footer-txt);text-decoration:none;transition:color .2s}
 footer a:hover{color:var(--yellow)}
@@ -1035,6 +1043,10 @@ footer a:hover{color:var(--yellow)}
       <h2>YOUR WEBSITE IS EMBARRASSING.<br><span>LET'S FIX THAT.</span></h2>
       <p>Fill in the form and we'll get back to you within 24 hours with a clear quote, no obligation, and no jargon. Most people hear back within a few hours.</p>
 
+      <div class="form-direct">
+        <span class="form-direct-label">Prefer email?</span>
+        <a href="mailto:info@nomorerubbishwebsites.com" class="form-direct-link">info@nomorerubbishwebsites.com</a>
+      </div>
 
       <div class="form-trust">
         <div class="form-trust-item">
@@ -1123,10 +1135,14 @@ footer a:hover{color:var(--yellow)}
 
 <footer>
   <div class="footer-logo">No More<span>Rubbish</span>Websites</div>
+  <address class="footer-address">
+    <a href="mailto:info@nomorerubbishwebsites.com">info@nomorerubbishwebsites.com</a>
+    <span class="footer-sep" aria-hidden="true">·</span>
+    <span>Chirnside, Scotland</span>
+  </address>
   <div class="footer-links">
     <a href="/privacy.html">Privacy Policy</a>
     <a href="/terms.html">Terms & Conditions</a>
-    <a href="mailto:info@nomorerubbishwebsites.com">info@nomorerubbishwebsites.com</a>
   </div>
   <div>© 2026 NoMoreRubbishWebsites</div>
 </footer>
