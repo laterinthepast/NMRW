@@ -24,11 +24,17 @@
 <meta property="og:description" content="Professional websites for small UK businesses from £299. Mobile-friendly, SEO-ready, 3-day turnaround. Fixed prices, no jargon. Get a free quote today.">
 <meta property="og:site_name" content="No More Rubbish Websites">
 <meta property="og:locale" content="en_GB">
-<meta property="og:updated_time" content="2026-04-09T12:00:00+00:00">
-<meta property="article:modified_time" content="2026-04-09T12:00:00+00:00">
+<meta property="og:image" content="https://www.nomorerubbishwebsites.com/og-card.png">
+<meta property="og:image:secure_url" content="https://www.nomorerubbishwebsites.com/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="No More Rubbish Websites — professional websites from £299, 3-day build, you own it">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Affordable Web Design for Small UK Businesses | From £299">
 <meta name="twitter:description" content="Professional websites for small UK businesses from £299. Mobile-friendly, SEO-ready, 3-day turnaround. Fixed prices, no jargon. Get a free quote today.">
+<meta name="twitter:image" content="https://www.nomorerubbishwebsites.com/og-card.png">
+<meta name="twitter:image:alt" content="No More Rubbish Websites — professional websites from £299, 3-day build, you own it">
 
 <!-- Structured Data — LocalBusiness + Service + FAQ -->
 <script type="application/ld+json">
@@ -37,15 +43,14 @@
   "@type": "ProfessionalService",
   "name": "No More Rubbish Websites",
   "url": "https://www.nomorerubbishwebsites.com",
-  "logo": "https://www.nomorerubbishwebsites.com/portfolio/bloom.png",
+  "logo": "https://www.nomorerubbishwebsites.com/og-card.png",
   "description": "Professional, affordable web design for small UK businesses. Mobile-friendly, SEO-ready websites from £299 with a 3-day turnaround.",
   "email": "info@nomorerubbishwebsites.com",
-  "telephone": "+44-0000-000000",
   "address": {
     "@type": "PostalAddress",
     "addressCountry": "GB"
   },
-  "image": "https://www.nomorerubbishwebsites.com/portfolio/bloom.png",
+  "image": "https://www.nomorerubbishwebsites.com/og-card.png",
   "priceRange": "£299–£999",
   "areaServed": {
     "@type": "Country",
@@ -194,7 +199,7 @@ nav.scrolled{background:var(--nav-bg);backdrop-filter:blur(16px);-webkit-backdro
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 
 /* ── HERO ── */
-.hero{min-height:100vh;position:relative;display:flex;align-items:center;justify-content:center;padding:5rem var(--side) 3rem;overflow:hidden;text-align:center}
+.hero{min-height:100vh;min-height:100dvh;position:relative;display:flex;align-items:center;justify-content:center;padding:5rem var(--side) 3rem;overflow:hidden;text-align:center}
 .hero-left{position:relative;z-index:2;max-width:860px;margin:0 auto}
 
 /* Social proof strip — above the fold */
@@ -392,10 +397,11 @@ section{padding:7rem var(--side)}
 .form-submit:hover{background:var(--yellow-dark);transform:translateY(-2px)}
 .form-small{font-size:.72rem;color:var(--ink3);text-align:center;display:flex;align-items:center;justify-content:center;gap:.4rem}
 .form-small svg{color:var(--ink3)}
-.form-success{display:none;text-align:center;padding:3rem 2rem}
-.form-success h3{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--ink);margin-bottom:.8rem;transition:color .35s}
-.form-success p{font-size:.9rem;color:var(--ink2);line-height:1.7}
-.form-success .success-icon{font-size:3rem;margin-bottom:1rem}
+.form-success,.form-error{display:none;text-align:center;padding:3rem 2rem}
+.form-success h3,.form-error h3{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--ink);margin-bottom:.8rem;transition:color .35s}
+.form-success p,.form-error p{font-size:.9rem;color:var(--ink2);line-height:1.7}
+.form-success .success-icon,.form-error .success-icon{font-size:3rem;margin-bottom:1rem}
+.form-error a{color:var(--ink);font-weight:600;text-decoration:underline}
 
 /* FOOTER */
 footer{background:var(--footer-bg);color:var(--footer-txt);padding:2rem var(--side);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.74rem;transition:background .35s,color .35s}
@@ -706,7 +712,7 @@ footer a:hover{color:var(--yellow)}
       </div>
     </div>
 
-    <div class="pf-card reveal">
+    <div class="pf-card reveal d1">
       <div class="pf-browser">
         <div class="pf-dots"><span class="pf-dot"></span><span class="pf-dot"></span><span class="pf-dot"></span></div>
         <div class="pf-url">okolitzastudio.com</div>
@@ -725,7 +731,7 @@ footer a:hover{color:var(--yellow)}
       </div>
     </div>
 
-    <div class="pf-card reveal">
+    <div class="pf-card reveal d2">
       <div class="pf-browser">
         <div class="pf-dots"><span class="pf-dot"></span><span class="pf-dot"></span><span class="pf-dot"></span></div>
         <div class="pf-url">l8pro.co.uk</div>
@@ -734,9 +740,9 @@ footer a:hover{color:var(--yellow)}
         <img src="/portfolio/l8.webp" width="1000" height="625" decoding="async" alt="L8 Pro website preview" loading="lazy">
       </div>
       <div class="pf-body">
-        <span class="pf-tag">Project · SaaS</span>
+        <span class="pf-tag">Project · Research</span>
         <h3 class="pf-title">L8 Pro</h3>
-        <p class="pf-desc">Late-delivery compensation platform. Clean conversion-focused landing with instant quote flow.</p>
+        <p class="pf-desc">Personal research prototype exploring how Legionella risk assessment could actually work for engineers on site — long-form editorial landing, conversion-tuned.</p>
         <a href="https://www.l8pro.co.uk/" class="pf-link" target="_blank" rel="noopener">
           View Project
           <svg aria-hidden="true" width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3M9 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -744,7 +750,7 @@ footer a:hover{color:var(--yellow)}
       </div>
     </div>
 
-    <div class="pf-card reveal d1">
+    <div class="pf-card reveal">
       <div class="pf-browser">
         <div class="pf-dots"><span class="pf-dot"></span><span class="pf-dot"></span><span class="pf-dot"></span></div>
         <div class="pf-url">scoutyourlead.com</div>
@@ -763,7 +769,45 @@ footer a:hover{color:var(--yellow)}
       </div>
     </div>
 
+    <div class="pf-card reveal d1">
+      <div class="pf-browser">
+        <div class="pf-dots"><span class="pf-dot"></span><span class="pf-dot"></span><span class="pf-dot"></span></div>
+        <div class="pf-url">bartsound.co.uk</div>
+      </div>
+      <div class="pf-shot">
+        <img src="/portfolio/bart.webp" width="1000" height="625" decoding="async" alt="Bart sound engineer website" loading="lazy">
+      </div>
+      <div class="pf-body">
+        <span class="pf-tag">Project · Music &amp; Audio</span>
+        <h3 class="pf-title">Bart — Sound Engineer</h3>
+        <p class="pf-desc">Front of house, monitor, and studio engineer. Booking system, gear list, and artist credentials.</p>
+        <a href="https://project1998573.netlify.app" class="pf-link" target="_blank" rel="noopener">
+          View Project
+          <svg aria-hidden="true" width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3M9 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
     <div class="pf-card reveal d2">
+      <div class="pf-browser">
+        <div class="pf-dots"><span class="pf-dot"></span><span class="pf-dot"></span><span class="pf-dot"></span></div>
+        <div class="pf-url">stopmonashee.com</div>
+      </div>
+      <div class="pf-shot">
+        <img src="/portfolio/monashee.webp" width="1000" height="625" decoding="async" alt="Stop Monashee Wind Farm campaign website" loading="lazy">
+      </div>
+      <div class="pf-body">
+        <span class="pf-tag">Project · Campaign</span>
+        <h3 class="pf-title">Stop Monashee Wind Farm</h3>
+        <p class="pf-desc">Community campaign site. Objection tools, impact data, and a call to action that drives engagement.</p>
+        <a href="https://stopmonashee.com" class="pf-link" target="_blank" rel="noopener">
+          View Project
+          <svg aria-hidden="true" width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3M9 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="pf-card reveal">
       <div class="pf-browser">
         <div class="pf-dots"><span class="pf-dot"></span><span class="pf-dot"></span><span class="pf-dot"></span></div>
         <div class="pf-url">bloom-and-co.co.uk</div>
@@ -853,63 +897,6 @@ footer a:hover{color:var(--yellow)}
         <p class="pf-desc">Boutique Glasgow salon. Editorial layout, online booking, and a treatment menu that sells.</p>
         <a href="https://nmrw-b6e8.vercel.app" class="pf-link" target="_blank" rel="noopener">
           View Template
-          <svg aria-hidden="true" width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3M9 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-    </div>
-
-    <div class="pf-card reveal d2">
-      <div class="pf-browser">
-        <div class="pf-dots"><span class="pf-dot"></span><span class="pf-dot"></span><span class="pf-dot"></span></div>
-        <div class="pf-url">monikasjakubowska.com</div>
-      </div>
-      <div class="pf-shot">
-        <img src="/portfolio/monika.webp" width="1000" height="625" decoding="async" alt="Monika S. Jakubowska photographer website" loading="lazy">
-      </div>
-      <div class="pf-body">
-        <span class="pf-tag">Project · Photography</span>
-        <h3 class="pf-title">Monika S. Jakubowska</h3>
-        <p class="pf-desc">London jazz photographer. Bold editorial layout, portfolio gallery, and venue credentials.</p>
-        <a href="https://project199838.netlify.app" class="pf-link" target="_blank" rel="noopener">
-          View Project
-          <svg aria-hidden="true" width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3M9 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-    </div>
-
-    <div class="pf-card reveal">
-      <div class="pf-browser">
-        <div class="pf-dots"><span class="pf-dot"></span><span class="pf-dot"></span><span class="pf-dot"></span></div>
-        <div class="pf-url">bartsound.co.uk</div>
-      </div>
-      <div class="pf-shot">
-        <img src="/portfolio/bart.webp" width="1000" height="625" decoding="async" alt="Bart sound engineer website" loading="lazy">
-      </div>
-      <div class="pf-body">
-        <span class="pf-tag">Project · Music &amp; Audio</span>
-        <h3 class="pf-title">Bart — Sound Engineer</h3>
-        <p class="pf-desc">Front of house, monitor, and studio engineer. Booking system, gear list, and artist credentials.</p>
-        <a href="https://project1998573.netlify.app" class="pf-link" target="_blank" rel="noopener">
-          View Project
-          <svg aria-hidden="true" width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3M9 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-    </div>
-
-    <div class="pf-card reveal d1">
-      <div class="pf-browser">
-        <div class="pf-dots"><span class="pf-dot"></span><span class="pf-dot"></span><span class="pf-dot"></span></div>
-        <div class="pf-url">stopmonashee.com</div>
-      </div>
-      <div class="pf-shot">
-        <img src="/portfolio/monashee.webp" width="1000" height="625" decoding="async" alt="Stop Monashee Wind Farm campaign website" loading="lazy">
-      </div>
-      <div class="pf-body">
-        <span class="pf-tag">Project · Campaign</span>
-        <h3 class="pf-title">Stop Monashee Wind Farm</h3>
-        <p class="pf-desc">Community campaign site. Objection tools, impact data, and a call to action that drives engagement.</p>
-        <a href="https://stopmonashee.com" class="pf-link" target="_blank" rel="noopener">
-          View Project
           <svg aria-hidden="true" width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3M9 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
@@ -1123,6 +1110,11 @@ footer a:hover{color:var(--yellow)}
         <h3>We've got your message!</h3>
         <p>We'll be in touch within 24 hours — usually much sooner. Check your inbox (and spam, just in case).</p>
       </div>
+      <div class="form-error" id="form-error" role="alert">
+        <div class="success-icon" aria-hidden="true">⚠️</div>
+        <h3>Something went wrong</h3>
+        <p>The form didn't go through. Email <a href="mailto:info@nomorerubbishwebsites.com">info@nomorerubbishwebsites.com</a> directly and I'll get back to you within 24 hours.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -1171,13 +1163,19 @@ document.getElementById('theme-toggle').addEventListener('click',()=>{dark=!dark
 const navbar=document.getElementById('navbar');
 window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',window.scrollY>20),{passive:true});
 
-// HAMBURGER
+// HAMBURGER — with focus trap via inert
 const hb=document.getElementById('hamburger'),mm=document.getElementById('mobile-menu');
+const inertTargets=['#main','#navbar','footer'].map(s=>document.querySelector(s)).filter(Boolean);
 function setMobileMenu(open){
   hb.classList.toggle('open',open);
   mm.classList.toggle('open',open);
   hb.setAttribute('aria-expanded',open?'true':'false');
   document.body.style.overflow=open?'hidden':'';
+  inertTargets.forEach(el=>{open?el.setAttribute('inert',''):el.removeAttribute('inert');});
+  if(open){
+    const first=mm.querySelector('a,button');
+    if(first) first.focus();
+  }
 }
 hb.setAttribute('aria-expanded','false');
 hb.setAttribute('aria-controls','mobile-menu');
@@ -1191,19 +1189,31 @@ function selectPackage(pkg){
   document.getElementById('form').scrollIntoView({behavior:'smooth'});
 }
 
-// FORM SUBMIT — posts to Formspree (replace YOUR_FORM_ID), then shows success
+// FORM SUBMIT — posts to web3forms, shows real success/error state
 function submitForm(e){
   e.preventDefault();
   const form=e.target;
+  const submitBtn=form.querySelector('button[type="submit"]');
   const data=new FormData(form);
+  const originalLabel=submitBtn.innerHTML;
+  submitBtn.disabled=true;
+  submitBtn.innerHTML='Sending…';
   fetch(form.action,{method:'POST',body:data,headers:{'Accept':'application/json'}})
     .then(r=>{
+      if(!r.ok) throw new Error('HTTP '+r.status);
+      return r.json().catch(()=>({}));
+    })
+    .then(()=>{
       document.getElementById('form-wrap').style.display='none';
       document.getElementById('form-success').style.display='block';
     })
     .catch(()=>{
       document.getElementById('form-wrap').style.display='none';
-      document.getElementById('form-success').style.display='block';
+      document.getElementById('form-error').style.display='block';
+    })
+    .finally(()=>{
+      submitBtn.disabled=false;
+      submitBtn.innerHTML=originalLabel;
     });
 }
 

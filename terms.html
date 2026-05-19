@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#f5f5f0;--ink:#0a0a0a;--ink2:#666;--ink3:#999;--yellow:#FFD100;--border:rgba(10,10,10,0.1);--side:clamp(1.5rem,10vw,12rem)}
+[data-theme="light"]{--bg:#f5f5f0;--ink:#0a0a0a;--ink2:#525252;--ink3:#6b6b6b;--border:rgba(10,10,10,0.1);--surface:#ffffff;--surface-alt:#fafaf6}
+[data-theme="dark"]{--bg:#0e0e0e;--ink:#f0f0eb;--ink2:#a3a3a3;--ink3:#7a7a7a;--border:rgba(240,240,235,0.12);--surface:#181818;--surface-alt:#161616}
+:root{--yellow:#FFD100;--side:clamp(1.5rem,10vw,12rem)}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;font-weight:300;line-height:1.7}
 
@@ -33,7 +35,7 @@ nav{background:var(--ink);padding:1.1rem var(--side);display:flex;align-items:ce
 .doc-body{display:grid;grid-template-columns:240px 1fr;gap:0;min-height:80vh}
 
 /* SIDEBAR TOC */
-.toc{position:sticky;top:0;height:100vh;overflow-y:auto;background:white;border-right:1px solid var(--border);padding:2.5rem 1.5rem}
+.toc{position:sticky;top:0;height:100vh;overflow-y:auto;background:var(--surface);border-right:1px solid var(--border);padding:2.5rem 1.5rem}
 .toc-title{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink3);font-weight:500;margin-bottom:1.2rem}
 .toc-list{list-style:none;display:flex;flex-direction:column;gap:.2rem}
 .toc-list a{display:block;font-size:.76rem;color:var(--ink2);text-decoration:none;padding:.35rem .6rem;border-radius:3px;transition:all .2s;border-left:2px solid transparent}
@@ -68,7 +70,7 @@ ol li{counter-increment:ol-counter}
 ol li::before{content:counter(ol-counter)'.';position:absolute;left:0;color:var(--yellow);font-weight:700;font-size:.82rem}
 
 /* HIGHLIGHT BOXES */
-.highlight{background:white;border:1px solid var(--border);border-left:3px solid var(--yellow);padding:1.2rem 1.4rem;margin:1.2rem 0;border-radius:0 4px 4px 0}
+.highlight{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--yellow);padding:1.2rem 1.4rem;margin:1.2rem 0;border-radius:0 4px 4px 0}
 .highlight p{font-size:.86rem;margin:0;color:var(--ink)}
 .highlight strong{color:var(--ink)}
 
@@ -77,13 +79,13 @@ ol li::before{content:counter(ol-counter)'.';position:absolute;left:0;color:var(
 .process-table th{background:var(--ink);color:white;padding:.7rem 1rem;text-align:left;font-weight:500;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}
 .process-table td{padding:.7rem 1rem;border-bottom:1px solid var(--border);color:var(--ink2);vertical-align:top}
 .process-table tr:last-child td{border-bottom:none}
-.process-table tr:nth-child(even) td{background:white}
+.process-table tr:nth-child(even) td{background:var(--surface)}
 .process-table .stage{font-weight:600;color:var(--ink);white-space:nowrap}
 .tag-yellow{display:inline-block;background:var(--yellow);color:var(--ink);font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.15rem .6rem;border-radius:2px}
 .tag-red{display:inline-block;background:#fee2e2;color:#991b1b;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.15rem .6rem;border-radius:2px}
 
 /* SIGNATURE BLOCK */
-.sig-block{background:white;border:1px solid var(--border);padding:2rem;margin-top:2rem}
+.sig-block{background:var(--surface);border:1px solid var(--border);padding:2rem;margin-top:2rem}
 .sig-block h3{text-transform:uppercase;letter-spacing:.1em;font-size:.76rem;margin-bottom:1.2rem;color:var(--ink3)}
 .sig-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
 .sig-field{border-bottom:1px solid var(--ink);padding-bottom:.3rem;margin-bottom:.4rem;min-height:2rem}
@@ -101,6 +103,9 @@ ol li::before{content:counter(ol-counter)'.';position:absolute;left:0;color:var(
   .sig-grid{grid-template-columns:1fr}
 }
 </style>
+<script>
+(function(){var s=localStorage.getItem('theme');var d=s?s==='dark':matchMedia('(prefers-color-scheme:dark)').matches;document.documentElement.setAttribute('data-theme',d?'dark':'light');})();
+</script>
 </head>
 <body>
 
