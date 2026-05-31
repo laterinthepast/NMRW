@@ -157,7 +157,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .slab{display:inline-block;background:var(--k);color:var(--y);padding:0 16px}
 .sec--ink .slab,.sec--yellow .slab{background:var(--k);color:var(--y)}
 .slab--y{background:var(--y);color:var(--k)}
-.slab--tilt{transform:rotate(-1deg)}
+.slab--tilt{rotate:-1deg}
 
 /* ---- Buttons ---- */
 .btn{display:inline-flex;align-items:center;gap:12px;font-family:var(--display);font-weight:900;text-transform:uppercase;letter-spacing:.01em;border:none;cursor:pointer;text-decoration:none;transition:transform .12s,box-shadow .12s;border-radius:0}
@@ -199,7 +199,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 /* ====== HERO ====== */
 .hero{background:var(--y);padding:40px var(--side) 0}
 .hero h1{font-family:var(--display);font-weight:900;letter-spacing:-.04em;line-height:.86;font-size:clamp(54px,13vw,196px);margin:20px 0 0;overflow-wrap:break-word}
-.hero h1 .bill{display:inline-block;background:var(--k);color:var(--y);padding:0 24px;transform:rotate(-1deg)}
+.hero h1 .bill{display:inline-block;background:var(--k);color:var(--y);padding:0 24px;rotate:-1deg}
 .hero-sub{display:flex;align-items:flex-start;gap:18px;margin-top:24px;max-width:720px}
 .hero-sub .bar{width:48px;height:4px;background:var(--k);margin-top:14px;flex:0 0 auto}
 .hero-sub p{font-size:clamp(16px,2.4vw,22px);font-weight:500;line-height:1.35}
@@ -207,7 +207,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .hero-cards{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding-top:40px;align-items:stretch}
 
 /* receipt + slab cards */
-.card-bill{background:var(--w);border:2px solid var(--k);box-shadow:10px 10px 0 var(--k);padding:24px 28px 26px;font-family:var(--mono);font-size:13px;transform:rotate(-0.8deg)}
+.card-bill{background:var(--w);border:2px solid var(--k);box-shadow:10px 10px 0 var(--k);padding:24px 28px 26px;font-family:var(--mono);font-size:13px;rotate:-0.8deg}
 .card-bill .rhead{text-align:center;border-bottom:2px dashed var(--k);padding-bottom:8px;margin-bottom:12px}
 .card-bill .rhead .t{font-family:var(--display);font-size:18px;letter-spacing:-.02em}
 .card-bill .rhead .s{font-size:10px;opacity:.65;margin-top:3px;letter-spacing:.1em}
@@ -222,7 +222,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .bill-total .amt{font-family:var(--display);font-size:26px}
 .bill-foot{margin-top:10px;font-size:10px;text-align:center;opacity:.55;letter-spacing:.06em}
 
-.card-get{background:var(--k);color:var(--y);border:2px solid var(--k);box-shadow:10px 10px 0 rgba(0,0,0,.15);padding:24px 28px 26px;transform:rotate(0.8deg);display:flex;flex-direction:column}
+.card-get{background:var(--k);color:var(--y);border:2px solid var(--k);box-shadow:10px 10px 0 rgba(0,0,0,.15);padding:24px 28px 26px;rotate:0.8deg;display:flex;flex-direction:column}
 .card-get .ghead{font-family:var(--mono);font-size:11px;opacity:.7;margin-bottom:10px;letter-spacing:.1em;display:flex;justify-content:space-between}
 .card-get .gtitle{font-family:var(--display);font-size:22px;letter-spacing:-.02em;padding-bottom:10px;margin-bottom:12px;border-bottom:2px dashed var(--y)}
 .card-get ul{list-style:none;display:flex;flex-direction:column;gap:11px;font-size:15px;font-weight:600;line-height:1.3;flex:1}
@@ -247,10 +247,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 /* ====== PRICING ====== */
 .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:48px;align-items:stretch}
 .pkg{background:var(--w);border:3px solid var(--k);padding:32px 30px 30px;box-shadow:10px 10px 0 var(--k);position:relative;display:flex;flex-direction:column}
-.pkg--1{transform:rotate(-1deg)}
-.pkg--3{transform:rotate(1deg)}
+.pkg--1{rotate:-1deg}
+.pkg--3{rotate:1deg}
 .pkg--feat{background:var(--k);color:var(--y);box-shadow:14px 14px 0 var(--y),14px 14px 0 3px var(--k)}
-.pkg-tab{position:absolute;top:-18px;left:24px;background:var(--y);color:var(--k);padding:8px 14px;font-family:var(--display);font-size:12px;letter-spacing:.06em;border:3px solid var(--k);transform:rotate(-3deg)}
+.pkg-tab{position:absolute;top:-18px;left:24px;background:var(--y);color:var(--k);padding:8px 14px;font-family:var(--display);font-size:12px;letter-spacing:.06em;border:3px solid var(--k);rotate:-3deg}
 .pkg-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;gap:8px}
 .pkg-name{font-family:var(--display);font-size:32px;letter-spacing:-.03em;line-height:.9}
 .pkg-sub{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.6;margin-top:8px;white-space:nowrap}
@@ -343,7 +343,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 /* ====== FINAL + FORM ====== */
 .final-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:flex-start}
 .final-left h2{font-family:var(--display);font-size:clamp(34px,6vw,96px);line-height:.88;letter-spacing:-.05em;overflow-wrap:break-word}
-.final-left h2 .binit{background:var(--y);color:var(--k);padding:0 18px;display:inline-block;transform:rotate(-1deg)}
+.final-left h2 .binit{background:var(--y);color:var(--k);padding:0 18px;display:inline-block;rotate:-1deg}
 .final-left p{max-width:540px;font-size:18px;line-height:1.45;margin-top:30px;opacity:.85}
 .final-list{list-style:none;margin-top:32px;display:flex;flex-direction:column;gap:12px;font-size:15px;font-weight:600}
 .final-list li{display:flex;gap:12px;align-items:flex-start}
@@ -385,6 +385,35 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 /* ====== SCROLL REVEAL ====== */
 .reveal{opacity:0;translate:0 26px;transition:opacity .62s cubic-bezier(.16,1,.3,1),translate .62s cubic-bezier(.16,1,.3,1)}
 .reveal.in{opacity:1;translate:0 0}
+
+/* ====== WOW: scroll progress, hero letter reveal, animated strike, 3D tilt ====== */
+.scroll-progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:1100;pointer-events:none;background:rgba(10,10,10,.08)}
+.scroll-progress__fill{height:100%;background:var(--k);width:0%;transition:width .08s linear;box-shadow:0 0 0 0 var(--k)}
+
+/* per-character hero reveal */
+.hero h1 .ch{display:inline-block;opacity:0;translate:0 .55em;rotate:var(--cr,-6deg);transition:opacity .55s cubic-bezier(.16,1,.3,1),translate .55s cubic-bezier(.16,1,.3,1),rotate .55s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--ci,0) * 45ms + 120ms)}
+.hero h1 .ch.in{opacity:1;translate:0 0;rotate:0deg}
+.hero h1 .bill .ch.in{rotate:0deg}
+
+/* animated bill strike (red line draws across) */
+.amt-strike{position:relative;display:inline-block}
+.amt-strike::after{content:'';position:absolute;top:50%;left:-6px;right:-6px;height:4px;background:var(--r);transform-origin:left center;scale:0 1;transition:scale .8s cubic-bezier(.7,0,.3,1)}
+.amt-strike.struck::after{scale:1 1}
+
+/* count-up classes hold a stable size during animation */
+.count{font-variant-numeric:tabular-nums}
+
+/* 3D tilt readiness on cards (transform property is set by JS on mousemove) */
+.pkg,.tile{transform-style:preserve-3d;will-change:transform}
+.pkg{transition:translate .2s cubic-bezier(.16,1,.3,1),box-shadow .2s,transform .15s ease-out}
+.tile{transition:translate .2s cubic-bezier(.16,1,.3,1),box-shadow .2s,transform .15s ease-out}
+/* on touch / no-hover, drop the tilt readiness so taps feel snappy */
+@media(hover:none){.pkg,.tile{transform-style:flat;will-change:auto}.pkg,.tile{transition:translate .2s cubic-bezier(.16,1,.3,1),box-shadow .2s}}
+
+/* scroll cue under the hero */
+.scroll-cue{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.7;margin-top:10px}
+.scroll-cue .arrow{display:inline-block;width:14px;height:14px;border-right:2px solid var(--k);border-bottom:2px solid var(--k);transform:rotate(45deg);animation:cueBounce 1.6s ease-in-out infinite}
+@keyframes cueBounce{0%,100%{translate:0 -3px}50%{translate:0 3px}}
 
 /* ====== HOVER + ACTIVE + CLICK SHAKE ====== */
 /* defined after .reveal.in so the shared `translate` property wins on hover.
@@ -442,7 +471,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   .final-left h2 .binit{padding:0 12px}
   .slab{padding:0 10px}
   .hero-cards{grid-template-columns:1fr;gap:16px}
-  .card-bill,.card-get,.pkg--1,.pkg--3{transform:none}
+  .card-bill,.card-get,.pkg--1,.pkg--3{rotate:0;transform:none}
   .hero-cta{flex-direction:column;align-items:flex-start;gap:22px}
   .stats{padding-left:0;border-left:none;padding-top:14px;border-top:2px solid var(--k);width:100%}
   .price-grid,.steps,.trust-grid,.obj-grid,.final-grid,.work-grid,.rev-grid{grid-template-columns:1fr}
@@ -465,6 +494,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 <body>
 
 <a class="skip-link" href="#main">Skip to content</a>
+<div class="scroll-progress" aria-hidden="true"><div class="scroll-progress__fill" id="scrollProgressFill"></div></div>
 
 <!-- ====== NAV ====== -->
 <header>
@@ -514,7 +544,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
           <div class="bill-row"><div class="kv"><span class="k">Hours of your time</span><span class="meta">~60h</span></div><span class="v">???</span></div>
           <div class="bill-row"><div class="kv"><span class="k">Looks like a template</span></div><span class="v">priceless</span></div>
         </div>
-        <div class="bill-total"><span class="lab">TOTAL</span><span class="amt strike">£1,791</span></div>
+        <div class="bill-total"><span class="lab">TOTAL</span><span class="amt amt-strike strike" data-target="1791" data-prefix="£" data-thousands="1">£1,791</span></div>
         <div class="bill-foot">-- AND YOU STILL DON'T OWN IT --</div>
       </div>
 
@@ -541,10 +571,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
         <span class="cta-sub">Free fixed-price quote · 24h reply</span>
       </div>
       <div class="stats">
-        <div class="stat"><div class="n">£299</div><div class="l">fixed price</div></div>
-        <div class="stat"><div class="n">3 days</div><div class="l">typical build</div></div>
-        <div class="stat"><div class="n">5.0</div><div class="l">on Google</div></div>
-        <div class="stat"><div class="n">100%</div><div class="l">sites you own</div></div>
+        <div class="stat"><div class="n count" data-target="299" data-prefix="£">£299</div><div class="l">fixed price</div></div>
+        <div class="stat"><div class="n count" data-target="3" data-suffix=" days">3 days</div><div class="l">typical build</div></div>
+        <div class="stat"><div class="n count" data-target="5" data-decimals="1">5.0</div><div class="l">on Google</div></div>
+        <div class="stat"><div class="n count" data-target="100" data-suffix="%">100%</div><div class="l">sites you own</div></div>
       </div>
     </div>
   </div>
@@ -646,8 +676,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
         <h2 id="work-h" class="sec-title reveal">REAL SITES.<br>SHIPPED FAST.</h2>
       </div>
       <div class="work-stats">
-        <div><div class="n">11</div><div class="l">live sites</div></div>
-        <div><div class="n">£299</div><div class="l">from, fixed</div></div>
+        <div><div class="n count" data-target="11">11</div><div class="l">live sites</div></div>
+        <div><div class="n count" data-target="299" data-prefix="£">£299</div><div class="l">from, fixed</div></div>
         <div><div class="n">2–7d</div><div class="l">turnaround</div></div>
       </div>
     </div>
@@ -1051,6 +1081,166 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       });
     });
   }
+
+  // ============================================================
+  // ====== WOW LAYER ======
+  // ============================================================
+  var hover = matchMedia('(hover:hover)').matches;
+
+  // ---- Hero <h1> letter-by-letter reveal (chaotic-brutalist drop-in) ----
+  (function splitHero(){
+    var h1 = document.querySelector('.hero h1');
+    if (!h1) return;
+    function walk(node){
+      Array.prototype.slice.call(node.childNodes).forEach(function(child){
+        if (child.nodeType === 3){
+          var frag = document.createDocumentFragment();
+          Array.from(child.textContent).forEach(function(ch){
+            var s = document.createElement('span');
+            s.className = 'ch';
+            s.textContent = ch === ' ' ? ' ' : ch;
+            frag.appendChild(s);
+          });
+          child.parentNode.replaceChild(frag, child);
+        } else if (child.nodeType === 1 && !child.classList.contains('ch')){
+          walk(child);
+        }
+      });
+    }
+    walk(h1);
+    var chs = h1.querySelectorAll('.ch');
+    chs.forEach(function(s, i){
+      s.style.setProperty('--ci', i);
+      var r = (Math.random() * 14 - 7).toFixed(1);
+      s.style.setProperty('--cr', r + 'deg');
+    });
+    function trigger(){
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){
+        chs.forEach(function(s){ s.classList.add('in'); });
+      });});
+    }
+    if (reduce) chs.forEach(function(s){ s.classList.add('in'); });
+    else if (document.fonts && document.fonts.ready) document.fonts.ready.then(trigger);
+    else setTimeout(trigger, 60);
+  })();
+
+  // ---- Scroll progress bar ----
+  (function scrollProgress(){
+    var fill = document.getElementById('scrollProgressFill');
+    if (!fill) return;
+    function update(){
+      var doc = document.documentElement;
+      var max = doc.scrollHeight - doc.clientHeight;
+      fill.style.width = (max > 0 ? Math.min(100, Math.max(0, window.scrollY / max * 100)) : 0) + '%';
+    }
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+  })();
+
+  // ---- Count-up on viewport entry (.count + bill amt-strike) ----
+  (function countUp(){
+    function fmt(el, v){
+      var prefix = el.dataset.prefix || '';
+      var suffix = el.dataset.suffix || '';
+      var decimals = parseInt(el.dataset.decimals || '0', 10);
+      var thousands = el.dataset.thousands === '1';
+      var s = decimals ? v.toFixed(decimals) : (thousands ? Math.floor(v).toLocaleString('en-GB') : String(Math.floor(v)));
+      return prefix + s + suffix;
+    }
+    function animate(el){
+      if (el.dataset.counted === '1') return;
+      el.dataset.counted = '1';
+      var target = parseFloat(el.dataset.target);
+      var dur = 1100;
+      var start = performance.now();
+      if (reduce){ el.textContent = fmt(el, target); return; }
+      function step(now){
+        var t = Math.min(1, (now - start) / dur);
+        var e = 1 - Math.pow(1 - t, 3);
+        el.textContent = fmt(el, target * e);
+        if (t < 1) requestAnimationFrame(step);
+        else el.textContent = fmt(el, target);
+      }
+      requestAnimationFrame(step);
+    }
+    var nodes = document.querySelectorAll('.count[data-target], .amt-strike[data-target]');
+    if (!('IntersectionObserver' in window)){
+      nodes.forEach(function(n){ animate(n); if (n.classList.contains('amt-strike')){ n.classList.remove('strike'); n.classList.add('struck'); } });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (!en.isIntersecting) return;
+        var el = en.target;
+        animate(el);
+        if (el.classList.contains('amt-strike')){
+          el.classList.remove('strike'); // clear static line-through; animated strike takes over
+          if (reduce) el.classList.add('struck');
+          else setTimeout(function(){ el.classList.add('struck'); }, 1100);
+        }
+        io.unobserve(el);
+      });
+    }, { threshold: 0.35 });
+    nodes.forEach(function(n){ io.observe(n); });
+  })();
+
+  // ---- 3D card tilt on .pkg + .tile (hover-capable only) ----
+  (function tilt(){
+    if (!hover || reduce) return;
+    var max = 6;
+    function attach(el){
+      var raf = null, tx = 0, ty = 0;
+      el.addEventListener('mousemove', function(e){
+        var r = el.getBoundingClientRect();
+        tx = ((e.clientX - r.left) / r.width - 0.5);
+        ty = ((e.clientY - r.top) / r.height - 0.5);
+        if (raf) return;
+        raf = requestAnimationFrame(function(){
+          raf = null;
+          el.style.transform = 'perspective(900px) rotateX(' + (-ty * max).toFixed(2) + 'deg) rotateY(' + (tx * max).toFixed(2) + 'deg)';
+        });
+      });
+      el.addEventListener('mouseleave', function(){ el.style.transform = ''; });
+    }
+    document.querySelectorAll('.pkg, .tile').forEach(attach);
+  })();
+
+  // ---- Magnetic main CTAs ----
+  (function magnet(){
+    if (!hover || reduce) return;
+    var strength = 0.28;
+    document.querySelectorAll('.hero-cta .btn--ink, .form-submit, #reviews .btn--ink').forEach(function(btn){
+      btn.addEventListener('mousemove', function(e){
+        var r = btn.getBoundingClientRect();
+        btn.style.translate = ((e.clientX - r.left - r.width/2) * strength).toFixed(1) + 'px ' + ((e.clientY - r.top - r.height/2) * strength).toFixed(1) + 'px';
+      });
+      btn.addEventListener('mouseleave', function(){ btn.style.translate = ''; });
+    });
+  })();
+
+  // ---- Marquee scroll velocity (speed + reverse on scroll up) ----
+  (function marqueeReact(){
+    if (reduce) return;
+    var tracks = document.querySelectorAll('.marquee__track');
+    if (!tracks.length) return;
+    var lastY = window.scrollY, resetTimer = null;
+    window.addEventListener('scroll', function(){
+      var y = window.scrollY;
+      var dir = y >= lastY ? 1 : -1;
+      var delta = Math.abs(y - lastY);
+      lastY = y;
+      var speed = Math.max(8, 22 - Math.min(14, delta * 0.6));
+      tracks.forEach(function(t){
+        t.style.animationDirection = dir > 0 ? 'normal' : 'reverse';
+        t.style.animationDuration = speed + 's';
+      });
+      if (resetTimer) clearTimeout(resetTimer);
+      resetTimer = setTimeout(function(){
+        tracks.forEach(function(t){ t.style.animationDuration = ''; });
+      }, 400);
+    }, { passive: true });
+  })();
 
   // ---- Mobile nav cta visibility ----
   var mq = matchMedia('(max-width:767px)');
