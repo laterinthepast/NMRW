@@ -1,51 +1,63 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en-GB">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Privacy Policy — No More Rubbish Websites</title>
-<meta name="description" content="Privacy policy for No More Rubbish Websites — what data we collect, why, and your rights under UK GDPR.">
+<title>Privacy Policy — Studio 103</title>
+<meta name="description" content="Privacy policy for Studio 103 — what data we collect, why, and your rights under UK GDPR.">
 <meta name="robots" content="index,follow">
-<link rel="canonical" href="https://www.nomorerubbishwebsites.com/privacy.html">
-<meta name="theme-color" content="#FFD100">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230a0a0a'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial Black,sans-serif' font-size='38' font-weight='900' fill='%23FFD100'%3EN%3C/text%3E%3C/svg%3E">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="canonical" href="https://studio103.co.uk/privacy.html">
+<meta name="theme-color" content="#f3f1ea">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2316161b'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='Helvetica,Arial,sans-serif' font-size='22' font-weight='800' letter-spacing='-1' fill='%23f3f1ea'%3E103%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-[data-theme="light"]{--bg:#f5f5f0;--ink:#0a0a0a;--ink2:#666;--border:rgba(10,10,10,0.15);--footer-bg:#0a0a0a;--footer-txt:rgba(255,255,255,.55)}
-[data-theme="dark"]{--bg:#0e0e0e;--ink:#f0f0eb;--ink2:#888;--border:rgba(240,240,235,0.12);--footer-bg:#050505;--footer-txt:rgba(255,255,255,.45)}
-:root{--yellow:#FFD100;--side:11vw}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.7;font-weight:300}
-a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--yellow);text-decoration-thickness:2px;text-underline-offset:3px}
-nav{display:flex;justify-content:space-between;align-items:center;padding:1.6rem var(--side);border-bottom:1px solid var(--border)}
-.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:.04em;color:var(--ink);text-decoration:none;line-height:1}
-.nav-logo span{color:var(--yellow)}
-.back{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);text-decoration:none}
+:root{
+  --bg:#f3f1ea; --bg-2:#ece8df; --ink:#16161b;
+  --ink-soft:rgba(22,22,27,.62); --ink-faint:rgba(22,22,27,.40);
+  --line:rgba(22,22,27,.13); --card:#fbfaf6;
+  --accent:#c8ff3d; --accent-ink:#16161b;
+  --display:"Schibsted Grotesk",system-ui,sans-serif;
+  --body:"Schibsted Grotesk",system-ui,sans-serif;
+  --mono:"Space Mono",ui-monospace,monospace;
+  --side:clamp(20px,5vw,64px);
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-weight:400;line-height:1.6;letter-spacing:-0.01em;-webkit-font-smoothing:antialiased;font-size:16px;font-feature-settings:"ss01","cv11"}
+a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:3px;transition:color .2s}
+a:hover{color:#000}
+::selection{background:var(--accent);color:var(--accent-ink)}
+
+.nav{display:flex;justify-content:space-between;align-items:center;padding:18px var(--side);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-0.03em;text-decoration:none;color:var(--ink)}
+.brand .mark{width:30px;height:30px;border-radius:9px;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-size:13px;font-weight:800;letter-spacing:0;text-decoration:none}
+.back{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none}
 .back:hover{color:var(--ink)}
-main{max-width:760px;margin:0 auto;padding:5rem var(--side) 6rem}
-.eyebrow{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink2);font-weight:500;margin-bottom:1rem;display:flex;align-items:center;gap:.8rem}
-.eyebrow::before{content:'';width:24px;height:1.5px;background:var(--yellow);display:block}
-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.6rem,6vw,4.5rem);line-height:.95;letter-spacing:-.01em;margin-bottom:.5rem}
-.updated{font-size:.78rem;color:var(--ink2);margin-bottom:3rem}
-h2{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.02em;margin:2.5rem 0 .8rem;color:var(--ink)}
-p,ul{font-size:.95rem;color:var(--ink2);margin-bottom:1rem}
+
+main{max-width:760px;margin:0 auto;padding:clamp(60px,9vw,120px) var(--side) clamp(72px,10vw,140px)}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);font-weight:600;margin-bottom:18px;display:flex;align-items:center;gap:.7em}
+.eyebrow::before{content:'';display:inline-block;width:28px;height:1px;background:var(--ink-faint)}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(40px,7vw,84px);line-height:.95;letter-spacing:-0.045em;margin-bottom:14px;text-wrap:balance}
+.updated{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--ink-faint);margin-bottom:48px}
+h2{font-family:var(--display);font-weight:800;font-size:clamp(22px,2.4vw,30px);letter-spacing:-0.02em;margin:40px 0 12px;color:var(--ink)}
+p,ul{font-size:16px;color:var(--ink-soft);margin-bottom:1rem;line-height:1.65}
 ul{padding-left:1.3rem}
 li{margin-bottom:.4rem}
 strong{color:var(--ink);font-weight:600}
-footer{background:var(--footer-bg);color:var(--footer-txt);padding:2.5rem var(--side);text-align:center;font-size:.78rem}
-footer a{color:var(--footer-txt);margin:0 .8rem;text-decoration:none}
-footer a:hover{color:var(--yellow)}
-@media(max-width:600px){:root{--side:6vw}main{padding:3rem var(--side) 4rem}}
+
+footer{background:var(--ink);color:rgba(255,255,255,.6);padding:36px var(--side);text-align:center;font-family:var(--mono);font-size:13px;letter-spacing:.04em}
+footer a{color:rgba(255,255,255,.78);text-decoration:none;margin:0 .8rem;transition:color .2s}
+footer a:hover{color:var(--accent)}
+footer .copy{margin-top:14px;color:rgba(255,255,255,.4);font-size:12px}
 </style>
-<script>
-(function(){var s=localStorage.getItem('theme');var d=s?s==='dark':matchMedia('(prefers-color-scheme:dark)').matches;document.documentElement.setAttribute('data-theme',d?'dark':'light');})();
-</script>
 </head>
 <body>
 
-<nav>
-  <a href="/" class="nav-logo">No More<span>Rubbish</span>Websites</a>
+<nav class="nav">
+  <a href="/" class="brand"><span class="mark">103</span><span>Studio&nbsp;103</span></a>
   <a href="/" class="back">← Back to site</a>
 </nav>
 
@@ -54,10 +66,10 @@ footer a:hover{color:var(--yellow)}
   <h1>Privacy Policy</h1>
   <div class="updated">Last updated: 8 April 2026</div>
 
-  <p>This policy explains what personal information No More Rubbish Websites ("we", "us") collects when you use <a href="https://nomorerubbishwebsites.com">nomorerubbishwebsites.com</a>, why we collect it, and what your rights are. We are a UK sole trader and the data controller for any personal data you share with us.</p>
+  <p>This policy explains what personal information Studio 103 ("we", "us") collects when you use <a href="https://studio103.co.uk">studio103.co.uk</a>, why we collect it, and what your rights are. We are a UK sole trader and the data controller for any personal data you share with us.</p>
 
   <h2>Who we are</h2>
-  <p>No More Rubbish Websites is operated by an individual sole trader based in the United Kingdom. You can contact us at any time at <a href="mailto:rafal@nomorerubbishwebsites.com">rafal@nomorerubbishwebsites.com</a>.</p>
+  <p>Studio 103 is operated by an individual sole trader based in Scotland, United Kingdom. You can contact us at any time at <a href="mailto:hello@studio103.co.uk">hello@studio103.co.uk</a>.</p>
 
   <h2>What we collect</h2>
   <p>When you submit the quote request form, we collect:</p>
@@ -81,15 +93,15 @@ footer a:hover{color:var(--yellow)}
   <p>Enquiries that don't lead to a project are kept for up to 12 months and then deleted. Client records are kept for 6 years after the end of our work together, as required by HMRC for tax purposes.</p>
 
   <h2>Your rights</h2>
-  <p>Under UK GDPR you have the right to access, correct, delete, or request a copy of any personal data we hold about you. To exercise any of these rights, email <a href="mailto:rafal@nomorerubbishwebsites.com">rafal@nomorerubbishwebsites.com</a>. You can also complain to the UK Information Commissioner's Office (<a href="https://ico.org.uk">ico.org.uk</a>) if you believe we've mishandled your data.</p>
+  <p>Under UK GDPR you have the right to access, correct, delete, or request a copy of any personal data we hold about you. To exercise any of these rights, email <a href="mailto:hello@studio103.co.uk">hello@studio103.co.uk</a>. You can also complain to the UK Information Commissioner's Office (<a href="https://ico.org.uk">ico.org.uk</a>) if you believe we've mishandled your data.</p>
 
   <h2>Changes to this policy</h2>
   <p>If we change this policy we'll update the "last updated" date at the top of the page. Material changes will be flagged on the homepage.</p>
 </main>
 
 <footer>
-  <div><a href="/">Home</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <a href="mailto:rafal@nomorerubbishwebsites.com">rafal@nomorerubbishwebsites.com</a></div>
-  <div style="margin-top:.8rem">© 2026 No More Rubbish Websites</div>
+  <div><a href="/">Home</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <a href="mailto:hello@studio103.co.uk">hello@studio103.co.uk</a></div>
+  <div class="copy">© 2026 Studio 103 · studio103.co.uk</div>
 </footer>
 
 </body>

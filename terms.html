@@ -1,133 +1,149 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en-GB">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Terms & Conditions — NoMoreRubbishWebsites</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230a0a0a'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial Black,sans-serif' font-size='38' font-weight='900' fill='%23FFD100'%3EN%3C/text%3E%3C/svg%3E">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>Terms &amp; Conditions — Studio 103</title>
+<meta name="description" content="Terms and conditions for Studio 103 — UK web design & development studio. Fixed pricing, fast builds, you own everything.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://studio103.co.uk/terms.html">
+<meta name="theme-color" content="#f3f1ea">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2316161b'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='Helvetica,Arial,sans-serif' font-size='22' font-weight='800' letter-spacing='-1' fill='%23f3f1ea'%3E103%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-[data-theme="light"]{--bg:#f5f5f0;--ink:#0a0a0a;--ink2:#525252;--ink3:#6b6b6b;--border:rgba(10,10,10,0.1);--surface:#ffffff;--surface-alt:#fafaf6}
-[data-theme="dark"]{--bg:#0e0e0e;--ink:#f0f0eb;--ink2:#a3a3a3;--ink3:#7a7a7a;--border:rgba(240,240,235,0.12);--surface:#181818;--surface-alt:#161616}
-:root{--yellow:#FFD100;--side:clamp(1.5rem,10vw,12rem)}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;font-weight:300;line-height:1.7}
+:root{
+  --bg:#f3f1ea; --bg-2:#ece8df; --ink:#16161b;
+  --ink-soft:rgba(22,22,27,.62); --ink-faint:rgba(22,22,27,.40);
+  --line:rgba(22,22,27,.13); --card:#fbfaf6;
+  --accent:#c8ff3d; --accent-ink:#16161b;
+  --display:"Schibsted Grotesk",system-ui,sans-serif;
+  --body:"Schibsted Grotesk",system-ui,sans-serif;
+  --mono:"Space Mono",ui-monospace,monospace;
+  --side:clamp(1.5rem,5vw,3.5rem);
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-weight:400;line-height:1.6;letter-spacing:-0.01em;-webkit-font-smoothing:antialiased;font-feature-settings:"ss01","cv11";overflow-x:hidden}
+a{color:var(--ink);transition:color .2s}
+::selection{background:var(--accent);color:var(--accent-ink)}
 
-/* NAV */
-nav{background:var(--ink);padding:1.1rem var(--side);display:flex;align-items:center;justify-content:space-between}
-.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.04em;color:white;text-decoration:none}
-.nav-logo span{color:var(--yellow)}
-.nav-back{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;display:flex;align-items:center;gap:.5rem}
-.nav-back:hover{color:var(--yellow)}
+/* nav */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:18px var(--side);background:var(--ink);color:var(--bg)}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-0.03em;text-decoration:none;color:var(--bg)}
+.brand .mark{width:30px;height:30px;border-radius:9px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-size:13px;font-weight:800;letter-spacing:0}
+.nav-back{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none;display:flex;align-items:center;gap:.5rem;transition:color .2s}
+.nav-back:hover{color:var(--accent)}
 .nav-back::before{content:'←'}
 
-/* HEADER */
-.doc-header{background:var(--ink);padding:4rem var(--side) 3rem;border-bottom:3px solid var(--yellow)}
-.doc-label{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--yellow);margin-bottom:.8rem;display:flex;align-items:center;gap:.6rem}
-.doc-label::before{content:'';display:block;width:18px;height:1.5px;background:var(--yellow)}
-.doc-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,6vw,5.5rem);line-height:.92;color:white;letter-spacing:-.01em;margin-bottom:1rem}
-.doc-meta{display:flex;gap:2rem;flex-wrap:wrap;margin-top:1.5rem}
-.meta-item{font-size:.76rem;color:rgba(255,255,255,.4);display:flex;flex-direction:column;gap:.2rem}
-.meta-item strong{color:rgba(255,255,255,.7);font-weight:500;font-size:.78rem}
+/* header */
+.doc-header{background:var(--ink);color:var(--bg);padding:48px var(--side) 56px;border-bottom:3px solid var(--accent)}
+.doc-header-inner{max-width:1200px;margin:0 auto}
+.doc-label{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;display:inline-flex;align-items:center;gap:.7em}
+.doc-label::before{content:'';display:inline-block;width:28px;height:1px;background:var(--accent)}
+.doc-title{font-family:var(--display);font-weight:800;font-size:clamp(40px,7vw,84px);line-height:.95;letter-spacing:-0.045em;color:var(--bg);margin-bottom:16px;text-wrap:balance}
+.doc-meta{display:flex;gap:36px;flex-wrap:wrap;margin-top:32px}
+.meta-item{font-family:var(--mono);font-size:12px;color:rgba(255,255,255,.45);display:flex;flex-direction:column;gap:4px;letter-spacing:.06em}
+.meta-item strong{color:rgba(255,255,255,.78);font-family:var(--display);font-weight:600;font-size:14px;letter-spacing:0;text-transform:none}
 
-/* LAYOUT */
-.doc-body{display:grid;grid-template-columns:240px 1fr;gap:0;min-height:80vh}
+/* layout */
+.doc-body{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:260px 1fr;gap:0;min-height:80vh}
 
-/* SIDEBAR TOC */
-.toc{position:sticky;top:0;height:100vh;overflow-y:auto;background:var(--surface);border-right:1px solid var(--border);padding:2.5rem 1.5rem}
-.toc-title{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink3);font-weight:500;margin-bottom:1.2rem}
-.toc-list{list-style:none;display:flex;flex-direction:column;gap:.2rem}
-.toc-list a{display:block;font-size:.76rem;color:var(--ink2);text-decoration:none;padding:.35rem .6rem;border-radius:3px;transition:all .2s;border-left:2px solid transparent}
-.toc-list a:hover{color:var(--ink);background:var(--bg);border-left-color:var(--yellow)}
-.toc-list a.active{color:var(--ink);background:var(--bg);border-left-color:var(--yellow);font-weight:500}
-.toc-num{color:var(--yellow);font-weight:600;margin-right:.3rem}
+/* sidebar TOC */
+.toc{position:sticky;top:0;height:100vh;overflow-y:auto;padding:48px 24px 48px var(--side);border-right:1px solid var(--line)}
+.toc-title{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);font-weight:600;margin-bottom:18px}
+.toc-list{list-style:none;display:flex;flex-direction:column;gap:2px;margin:0;padding:0}
+.toc-list a{display:flex;align-items:baseline;gap:8px;font-size:13.5px;color:var(--ink-soft);text-decoration:none;padding:8px 10px;border-radius:6px;transition:background .2s,color .2s,border-color .2s;border-left:2px solid transparent;letter-spacing:-0.005em}
+.toc-list a:hover{color:var(--ink);background:rgba(22,22,27,.04);border-left-color:var(--accent)}
+.toc-list a.active{color:var(--ink);background:rgba(22,22,27,.06);border-left-color:var(--accent);font-weight:500}
+.toc-num{font-family:var(--mono);color:var(--ink-faint);font-size:11px;font-weight:600;flex:0 0 auto}
 
-/* CONTENT */
-.doc-content{padding:3.5rem var(--side) 5rem 4rem;max-width:780px}
+/* content */
+.doc-content{padding:56px var(--side) 80px clamp(40px,4vw,64px);max-width:880px}
 
-/* IMPORTANT NOTICE BOX */
-.notice-box{background:var(--yellow);padding:1.5rem 1.8rem;margin-bottom:3rem;border-left:4px solid var(--ink)}
-.notice-box strong{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:.4rem}
-.notice-box p{font-size:.85rem;line-height:1.6;color:var(--ink)}
+/* notice / highlight boxes */
+.notice-box{background:var(--accent);color:var(--accent-ink);padding:24px 26px;margin-bottom:48px;border-radius:8px}
+.notice-box strong{font-family:var(--mono);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;display:block;margin-bottom:8px}
+.notice-box p{font-size:14px;line-height:1.6;color:var(--accent-ink);margin:0}
+.highlight{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);padding:18px 22px;margin:22px 0;border-radius:0 8px 8px 0}
+.highlight p{font-size:14.5px;line-height:1.65;margin:0;color:var(--ink-soft)}
+.highlight strong{color:var(--ink);font-weight:600}
 
-/* SECTIONS */
-.section{margin-bottom:3.5rem;padding-bottom:3.5rem;border-bottom:1px solid var(--border)}
+/* sections */
+.section{margin-bottom:56px;padding-bottom:56px;border-bottom:1px solid var(--line)}
 .section:last-child{border-bottom:none}
-.section-num{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:var(--yellow);line-height:1;margin-bottom:.3rem;opacity:.4}
-h2{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.02em;color:var(--ink);margin-bottom:1.2rem;line-height:1}
-h3{font-size:.88rem;font-weight:600;color:var(--ink);margin:1.4rem 0 .6rem;text-transform:uppercase;letter-spacing:.08em}
-p{font-size:.9rem;line-height:1.8;color:var(--ink2);margin-bottom:.9rem}
-p:last-child{margin-bottom:0}
-strong{color:var(--ink);font-weight:600}
+.section-num{font-family:var(--mono);font-size:12px;color:var(--ink-faint);letter-spacing:.18em;margin-bottom:8px;font-weight:600}
+.section h2{font-family:var(--display);font-weight:800;font-size:clamp(26px,3vw,38px);letter-spacing:-0.025em;color:var(--ink);margin-bottom:20px;line-height:1.05}
+.section h3{font-family:var(--display);font-weight:700;font-size:16px;color:var(--ink);margin:24px 0 10px;letter-spacing:-0.01em}
+.section p{font-size:15.5px;line-height:1.7;color:var(--ink-soft);margin-bottom:14px}
+.section p:last-child{margin-bottom:0}
+.section strong{color:var(--ink);font-weight:600}
+.section a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:3px;font-weight:500}
+.section a:hover{color:#000}
 
-/* LISTS */
-ul,ol{padding-left:0;list-style:none;margin-bottom:.9rem}
-ul li,ol li{font-size:.9rem;line-height:1.8;color:var(--ink2);padding:.2rem 0 .2rem 1.4rem;position:relative}
-ul li::before{content:'—';position:absolute;left:0;color:var(--yellow);font-weight:700}
-ol{counter-reset:ol-counter}
-ol li{counter-increment:ol-counter}
-ol li::before{content:counter(ol-counter)'.';position:absolute;left:0;color:var(--yellow);font-weight:700;font-size:.82rem}
+/* lists */
+.section ul,.section ol{padding-left:0;list-style:none;margin-bottom:14px}
+.section ul li,.section ol li{font-size:15.5px;line-height:1.7;color:var(--ink-soft);padding:4px 0 4px 24px;position:relative}
+.section ul li::before{content:'';position:absolute;left:0;top:14px;width:10px;height:1px;background:var(--accent)}
+.section ol{counter-reset:ol-counter}
+.section ol li{counter-increment:ol-counter}
+.section ol li::before{content:counter(ol-counter)'.';position:absolute;left:0;top:4px;color:var(--ink-faint);font-family:var(--mono);font-size:12px;background:none;width:auto;height:auto;font-weight:700}
 
-/* HIGHLIGHT BOXES */
-.highlight{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--yellow);padding:1.2rem 1.4rem;margin:1.2rem 0;border-radius:0 4px 4px 0}
-.highlight p{font-size:.86rem;margin:0;color:var(--ink)}
-.highlight strong{color:var(--ink)}
-
-/* PROCESS TABLE */
-.process-table{width:100%;border-collapse:collapse;margin:1.2rem 0;font-size:.84rem}
-.process-table th{background:var(--ink);color:white;padding:.7rem 1rem;text-align:left;font-weight:500;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}
-.process-table td{padding:.7rem 1rem;border-bottom:1px solid var(--border);color:var(--ink2);vertical-align:top}
+/* process table */
+.process-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:14px;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.process-table th{background:var(--ink);color:var(--bg);padding:10px 14px;text-align:left;font-family:var(--mono);font-weight:600;font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.process-table td{padding:12px 14px;border-bottom:1px solid var(--line);color:var(--ink-soft);vertical-align:top;line-height:1.5}
 .process-table tr:last-child td{border-bottom:none}
-.process-table tr:nth-child(even) td{background:var(--surface)}
+.process-table tr:nth-child(even) td{background:var(--card)}
 .process-table .stage{font-weight:600;color:var(--ink);white-space:nowrap}
-.tag-yellow{display:inline-block;background:var(--yellow);color:var(--ink);font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.15rem .6rem;border-radius:2px}
-.tag-red{display:inline-block;background:#fee2e2;color:#991b1b;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.15rem .6rem;border-radius:2px}
+.tag-yellow{display:inline-block;background:var(--accent);color:var(--accent-ink);font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:999px}
 
-/* SIGNATURE BLOCK */
-.sig-block{background:var(--surface);border:1px solid var(--border);padding:2rem;margin-top:2rem}
-.sig-block h3{text-transform:uppercase;letter-spacing:.1em;font-size:.76rem;margin-bottom:1.2rem;color:var(--ink3)}
-.sig-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+/* signature block */
+.sig-block{background:var(--card);border:1px solid var(--line);padding:30px;margin-top:32px;border-radius:8px}
+.sig-block h3{font-family:var(--mono);text-transform:uppercase;letter-spacing:.14em;font-size:11px;margin-bottom:20px;color:var(--ink-faint);font-weight:700}
+.sig-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
 .sig-field{border-bottom:1px solid var(--ink);padding-bottom:.3rem;margin-bottom:.4rem;min-height:2rem}
-.sig-label{font-size:.68rem;color:var(--ink3);letter-spacing:.08em;text-transform:uppercase}
+.sig-label{font-family:var(--mono);font-size:10.5px;color:var(--ink-faint);letter-spacing:.1em;text-transform:uppercase}
+.sig-block .party-label{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:20px;font-weight:700}
 
-/* FOOTER */
-.doc-footer{background:var(--ink);padding:2rem var(--side);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
-.doc-footer p{font-size:.74rem;color:rgba(255,255,255,.3)}
-.doc-footer a{color:var(--yellow);text-decoration:none;font-size:.74rem}
+/* footer */
+.doc-footer{background:var(--ink);color:rgba(255,255,255,.6);padding:36px var(--side);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-family:var(--mono);font-size:13px;letter-spacing:.04em}
+.doc-footer p{margin:0;font-size:13px}
+.doc-footer a{color:rgba(255,255,255,.78);text-decoration:none;font-size:13px;transition:color .2s}
+.doc-footer a:hover{color:var(--accent)}
 
-@media(max-width:900px){
+@media(max-width:980px){
   .doc-body{grid-template-columns:1fr}
-  .toc{display:none}
-  .doc-content{padding:2.5rem var(--side)}
-  .sig-grid{grid-template-columns:1fr}
+  .toc{position:static;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:32px var(--side)}
+  .doc-content{padding:48px var(--side)}
+  .sig-grid{grid-template-columns:1fr;gap:24px}
 }
 </style>
-<script>
-(function(){var s=localStorage.getItem('theme');var d=s?s==='dark':matchMedia('(prefers-color-scheme:dark)').matches;document.documentElement.setAttribute('data-theme',d?'dark':'light');})();
-</script>
 </head>
 <body>
 
-<nav>
-  <a href="index.html" class="nav-logo">No More<span>Rubbish</span>Websites</a>
-  <a href="index.html" class="nav-back">Back to Home</a>
+<nav class="nav">
+  <a href="index.html" class="brand"><span class="mark">103</span><span>Studio&nbsp;103</span></a>
+  <a href="index.html" class="nav-back">Back to home</a>
 </nav>
 
 <div class="doc-header">
-  <div class="doc-label">Legal Document</div>
-  <div class="doc-title">Terms &<br>Conditions</div>
-  <div class="doc-meta">
-    <div class="meta-item"><strong>Version</strong>1.0</div>
-    <div class="meta-item"><strong>Effective Date</strong>April 2025</div>
-    <div class="meta-item"><strong>Jurisdiction</strong>Scotland, UK</div>
-    <div class="meta-item"><strong>Last Updated</strong>April 2025</div>
+  <div class="doc-header-inner">
+    <div class="doc-label">Legal Document</div>
+    <h1 class="doc-title">Terms &amp;<br>Conditions</h1>
+    <div class="doc-meta">
+      <div class="meta-item"><strong>Version</strong>1.0</div>
+      <div class="meta-item"><strong>Effective Date</strong>2026</div>
+      <div class="meta-item"><strong>Jurisdiction</strong>Scotland, UK</div>
+      <div class="meta-item"><strong>Last Updated</strong>2026</div>
+    </div>
   </div>
 </div>
 
 <div class="doc-body">
 
-  <!-- SIDEBAR -->
   <aside class="toc">
     <div class="toc-title">Contents</div>
     <ul class="toc-list">
@@ -137,9 +153,9 @@ ol li::before{content:counter(ol-counter)'.';position:absolute;left:0;color:var(
       <li><a href="#s4"><span class="toc-num">04</span> The Build Process</a></li>
       <li><a href="#s5"><span class="toc-num">05</span> Revisions</a></li>
       <li><a href="#s6"><span class="toc-num">06</span> Your Responsibilities</a></li>
-      <li><a href="#s7"><span class="toc-num">07</span> Fees & Payment</a></li>
+      <li><a href="#s7"><span class="toc-num">07</span> Fees &amp; Payment</a></li>
       <li><a href="#s8"><span class="toc-num">08</span> Handover of Logins</a></li>
-      <li><a href="#s9"><span class="toc-num">09</span> Ownership & IP</a></li>
+      <li><a href="#s9"><span class="toc-num">09</span> Ownership &amp; IP</a></li>
       <li><a href="#s10"><span class="toc-num">10</span> Aftercare Support</a></li>
       <li><a href="#s11"><span class="toc-num">11</span> Cancellation</a></li>
       <li><a href="#s12"><span class="toc-num">12</span> Liability</a></li>
@@ -149,21 +165,19 @@ ol li::before{content:counter(ol-counter)'.';position:absolute;left:0;color:var(
     </ul>
   </aside>
 
-  <!-- CONTENT -->
   <main class="doc-content">
 
     <div class="notice-box">
       <strong>Please read these terms carefully</strong>
-      <p>By engaging NoMoreRubbishWebsites for any web design or development service, you agree to be bound by these Terms and Conditions. If you do not agree, please do not proceed with an order. These terms form a legally binding contract between you and NoMoreRubbishWebsites.</p>
+      <p>By engaging Studio 103 for any web design or development service, you agree to be bound by these Terms and Conditions. If you do not agree, please do not proceed with an order. These terms form a legally binding contract between you and Studio 103.</p>
     </div>
 
-    <!-- 1. DEFINITIONS -->
-    <div class="section" id="s1">
+    <section class="section" id="s1">
       <div class="section-num">01</div>
       <h2>Definitions</h2>
       <p>In these Terms and Conditions, the following words have the following meanings:</p>
       <ul>
-        <li><strong>"We", "us", "our"</strong> refers to NoMoreRubbishWebsites, a sole trader business operating in Scotland, United Kingdom.</li>
+        <li><strong>"We", "us", "our"</strong> refers to Studio 103, a sole trader business operating in Scotland, United Kingdom.</li>
         <li><strong>"You", "your", "the Client"</strong> refers to the individual or business that has engaged our services.</li>
         <li><strong>"Project"</strong> means the website design and/or development work agreed between us as set out in the project brief or quotation.</li>
         <li><strong>"Quote"</strong> means the written price and scope of work we provide before starting any project.</li>
@@ -174,10 +188,9 @@ ol li::before{content:counter(ol-counter)'.';position:absolute;left:0;color:var(
         <li><strong>"Logins"</strong> means all usernames, passwords, and access credentials for your website, hosting account, and domain registrar.</li>
         <li><strong>"Final Payment"</strong> means the last payment due before handover of logins and live deployment, as set out in Section 7.</li>
       </ul>
-    </div>
+    </section>
 
-    <!-- 2. THE AGREEMENT -->
-    <div class="section" id="s2">
+    <section class="section" id="s2">
       <div class="section-num">02</div>
       <h2>The Agreement</h2>
       <p>A binding contract between you and us is formed when <strong>both of the following have occurred</strong>:</p>
@@ -189,20 +202,19 @@ ol li::before{content:counter(ol-counter)'.';position:absolute;left:0;color:var(
       <div class="highlight">
         <p><strong>Important:</strong> These Terms and Conditions apply to all projects we undertake, regardless of whether a separate written contract has been signed. By paying the deposit, you confirm you have read and agreed to these terms.</p>
       </div>
-    </div>
+    </section>
 
-    <!-- 3. OUR SERVICES -->
-    <div class="section" id="s3">
+    <section class="section" id="s3">
       <div class="section-num">03</div>
       <h2>Our Services</h2>
       <p>We provide web design and development services for small and medium-sized local businesses. Our services include but are not limited to:</p>
       <ul>
         <li>Website design and build (Landing package — single-page site)</li>
         <li>Website design and build (Starter package — up to 3 pages)</li>
-        <li>Website design and build (Professional package — up to 7 pages)</li>
+        <li>Website design and build (Grow package — up to 7 pages)</li>
         <li>Website refresh and redesign of existing sites</li>
         <li>Contact form setup and integration</li>
-        <li>Basic SEO setup including meta titles, descriptions, and Google indexing</li>
+        <li>Custom SEO setup including meta titles, descriptions, and Google indexing</li>
         <li>Google Maps and social media integration</li>
         <li>Mobile-responsive design</li>
         <li>Domain and hosting setup assistance</li>
@@ -222,33 +234,33 @@ ol li::before{content:counter(ol-counter)'.';position:absolute;left:0;color:var(
         <li>Advanced SEO campaigns or ongoing SEO management</li>
       </ul>
       <p>If you require any of the above, please ask us and we will provide a separate quotation.</p>
-    </div>
+    </section>
 
-    <!-- 4. THE BUILD PROCESS -->
-    <div class="section" id="s4">
+    <section class="section" id="s4">
       <div class="section-num">04</div>
       <h2>The Build Process</h2>
       <p>Every project follows a structured process to ensure the final website reflects your business accurately. We do not begin design or development work without first consulting with you.</p>
 
       <table class="process-table">
-        <tr><th>Stage</th><th>What Happens</th><th>Who Acts</th></tr>
-        <tr><td class="stage">1. Consultation</td><td>We discuss your business, goals, design preferences, pages required, and any existing branding. This may be by call, video, or written brief.</td><td>Both</td></tr>
-        <tr><td class="stage">2. Quote & Agreement</td><td>We provide a written quote. You accept and pay the deposit. Work is scheduled.</td><td>Both</td></tr>
-        <tr><td class="stage">3. Content Gathering</td><td>You provide all required content — text, logo, photos, and any specific requirements. We cannot proceed without this.</td><td>Client</td></tr>
-        <tr><td class="stage">4. Design & Build</td><td>We design and build your website according to the agreed brief. Turnaround is 2 days (Landing), 3 days (Starter), or 7 days (Professional) from receipt of all content.</td><td>Us</td></tr>
-        <tr><td class="stage">5. Preview & Review</td><td>We share a preview link. You review the site and provide consolidated feedback. Up to 3 rounds of revisions are included.</td><td>Both</td></tr>
-        <tr><td class="stage">6. Final Payment</td><td>Once you are satisfied with the site, final payment is made before launch. <span class="tag-yellow">Payment required before handover</span></td><td>Client</td></tr>
-        <tr><td class="stage">7. Launch & Handover</td><td>Upon receipt of final payment, we launch the site and hand over all logins — website CMS, hosting, and domain registrar credentials.</td><td>Us</td></tr>
-        <tr><td class="stage">8. Aftercare</td><td>14-day (Landing), 30-day (Starter), or 60-day (Professional) aftercare support period begins from launch date.</td><td>Both</td></tr>
+        <thead><tr><th>Stage</th><th>What Happens</th><th>Who Acts</th></tr></thead>
+        <tbody>
+          <tr><td class="stage">1. Consultation</td><td>We discuss your business, goals, design preferences, pages required, and any existing branding. This may be by call, video, or written brief.</td><td>Both</td></tr>
+          <tr><td class="stage">2. Quote &amp; Agreement</td><td>We provide a written quote. You accept and pay the deposit. Work is scheduled.</td><td>Both</td></tr>
+          <tr><td class="stage">3. Content Gathering</td><td>You provide all required content — text, logo, photos, and any specific requirements. We cannot proceed without this.</td><td>Client</td></tr>
+          <tr><td class="stage">4. Design &amp; Build</td><td>We design and build your website according to the agreed brief. Turnaround is 2 days (Landing), 3 days (Starter), or 7 days (Grow) from receipt of all content.</td><td>Us</td></tr>
+          <tr><td class="stage">5. Preview &amp; Review</td><td>We share a preview link. You review the site and provide consolidated feedback. Up to 3 rounds of revisions are included.</td><td>Both</td></tr>
+          <tr><td class="stage">6. Final Payment</td><td>Once you are satisfied with the site, final payment is made before launch. <span class="tag-yellow">Payment required before handover</span></td><td>Client</td></tr>
+          <tr><td class="stage">7. Launch &amp; Handover</td><td>Upon receipt of final payment, we launch the site and hand over all logins — website CMS, hosting, and domain registrar credentials.</td><td>Us</td></tr>
+          <tr><td class="stage">8. Aftercare</td><td>14-day (Landing), 30-day (Starter), or 60-day (Grow) aftercare support period begins from launch date.</td><td>Both</td></tr>
+        </tbody>
       </table>
 
       <h3>Timelines</h3>
       <p>Quoted build times run from the date we receive <strong>all required content from you</strong>, not from the date of deposit. We cannot be held responsible for delays caused by late content, slow feedback, or lack of communication from the Client.</p>
       <p>We will make every reasonable effort to meet agreed timelines. If we anticipate a delay on our part, we will notify you as soon as possible.</p>
-    </div>
+    </section>
 
-    <!-- 5. REVISIONS -->
-    <div class="section" id="s5">
+    <section class="section" id="s5">
       <div class="section-num">05</div>
       <h2>Revisions</h2>
       <p>All packages include <strong>up to 3 rounds of revisions</strong> following the initial preview. A "round" means one set of consolidated feedback responded to with one updated version of the site.</p>
@@ -277,10 +289,9 @@ ol li::before{content:counter(ol-counter)'.';position:absolute;left:0;color:var(
 
       <h3>Scope changes</h3>
       <p>If you request changes that significantly alter the scope of the project from the original brief — such as adding new pages, new features, or major structural redesign — this may constitute a new quotation rather than a revision. We will advise you clearly if this is the case.</p>
-    </div>
+    </section>
 
-    <!-- 6. YOUR RESPONSIBILITIES -->
-    <div class="section" id="s6">
+    <section class="section" id="s6">
       <div class="section-num">06</div>
       <h2>Your Responsibilities</h2>
       <p>A successful project is a collaboration. To allow us to deliver your website on time and to the agreed standard, you agree to:</p>
@@ -297,19 +308,18 @@ ol li::before{content:counter(ol-counter)'.';position:absolute;left:0;color:var(
       <h3>Content ownership</h3>
       <p>You confirm that any content, images, text, or materials you provide to us are either owned by you or that you hold a valid licence to use them. We accept no liability for any copyright infringement arising from content supplied by you.</p>
       <p>If you use stock images, we recommend licensed sources such as Unsplash, Pexels (free), or Shutterstock (paid). We can advise on this if needed.</p>
-    </div>
+    </section>
 
-    <!-- 7. FEES & PAYMENT -->
-    <div class="section" id="s7">
+    <section class="section" id="s7">
       <div class="section-num">07</div>
-      <h2>Fees & Payment</h2>
+      <h2>Fees &amp; Payment</h2>
 
       <h3>Pricing</h3>
       <p>All prices are as quoted in writing before the project begins. Our standard packages are:</p>
       <ul>
-        <li><strong>Landing Website</strong> — from £299 (2-day build, single page — designed for very small businesses)</li>
-        <li><strong>Starter Website</strong> — from £499 (3-day build, up to 3 pages)</li>
-        <li><strong>Professional Website</strong> — from £999 (7-day build, up to 7 pages)</li>
+        <li><strong>Landing</strong> — from £299 (2-day build, single page — designed for very small businesses)</li>
+        <li><strong>Starter</strong> — from £499 (3-day build, up to 3 pages)</li>
+        <li><strong>Grow</strong> — from £999 (7-day build, up to 7 pages)</li>
         <li>Custom projects — priced individually per written quote</li>
       </ul>
       <p>Prices are quoted exclusive of VAT. If we become VAT registered, we will notify you in advance and update our pricing accordingly.</p>
@@ -341,14 +351,13 @@ ol li::before{content:counter(ol-counter)'.';position:absolute;left:0;color:var(
 
       <h3>Expenses</h3>
       <p>Any third-party costs incurred on your behalf — such as purchasing stock images, premium plugins, or fonts specifically requested by you — will be charged at cost and added to your invoice with prior agreement.</p>
-    </div>
+    </section>
 
-    <!-- 8. HANDOVER OF LOGINS -->
-    <div class="section" id="s8">
+    <section class="section" id="s8">
       <div class="section-num">08</div>
-      <h2>Handover of Logins & Access</h2>
+      <h2>Handover of Logins &amp; Access</h2>
 
-      <div class="highlight" style="border-left-color:#0a0a0a;background:#fff9e6">
+      <div class="highlight">
         <p><strong>Full payment must be received before any login credentials, access details, or live deployment takes place.</strong> This includes but is not limited to: CMS logins, hosting account credentials, domain registrar access, FTP/SFTP details, and any third-party platform accounts set up on your behalf.</p>
       </div>
 
@@ -366,16 +375,15 @@ ol li::before{content:counter(ol-counter)'.';position:absolute;left:0;color:var(
 
       <h3>Security</h3>
       <p>We strongly recommend that you change all passwords after handover. We accept no responsibility for any security issues that arise after login credentials have been transferred to you.</p>
-    </div>
+    </section>
 
-    <!-- 9. OWNERSHIP & IP -->
-    <div class="section" id="s9">
+    <section class="section" id="s9">
       <div class="section-num">09</div>
-      <h2>Ownership & Intellectual Property</h2>
+      <h2>Ownership &amp; Intellectual Property</h2>
 
       <h3>Transfer of ownership</h3>
       <p>Upon receipt of <strong>full and final payment</strong>, all intellectual property rights in the completed website design and code transfer to you, the Client. You will own the site outright — including all files, designs, and assets created specifically for your project.</p>
-      <p>Until final payment is received, all work remains the intellectual property of NoMoreRubbishWebsites.</p>
+      <p>Until final payment is received, all work remains the intellectual property of Studio 103.</p>
 
       <h3>Our portfolio rights</h3>
       <p>We reserve the right to display your completed website as part of our portfolio and in our marketing materials (website, social media, case studies) unless you specifically request otherwise in writing before the project begins. We will never share sensitive business information — only the visual design of the site.</p>
@@ -385,17 +393,16 @@ ol li::before{content:counter(ol-counter)'.';position:absolute;left:0;color:var(
 
       <h3>Content you provide</h3>
       <p>All content supplied by you (text, images, logos) remains your property at all times. We will not use your content for any purpose other than building your website.</p>
-    </div>
+    </section>
 
-    <!-- 10. AFTERCARE SUPPORT -->
-    <div class="section" id="s10">
+    <section class="section" id="s10">
       <div class="section-num">10</div>
       <h2>Aftercare Support</h2>
       <p>Following launch, all packages include a period of complimentary aftercare support:</p>
       <ul>
-        <li><strong>Landing package:</strong> 14 days from launch date</li>
-        <li><strong>Starter package:</strong> 30 days from launch date</li>
-        <li><strong>Professional package:</strong> 60 days from launch date</li>
+        <li><strong>Landing:</strong> 14 days from launch date</li>
+        <li><strong>Starter:</strong> 30 days from launch date</li>
+        <li><strong>Grow:</strong> 60 days from launch date</li>
       </ul>
 
       <h3>What aftercare covers</h3>
@@ -415,10 +422,9 @@ ol li::before{content:counter(ol-counter)'.';position:absolute;left:0;color:var(
       </ul>
 
       <p>After the aftercare period ends, support and maintenance can be arranged at our standard rate of <strong>£50 per hour</strong> or via a monthly maintenance package (available on request).</p>
-    </div>
+    </section>
 
-    <!-- 11. CANCELLATION -->
-    <div class="section" id="s11">
+    <section class="section" id="s11">
       <div class="section-num">11</div>
       <h2>Cancellation</h2>
 
@@ -430,7 +436,7 @@ ol li::before{content:counter(ol-counter)'.';position:absolute;left:0;color:var(
         <li><strong>After preview has been delivered:</strong> Full project fee is payable. The deposit is non-refundable and the remaining balance becomes immediately due.</li>
       </ul>
 
-      <p>Cancellation must be made in writing via email to <a href="mailto:rafal@nomorerubbishwebsites.com" style="color:var(--ink);font-weight:500">rafal@nomorerubbishwebsites.com</a>.</p>
+      <p>Cancellation must be made in writing via email to <a href="mailto:hello@studio103.co.uk">hello@studio103.co.uk</a>.</p>
 
       <h3>Cancellation by us</h3>
       <p>We reserve the right to cancel a project in exceptional circumstances, including (but not limited to):</p>
@@ -443,10 +449,9 @@ ol li::before{content:counter(ol-counter)'.';position:absolute;left:0;color:var(
 
       <h3>Project abandonment</h3>
       <p>If a project is stalled for more than <strong>30 days due to inaction on your part</strong> (e.g. failure to provide content, failure to respond to communications), we reserve the right to treat the project as abandoned. In this case, the deposit is forfeited and the project will be closed. Restarting the project may require a new quote and new deposit.</p>
-    </div>
+    </section>
 
-    <!-- 12. LIABILITY -->
-    <div class="section" id="s12">
+    <section class="section" id="s12">
       <div class="section-num">12</div>
       <h2>Limitation of Liability</h2>
 
@@ -464,96 +469,91 @@ ol li::before{content:counter(ol-counter)'.';position:absolute;left:0;color:var(
 
       <h3>Third-party services</h3>
       <p>We may recommend or set up third-party services such as hosting providers, domain registrars, or analytics platforms. We are not responsible for the performance, availability, pricing changes, or terms of these third-party services.</p>
-    </div>
+    </section>
 
-    <!-- 13. CONFIDENTIALITY -->
-    <div class="section" id="s13">
+    <section class="section" id="s13">
       <div class="section-num">13</div>
       <h2>Confidentiality</h2>
       <p>Both parties agree to keep confidential any sensitive business information shared during the course of the project. This includes business strategies, financial information, customer data, and any information clearly marked or communicated as confidential.</p>
       <p>We will not disclose your confidential information to any third party without your prior written consent, except where required by law.</p>
       <p>This obligation of confidentiality does not apply to information that is or becomes publicly available through no fault of ours, or that we were already aware of before you shared it with us.</p>
       <h3>Data protection</h3>
-      <p>We handle any personal data you share with us in accordance with the UK General Data Protection Regulation (UK GDPR) and the Data Protection Act 2018. Please refer to our Privacy Policy for full details of how we collect, use, and store your data.</p>
-    </div>
+      <p>We handle any personal data you share with us in accordance with the UK General Data Protection Regulation (UK GDPR) and the Data Protection Act 2018. Please refer to our <a href="privacy.html">Privacy Policy</a> for full details of how we collect, use, and store your data.</p>
+    </section>
 
-    <!-- 14. GOVERNING LAW -->
-    <div class="section" id="s14">
+    <section class="section" id="s14">
       <div class="section-num">14</div>
-      <h2>Governing Law & Disputes</h2>
+      <h2>Governing Law &amp; Disputes</h2>
       <p>These Terms and Conditions are governed by and construed in accordance with the <strong>law of Scotland</strong>. Any disputes arising from or in connection with these terms shall be subject to the exclusive jurisdiction of the <strong>Scottish courts</strong>.</p>
       <h3>Resolving disputes</h3>
-      <p>Before raising any formal dispute, we ask that both parties make a genuine effort to resolve any disagreement informally. Please contact us in the first instance at <a href="mailto:rafal@nomorerubbishwebsites.com" style="color:var(--ink);font-weight:500">rafal@nomorerubbishwebsites.com</a> and we will respond within 3 working days.</p>
+      <p>Before raising any formal dispute, we ask that both parties make a genuine effort to resolve any disagreement informally. Please contact us in the first instance at <a href="mailto:hello@studio103.co.uk">hello@studio103.co.uk</a> and we will respond within 3 working days.</p>
       <p>If informal resolution is not possible, we are willing to consider mediation as an alternative to legal proceedings before either party commences formal legal action.</p>
       <h3>Severability</h3>
       <p>If any provision of these Terms is found to be invalid or unenforceable by a court of competent jurisdiction, the remaining provisions shall continue in full force and effect.</p>
       <h3>Entire agreement</h3>
       <p>These Terms and Conditions, together with the written Quote accepted by you, constitute the entire agreement between the parties and supersede all prior discussions, representations, or agreements whether written or oral.</p>
-    </div>
+    </section>
 
-    <!-- 15. CONTACT -->
-    <div class="section" id="s15">
+    <section class="section" id="s15">
       <div class="section-num">15</div>
       <h2>Contact Us</h2>
       <p>If you have any questions about these Terms and Conditions, or wish to discuss any aspect of your project, please contact us:</p>
       <ul>
-        <li><strong>Trading name:</strong> NoMoreRubbishWebsites</li>
+        <li><strong>Trading name:</strong> Studio 103</li>
         <li><strong>Business type:</strong> Sole trader</li>
-        <li><strong>Based in:</strong> Glasgow, Scotland</li>
-        <li><strong>Email:</strong> <a href="mailto:rafal@nomorerubbishwebsites.com" style="color:var(--ink)">rafal@nomorerubbishwebsites.com</a></li>
-        <li><strong>Website:</strong> <a href="https://nomorerubbishwebsites.com" style="color:var(--ink)">nomorerubbishwebsites.com</a></li>
+        <li><strong>Based in:</strong> Scotland, United Kingdom</li>
+        <li><strong>Email:</strong> <a href="mailto:hello@studio103.co.uk">hello@studio103.co.uk</a></li>
+        <li><strong>Website:</strong> <a href="https://studio103.co.uk">studio103.co.uk</a></li>
       </ul>
-      <p style="margin-top:1.2rem;font-size:.82rem;color:var(--ink3)">These Terms and Conditions were last updated in April 2025. We reserve the right to update these terms at any time. The version applicable to your project is the version in force at the time your deposit is received.</p>
+      <p style="margin-top:20px;font-size:13px;color:var(--ink-faint)">These Terms and Conditions were last updated in 2026. We reserve the right to update these terms at any time. The version applicable to your project is the version in force at the time your deposit is received.</p>
 
-      <!-- SIGNATURE BLOCK -->
-      <div class="sig-block" style="margin-top:2.5rem">
+      <div class="sig-block">
         <h3>Project agreement — client sign-off (optional)</h3>
-        <p style="font-size:.82rem;color:var(--ink2);margin-bottom:1.5rem">For larger projects, both parties may wish to sign below to confirm agreement to these terms alongside the project quote. This is optional — acceptance of the quote and payment of the deposit also constitutes agreement.</p>
+        <p style="font-size:13.5px;color:var(--ink-soft);margin-bottom:24px;line-height:1.6">For larger projects, both parties may wish to sign below to confirm agreement to these terms alongside the project quote. This is optional — acceptance of the quote and payment of the deposit also constitutes agreement.</p>
         <div class="sig-grid">
           <div>
-            <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:1.2rem">Client</div>
+            <div class="party-label">Client</div>
             <div class="sig-field"></div>
             <div class="sig-label">Signature</div>
-            <div class="sig-field" style="margin-top:1rem"></div>
+            <div class="sig-field" style="margin-top:18px"></div>
             <div class="sig-label">Full Name</div>
-            <div class="sig-field" style="margin-top:1rem"></div>
+            <div class="sig-field" style="margin-top:18px"></div>
             <div class="sig-label">Date</div>
           </div>
           <div>
-            <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:1.2rem">NoMoreRubbishWebsites</div>
+            <div class="party-label">Studio 103</div>
             <div class="sig-field"></div>
             <div class="sig-label">Signature</div>
-            <div class="sig-field" style="margin-top:1rem"></div>
+            <div class="sig-field" style="margin-top:18px"></div>
             <div class="sig-label">Full Name</div>
-            <div class="sig-field" style="margin-top:1rem"></div>
+            <div class="sig-field" style="margin-top:18px"></div>
             <div class="sig-label">Date</div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
   </main>
 </div>
 
-<div class="doc-footer">
-  <p>© 2025 NoMoreRubbishWebsites — Sole trader, Scotland, UK</p>
+<footer class="doc-footer">
+  <p>© 2026 Studio 103 — Sole trader, Scotland, UK</p>
   <a href="privacy.html">Privacy Policy</a>
-</div>
+</footer>
 
 <script>
-// Highlight active TOC item on scroll
 const sections = document.querySelectorAll('.section');
 const tocLinks = document.querySelectorAll('.toc-list a');
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => {
-    if(e.isIntersecting){
+    if (e.isIntersecting){
       tocLinks.forEach(l => l.classList.remove('active'));
       const id = e.target.getAttribute('id');
-      const active = document.querySelector(`.toc-list a[href="#${id}"]`);
-      if(active) active.classList.add('active');
+      const active = document.querySelector('.toc-list a[href="#' + id + '"]');
+      if (active) active.classList.add('active');
     }
   });
-}, {rootMargin:'-20% 0px -70% 0px'});
+}, { rootMargin: '-20% 0px -70% 0px' });
 sections.forEach(s => obs.observe(s));
 </script>
 </body>
