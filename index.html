@@ -80,7 +80,7 @@
   --mono: "Space Mono", ui-monospace, monospace;
 
   --bg:#f3f1ea; --bg-2:#ece8df; --ink:#16161b;
-  --ink-soft:rgba(22,22,27,.62); --ink-faint:rgba(22,22,27,.40);
+  --ink-soft:rgba(22,22,27,.68); --ink-faint:rgba(22,22,27,.58);
   --line:rgba(22,22,27,.13); --card:#fbfaf6; --card-edge:rgba(22,22,27,.08);
 
   --accent:#c8ff3d; --accent-ink:#16161b;
@@ -431,7 +431,8 @@ body[data-hero="orb"] .fx-orb{ display:block; }
   color:var(--accent-ink); display:grid; place-items:center; font-size:12px; font-weight:700; flex-shrink:0; }
 .form-card{ background:var(--card); color:var(--ink); border-radius:var(--r);
   padding:clamp(24px,2.8vw,38px); box-shadow:0 40px 80px -40px rgba(0,0,0,.5); }
-.form-card .fh{ display:flex; align-items:center; justify-content:space-between; margin-bottom:22px; flex-wrap:wrap; gap:8px; }
+.form-card .fh{ display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; flex-wrap:wrap; gap:8px; }
+.form-hint{ font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:var(--ink-faint); margin:0 0 18px; }
 .form-card .fh b{ font-family:var(--display); font-weight:800; font-size:22px; letter-spacing:-.03em; }
 .form-card .fh .t{ font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase;
   color:var(--ink-faint); display:flex; align-items:center; gap:7px; }
@@ -464,7 +465,7 @@ body[data-hero="orb"] .fx-orb{ display:block; }
 .select-list li{ padding:11px 12px; border-radius:8px; font-size:15px; color:var(--ink-soft);
   display:flex; align-items:center; justify-content:space-between; gap:10px;
   transition:background .18s, color .18s; }
-.select-list li:hover{ background:color-mix(in srgb, var(--accent) 24%, transparent); color:var(--ink); }
+.select-list li:hover, .select-list li.hl{ background:color-mix(in srgb, var(--accent) 24%, transparent); color:var(--ink); }
 .select-list li[aria-selected="true"]{ background:var(--accent); color:var(--accent-ink); font-weight:600; }
 .select-list li[aria-selected="true"]::after{ content:"✓"; font-size:12px; }
 .form-card .submit{ margin-top:16px; }
@@ -482,9 +483,10 @@ body[data-hero="orb"] .fx-orb{ display:block; }
 .footer .brand{ color:var(--bg); font-size:24px; }
 .footer .brand .mark{ background:var(--accent); color:#16161b; }
 .footer .tag{ color:rgba(255,255,255,.6); margin-top:18px; max-width:30ch; font-size:15px; }
-.footer h4{ font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+.footer h3{ font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase;
   color:rgba(255,255,255,.45); margin-bottom:16px; }
-.footer .col a, .footer .col p{ display:block; color:rgba(255,255,255,.78); font-size:15px;
+.footer .col a, .footer .col p{ display:block; color:rgba(255,255,255,.82); font-size:15px;
+  min-height:24px; padding-block:6px;
   margin-bottom:10px; transition:color .25s; overflow-wrap:anywhere; }
 .footer .col a:hover{ color:var(--accent); }
 .footer .bottom{ border-top:1px solid rgba(255,255,255,.14); padding-block:22px;
@@ -524,7 +526,7 @@ html.reveal-failsafe .reveal{ translate:none !important; transition:none !import
 }
 </style>
 </head>
-<body data-palette="dream" data-hero="orb" data-smooth="off" data-cursor="on" data-grain="on" data-parallax="on">
+<body data-palette="dream" data-hero="orb" data-smooth="off" data-cursor="off" data-grain="on" data-parallax="on">
 
 <a class="skip" href="#smooth-content">Skip to content</a>
 
@@ -537,7 +539,7 @@ html.reveal-failsafe .reveal{ translate:none !important; transition:none !import
 
 <header class="nav" id="nav">
   <a href="#top" class="brand" data-cursor-hover>
-    <span class="mark">103</span>
+    <span class="mark" aria-hidden="true">103</span>
     <span>Studio&nbsp;103</span>
   </a>
   <nav class="nav-links" aria-label="Primary">
@@ -546,7 +548,7 @@ html.reveal-failsafe .reveal{ translate:none !important; transition:none !import
     <a href="#pricing">Pricing</a>
     <a href="#reviews">Reviews</a>
   </nav>
-  <a href="#contact" class="btn" data-cursor-hover>Start a project <span class="arr">→</span></a>
+  <a href="#contact" class="btn" data-cursor-hover>Start a project <span class="arr" aria-hidden="true">→</span></a>
 </header>
 
 <main id="smooth-content">
@@ -557,7 +559,7 @@ html.reveal-failsafe .reveal{ translate:none !important; transition:none !import
     </h1>
     <p class="sub">Studio 103 makes <b>design-led websites</b> for ambitious small businesses. <b>Fixed pricing</b>, builds measured in days, custom SEO that ranks - and a site that's <b>100% yours, forever</b>. No templates, no lock-in, no rubbish.</p>
     <div class="hero-actions">
-      <a href="#contact" class="btn btn--accent btn--lg" data-cursor-hover>Start a project <span class="arr">→</span></a>
+      <a href="#contact" class="btn btn--accent btn--lg" data-cursor-hover>Start a project <span class="arr" aria-hidden="true">→</span></a>
       <a href="#work" class="btn btn--ghost btn--lg" data-cursor-hover>See selected work</a>
     </div>
     <div class="hero-stats">
@@ -589,28 +591,28 @@ html.reveal-failsafe .reveal{ translate:none !important; transition:none !import
           <div class="inner"><img src="/portfolio/okolitza.webp" width="1000" height="625" loading="lazy" decoding="async" alt="Okolitza Studio — Recording Studio website built by Studio 103"></div>
           <span class="num">01 / 04</span>
           <span class="days">3d</span>
-          <div class="meta"><div><div class="nm">Okolitza Studio</div><div class="cat">Recording Studio</div></div><span class="go">→</span></div>
+          <div class="meta"><div><div class="nm">Okolitza Studio</div><div class="cat">Recording Studio</div></div><span class="go" aria-hidden="true">→</span></div>
         </a>
         <a class="stack-card" href="https://www.l8pro.co.uk/" target="_blank" rel="noopener" data-cursor-hover aria-label="L8 Pro — Consultancy website (opens in new tab)">
           <div class="inner"><img src="/portfolio/l8.webp" width="1000" height="472" loading="lazy" decoding="async" alt="L8 Pro — Consultancy website built by Studio 103"></div>
           <span class="num">02 / 04</span>
           <span class="days">5d</span>
-          <div class="meta"><div><div class="nm">L8 Pro</div><div class="cat">Consultancy</div></div><span class="go">→</span></div>
+          <div class="meta"><div><div class="nm">L8 Pro</div><div class="cat">Consultancy</div></div><span class="go" aria-hidden="true">→</span></div>
         </a>
         <a class="stack-card" href="https://www.scoutyourlead.com/" target="_blank" rel="noopener" data-cursor-hover aria-label="Scout Your Lead — B2B Lead Gen website (opens in new tab)">
           <div class="inner"><img src="/portfolio/scout.webp" width="1000" height="486" loading="lazy" decoding="async" alt="Scout Your Lead — B2B Lead Gen website built by Studio 103"></div>
           <span class="num">03 / 04</span>
           <span class="days">4d</span>
-          <div class="meta"><div><div class="nm">Scout Your Lead</div><div class="cat">B2B Lead Gen</div></div><span class="go">→</span></div>
+          <div class="meta"><div><div class="nm">Scout Your Lead</div><div class="cat">B2B Lead Gen</div></div><span class="go" aria-hidden="true">→</span></div>
         </a>
         <a class="stack-card" href="https://project1998573.netlify.app" target="_blank" rel="noopener" data-cursor-hover aria-label="Bart Sound — Music and Audio website (opens in new tab)">
           <div class="inner"><img src="/portfolio/bart.webp" width="1000" height="666" loading="lazy" decoding="async" alt="Bart Sound — Music and Audio website built by Studio 103"></div>
           <span class="num">04 / 04</span>
           <span class="days">4d</span>
-          <div class="meta"><div><div class="nm">Bart Sound</div><div class="cat">Music &amp; Audio</div></div><span class="go">→</span></div>
+          <div class="meta"><div><div class="nm">Bart Sound</div><div class="cat">Music &amp; Audio</div></div><span class="go" aria-hidden="true">→</span></div>
         </a>
       </div>
-      <div class="work-cta"><a href="#contact" class="btn btn--ghost" data-cursor-hover>Start your project <span class="arr">→</span></a></div>
+      <div class="work-cta"><a href="#contact" class="btn btn--ghost" data-cursor-hover>Start your project <span class="arr" aria-hidden="true">→</span></a></div>
     </div>
   </section>
 
@@ -627,11 +629,11 @@ html.reveal-failsafe .reveal{ translate:none !important; transition:none !import
       </div>
       <div class="phone-stage" id="phone-stage">
         <div class="phone phone-a" data-phone="a">
-          <span class="notch"></span><span class="side"></span>
+          <span class="notch" aria-hidden="true"></span><span class="side" aria-hidden="true"></span>
           <div class="screen"><img src="/portfolio/mobile.webp" alt="Studio 103 client site on mobile" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;filter:grayscale(1) contrast(1.05)"></div>
         </div>
         <div class="phone phone-b" data-phone="b" data-cursor-hover>
-          <span class="notch"></span><span class="side"></span>
+          <span class="notch" aria-hidden="true"></span><span class="side" aria-hidden="true"></span>
           <div class="screen"><img src="/portfolio/mobile.webp" alt="Studio 103 client site on mobile" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block"></div>
         </div>
       </div>
@@ -704,7 +706,7 @@ html.reveal-failsafe .reveal{ translate:none !important; transition:none !import
             <li>Free hosting for life</li>
             <li>You own everything</li>
           </ul>
-          <a href="#contact" class="btn btn--block" data-cursor-hover data-pkg="Landing — £299">Get my free quote <span class="arr">→</span></a>
+          <a href="#contact" class="btn btn--block" data-cursor-hover data-pkg="Landing — £299" aria-label="Get my free quote for Landing package, from £299">Get my free quote <span class="arr" aria-hidden="true">→</span></a>
         </div>
         <div class="price-card feat reveal" data-cursor-hover>
           <span class="pop">★ Most popular</span>
@@ -721,7 +723,7 @@ html.reveal-failsafe .reveal{ translate:none !important; transition:none !import
             <li>30-day aftercare included</li>
             <li>You own everything</li>
           </ul>
-          <a href="#contact" class="btn btn--accent btn--block" data-cursor-hover data-pkg="Starter — £499">Get my free quote <span class="arr">→</span></a>
+          <a href="#contact" class="btn btn--accent btn--block" data-cursor-hover data-pkg="Starter — £499" aria-label="Get my free quote for Starter package, from £499">Get my free quote <span class="arr" aria-hidden="true">→</span></a>
         </div>
         <div class="price-card reveal" data-cursor-hover>
           <div class="tier-name">Grow</div>
@@ -737,7 +739,7 @@ html.reveal-failsafe .reveal{ translate:none !important; transition:none !import
             <li>60-day priority support</li>
             <li>You own everything</li>
           </ul>
-          <a href="#contact" class="btn btn--block" data-cursor-hover data-pkg="Grow — £999">Get my free quote <span class="arr">→</span></a>
+          <a href="#contact" class="btn btn--block" data-cursor-hover data-pkg="Grow — £999" aria-label="Get my free quote for Grow package, from £999">Get my free quote <span class="arr" aria-hidden="true">→</span></a>
         </div>
       </div>
       <div class="hosting-note reveal">
@@ -773,7 +775,7 @@ html.reveal-failsafe .reveal{ translate:none !important; transition:none !import
             <div>All 5 stars <b>Yes</b></div>
             <div>Verified <b>Google</b></div>
           </div>
-          <a href="https://maps.app.goo.gl/7YvGLL88SBKGuFH38" target="_blank" rel="noopener" class="btn btn--accent" data-cursor-hover>Read all on Google <span class="arr">→</span></a>
+          <a href="https://maps.app.goo.gl/7YvGLL88SBKGuFH38" target="_blank" rel="noopener" class="btn btn--accent" data-cursor-hover>Read all on Google <span class="arr" aria-hidden="true">→</span></a>
         </div>
       </div>
     </div>
@@ -799,7 +801,8 @@ html.reveal-failsafe .reveal{ translate:none !important; transition:none !import
       </div>
       <div class="form-card reveal">
         <div id="form-wrap">
-          <div class="fh"><b>Free quote</b><span class="t"><span class="dot"></span> ~60 seconds</span></div>
+          <div class="fh"><b>Free quote</b><span class="t"><span class="dot" aria-hidden="true"></span> ~60 seconds</span></div>
+          <p class="form-hint"><span aria-hidden="true">*</span> Required fields</p>
           <form id="quote-form" action="https://api.web3forms.com/submit" method="POST">
             <input type="hidden" name="access_key" value="e28578ec-5e26-4389-b13a-60ef4df9d547">
             <input type="hidden" name="subject" value="New Studio 103 quote request">
@@ -808,7 +811,7 @@ html.reveal-failsafe .reveal{ translate:none !important; transition:none !import
             <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
             <div class="form-grid">
               <div class="field">
-                <label for="f-name">Your name *</label>
+                <label for="f-name">Your name <span aria-hidden="true">*</span></label>
                 <input id="f-name" type="text" name="name" placeholder="Jane Smith" autocomplete="name" required aria-required="true">
               </div>
               <div class="field">
@@ -816,7 +819,7 @@ html.reveal-failsafe .reveal{ translate:none !important; transition:none !import
                 <input id="f-biz" type="text" name="business" placeholder="Acme Co." autocomplete="organization">
               </div>
               <div class="field">
-                <label for="f-email">Email *</label>
+                <label for="f-email">Email <span aria-hidden="true">*</span></label>
                 <input id="f-email" type="email" name="email" placeholder="jane@acme.co.uk" autocomplete="email" required aria-required="true">
               </div>
               <div class="field">
@@ -841,7 +844,7 @@ html.reveal-failsafe .reveal{ translate:none !important; transition:none !import
                 <textarea id="f-msg" name="message" placeholder="Anything you want us to know…"></textarea>
               </div>
             </div>
-            <button type="submit" class="btn btn--accent btn--block submit" data-cursor-hover>Send my free quote <span class="arr">→</span></button>
+            <button type="submit" class="btn btn--accent btn--block submit" data-cursor-hover>Send my free quote <span class="arr" aria-hidden="true">→</span></button>
             <p class="fine">Your info is private · we never share it</p>
           </form>
         </div>
@@ -861,12 +864,12 @@ html.reveal-failsafe .reveal{ translate:none !important; transition:none !import
     <div class="wrap">
       <div class="cols">
         <div>
-          <a href="#top" class="brand" data-cursor-hover><span class="mark">103</span><span>Studio&nbsp;103</span></a>
+          <a href="#top" class="brand" data-cursor-hover><span class="mark" aria-hidden="true">103</span><span>Studio&nbsp;103</span></a>
           <p class="tag">Web design &amp; development for ambitious UK small businesses. Built proper. Owned by you. From £299.</p>
         </div>
-        <div class="col"><h4>Site</h4><a href="#work">Work</a><a href="#services">Services</a><a href="#pricing">Pricing</a><a href="#reviews">Reviews</a><a href="#contact">Get a quote</a></div>
-        <div class="col"><h4>Contact</h4><a href="mailto:hello@studio103.co.uk">hello@studio103.co.uk</a><p>Glasgow · Edinburgh · UK</p><p>Reply within 24h</p></div>
-        <div class="col"><h4>Legal</h4><a href="/privacy.html" data-cursor-hover>Privacy Policy</a><a href="/terms.html" data-cursor-hover>Terms &amp; Conditions</a></div>
+        <div class="col"><h3>Site</h3><a href="#work">Work</a><a href="#services">Services</a><a href="#pricing">Pricing</a><a href="#reviews">Reviews</a><a href="#contact">Get a quote</a></div>
+        <div class="col"><h3>Contact</h3><a href="mailto:hello@studio103.co.uk">hello@studio103.co.uk</a><p>Glasgow · Edinburgh · UK</p><p>Reply within 24h</p></div>
+        <div class="col"><h3>Legal</h3><a href="/privacy.html" data-cursor-hover>Privacy Policy</a><a href="/terms.html" data-cursor-hover>Terms &amp; Conditions</a></div>
       </div>
       <div class="bottom"><span>© 2026 Studio 103 · studio103.co.uk</span><span>Built in days. By us. Obviously.</span></div>
     </div>
@@ -883,7 +886,7 @@ html.reveal-failsafe .reveal{ translate:none !important; transition:none !import
   var content = document.getElementById("smooth-content");
   var nav = document.getElementById("nav");
 
-  var state = { smooth:true, parallax:true };
+  var state = { smooth:true, parallax: !prefersReduce };
   var current = 0, target = 0;
   var mx = window.innerWidth/2, my = window.innerHeight/2;
   var cnx = 0, cny = 0, ctx = 0, cty = 0;
@@ -1006,26 +1009,89 @@ html.reveal-failsafe .reveal{ translate:none !important; transition:none !import
       var list = sel.querySelector(".select-list");
       var hidden = document.getElementById("packageHidden");
       if (!val || !list) return;
-      sel.addEventListener("click", function(){
-        var open = sel.classList.toggle("open");
-        sel.setAttribute("aria-expanded", open ? "true" : "false");
+      var opts = Array.prototype.slice.call(list.querySelectorAll("li"));
+      // Give each option an id so we can set aria-activedescendant
+      opts.forEach(function(o, i){ if (!o.id) o.id = (sel.id || "sel") + "-opt-" + i; });
+      // start highlight at the currently selected option
+      var hl = Math.max(0, opts.findIndex(function(o){ return o.getAttribute("aria-selected") === "true"; }));
+      function highlight(i){
+        hl = Math.max(0, Math.min(opts.length - 1, i));
+        opts.forEach(function(o, j){ o.classList.toggle("hl", j === hl); });
+        sel.setAttribute("aria-activedescendant", opts[hl].id);
+        // keep highlighted option in view inside scrollable list
+        var o = opts[hl];
+        if (o.offsetTop < list.scrollTop) list.scrollTop = o.offsetTop;
+        else if (o.offsetTop + o.offsetHeight > list.scrollTop + list.clientHeight) {
+          list.scrollTop = o.offsetTop + o.offsetHeight - list.clientHeight;
+        }
+      }
+      function openList(){ sel.classList.add("open"); sel.setAttribute("aria-expanded", "true"); highlight(hl); }
+      function closeList(){ sel.classList.remove("open"); sel.setAttribute("aria-expanded", "false"); sel.removeAttribute("aria-activedescendant"); }
+      function pick(li){
+        opts.forEach(function(o){ o.removeAttribute("aria-selected"); });
+        li.setAttribute("aria-selected", "true");
+        var v = li.getAttribute("data-val");
+        val.textContent = v;
+        if (hidden) hidden.value = v;
+        closeList();
+      }
+      sel.addEventListener("click", function(e){
+        // option click is handled separately and stops propagation
+        if (e.target.closest(".select-list")) return;
+        if (sel.classList.contains("open")) closeList(); else openList();
       });
-      list.querySelectorAll("li").forEach(function(li){
-        li.addEventListener("click", function(e){
-          e.stopPropagation();
-          list.querySelectorAll("li").forEach(function(o){ o.removeAttribute("aria-selected"); });
-          li.setAttribute("aria-selected", "true");
-          var v = li.getAttribute("data-val");
-          val.textContent = v;
-          if (hidden) hidden.value = v;
-          sel.classList.remove("open");
-          sel.setAttribute("aria-expanded", "false");
-        });
+      opts.forEach(function(li, i){
+        li.addEventListener("click", function(e){ e.stopPropagation(); pick(li); });
+        li.addEventListener("mouseenter", function(){ highlight(i); });
+      });
+      // Full keyboard support per WAI-ARIA combobox pattern.
+      sel.addEventListener("keydown", function(e){
+        var isOpen = sel.classList.contains("open");
+        switch (e.key){
+          case "ArrowDown":
+            e.preventDefault();
+            if (!isOpen) openList(); else highlight(hl + 1);
+            break;
+          case "ArrowUp":
+            e.preventDefault();
+            if (!isOpen) openList(); else highlight(hl - 1);
+            break;
+          case "Home":
+            if (isOpen){ e.preventDefault(); highlight(0); }
+            break;
+          case "End":
+            if (isOpen){ e.preventDefault(); highlight(opts.length - 1); }
+            break;
+          case "Enter":
+          case " ":
+            e.preventDefault();
+            if (!isOpen) openList(); else pick(opts[hl]);
+            break;
+          case "Escape":
+            if (isOpen){ e.preventDefault(); closeList(); }
+            break;
+          case "Tab":
+            if (isOpen) closeList();
+            break;
+          default:
+            // type-ahead — jump to next option starting with this char
+            if (e.key.length === 1 && /\S/.test(e.key)){
+              var c = e.key.toLowerCase();
+              for (var i = 1; i <= opts.length; i++){
+                var idx = (hl + i) % opts.length;
+                if (opts[idx].textContent.trim().toLowerCase().startsWith(c)){
+                  if (!isOpen) openList();
+                  highlight(idx);
+                  break;
+                }
+              }
+            }
+        }
       });
     });
     document.addEventListener("click", function(e){
       document.querySelectorAll(".select.open").forEach(function(sel){
-        if (!sel.contains(e.target)){ sel.classList.remove("open"); sel.setAttribute("aria-expanded", "false"); }
+        if (!sel.contains(e.target)){ sel.classList.remove("open"); sel.setAttribute("aria-expanded", "false"); sel.removeAttribute("aria-activedescendant"); }
       });
     });
   }
@@ -1199,7 +1265,7 @@ html.reveal-failsafe .reveal{ translate:none !important; transition:none !import
       var os = Math.max(0.78, 1 - current * 0.00035);
       fxOrb.style.transform = "translate(-50%,-50%) translate(" + (cnx * 36 * p) + "px," + (cny * 30 * p + oy) + "px) scale(" + os + ")";
     }
-    if (shards.length && orbBall){
+    if (shards.length && orbBall && !prefersReduce){
       var hH = (heroEl ? heroEl.offsetHeight : window.innerHeight) || window.innerHeight;
       updateShatter(Math.max(0, Math.min(1.15, current / (hH * 1.15))));
     }
@@ -1252,7 +1318,10 @@ html.reveal-failsafe .reveal{ translate:none !important; transition:none !import
     initSelect();
     assignStagger();
     collectReveals();
-    if (!finePointer) body.setAttribute("data-cursor", "off");
+    // Cursor opts in only on desktop + non-reduced-motion. JS-disabled
+    // users keep their native cursor (body default is data-cursor="off").
+    if (finePointer && !prefersReduce) body.setAttribute("data-cursor", "on");
+    else body.setAttribute("data-cursor", "off");
     enableSmooth(!prefersReduce);
     setBodyHeight();
     checkReveals();
