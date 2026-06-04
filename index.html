@@ -886,7 +886,7 @@ html.reveal-failsafe .reveal{ translate:none !important; transition:none !import
   var content = document.getElementById("smooth-content");
   var nav = document.getElementById("nav");
 
-  var state = { smooth:true, parallax: !prefersReduce };
+  var state = { smooth:true, parallax: !prefersReduce && finePointer };
   var current = 0, target = 0;
   var mx = window.innerWidth/2, my = window.innerHeight/2;
   var cnx = 0, cny = 0, ctx = 0, cty = 0;
@@ -1270,7 +1270,11 @@ html.reveal-failsafe .reveal{ translate:none !important; transition:none !import
       updateShatter(Math.max(0, Math.min(1.15, current / (hH * 1.15))));
     }
 
-    if (stackCards.length && stackWrap && stackSlotH > 0){
+    // Stack-card pin is desktop-only: on touch devices it fights native
+    // momentum scroll (every rAF tick reads getBoundingClientRect and
+    // writes 4 transforms, causing visible shake). Mobile users just see
+    // the cards scroll naturally past one another.
+    if (finePointer && !prefersReduce && stackCards.length && stackWrap && stackSlotH > 0){
       var vh3 = window.innerHeight;
       var crect = stackWrap.getBoundingClientRect();
       var basePin = Math.max(86, vh3 * 0.12);
