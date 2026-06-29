@@ -422,6 +422,42 @@ body[data-hero="orb"] .fx-orb{ display:block; }
 .tier-feats li::before{ content:"✓"; flex-shrink:0; width:18px; height:18px; border-radius:5px;
   background:var(--accent); color:var(--accent-ink); display:grid; place-items:center;
   font-size:11px; font-weight:700; margin-top:1px; }
+/* Optional Care Plans — additive monthly add-on; styled lighter than the one-time build cards */
+.care-plan{ margin-top:clamp(36px,4vw,56px); padding:clamp(26px,3vw,44px); background:var(--card);
+  border:1px solid var(--card-edge); border-radius:var(--r) }
+.care-head{ display:grid; grid-template-columns:auto 1fr; column-gap:14px; row-gap:10px;
+  align-items:baseline; margin-bottom:24px; max-width:64ch }
+.care-tag{ display:inline-block; font-family:var(--mono); font-size:11px; letter-spacing:.14em;
+  text-transform:uppercase; background:var(--accent); color:var(--accent-ink);
+  padding:5px 11px; border-radius:999px; font-weight:700; justify-self:start; align-self:center;
+  grid-column:1; grid-row:1 }
+.care-head h3{ grid-column:2; grid-row:1; font-family:var(--display); font-weight:800;
+  font-size:clamp(22px,2.6vw,30px); letter-spacing:-.02em; line-height:1.1; color:var(--ink) }
+.care-head p{ grid-column:1 / -1; grid-row:2; color:var(--ink-soft); font-size:15px; line-height:1.55; margin:0 }
+.care-tiers{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(12px,1.4vw,18px) }
+.care-tier{ padding:20px 22px; background:var(--bg); border:1px solid var(--line);
+  border-radius:12px; display:flex; flex-direction:column; gap:14px }
+.care-tier--feat{ border-color:var(--accent); background:color-mix(in srgb, var(--accent) 9%, var(--bg)) }
+.care-tier-head{ display:flex; align-items:baseline; justify-content:space-between; gap:10px }
+.care-name{ font-family:var(--display); font-weight:800; font-size:18px; letter-spacing:-.02em }
+.care-price{ font-family:var(--display); font-weight:800; font-size:26px; letter-spacing:-.03em; color:var(--ink) }
+.care-price span{ font-family:var(--mono); font-size:11px; font-weight:400;
+  letter-spacing:.06em; color:var(--ink-faint); margin-left:2px }
+.care-tier ul{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px }
+.care-tier li{ font-size:13.5px; line-height:1.45; color:var(--ink-soft);
+  padding-left:22px; position:relative }
+.care-tier li::before{ content:"✓"; position:absolute; left:0; top:1px;
+  width:14px; height:14px; background:var(--accent); color:var(--accent-ink);
+  border-radius:3px; font-size:9px; font-weight:700;
+  display:inline-flex; align-items:center; justify-content:center }
+.care-foot{ margin:20px 0 0; font-family:var(--mono); font-size:12px; letter-spacing:.04em;
+  color:var(--ink-faint); text-align:center }
+@media (max-width:768px){
+  .care-tiers{ grid-template-columns:1fr }
+  .care-head{ grid-template-columns:1fr }
+  .care-head h3, .care-tag{ grid-column:1 }
+}
+
 .hosting-note{ margin-top:30px; background:var(--ink); color:var(--bg); border-radius:var(--r);
   padding:clamp(22px,2.6vw,34px); display:flex; align-items:center; gap:26px; flex-wrap:wrap; }
 .hosting-note .big{ font-family:var(--display); font-weight:800; font-size:50px; letter-spacing:-.04em;
@@ -798,9 +834,58 @@ html.reveal-failsafe .reveal{ translate:none !important; transition:none !import
           <a href="#contact" class="btn btn--block" data-cursor-hover data-pkg="Grow — £999" aria-label="Get my free quote for Grow package, from £999">Get my free quote <span class="arr" aria-hidden="true">→</span></a>
         </div>
       </div>
+
+      <!-- OPTIONAL CARE PLANS — additive, not a replacement for the one-time build price -->
+      <div class="care-plan reveal" aria-labelledby="care-h3">
+        <div class="care-head">
+          <span class="care-tag">Optional</span>
+          <h3 id="care-h3">Want someone watching the site?</h3>
+          <p>Built-and-owned still applies. Add a Care plan if you want monthly tweaks, backups and priority support. Cancel anytime — the site stays yours forever.</p>
+        </div>
+        <div class="care-tiers">
+          <div class="care-tier">
+            <div class="care-tier-head">
+              <span class="care-name">Light</span>
+              <span class="care-price">£19<span>/mo</span></span>
+            </div>
+            <ul>
+              <li>1 content tweak per month</li>
+              <li>Hosting &amp; backups handled</li>
+              <li>Monthly health &amp; uptime check</li>
+              <li>Email support, 48h reply</li>
+            </ul>
+          </div>
+          <div class="care-tier care-tier--feat">
+            <div class="care-tier-head">
+              <span class="care-name">Standard</span>
+              <span class="care-price">£29<span>/mo</span></span>
+            </div>
+            <ul>
+              <li>Up to 3 tweaks per month</li>
+              <li>Everything in Light</li>
+              <li>Quarterly analytics summary</li>
+              <li>Priority email support, 24h reply</li>
+            </ul>
+          </div>
+          <div class="care-tier">
+            <div class="care-tier-head">
+              <span class="care-name">Pro</span>
+              <span class="care-price">£49<span>/mo</span></span>
+            </div>
+            <ul>
+              <li>Up to 6 tweaks per month</li>
+              <li>Everything in Standard</li>
+              <li>One new section every 3 months</li>
+              <li>Same-day support, business hours</li>
+            </ul>
+          </div>
+        </div>
+        <p class="care-foot">Mention which Care tier you want on the form — or skip it entirely. Either way the site is 100% yours.</p>
+      </div>
+
       <div class="hosting-note reveal">
         <span class="big">£0</span>
-        <div class="txt"><b>Free hosting. For life.</b><br><span>Vercel · Netlify · Cloudflare. No monthly fees. Ever.</span></div>
+        <div class="txt"><b>Free hosting. For life.</b><br><span>Vercel · Netlify · Cloudflare. No monthly fees on the build. Ever.</span></div>
         <div class="right">Need a new domain?<br>Around £10/yr. We sort it.</div>
       </div>
     </div>
