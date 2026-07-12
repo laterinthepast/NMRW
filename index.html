@@ -199,6 +199,35 @@ body[data-hero="orb"] .fx-orb{ display:block; }
   width:0; background:var(--ink); transition:width .3s var(--ease); }
 .nav-links a:hover{ color:var(--ink); } .nav-links a:hover::after{ width:100%; }
 
+/* Mobile menu — hamburger toggle + full-screen overlay panel (shown <980px) */
+.nav-toggle{ display:none; width:44px; height:44px; align-items:center; justify-content:center;
+  background:transparent; border:1px solid var(--line); border-radius:12px; cursor:pointer;
+  color:var(--ink); flex-shrink:0; transition:border-color .25s, background .25s; }
+.nav-toggle:hover{ border-color:var(--ink); }
+.nav-toggle-bars{ position:relative; display:block; width:20px; height:14px; }
+.nav-toggle-bars span{ position:absolute; left:0; width:100%; height:2px; border-radius:2px;
+  background:currentColor; transition:transform .3s var(--ease), opacity .2s var(--ease); }
+.nav-toggle-bars span:nth-child(1){ top:0; }
+.nav-toggle-bars span:nth-child(2){ top:6px; }
+.nav-toggle-bars span:nth-child(3){ top:12px; }
+.nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(1){ transform:translateY(6px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(2){ opacity:0; }
+.nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(3){ transform:translateY(-6px) rotate(-45deg); }
+
+.mobile-menu{ position:fixed; inset:0; z-index:7900; visibility:hidden; opacity:0;
+  background:color-mix(in srgb, var(--bg) 94%, transparent);
+  -webkit-backdrop-filter:blur(22px); backdrop-filter:blur(22px);
+  display:flex; flex-direction:column; justify-content:center;
+  padding:calc(env(safe-area-inset-top,0px) + 96px) var(--pad) calc(env(safe-area-inset-bottom,0px) + 40px);
+  transition:opacity .3s var(--ease), visibility .3s var(--ease); }
+.mobile-menu.open{ visibility:visible; opacity:1; }
+.mobile-menu nav{ display:flex; flex-direction:column; gap:4px; }
+.mobile-menu a:not(.btn){ font-family:var(--display); font-weight:800;
+  font-size:clamp(30px,9vw,44px); letter-spacing:-.03em; color:var(--ink);
+  padding:12px 0; border-bottom:1px solid var(--line); transition:color .2s; }
+.mobile-menu a:not(.btn):hover{ color:var(--ink-soft); }
+.mobile-menu .btn{ margin-top:24px; }
+
 .btn{ display:inline-flex; align-items:center; gap:10px;
   font-weight:600; font-size:15px; letter-spacing:-0.01em;
   padding:13px 22px; border-radius:999px; border:1px solid transparent;
@@ -223,12 +252,14 @@ body[data-hero="orb"] .fx-orb{ display:block; }
 .hero h1{ font-family:var(--display); font-weight:800;
   font-size:clamp(44px,8.4vw,132px); line-height:0.92; letter-spacing:-0.045em;
   max-width:16ch; text-wrap:balance; overflow-wrap:break-word; }
-.hero h1 .accent-word{ position:relative; white-space:nowrap; }
-.hero h1 .accent-word::after{ content:""; position:absolute; left:-2%; right:-2%; bottom:.08em;
-  height:.40em; background:var(--accent); z-index:0; border-radius:4px;
-  transform:scaleX(0); transform-origin:left; animation:swipe 1s var(--ease) .5s forwards; }
-.hero h1 .kw > span{ position:relative; z-index:1; }
-@keyframes swipe{ to{transform:scaleX(1);} }
+.hero h1 .accent-word{ position:relative; }
+/* Marker highlight via a clonable background stripe — wraps cleanly onto
+   multiple lines on narrow screens (no nowrap overflow). */
+.hero h1 .accent-word > span{ position:relative;
+  background:linear-gradient(var(--accent),var(--accent)) 0 88% / 0% .42em no-repeat;
+  -webkit-box-decoration-break:clone; box-decoration-break:clone; border-radius:4px;
+  animation:swipe 1s var(--ease) .5s forwards; }
+@keyframes swipe{ to{ background-size:100% .42em; } }
 .hero .sub{ margin-top:30px; max-width:50ch; font-size:clamp(16px,1.5vw,21px);
   color:var(--ink-soft); line-height:1.5; }
 .hero .sub b{ color:var(--ink); font-weight:600; }
@@ -571,6 +602,8 @@ html.reveal-failsafe .reveal{ translate:none !important; transition:none !import
 
 @media (max-width:980px){
   .nav-links{ display:none; }
+  .nav-cta{ display:none; }
+  .nav-toggle{ display:inline-flex; }
   .price-grid{ grid-template-columns:1fr; }
   .rev-grid{ grid-template-columns:1fr; }
   .contact .wrap{ grid-template-columns:1fr; }
@@ -594,7 +627,8 @@ html.reveal-failsafe .reveal{ translate:none !important; transition:none !import
   body[data-reveal="armed"] .reveal:not(.in){ translate:none !important; }
   .reveal{ opacity:1 !important; translate:none !important; transition:none !important; }
   .marquee .track{ animation:none !important; }
-  .hero h1 .accent-word::after{ transform:scaleX(1) !important; }
+  .hero h1 .accent-word > span{ background-size:100% .42em !important; animation:none !important; }
+  .mobile-menu, .nav-toggle-bars span{ transition-duration:.001ms !important; }
 }
 </style>
 </head>
@@ -620,10 +654,23 @@ html.reveal-failsafe .reveal{ translate:none !important; transition:none !import
     <a href="#pricing">Pricing</a>
     <a href="#reviews">Reviews</a>
   </nav>
-  <a href="#contact" class="btn" data-cursor-hover>Start a project <span class="arr" aria-hidden="true">→</span></a>
+  <a href="#contact" class="btn nav-cta" data-cursor-hover>Start a project <span class="arr" aria-hidden="true">→</span></a>
+  <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-cursor-hover>
+    <span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+  </button>
 </header>
 
-<main id="smooth-content">
+<div class="mobile-menu" id="mobile-menu">
+  <nav aria-label="Mobile">
+    <a href="#work">Work</a>
+    <a href="#services">Services</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact" class="btn btn--accent btn--block btn--lg">Start a project <span class="arr" aria-hidden="true">→</span></a>
+  </nav>
+</div>
+
+<main id="smooth-content" tabindex="-1">
 
   <section class="hero wrap" id="top" aria-labelledby="hero-h1">
     <h1 id="hero-h1">We design &amp; build websites that
@@ -902,7 +949,7 @@ html.reveal-failsafe .reveal{ translate:none !important; transition:none !import
             <div>All 5 stars <b>Yes</b></div>
             <div>Verified <b>Google</b></div>
           </div>
-          <a href="https://www.google.com/maps/place/studio103/@55.8004859,-2.2150151,17z/data=!4m6!3m5!1s0x4887417c77db511d:0x266a8184ea69eb52!8m2!3d55.8007127!4d-2.2128095!16s%2Fg%2F11z5r368hs?entry=ttu" target="_blank" rel="noopener" class="btn btn--accent" data-cursor-hover>Read all on Google <span class="arr" aria-hidden="true">→</span></a>
+          <a href="https://www.google.com/maps/place/studio103/@55.8004859,-2.2150151,17z/data=!4m6!3m5!1s0x4887417c77db511d:0x266a8184ea69eb52!8m2!3d55.8007127!4d-2.2128095!16s%2Fg%2F11z5r368hs?entry=ttu" target="_blank" rel="noopener" class="btn btn--accent" data-cursor-hover aria-label="Read all reviews on Google (opens in new tab)">Read all on Google <span class="arr" aria-hidden="true">→</span></a>
         </div>
       </div>
     </div>
@@ -955,10 +1002,10 @@ html.reveal-failsafe .reveal{ translate:none !important; transition:none !import
               </div>
               <div class="field full">
                 <label id="f-pkg-label">Which package interests you?</label>
-                <div class="select" id="f-pkg" tabindex="0" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="f-pkg-label" data-cursor-hover>
+                <div class="select" id="f-pkg" tabindex="0" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-controls="f-pkg-list" aria-labelledby="f-pkg-label" data-cursor-hover>
                   <span class="select-value">Starter — £799</span>
                   <span class="select-arr" aria-hidden="true">⌄</span>
-                  <ul class="select-list" role="listbox">
+                  <ul class="select-list" id="f-pkg-list" role="listbox" aria-labelledby="f-pkg-label">
                     <li role="option" data-val="Landing — £399">Landing — £399</li>
                     <li role="option" data-val="Starter — £799" aria-selected="true">Starter — £799</li>
                     <li role="option" data-val="Grow — £1,299">Grow — £1,299</li>
@@ -1440,8 +1487,52 @@ html.reveal-failsafe .reveal{ translate:none !important; transition:none !import
     requestAnimationFrame(frame);
   }
 
+  function initNav(){
+    var toggle = document.getElementById("nav-toggle");
+    var menu = document.getElementById("mobile-menu");
+    if (!toggle || !menu) return;
+    function focusables(){
+      return Array.prototype.slice.call(menu.querySelectorAll('a[href],button:not([disabled])'));
+    }
+    function onKey(e){
+      if (e.key === "Escape"){ e.preventDefault(); closeMenu(true); return; }
+      if (e.key === "Tab"){
+        var f = focusables(); if (!f.length) return;
+        var first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+      }
+    }
+    function openMenu(){
+      menu.classList.add("open");
+      toggle.setAttribute("aria-expanded", "true");
+      toggle.setAttribute("aria-label", "Close menu");
+      var f = focusables(); if (f.length) f[0].focus();
+      document.addEventListener("keydown", onKey, true);
+    }
+    function closeMenu(returnFocus){
+      if (!menu.classList.contains("open")) return;
+      menu.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Open menu");
+      document.removeEventListener("keydown", onKey, true);
+      if (returnFocus !== false) toggle.focus();
+    }
+    toggle.addEventListener("click", function(){
+      if (menu.classList.contains("open")) closeMenu(true); else openMenu();
+    });
+    menu.addEventListener("click", function(e){
+      if (e.target === menu){ closeMenu(true); return; }      // backdrop
+      if (e.target.closest("a")) closeMenu(false);            // navigated — let anchor scroll take focus
+    });
+    window.addEventListener("resize", function(){
+      if (window.innerWidth > 980) closeMenu(false);
+    });
+  }
+
   function init(){
     initCursor();
+    initNav();
     buildStack();
     buildPhones();
     buildShards();
